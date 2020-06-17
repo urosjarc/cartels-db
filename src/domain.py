@@ -74,7 +74,7 @@ class Firm(Node):
         self.Firm_address = None
         self.Firm_type = None
         self.Ticker_firm = None
-        self.Stock_exchange = None
+        self.Stock_exchange_firm = None
 
 
 class Undertaking(Node):
@@ -84,9 +84,11 @@ class Undertaking(Node):
         self.IncorpStateUnder = None
         self.Under_address = None
         self.Ticker_undertaking = None
+        self.Stock_exchange_undertaking = None
 
 class Holding(Node):
     def __init__(self):
         super().__init__('Holding')
         self.Holding = None
         self.Holding_Ticker_parent = None
+        self.Stock_exchange_holding = None

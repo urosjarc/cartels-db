@@ -1,7 +1,9 @@
-from src import db
+from src import db, stock
 
 db.init()
 # db.delete_all()
 # db.create_nodes()
 # db.create_relationships()
-db.get_ticker_firm()
+
+ticker = db.get_firm_tickers()
+stock.plotStock(ticker[3])

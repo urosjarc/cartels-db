@@ -80,9 +80,11 @@ def create_relationships():
                 'MATCH (u:Undertaking),(h:Holding) WHERE u.Undertaking = $Undertaking AND h.Holding = $Holding MERGE (u)-[r:REL]->(h) RETURN type(r)',
                 Undertaking=row.undertaking.Undertaking, Holding=row.holding.Holding)
 
-def get_ticker_firm():
+def get_firm_tickers():
+    tickers = set()
     for row in this.rows:
-        ticker = row.firm.Ticker_firm
-        if len(ticker)>0:
-            print(ticker, row.firm.Stock_exchange)
-
+        try:
+            tickers.add(row.firm.Ticker_firm.split(':')[1])
+        except:
+            pass
+    return list(tickers)
