@@ -29,6 +29,7 @@ class CSVRow:
 
 class Node:
     def __init__(self, name):
+        self._exists = None
         self._name = name
         self._instance = None
 
@@ -46,14 +47,24 @@ class Node:
         return varg
 
     def _init(self):
-        self._instance = NeoNode(self._name, **self._getAttr())
+        name = getattr(self, self._name, False)
+        self._exists = name and not name.isspace()
+
+        if self._exists:
+            self._instance = NeoNode(self._name, **self._getAttr())
 
 class Case(Node):
     def __init__(self):
         super().__init__('Case')
         self.Case = None
         self.EC_Date_of_decision = None
-
+        self.GC_Case_number = None
+        self.ECJ_Case_number = None
+        self.Case_File = None
+        self.GC_File = None
+        self.ECJ_File = None
+        self.DR_Event_File = None
+        self.EC_Event_dec_file = None
 
 class Firm(Node):
     def __init__(self):
@@ -62,6 +73,8 @@ class Firm(Node):
         self.Incorporation_state = None
         self.Firm_address = None
         self.Firm_type = None
+        self.Ticker_firm = None
+        self.Stock_exchange = None
 
 
 class Undertaking(Node):
@@ -70,7 +83,7 @@ class Undertaking(Node):
         self.Undertaking = None
         self.IncorpStateUnder = None
         self.Under_address = None
-
+        self.Ticker_undertaking = None
 
 class Holding(Node):
     def __init__(self):
