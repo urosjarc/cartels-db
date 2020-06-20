@@ -1,7 +1,7 @@
 from py2neo import Graph, Relationship
 import sys
 import csv
-from src import utils
+from src import utils, auth
 from src.domain import *
 from typing import List
 
@@ -14,7 +14,7 @@ this.rel = Relationship.type("RELATIONSHIP")
 
 # DATABASE
 def init():
-    this.graph = Graph(auth=("neo4j", "urosjarc"), host="localhost", port=7687)
+    this.graph = Graph(auth=auth.neo4j, host="localhost", port=7687)
 
     with open(this.csvPath) as csvfile:
         reader = csv.DictReader(csvfile)
@@ -46,9 +46,14 @@ def create_nodes():
             this.graph.merge(row.case._instance, 'Case', 'Case')
         if row.holding._exists:
             this.graph.merge(row.holding._instance, 'Holding', 'Holding')
+        else:
+            notExists['holding']+=1
         if row.undertaking._exists:
             this.graph.merge(row.undertaking._instance, 'Undertaking', 'Undertaking')
+        else:
+            notExists['undertaking']+=1
 
+    print(notExists)
 
 # CREATE CONNECTIONS
 def create_relationships():

@@ -1,7 +1,6 @@
 # Dependencies
 
 ```
-sudo pip3 install yfinance
 sudo pip3 install py2neo
 sudo apt install neo4j
 ```

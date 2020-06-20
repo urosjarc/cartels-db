@@ -1,5 +1,18 @@
 from py2neo import Node as NeoNode
 
+class Path:
+    def __init__(self, json: dict):
+        self.confidence = -1
+        self.street = None
+        self.number = None
+        self.name = None
+        self.type = None
+        self.latitude = None
+        self.longitude = None
+
+        for attr, val in self.__dict__.items():
+            if val is None:
+                setattr(self, attr, json.get(attr,None))
 
 class CSVRow:
     def __init__(self, row):
@@ -25,7 +38,6 @@ class CSVRow:
 
     def _createConnections(self):
         pass
-
 
 class Node:
     def __init__(self, name):
@@ -57,10 +69,17 @@ class Case(Node):
     def __init__(self):
         super().__init__('Case')
         self.Case = None
+        self.Press_Release = None
         self.EC_Date_of_decision = None
         self.GC_Case_number = None
         self.ECJ_Case_number = None
         self.Case_File = None
+        self.Case_File_summary = None
+        self.Case_File_French = None
+        self.Case_File_Italian = None
+        self.Case_File_German = None
+        self.Case_File_Dutch = None
+
         self.GC_File = None
         self.ECJ_File = None
         self.DR_Event_File = None
@@ -85,6 +104,7 @@ class Undertaking(Node):
         self.Under_address = None
         self.Ticker_undertaking = None
         self.Stock_exchange_undertaking = None
+
 
 class Holding(Node):
     def __init__(self):
