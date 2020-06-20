@@ -5,13 +5,5 @@ db.init()
 # db.create_nodes()
 # db.create_relationships()
 
-c1 = 0
-s = len(db.rows)
-for i, row in enumerate(db.rows):
-    print(round(i/s * 100))
-    res = utils.getCoordinates(row.firm.Incorporation_state, row.firm.Firm_address)
-    if res.confidence == 1:
-        c1+=1
-
-print(c1/len(db.rows) * 100)
+utils.saveCoordinates(db.rows, utils.currentDir(__file__, '../data/coordinates.csv'))
 
