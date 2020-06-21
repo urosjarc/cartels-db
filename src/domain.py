@@ -17,7 +17,17 @@ class Path:
 
 
 class CSVRow:
-    def __init__(self, row):
+    def __init__(self, row: dict):
+        delKeys = []
+        pairs = []
+        for k, v in row.items():
+            new_key = k.replace('(', '').replace(')', '').replace('/', '_')
+            pairs.append([new_key,v])
+            delKeys.append(k)
+        for k in delKeys:
+            row.pop(k)
+        for k, v in pairs:
+            row[k] = v
         self._row = row
 
         self.firm = Firm()
@@ -72,6 +82,7 @@ class Node:
 class Case(Node):
     def __init__(self):
         super().__init__('Case')
+        self.NACE_code = None
         self.Case = None
         self.Press_Release = None
         self.EC_Date_of_decision = None
@@ -89,6 +100,32 @@ class Case(Node):
         self.DR_Event_File = None
         self.EC_Event_dec_file = None
 
+        self.ECSC = None
+
+        self.Readoption_amendment = None
+        self.Ex_offo = None
+        self.Notification = None
+        self.Notification_additional_to_complaint = None
+        self.Complaint = None
+        self.Complaint_post_initiation = None
+        self.Leniency = None
+        self.Dawn_raid = None
+        self.Statement_of_objections = None
+        self.Recitals = None
+        self.Articles_of_remedy = None
+        self.Market_of_concern = None
+        self.Industry = None
+        self.Dawn_raid_USA_Japan = None
+        self.Extra_EU_ongoing_invest = None
+        self.DR_Date_News = None
+        self.DR_dec_event = None
+        self.EC_pre_dec_event = None
+        self.EC_dec_event = None
+        self.M20_DR_date = None
+        self.M20_EC_date = None
+        self.M20ticker = None
+
+
 
 class Firm(Node):
     def __init__(self):
@@ -99,24 +136,168 @@ class Firm(Node):
         self.Firm_type = None
         self.Ticker_firm = None
         self.Stock_exchange_firm = None
+        self.Infringement = None
+        self.InfrBegin1 = None
+        self.InfrEnd1 = None
+        self.InfrBegin2 = None
+        self.InfrEnd2 = None
+        self.InfrBegin3 = None
+        self.InfrEnd3 = None
+        self.InfrBegin4 = None
+        self.InfrEnd4 = None
+        self.InfrBegin5 = None
+        self.InfrEnd5 = None
+        self.InfrBegin6 = None
+        self.InfrEnd6 = None
+        self.InfrBegin7 = None
+        self.InfrEnd7 = None
+        self.InfrBegin8 = None
+        self.InfrEnd8 = None
+        self.InfrBegin9 = None
+        self.InfrEnd9 = None
+        self.InfrBegin10 = None
+        self.InfrEnd10 = None
+        self.InfrBegin11 = None
+        self.InfrEnd11 = None
+        self.InfrBegin12 = None
+        self.InfrEnd12 = None
+        self.Fine_reduction_due_to_cooperation_in_percentage = None
+        self.Settlement_fine_reduction_in_percentage = None
+        self.Full_immunity = None
+        self.Fine_final_single_firm = None
+        self.Leniency__Single_Fine_red_in_percent = None
+        self.GC_case_SF = None
+        self.ECJ_SF_fine = None
+        self.Fine_jointly_severally_1 = None
+        self.Reduction_1 = None
+        self.GC_case_JSF1 = None
+        self.ECJ_JSF1 = None
+        self.Fine_jointly_severally_2 = None
+        self.Reduction_2 = None
+        self.GC_case_JSF2 = None
+        self.ECJ_JSF2 = None
+        self.Fine_jointly_severally_3 = None
+        self.Reduction_3 = None
+        self.GC_case_JSF3 = None
+        self.ECJ_JSF3 = None
+        self.Fine_jointly_severally_4 = None
+        self.Reduction_4 = None
+        self.GC_case_JSF4 = None
+        self.Fine_jointly_severally_5 = None
+        self.Reduction_5 = None
+        self.GC_case_JSF5 = None
+        self.Fine_jointly_severally_6 = None
+        self.Reduction_6 = None
+        self.GC_case_JSF6 = None
+        self.Fine_jointly_severally_7 = None
+        self.Reduction_7 = None
+        self.GC_case_JSF7 = None
+        self.Structural_remedy = None
+        self.Behavioral_remedy = None
+        self.Concrete_Behavioral_Remedy = None
+        self.Settlement = None
+        self.Whistleblower = None
+        self.Leniency_application = None
+        self.Dawn_raid_F_specific = None
+        self.Other_decisions_procedures = None
+        self.GC_File = None
+        self.GC_File_summary = None
+        self.GC_File_French = None
+        self.GC_File_Italian = None
+        self.GC_File_German = None
+        self.GC_File_Spanish = None
+        self.GC_File_Dutch = None
+        self.Press_release = None
+        self.GC_New_party = None
+        self.GC_new_party_state = None
+        self.GC_Case_number = None
+        self.GC_Filing_action = None
+        self.GC_Decision_date = None
+        self.GC_Judgement_order = None
+        self.GC_Chamber_of_3 = None
+        self.GC_Chamber_of_5 = None
+        self.GC_Grand_Chamber = None
+        self.GC_Dismissing_action__entirely = None
+        self.GC_Manifestly_inadmissible = None
+        self.GC_Inadmissible = None
+        self.GC_Total_action_success = None
+        self.GC_No_need_to_adjudicate = None
+        self.GC_Total_annulment_of_EC_decision = None
+        self.GC_Partial_annulment_of_EC_decision = None
+        self.GC_Fine_partial_change_of_EC_decision = None
+        self.GC_Change_of_other_remedies_of_EC_decision = None
+        self.GC_judgement_Summary = None
+        self.GC_judgment_Paragraphs = None
+        self.GC_judgement_Articles = None
+        self.ECJ_File = None
+        self.ECJ_File_summary = None
+        self.ECJ_File_French = None
+        self.ECJ_File_Italian = None
+        self.ECJ_File_German = None
+        self.ECJ_File_Spanish = None
+        self.Press_release = None
+        self.ECJ_New_party = None
+        self.ECJ_new_party_State = None
+        self.ECJ_Commission_appeal = None
+        self.ECJ_Cross_appeal_of_Commission = None
+        self.ECJ_Case_number = None
+        self.ECJ_Appeal_lodged = None
+        self.ECJ_Decision_date = None
+        self.ECJ_Judgement_order = None
+        self.ECJ_Chamber_of_3 = None
+        self.ECJ_Chamber_of_5 = None
+        self.ECJ_Grand_Chamber = None
+        self.AG_opinion = None
+        self.ECJ_Dissmissing_appeal = None
+        self.ECJ_Comm_T_Dissmiss = None
+        self.ECJ_Comm_P_Dissmiss = None
+        self.ECJ_Comm_T_Grant = None
+        self.ECJ_total_referral = None
+        self.ECJ_Partial_referral = None
+        self.ECJ_Total_change_of_GC_judgement = None
+        self.ECJ_Total_party_appeal_success = None
+        self.ECJ_Partial_change_of_EC_decision = None
+        self.ECJ_Total_confirmation_of_EC_decision_dissmisal_of_action_on_1st_instance = None
+        self.ECJ_Total_annulment_of_EC_decision = None
+        self.ECJ_Partial_annulment_of_EC_decision = None
+        self.ECJ_Fine_partial_change_of_EC_decision = None
+        self.ECJ_Change_of_other_remedies_of_EC_decision = None
+        self.ECJ_judgement_Summary = None
+        self.ECJ_judgement_Paragraphs = None
+        self.ECJ_judgement_Articles = None
+        self.DR_dec_2M = None
+        self.DR_dec_15d = None
+        self.DR_dec_15d_DJN = None
+        self.DR_dec_15d_R = None
+        self.DR_dec_15d_FT = None
+        self.DR_dec_15d_WSJ = None
+        self.GC_pre_dec_event = None
+        self.GC_dec_event = None
+        self.GC_dec_2M = None
+        self.GC_dec_15d = None
+        self.GC_dec_15d_DJN = None
+        self.GC_dec_15d_R = None
+        self.GC_dec_15d_FT = None
+        self.GC_dec_15d_WSJ = None
+
+
 
     def post_init(self):
-
-        type = None
-        if 'association' not in self.Firm_type and self.Ticker_firm is None:
-            type = 'association'
-        elif self.Ticker_firm is not None:
-            type = 'public'
-        else:
-            type = 'association'
-        self.Ticker_firm = type
-
+            type = None
+            if 'association' in self.Firm_type:
+                type = 'association'
+            elif self.Ticker_firm is None:
+                type = 'private'
+            else:
+                type = 'public'
+            self.Ticker_firm = type
 
 class Undertaking(Node):
     def __init__(self):
         super().__init__('Undertaking')
         self.Undertaking = None
         self.IncorpStateUnder = None
+        self.IncorpStateUnderJS = None
         self.Under_address = None
         self.Ticker_undertaking = None
         self.Stock_exchange_undertaking = None
@@ -128,6 +309,49 @@ class Holding(Node):
         self.Holding = None
         self.Holding_Ticker_parent = None
         self.Stock_exchange_holding = None
-        self.Incorporation_state_for_holding = None
+        self.Incorporation_state = None
 
 
+# Todo:
+#   - Undertaking_type
+#   - Pecularities_of_undertaking_M&A_or_restructuring
+#   - A_101
+#   - A_102
+#   - A101_102
+#   - a_101
+#   - a_102
+#   - Cartel_VerR
+#   - CJE_Appeal
+#   - CJE_Case_number_for_referral
+#   - GC_referral_New_party
+#   - GC_referral_new_party_state
+#   - GC_referral_Case_number
+#   - GC_referral_Filing_action
+#   - GC_referral_Decision_date
+#   - GC_referral_Judgement/order
+#   - GC_referral_Chamber_of_3
+#   - GC_referral_Chamber_of_5
+#   - GC_referral_Grand_Chamber
+#   - GC_referral_Dismissing_action__entirely
+#   - GC_referral_Manifestly_inadmissible
+#   - GC_referral_Inadmissible
+#   - GC_referral_Total_action_success
+#   - GC_referral_No_need_to_adjudicate
+#   - GC_referral_Total_annulment_of_EC_decision
+#   - GC_referral_Partial_annulment_of_EC_decision
+#   - GC_referral_Fine_partial_change_of_EC_decision
+#   - GC_referral_Change_of_other_remedies_of_EC_decision
+#   - GC_referral_judgment_Paragraphs
+#   - GC_referral_judgement_Articles
+#   - GC_referral_judgement_Summary
+#   - EC_Event_dec_file
+#   - GC_Event_File
+#   - CJ_Event_File
+#   - CJ_pre_dec_event
+#   - CJ_dec_event
+#   - CJ_dec_2M
+#   - CJ_dec_15d
+#   - CJ_dec_15d_DJN
+#   - CJ_dec_15d_R
+#   - CJ_dec_15d_FT
+#   - CJ_dec_15d_WSJ
