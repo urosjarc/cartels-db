@@ -1,5 +1,6 @@
 from py2neo import Node as NeoNode
 
+
 class Path:
     def __init__(self, json: dict):
         self.confidence = -1
@@ -12,7 +13,8 @@ class Path:
 
         for attr, val in self.__dict__.items():
             if val is None:
-                setattr(self, attr, json.get(attr,None))
+                setattr(self, attr, json.get(attr, None))
+
 
 class CSVRow:
     def __init__(self, row):
@@ -24,7 +26,6 @@ class CSVRow:
         self.holding = Holding()
 
         self._createNodes()
-        self._createConnections()
 
     def _createNodes(self):
         for attr, val in self.__dict__.items():
@@ -34,13 +35,12 @@ class CSVRow:
                     if not nodeAttr.startswith('_'):
                         node._setVar(nodeAttr, self._row[nodeAttr])
 
-                node._init()
+                node._init(self._row)
 
-    def _createConnections(self):
-        pass
 
 class Node:
     def __init__(self, name):
+        self._data = None
         self._exists = None
         self._name = name
         self._instance = None
@@ -58,12 +58,16 @@ class Node:
                 varg[name] = val
         return varg
 
-    def _init(self):
+    def _init(self, data):
+        self._data = data
         name = getattr(self, self._name, False)
         self._exists = name and not name.isspace()
 
         if self._exists:
             self._instance = NeoNode(self._name, **self._getAttr())
+
+    def post_init(self):
+        pass
 
 class Case(Node):
     def __init__(self):
@@ -85,6 +89,7 @@ class Case(Node):
         self.DR_Event_File = None
         self.EC_Event_dec_file = None
 
+
 class Firm(Node):
     def __init__(self):
         super().__init__('Firm')
@@ -94,6 +99,17 @@ class Firm(Node):
         self.Firm_type = None
         self.Ticker_firm = None
         self.Stock_exchange_firm = None
+
+    def post_init(self):
+
+        type = None
+        if 'association' not in self.Firm_type and self.Ticker_firm is None:
+            type = 'association'
+        elif self.Ticker_firm is not None:
+            type = 'public'
+        else:
+            type = 'association'
+        self.Ticker_firm = type
 
 
 class Undertaking(Node):
@@ -112,3 +128,6 @@ class Holding(Node):
         self.Holding = None
         self.Holding_Ticker_parent = None
         self.Stock_exchange_holding = None
+        self.Incorporation_state_for_holding = None
+
+

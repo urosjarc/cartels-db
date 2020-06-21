@@ -25,33 +25,31 @@ def getCoordinates(region, query) -> domain.Path:
     return domain.Path(data[0] if len(data) == 1 else {})
 
 def saveCoordinates(rows, path):
-    # field names
     fields = ['Address', 'latitude', 'longitude', 'confidence', 'type', 'name', 'number', 'street']
-
-    # data rows of csv file
-    rows_csv = [ ]
     s = len(rows)
-    for i, row in enumerate(rows):
-        if i%10 == 0:
-            print(f"Complete: {round(i/s * 100)}%")
-        row: domain.CSVRow = row
-        c = getCoordinates(row.firm.Incorporation_state, row.firm.Firm_address)
-        rows_csv.append([
-            row.firm.Firm_address,
-            c.latitude,
-            c.longitude,
-            c.confidence,
-            c.type,
-            c.name,
-            c.number,
-            c.street
-        ])
 
-
-    # writing to csv file
     with open(path, 'w') as csvfile:
-        # creating a csv writer object
+
         csvwriter = csv.writer(csvfile)
         csvwriter.writerow(fields)
-        csvwriter.writerows(rows_csv)
+
+        for i, row in enumerate(rows):
+            if i%10 == 0:
+                print(f"Complete: {round(i/s * 100)}%")
+
+            row: domain.CSVRow = row
+            print(i, row.firm.Incorporation_state, row.firm.Firm_address)
+            c = getCoordinates(row.firm.Incorporation_state, row.firm.Firm_address)
+
+
+            csvwriter.writerow([
+                row.firm.Firm_address,
+                c.latitude,
+                c.longitude,
+                c.confidence,
+                c.type,
+                c.name,
+                c.number,
+                c.street
+            ])
 
