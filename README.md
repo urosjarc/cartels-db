@@ -10,3 +10,13 @@ sudo apt install neo4j
 ```
 sudo neo4j start
 ```
+
+# Exporting DB
+```
+sudo neo4j-admin dump --database=neo4j --verbose --to=/home/urosjarc/cartels.db
+```
+
+# Importing DB
+```
+sudo neo4j-admin load --verbose --from=/home/urosjarc/cartels.db --database=neo4j --force --info
+```
