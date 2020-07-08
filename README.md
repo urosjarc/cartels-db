@@ -20,3 +20,10 @@ sudo neo4j-admin dump --database=neo4j --verbose --to=/home/urosjarc/cartels.db
 ```
 sudo neo4j-admin load --verbose --from=/home/urosjarc/cartels.db --database=neo4j --force --info
 ```
+
+# Test DB
+```
+pass: VvipLE4UzMRYfW1G
+user: neo4j
+url: https://34-66-123-143.gcp-neo4j-sandbox.com:7473/
+```

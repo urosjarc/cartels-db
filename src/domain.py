@@ -45,7 +45,9 @@ class CSVRow:
                     if not nodeAttr.startswith('_'):
                         node._setVar(nodeAttr, self._row[nodeAttr])
 
-                node._init(self._row)
+                node._data = self._row
+                node.post_init()
+                node._init()
 
 
 class Node:
@@ -68,8 +70,7 @@ class Node:
                 varg[name] = val
         return varg
 
-    def _init(self, data):
-        self._data = data
+    def _init(self):
         name = getattr(self, self._name, False)
         self._exists = name and not name.isspace()
 
@@ -88,6 +89,7 @@ class Case(Node):
         self.EC_Date_of_decision = None
         self.GC_Case_number = None
         self.ECJ_Case_number = None
+        self.Infringement = None
         self.Case_File = None
         self.Case_File_summary = None
         self.Case_File_French = None
@@ -97,7 +99,6 @@ class Case(Node):
 
         self.GC_File = None
         self.ECJ_File = None
-        self.DR_Event_File = None
         self.EC_Event_dec_file = None
 
         self.ECSC = None
@@ -117,14 +118,13 @@ class Case(Node):
         self.Industry = None
         self.Dawn_raid_USA_Japan = None
         self.Extra_EU_ongoing_invest = None
-        self.DR_Date_News = None
-        self.DR_dec_event = None
         self.EC_pre_dec_event = None
         self.EC_dec_event = None
         self.M20_DR_date = None
         self.M20_EC_date = None
         self.M20ticker = None
 
+        self.EC_Event_dec_file = None
 
 
 class Firm(Node):
@@ -136,7 +136,6 @@ class Firm(Node):
         self.Firm_type = None
         self.Ticker_firm = None
         self.Stock_exchange_firm = None
-        self.Infringement = None
         self.InfrBegin1 = None
         self.InfrEnd1 = None
         self.InfrBegin2 = None
@@ -280,7 +279,29 @@ class Firm(Node):
         self.GC_dec_15d_FT = None
         self.GC_dec_15d_WSJ = None
 
+        self.A_101 = None
+        self.A_102 = None
+        self.A101_102 = None
+        self.a_101 = None
+        self.a_102 = None
+        self.Cartel_VerR = None
+        self.Ringleader = None
 
+        self.DR_Event_File = None
+        self.DR_Date_News = None
+        self.DR_dec_event = None
+
+        self.GC_Event_File = None
+        self.ECJ_Event_File = None
+
+        self.ECJ_pre_dec_event = None
+        self.ECJ_dec_event = None
+        self.ECJ_dec_2M = None
+        self.ECJ_dec_15d = None
+        self.ECJ_dec_15d_DJN = None
+        self.ECJ_dec_15d_R = None
+        self.ECJ_dec_15d_FT = None
+        self.ECJ_dec_15d_WSJ = None
 
     def post_init(self):
             type = None
@@ -301,6 +322,20 @@ class Undertaking(Node):
         self.Under_address = None
         self.Ticker_undertaking = None
         self.Stock_exchange_undertaking = None
+        self._Undertaking_type = None
+
+    def post_init(self):
+        type = None
+
+        if self.Undertaking == self._data['Firm']:
+            if 'association' in self.Ticker_undertaking:
+                type = 'association'
+            elif self.Ticker_undertaking is None:
+                type = 'private'
+            else:
+                type = 'public'
+
+        self._Undertaking_type = type
 
 
 class Holding(Node):
@@ -309,49 +344,53 @@ class Holding(Node):
         self.Holding = None
         self.Holding_Ticker_parent = None
         self.Stock_exchange_holding = None
-        self.Incorporation_state = None
+        self.IncorpStateHold = None
 
 
 # Todo:
 #   - Undertaking_type
-#   - Pecularities_of_undertaking_M&A_or_restructuring
-#   - A_101
-#   - A_102
-#   - A101_102
-#   - a_101
-#   - a_102
-#   - Cartel_VerR
-#   - CJE_Appeal
-#   - CJE_Case_number_for_referral
-#   - GC_referral_New_party
-#   - GC_referral_new_party_state
-#   - GC_referral_Case_number
-#   - GC_referral_Filing_action
-#   - GC_referral_Decision_date
-#   - GC_referral_Judgement/order
-#   - GC_referral_Chamber_of_3
-#   - GC_referral_Chamber_of_5
-#   - GC_referral_Grand_Chamber
-#   - GC_referral_Dismissing_action__entirely
-#   - GC_referral_Manifestly_inadmissible
-#   - GC_referral_Inadmissible
-#   - GC_referral_Total_action_success
-#   - GC_referral_No_need_to_adjudicate
-#   - GC_referral_Total_annulment_of_EC_decision
-#   - GC_referral_Partial_annulment_of_EC_decision
-#   - GC_referral_Fine_partial_change_of_EC_decision
-#   - GC_referral_Change_of_other_remedies_of_EC_decision
-#   - GC_referral_judgment_Paragraphs
-#   - GC_referral_judgement_Articles
-#   - GC_referral_judgement_Summary
-#   - EC_Event_dec_file
-#   - GC_Event_File
-#   - CJ_Event_File
-#   - CJ_pre_dec_event
-#   - CJ_dec_event
-#   - CJ_dec_2M
-#   - CJ_dec_15d
-#   - CJ_dec_15d_DJN
-#   - CJ_dec_15d_R
-#   - CJ_dec_15d_FT
-#   - CJ_dec_15d_WSJ
+# OPOMBA(pass)  - Pecularities_of_undertaking_M&A_or_restructuring
+# OK(firm)  - A_101
+# OK(firm)  - A_102
+# OK(firm)  - A101_102
+# OK(firm)  - a_101
+# OK(firm)  - a_102
+# OK(firm)  - Cartel_VerR
+# OK(firm)  - Ringleader
+# IGNORE(pass)  - CJE_Appeal
+# IGNORE(pass)  - CJE_Case_number_for_referral
+# IGNORE(pass)  - GC_referral_New_party
+# IGNORE(pass)  - GC_referral_new_party_state
+# IGNORE(pass)  - GC_referral_Case_number
+# IGNORE(pass)  - GC_referral_Filing_action
+# IGNORE(pass)  - GC_referral_Decision_date
+# IGNORE(pass)  - GC_referral_Judgement/order
+# IGNORE(pass)  - GC_referral_Chamber_of_3
+# IGNORE(pass)  - GC_referral_Chamber_of_5
+# IGNORE(pass)  - GC_referral_Grand_Chamber
+# IGNORE(pass)  - GC_referral_Dismissing_action__entirely
+# IGNORE(pass)  - GC_referral_Manifestly_inadmissible
+# IGNORE(pass)  - GC_referral_Inadmissible
+# IGNORE(pass)  - GC_referral_Total_action_success
+# IGNORE(pass)  - GC_referral_No_need_to_adjudicate
+# IGNORE(pass)  - GC_referral_Total_annulment_of_EC_decision
+# IGNORE(pass)  - GC_referral_Partial_annulment_of_EC_decision
+# IGNORE(pass)  - GC_referral_Fine_partial_change_of_EC_decision
+# IGNORE(pass)  - GC_referral_Change_of_other_remedies_of_EC_decision
+# IGNORE(pass)  - GC_referral_judgment_Paragraphs
+# IGNORE(pass)  - GC_referral_judgement_Articles
+# IGNORE(pass)  - GC_referral_judgement_Summary
+# OK(case)  - EC_Event_dec_file
+# MOVE(firm) - DR_Event_File
+# MOVE(case->firm) - DR_Date_News
+# MOVE(case->firm) - DR_dec_event
+# OK(firm)  - GC_Event_File
+# OK(firm)  - CJ_Event_File
+# RENAME(CJ...->ECJ...)  - CJ_pre_dec_event
+# RENAME(CJ...->ECJ...)  - CJ_dec_event
+# RENAME(CJ...->ECJ...)  - CJ_dec_2M
+# RENAME(CJ...->ECJ...)  - CJ_dec_15d
+# RENAME(CJ...->ECJ...)  - CJ_dec_15d_DJN
+# RENAME(CJ...->ECJ...)  - CJ_dec_15d_R
+# RENAME(CJ...->ECJ...)  - CJ_dec_15d_FT
+# RENAME(CJ...->ECJ...)  - CJ_dec_15d_WSJ

@@ -1,7 +1,8 @@
 from py2neo import Graph, Relationship
 import sys
 import csv
-from src import utils, auth
+from src import utils
+from src import auth as aut
 from src.domain import *
 from typing import List
 
@@ -14,7 +15,7 @@ this.rel = Relationship.type("RELATIONSHIP")
 
 # DATABASE
 def init():
-    this.graph = Graph(auth=auth.neo4j, host="localhost", port=7687)
+    this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600*24*30, keep_alive=True)
 
     with open(this.csvPath) as csvfile:
         reader = csv.DictReader(csvfile)
