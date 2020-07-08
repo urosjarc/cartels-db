@@ -27,3 +27,8 @@ pass: VvipLE4UzMRYfW1G
 user: neo4j
 url: https://34-66-123-143.gcp-neo4j-sandbox.com:7473/
 ```
+
+# Connecting
+
+Todo: (static) Firm, Undertaking, Holding => Stock.Type
+Todo: (L#A1012M) -//- => Stock

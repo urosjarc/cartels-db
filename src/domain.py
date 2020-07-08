@@ -1,5 +1,24 @@
 from py2neo import Node as NeoNode
 
+def reformat(row:dict):
+    delKeys = []
+    pairs = []
+    for k, v in row.items():
+        new_key = k\
+            .replace('(', '')\
+            .replace(')', '')\
+            .replace('/', '_')\
+            .replace('.','_')\
+            .replace(' ', '_')\
+            .replace('-', '_')
+        pairs.append([new_key,v])
+        delKeys.append(k)
+    for k in delKeys:
+        row.pop(k)
+    for k, v in pairs:
+        row[k] = v
+
+    return row
 
 class Path:
     def __init__(self, json: dict):
@@ -15,20 +34,9 @@ class Path:
             if val is None:
                 setattr(self, attr, json.get(attr, None))
 
-
 class CSVRow:
     def __init__(self, row: dict):
-        delKeys = []
-        pairs = []
-        for k, v in row.items():
-            new_key = k.replace('(', '').replace(')', '').replace('/', '_')
-            pairs.append([new_key,v])
-            delKeys.append(k)
-        for k in delKeys:
-            row.pop(k)
-        for k, v in pairs:
-            row[k] = v
-        self._row = row
+        self._row = reformat(row)
 
         self.firm = Firm()
         self.case = Case()
@@ -48,7 +56,6 @@ class CSVRow:
                 node._data = self._row
                 node.post_init()
                 node._init()
-
 
 class Node:
     def __init__(self, name):
@@ -125,6 +132,18 @@ class Case(Node):
         self.M20ticker = None
 
         self.EC_Event_dec_file = None
+
+class Stock(Node):
+    def __init__(self, row: dict):
+        super().__init__('Type')
+        self.Type = None
+        self._row = reformat(row)
+        self._createNodes()
+        self._init()
+
+    def _createNodes(self):
+        for attr, val in self._row.items():
+            setattr(self, attr, val)
 
 
 class Firm(Node):

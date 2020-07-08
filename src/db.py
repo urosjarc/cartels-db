@@ -1,4 +1,4 @@
-from py2neo import Graph, Relationship
+from py2neo import Graph, Relationship, Cursor
 import sys
 import csv
 from src import utils
@@ -8,10 +8,12 @@ from typing import List
 
 this = sys.modules[__name__]
 this.graph = None
-this.rows: List[CSVRow] = []
-this.csvPath = utils.currentDir(__file__, '../data/cartels-db.csv')
-this.rel = Relationship.type("RELATIONSHIP")
 
+this.rows: List[CSVRow] = []
+this.stock_rows: List[Stock] = []
+
+this.csvPath = utils.currentDir(__file__, '../data/cartels-db.csv')
+this.csvStockPath = utils.currentDir(__file__, '../data/stock-db.csv')
 
 # DATABASE
 def init():
@@ -22,6 +24,11 @@ def init():
         for row in reader:
             this.rows.append(CSVRow(row))
 
+    with open(this.csvStockPath) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.stock_rows.append(Stock(row))
+
 
 # DELETE ALL IN DATABASE
 def delete_all():
@@ -31,12 +38,20 @@ def delete_all():
 # CREATE NODES
 def create_nodes():
     size = len(this.rows)
+    size_stock = len(this.stock_rows)
     notExists = {
         'firm': 0,
         'case': 0,
         'holding': 0,
         'undertaking': 0,
     }
+
+    for i, row in enumerate(this.stock_rows):
+        if i % 100 == 0:
+            print(f'CREATING STOCK: {round(i / size_stock * 100)}%')
+
+        this.graph.merge(row._instance, 'Stock', 'Type')
+
     for i, row in enumerate(this.rows):
         if i % 100 == 0:
             print(f'CREATING: {round(i / size * 100)}%')
@@ -85,6 +100,23 @@ def create_relationships():
             this.graph.run(
                 'MATCH (u:Undertaking),(h:Holding) WHERE u.Undertaking = $Undertaking AND h.Holding = $Holding MERGE (u)-[r:REL]->(h) RETURN type(r)',
                 Undertaking=row.undertaking.Undertaking, Holding=row.holding.Holding)
+
+def create_relationships_stock():
+    size_stock = len(this.stock_rows)
+    for i, row in enumerate(this.stock_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK: {round(i / size_stock * 100)}%')
+
+        rel: Cursor = this.graph.run(
+            'MATCH (s:Stock),(f:Firm) WHERE s.Type = $Ticker_firm AND f.Ticker_firm = $Ticker_firm MERGE (s)-[r:REL_STOCK]->(f) RETURN type(r)',
+            Ticker_firm=row.Type)
+        print(rel.to_table())
+        this.graph.run(
+            'MATCH (s:Stock),(u:Undertaking) WHERE s.Type = $Ticker_firm AND u.Ticker_undertaking = $Ticker_firm MERGE (s)-[r:REL_STOCK]->(u) RETURN type(r)',
+            Ticker_firm=row.Type)
+        this.graph.run(
+            'MATCH (s:Stock),(h:Holding) WHERE s.Type = $Ticker_firm AND h.Holding_Ticker_parent= $Ticker_firm MERGE (s)-[r:REL_STOCK]->(h) RETURN type(r)',
+            Ticker_firm=row.Type)
 
 def get_firm_tickers():
     tickers = set()
