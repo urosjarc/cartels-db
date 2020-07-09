@@ -11,10 +11,11 @@ this.graph = None
 
 this.rows: List[CSVRow] = []
 this.stock_rows: List[Stock] = []
+this.stock_annual_rows: List[StockAnnual] = []
 
 this.csvPath = utils.currentDir(__file__, '../data/cartels-db.csv')
 this.csvStockPath = utils.currentDir(__file__, '../data/stock-db.csv')
-
+this.csvStockAnnualPath = utils.currentDir(__file__, '../data/stock-annual-eu-db.csv')
 
 # DATABASE
 def init():
@@ -30,6 +31,13 @@ def init():
         for row in reader:
             this.stock_rows.append(Stock(row))
 
+    with open(this.csvStockAnnualPath) as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            sa = StockAnnual(row)
+            # Todo: Merge with the same code!!!
+            if sa.Code is not None:
+                this.stock_annual_rows.append(sa.Code)
 
 # DELETE ALL IN DATABASE
 def delete_all():
@@ -75,6 +83,14 @@ def create_nodes_stock():
         if row._exists:
             this.graph.merge(row._instance, 'Stock', 'Type')
 
+def create_nodes_stock_annual():
+    size_annual_stock = len(this.stock_annual_rows)
+    for i, row in enumerate(this.stock_annual_rows):
+        if i % 100 == 0:
+            print(f'CREATING STOCK ANNUAL NODES: {round(i / size_annual_stock * 100)}%')
+
+        if row._exists:
+            this.graph.merge(row._instance, 'StockAnnual', 'Code')
 
 # CREATE CONNECTIONS
 def create_relationships_core():

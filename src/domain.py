@@ -142,7 +142,6 @@ class Case(Node):
 class Stock(Node):
     def __init__(self, row: dict):
         super().__init__('Type')
-        self.Type = None
         self._row = reformat(row)
         self._createNodes()
         self._init()
@@ -151,6 +150,22 @@ class Stock(Node):
         for attr, val in self._row.items():
             setattr(self, attr, val)
 
+
+class StockAnnual(Node):
+    def __init__(self, row: dict):
+        super().__init__('Type')
+        self._row = reformat(row)
+        self._createNodes()
+        self._init()
+
+    def _createNodes(self):
+        for attr, val in self._row.items():
+            setattr(self, attr, val)
+
+        if ')' in self.Code:
+            self.Code = self.Code.split('(')[0]
+        else:
+            self.Code = None
 
 class Firm(Node):
     def __init__(self):
