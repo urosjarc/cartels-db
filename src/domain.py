@@ -1,17 +1,18 @@
 from py2neo import Node as NeoNode
 
-def reformat(row:dict):
+
+def reformat(row: dict):
     delKeys = []
     pairs = []
     for k, v in row.items():
-        new_key = k\
-            .replace('(', '')\
-            .replace(')', '')\
-            .replace('/', '_')\
-            .replace('.','_')\
-            .replace(' ', '_')\
+        new_key = k \
+            .replace('(', '') \
+            .replace(')', '') \
+            .replace('/', '_') \
+            .replace('.', '_') \
+            .replace(' ', '_') \
             .replace('-', '_')
-        pairs.append([new_key,v])
+        pairs.append([new_key, v])
         delKeys.append(k)
     for k in delKeys:
         row.pop(k)
@@ -19,6 +20,7 @@ def reformat(row:dict):
         row[k] = v
 
     return row
+
 
 class Path:
     def __init__(self, json: dict):
@@ -33,6 +35,7 @@ class Path:
         for attr, val in self.__dict__.items():
             if val is None:
                 setattr(self, attr, json.get(attr, None))
+
 
 class CSVRow:
     def __init__(self, row: dict):
@@ -56,6 +59,7 @@ class CSVRow:
                 node._data = self._row
                 node.post_init()
                 node._init()
+
 
 class Node:
     def __init__(self, name):
@@ -86,6 +90,7 @@ class Node:
 
     def post_init(self):
         pass
+
 
 class Case(Node):
     def __init__(self):
@@ -132,6 +137,7 @@ class Case(Node):
         self.M20ticker = None
 
         self.EC_Event_dec_file = None
+
 
 class Stock(Node):
     def __init__(self, row: dict):
@@ -323,14 +329,15 @@ class Firm(Node):
         self.ECJ_dec_15d_WSJ = None
 
     def post_init(self):
-            type = None
-            if 'association' in self.Firm_type:
-                type = 'association'
-            elif self.Ticker_firm is None:
-                type = 'private'
-            else:
-                type = 'public'
-            self.Ticker_firm = type
+        type = None
+        if 'association' in self.Firm_type:
+            type = 'association'
+        elif self.Ticker_firm is None:
+            type = 'private'
+        else:
+            type = 'public'
+        self.Ticker_firm = type
+
 
 class Undertaking(Node):
     def __init__(self):
@@ -364,7 +371,6 @@ class Holding(Node):
         self.Holding_Ticker_parent = None
         self.Stock_exchange_holding = None
         self.IncorpStateHold = None
-
 
 # Todo:
 #   - Undertaking_type
