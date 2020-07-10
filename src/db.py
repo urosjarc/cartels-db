@@ -36,11 +36,12 @@ def init():
         reader = csv.DictReader(csvfile)
         for row in reader:
             sa = StockAnnual(row)
-            if sa.Code not in stock_annual_rows:
-                stock_annual_rows[sa.Code] = [sa]
+            if sa.StockAnnual not in stock_annual_rows:
+                stock_annual_rows[sa.StockAnnual] = [sa]
             else:
-                stock_annual_rows[sa.Code].append(sa)
+                stock_annual_rows[sa.StockAnnual].append(sa)
 
+        # Merganje propertijev
         for k, vs in stock_annual_rows.items():
             sa = vs[0]
             for i in range(1, len(vs)):
@@ -97,7 +98,7 @@ def create_nodes_stock():
             print(f'CREATING STOCK NODES: {round(i / size_stock * 100)}%')
 
         if row._exists:
-            this.graph.merge(row._instance, 'Stock', 'Type')
+            this.graph.merge(row._instance, 'Stock', 'Stock')
 
 def create_nodes_stock_annual():
     size_annual_stock = len(this.stock_annual_rows)
@@ -106,7 +107,7 @@ def create_nodes_stock_annual():
             print(f'CREATING STOCK ANNUAL NODES: {round(i / size_annual_stock * 100)}%')
 
         if row._exists:
-            this.graph.merge(row._instance, 'StockAnnual', 'Code')
+            this.graph.merge(row._instance, 'StockAnnual', 'StockAnnual')
 
 # CREATE CONNECTIONS
 def create_relationships_core():
@@ -146,20 +147,32 @@ def create_relationships_stock():
             print(f'CONNECTING STOCK: {round(i / size_stock * 100)}%')
 
         if not row._exists:
-            raise Exception(f'Not exists: {row.Type}')
+            raise Exception(f'Not exists: {row.Stock}')
 
         this.graph.run(
-            'MATCH (s:Stock), (f:Firm) WHERE s.Type=$Ticker_firm AND f.Stock_exchange_firm=$Ticker_firm MERGE (s)-[r:REL_STOCK]->(f) RETURN type(r)',
-            Ticker_firm=row.Type)
+            'MATCH (s:Stock), (f:Firm) WHERE s.Stock=$Stock AND f.Stock_exchange_firm=$Stock MERGE (s)-[r:REL_STOCK]->(f) RETURN type(r)',
+            Stock=row.Stock)
 
         this.graph.run(
-            'MATCH (s:Stock), (u:Undertaking) WHERE s.Type=$Ticker_firm AND u.Stock_exchange_undertaking=$Ticker_firm MERGE (s)-[r:REL_STOCK]->(u) RETURN type(r)',
-            Ticker_firm=row.Type)
+            'MATCH (s:Stock), (u:Undertaking) WHERE s.Stock=$Stock AND u.Stock_exchange_undertaking=$Stock MERGE (s)-[r:REL_STOCK]->(u) RETURN type(r)',
+            Stock=row.Stock)
 
         this.graph.run(
-            'MATCH (s:Stock), (h:Holding) WHERE s.Type=$Ticker_firm AND h.Stock_exchange_holding=$Ticker_firm MERGE (s)-[r:REL_STOCK]->(h) RETURN type(r)',
-            Ticker_firm=row.Type)
+            'MATCH (s:Stock), (h:Holding) WHERE s.Stock=$Stock AND h.Stock_exchange_holding=$Stock MERGE (s)-[r:REL_STOCK]->(h) RETURN type(r)',
+            Stock=row.Stock)
 
+def create_relationships_stock_annual():
+    size_stock = len(this.stock_annual_rows)
+    for i, row in enumerate(this.stock_annual_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK ANNUAL: {round(i / size_stock * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {row.StockAnnual}')
+
+        this.graph.run(
+            'MATCH (s:Stock), (sa:StockAnnual) WHERE s.Stock=$StockAnnual AND sa.StockAnnual=$StockAnnual MERGE (s)-[r:REL_STOCK]->(sa) RETURN type(r)',
+            StockAnnual=row.StockAnnual)
 
 def get_firm_tickers():
     tickers = set()
@@ -169,3 +182,5 @@ def get_firm_tickers():
         except:
             pass
     return list(tickers)
+
+

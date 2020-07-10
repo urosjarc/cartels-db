@@ -144,8 +144,12 @@ class Case(Node):
 
 class Stock(Node):
     def __init__(self, row: dict):
-        super().__init__('Type')
+        super().__init__('Stock')
         self._row = reformat(row)
+
+        self.Stock = self._row['Type']
+        del self._row['Type']
+
         self._createNodes()
         self._init()
 
@@ -154,14 +158,17 @@ class Stock(Node):
             setattr(self, attr, val)
 
 
+
+
 class StockAnnual(Node):
     def __init__(self, row: dict):
-        super().__init__('Code')
-
-        self.Code = None
-        self.CURRENCY = None
-
+        super().__init__('StockAnnual')
         self._row = reformat(row)
+
+        self.CURRENCY = None
+        self.StockAnnual = self._row['Code']
+        del self._row['Code']
+
         self._createNodes()
         self._init(False)
 
@@ -177,10 +184,10 @@ class StockAnnual(Node):
             elif attr not in ['Name']:
                 setattr(self, attr, val)
 
-        if ')' in self.Code:
-            self.Code = self.Code.split('(')[0]
+        if ')' in self.StockAnnual:
+            self.StockAnnual = self.StockAnnual.split('(')[0]
         else:
-            self.Code = None
+            self.StockAnnual= None
 
         if '-' in name:
             name = reformat_value(name.split('- ')[-1])
