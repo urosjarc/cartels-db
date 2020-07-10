@@ -36,6 +36,10 @@ def init():
         reader = csv.DictReader(csvfile)
         for row in reader:
             sa = StockAnnual(row)
+
+            if sa.StockAnnual is None:
+                continue
+
             if sa.StockAnnual not in stock_annual_rows:
                 stock_annual_rows[sa.StockAnnual] = [sa]
             else:
@@ -43,14 +47,14 @@ def init():
 
         # Merganje propertijev
         for k, vs in stock_annual_rows.items():
-            sa = vs[0]
+            SA = vs[0]
             for i in range(1, len(vs)):
                 for attr, val in vs[i].__dict__.items():
                     if '_year' in attr or '_stock' in attr:
-                        setattr(sa, attr, val)
+                        setattr(SA, attr, val)
 
-            sa._init()
-            this.stock_annual_rows.append(sa)
+            SA._init()
+            this.stock_annual_rows.append(SA)
 
 
 
@@ -168,10 +172,10 @@ def create_relationships_stock_annual():
             print(f'CONNECTING STOCK ANNUAL: {round(i / size_stock * 100)}%')
 
         if not row._exists:
-            raise Exception(f'Not exists: {row.StockAnnual}')
+            raise Exception(f'Not exists: {i} {row.__dict__}')
 
         this.graph.run(
-            'MATCH (s:Stock), (sa:StockAnnual) WHERE s.Stock=$StockAnnual AND sa.StockAnnual=$StockAnnual MERGE (s)-[r:REL_STOCK]->(sa) RETURN type(r)',
+            'MATCH (s:Stock), (sa:StockAnnual) WHERE s.Stock=$StockAnnual AND sa.StockAnnual=$StockAnnual MERGE (s)-[r:REL_STOCK_ANNUAL]->(sa) RETURN type(r)',
             StockAnnual=row.StockAnnual)
 
 def get_firm_tickers():
