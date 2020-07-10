@@ -31,13 +31,30 @@ def init():
         for row in reader:
             this.stock_rows.append(Stock(row))
 
+    stock_annual_rows = {}
     with open(this.csvStockAnnualPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             sa = StockAnnual(row)
-            # Todo: Merge with the same code!!!
-            if sa.Code is not None:
-                this.stock_annual_rows.append(sa.Code)
+            if sa.Code not in stock_annual_rows:
+                stock_annual_rows[sa.Code] = [sa]
+            else:
+                stock_annual_rows[sa.Code].append(sa)
+
+        for k, vs in stock_annual_rows.items():
+            sa = vs[0]
+            for i in range(1, len(vs)):
+                for attr, val in vs[i].__dict__.items():
+                    if '_year' in attr or '_stock' in attr:
+                        setattr(sa, attr, val)
+
+            sa._init()
+            this.stock_annual_rows.append(sa)
+
+
+
+
+
 
 # DELETE ALL IN DATABASE
 def delete_all():
@@ -72,7 +89,6 @@ def create_nodes_core():
             notExists['undertaking'] += 1
 
     print(notExists)
-
 
 def create_nodes_stock():
     size_stock = len(this.stock_rows)

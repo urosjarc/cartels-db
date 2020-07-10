@@ -1,17 +1,20 @@
 from py2neo import Node as NeoNode
 
+def reformat_value(val: str):
+    return val\
+        .replace('(', '') \
+        .replace(')', '') \
+        .replace('/', '_') \
+        .replace('.', '_') \
+        .replace(' ', '_') \
+        .replace('-', '_') \
+        .replace('&', '')
 
 def reformat(row: dict):
     delKeys = []
     pairs = []
     for k, v in row.items():
-        new_key = k \
-            .replace('(', '') \
-            .replace(')', '') \
-            .replace('/', '_') \
-            .replace('.', '_') \
-            .replace(' ', '_') \
-            .replace('-', '_')
+        new_key = reformat_value(k)
         pairs.append([new_key, v])
         delKeys.append(k)
     for k in delKeys:
@@ -81,11 +84,11 @@ class Node:
                 varg[name] = val
         return varg
 
-    def _init(self):
+    def _init(self, instance: bool = True):
         name = getattr(self, self._name, False)
         self._exists = name and not name.isspace()
 
-        if self._exists:
+        if self._exists and instance:
             self._instance = NeoNode(self._name, **self._getAttr())
 
     def post_init(self):
@@ -153,19 +156,38 @@ class Stock(Node):
 
 class StockAnnual(Node):
     def __init__(self, row: dict):
-        super().__init__('Type')
+        super().__init__('Code')
+
+        self.Code = None
+        self.CURRENCY = None
+
         self._row = reformat(row)
         self._createNodes()
-        self._init()
+        self._init(False)
 
     def _createNodes(self):
+        stock = []
+        years = []
+        name = self._row['Name']
         for attr, val in self._row.items():
-            setattr(self, attr, val)
+            if attr.isnumeric():
+                if val.isnumeric():
+                    stock.append(int(val))
+                    years.append(int(attr))
+            elif attr not in ['Name']:
+                setattr(self, attr, val)
 
         if ')' in self.Code:
             self.Code = self.Code.split('(')[0]
         else:
             self.Code = None
+
+        if '-' in name:
+            name = reformat_value(name.split('- ')[-1])
+            setattr(self, name + '_stock', stock)
+            setattr(self, name + '_years', years)
+
+
 
 class Firm(Node):
     def __init__(self):
