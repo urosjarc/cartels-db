@@ -10,12 +10,13 @@ this = sys.modules[__name__]
 this.graph = None
 
 this.rows: List[CSVRow] = []
-this.stock_rows: List[Stock] = []
-this.stock_annual_rows: List[StockAnnual] = []
+this.stock_meta_rows: List[StockMeta] = []
+this.stock_data_rows: List[StockData] = []
 
 this.csvPath = utils.currentDir(__file__, '../data/cartels-db.csv')
 this.csvStockPath = utils.currentDir(__file__, '../data/stock-db.csv')
 this.csvStockAnnualPath = utils.currentDir(__file__, '../data/stock-annual-eu-db.csv')
+
 
 # DATABASE
 def init():
@@ -29,24 +30,24 @@ def init():
     with open(this.csvStockPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            this.stock_rows.append(Stock(row))
+            this.stock_meta_rows.append(StockMeta(row))
 
-    stock_annual_rows = {}
+    stock_data_rows = {}
     with open(this.csvStockAnnualPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            sa = StockAnnual(row)
+            sa = StockData(row)
 
-            if sa.StockAnnual is None:
+            if sa.StockData is None:
                 continue
 
-            if sa.StockAnnual not in stock_annual_rows:
-                stock_annual_rows[sa.StockAnnual] = [sa]
+            if sa.StockData not in stock_data_rows:
+                stock_data_rows[sa.StockData] = [sa]
             else:
-                stock_annual_rows[sa.StockAnnual].append(sa)
+                stock_data_rows[sa.StockData].append(sa)
 
         # Merganje propertijev
-        for k, vs in stock_annual_rows.items():
+        for k, vs in stock_data_rows.items():
             SA = vs[0]
             for i in range(1, len(vs)):
                 for attr, val in vs[i].__dict__.items():
@@ -54,11 +55,7 @@ def init():
                         setattr(SA, attr, val)
 
             SA._init()
-            this.stock_annual_rows.append(SA)
-
-
-
-
+            this.stock_data_rows.append(SA)
 
 
 # DELETE ALL IN DATABASE
@@ -95,23 +92,26 @@ def create_nodes_core():
 
     print(notExists)
 
-def create_nodes_stock():
-    size_stock = len(this.stock_rows)
-    for i, row in enumerate(this.stock_rows):
+
+def create_nodes_stock_meta():
+    size_stock = len(this.stock_meta_rows)
+    for i, row in enumerate(this.stock_meta_rows):
         if i % 100 == 0:
-            print(f'CREATING STOCK NODES: {round(i / size_stock * 100)}%')
+            print(f'CREATING STOCK META NODES: {round(i / size_stock * 100)}%')
 
         if row._exists:
-            this.graph.merge(row._instance, 'Stock', 'Stock')
+            this.graph.merge(row._instance, 'StockMeta', 'StockMeta')
 
-def create_nodes_stock_annual():
-    size_annual_stock = len(this.stock_annual_rows)
-    for i, row in enumerate(this.stock_annual_rows):
+
+def create_nodes_stock_data():
+    size = len(this.stock_data_rows)
+    for i, row in enumerate(this.stock_data_rows):
         if i % 100 == 0:
-            print(f'CREATING STOCK ANNUAL NODES: {round(i / size_annual_stock * 100)}%')
+            print(f'CREATING STOCK DATA NODES: {round(i / size * 100)}%')
 
         if row._exists:
-            this.graph.merge(row._instance, 'StockAnnual', 'StockAnnual')
+            this.graph.merge(row._instance, 'StockData', 'StockData')
+
 
 # CREATE CONNECTIONS
 def create_relationships_core():
@@ -119,7 +119,7 @@ def create_relationships_core():
 
     for i, row in enumerate(this.rows):
         if i % 100 == 0:
-            print(f'CONNECTING: {round(i / size * 100)}%')
+            print(f'CONNECTING CORE: {round(i / size * 100)}%')
 
         # Firm => Case
         if row.firm._exists and row.case._exists:
@@ -144,39 +144,41 @@ def create_relationships_core():
                 Undertaking=row.undertaking.Undertaking, Holding=row.holding.Holding)
 
 
-def create_relationships_stock():
-    size_stock = len(this.stock_rows)
-    for i, row in enumerate(this.stock_rows):
+def create_relationships_stock_meta():
+    size = len(this.stock_meta_rows)
+    for i, row in enumerate(this.stock_meta_rows):
         if i % 100 == 0:
-            print(f'CONNECTING STOCK: {round(i / size_stock * 100)}%')
+            print(f'CONNECTING STOCK META: {round(i / size * 100)}%')
 
         if not row._exists:
-            raise Exception(f'Not exists: {row.Stock}')
+            raise Exception(f'Not exists: {row.StockMeta}')
 
         this.graph.run(
-            'MATCH (s:Stock), (f:Firm) WHERE s.Stock=$Stock AND f.Stock_exchange_firm=$Stock MERGE (s)-[r:REL_STOCK]->(f) RETURN type(r)',
-            Stock=row.Stock)
+            'MATCH (sm:StockMeta), (f:Firm) WHERE sm.StockMeta=$StockMeta AND f.Stock_exchange_firm=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(f) RETURN type(r)',
+            StockMeta=row.StockMeta)
 
         this.graph.run(
-            'MATCH (s:Stock), (u:Undertaking) WHERE s.Stock=$Stock AND u.Stock_exchange_undertaking=$Stock MERGE (s)-[r:REL_STOCK]->(u) RETURN type(r)',
-            Stock=row.Stock)
+            'MATCH (sm:StockMeta), (u:Undertaking) WHERE sm.StockMeta=$StockMeta AND u.Stock_exchange_undertaking=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(u) RETURN type(r)',
+            StockMeta=row.StockMeta)
 
         this.graph.run(
-            'MATCH (s:Stock), (h:Holding) WHERE s.Stock=$Stock AND h.Stock_exchange_holding=$Stock MERGE (s)-[r:REL_STOCK]->(h) RETURN type(r)',
-            Stock=row.Stock)
+            'MATCH (sm:StockMeta), (h:Holding) WHERE sm.StockMeta=$StockMeta AND h.Stock_exchange_holding=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(h) RETURN type(r)',
+            StockMeta=row.StockMeta)
 
-def create_relationships_stock_annual():
-    size_stock = len(this.stock_annual_rows)
-    for i, row in enumerate(this.stock_annual_rows):
+
+def create_relationships_stock_data():
+    size = len(this.stock_data_rows)
+    for i, row in enumerate(this.stock_data_rows):
         if i % 100 == 0:
-            print(f'CONNECTING STOCK ANNUAL: {round(i / size_stock * 100)}%')
+            print(f'CONNECTING STOCK DATA: {round(i / size * 100)}%')
 
         if not row._exists:
             raise Exception(f'Not exists: {i} {row.__dict__}')
 
         this.graph.run(
-            'MATCH (s:Stock), (sa:StockAnnual) WHERE s.Stock=$StockAnnual AND sa.StockAnnual=$StockAnnual MERGE (s)-[r:REL_STOCK_ANNUAL]->(sa) RETURN type(r)',
-            StockAnnual=row.StockAnnual)
+            'MATCH (sm:StockMeta), (sd:StockData) WHERE sm.StockMeta=$StockData AND sd.StockData=$StockData MERGE (sm)-[r:REL_STOCK_DATA]->(sd) RETURN type(r)',
+            StockData=row.StockData)
+
 
 def get_firm_tickers():
     tickers = set()
@@ -186,5 +188,3 @@ def get_firm_tickers():
         except:
             pass
     return list(tickers)
-
-

@@ -1,7 +1,8 @@
 from py2neo import Node as NeoNode
 
+
 def reformat_value(val: str):
-    return val\
+    return val \
         .replace('(', '') \
         .replace(')', '') \
         .replace('/', '_') \
@@ -9,6 +10,7 @@ def reformat_value(val: str):
         .replace(' ', '_') \
         .replace('-', '_') \
         .replace('&', '')
+
 
 def reformat(row: dict):
     delKeys = []
@@ -142,12 +144,12 @@ class Case(Node):
         self.EC_Event_dec_file = None
 
 
-class Stock(Node):
+class StockMeta(Node):
     def __init__(self, row: dict):
-        super().__init__('Stock')
+        super().__init__('StockMeta')
         self._row = reformat(row)
 
-        self.Stock = self._row['Type']
+        self.StockMeta = self._row['Type']
         del self._row['Type']
 
         self._createNodes()
@@ -158,15 +160,13 @@ class Stock(Node):
             setattr(self, attr, val)
 
 
-
-
-class StockAnnual(Node):
+class StockData(Node):
     def __init__(self, row: dict):
-        super().__init__('StockAnnual')
+        super().__init__('StockData')
         self._row = reformat(row)
 
         self.CURRENCY = None
-        self.StockAnnual = self._row['Code']
+        self.StockData = self._row['Code']
         del self._row['Code']
 
         self._createNodes()
@@ -184,16 +184,15 @@ class StockAnnual(Node):
             elif attr not in ['Name']:
                 setattr(self, attr, val)
 
-        if ')' in self.StockAnnual:
-            self.StockAnnual = self.StockAnnual.split('(')[0]
+        if ')' in self.StockData:
+            self.StockData = self.StockData.split('(')[0]
         else:
-            self.StockAnnual= None
+            self.StockData = None
 
         if '-' in name:
             name = reformat_value(name.split('- ')[-1])
             setattr(self, name + '_stock', stock)
             setattr(self, name + '_years', years)
-
 
 
 class Firm(Node):
