@@ -1,61 +1,44 @@
-from py2neo import Graph, Relationship, Cursor
+from py2neo import Graph
 import sys
 import csv
 from src import utils
 from src import auth as aut
 from src.domain import *
 from typing import List
+import os
 
 this = sys.modules[__name__]
 this.graph = None
 
-this.rows: List[CSVRow] = []
+this.core_rows: List[CSV_Core] = []
 this.stock_meta_rows: List[StockMeta] = []
 this.stock_data_rows: List[StockData] = []
 
-this.csvPath = utils.currentDir(__file__, '../data/cartels-db.csv')
-this.csvStockPath = utils.currentDir(__file__, '../data/stock-db.csv')
-this.csvStockAnnualPath = utils.currentDir(__file__, '../data/stock-annual-eu-db.csv')
-
+this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
+this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
+this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/stock-data'))]
 
 # DATABASE
 def init():
     this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
 
-    with open(this.csvPath) as csvfile:
+    with open(this.csvCorePath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            this.rows.append(CSVRow(row))
+            this.core_rows.append(CSV_Core(row))
 
-    with open(this.csvStockPath) as csvfile:
+    with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             this.stock_meta_rows.append(StockMeta(row))
 
-    stock_data_rows = {}
-    with open(this.csvStockAnnualPath) as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            sa = StockData(row)
-
-            if sa.StockData is None:
-                continue
-
-            if sa.StockData not in stock_data_rows:
-                stock_data_rows[sa.StockData] = [sa]
-            else:
-                stock_data_rows[sa.StockData].append(sa)
-
-        # Merganje propertijev
-        for k, vs in stock_data_rows.items():
-            SA = vs[0]
-            for i in range(1, len(vs)):
-                for attr, val in vs[i].__dict__.items():
-                    if '_year' in attr or '_stock' in attr:
-                        setattr(SA, attr, val)
-
-            SA._init()
-            this.stock_data_rows.append(SA)
+    for path in this.csvStockDataPaths:
+        name = path.split("/")[-1]
+        addMissingAttributes = False
+        if name in ['annual.csv']:
+            addMissingAttributes = True
+        print(f'Parsing: {name} addMissingAttr={addMissingAttributes}')
+        this.stock_data_rows += StockData.parse(path, addMissingAttributes)
 
 
 # DELETE ALL IN DATABASE
@@ -65,7 +48,7 @@ def delete_all():
 
 # CREATE NODES
 def create_nodes_core():
-    size = len(this.rows)
+    size = len(this.core_rows)
     notExists = {
         'firm': 0,
         'case': 0,
@@ -73,7 +56,7 @@ def create_nodes_core():
         'undertaking': 0,
     }
 
-    for i, row in enumerate(this.rows):
+    for i, row in enumerate(this.core_rows):
         if i % 100 == 0:
             print(f'CREATING CORE NODES: {round(i / size * 100)}%')
 
@@ -115,9 +98,9 @@ def create_nodes_stock_data():
 
 # CREATE CONNECTIONS
 def create_relationships_core():
-    size = len(this.rows)
+    size = len(this.core_rows)
 
-    for i, row in enumerate(this.rows):
+    for i, row in enumerate(this.core_rows):
         if i % 100 == 0:
             print(f'CONNECTING CORE: {round(i / size * 100)}%')
 
@@ -182,7 +165,7 @@ def create_relationships_stock_data():
 
 def get_firm_tickers():
     tickers = set()
-    for row in this.rows:
+    for row in this.core_rows:
         try:
             tickers.add(row.firm.Ticker_firm.split(':')[1])
         except:

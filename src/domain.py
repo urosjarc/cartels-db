@@ -1,30 +1,6 @@
 from py2neo import Node as NeoNode
-
-
-def reformat_value(val: str):
-    return val \
-        .replace('(', '') \
-        .replace(')', '') \
-        .replace('/', '_') \
-        .replace('.', '_') \
-        .replace(' ', '_') \
-        .replace('-', '_') \
-        .replace('&', '')
-
-
-def reformat(row: dict):
-    delKeys = []
-    pairs = []
-    for k, v in row.items():
-        new_key = reformat_value(k)
-        pairs.append([new_key, v])
-        delKeys.append(k)
-    for k in delKeys:
-        row.pop(k)
-    for k, v in pairs:
-        row[k] = v
-
-    return row
+from src import utils
+import csv
 
 
 class Path:
@@ -40,30 +16,6 @@ class Path:
         for attr, val in self.__dict__.items():
             if val is None:
                 setattr(self, attr, json.get(attr, None))
-
-
-class CSVRow:
-    def __init__(self, row: dict):
-        self._row = reformat(row)
-
-        self.firm = Firm()
-        self.case = Case()
-        self.undertaking = Undertaking()
-        self.holding = Holding()
-
-        self._createNodes()
-
-    def _createNodes(self):
-        for attr, val in self.__dict__.items():
-            if isinstance(val, Node):
-                node = getattr(self, attr)
-                for nodeAttr in node.__dict__:
-                    if not nodeAttr.startswith('_'):
-                        node._setVar(nodeAttr, self._row[nodeAttr])
-
-                node._data = self._row
-                node.post_init()
-                node._init()
 
 
 class Node:
@@ -95,6 +47,127 @@ class Node:
 
     def post_init(self):
         pass
+
+
+class StockMeta(Node):
+    def __init__(self, row: dict):
+        super().__init__('StockMeta')
+        self._row = utils.reformat_dict(row)
+
+        self.StockMeta = self._row['Type']
+        del self._row['Type']
+
+        self._createNodes()
+        self._init()
+
+    def _createNodes(self):
+        for attr, val in self._row.items():
+            setattr(self, attr, val)
+
+
+class StockData(Node):
+
+    @staticmethod
+    def parse(path: str, addMissingAttributes: bool=False):
+        with open(path) as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            stock_data_rows = {}
+            finish_stock_data_nodes = []
+            unique_names = set()
+            default_values = []
+
+            for row in reader:
+                sa = StockData(row)
+
+                if sa.StockData is None:
+                    continue
+
+                if sa.StockData not in stock_data_rows:
+                    stock_data_rows[sa.StockData] = [sa]
+                else:
+                    stock_data_rows[sa.StockData].append(sa)
+
+            # Merganje propertijev
+            for k, vs in stock_data_rows.items():
+                SA = vs[0]
+                default_values = [-1 for date in SA.date]
+
+                unique_names.add(SA.name)
+                delattr(SA, 'name')
+                for i in range(1, len(vs)):
+                    unique_names.add(vs[i].name)
+                    setattr(SA, vs[i].name, getattr(vs[i], vs[i].name))
+
+                SA._init()
+                finish_stock_data_nodes.append(SA)
+
+            # Adding other non existing attributes
+            if addMissingAttributes:
+                for node in finish_stock_data_nodes:
+                    for attr in unique_names:
+                        setattr(node, attr, getattr(node, attr, default_values))
+
+            return finish_stock_data_nodes
+
+    def __init__(self, row: dict):
+        super().__init__('StockData')
+        self._row = utils.reformat_dict(row)
+
+        self.CURRENCY = None
+        self.StockData = self._row['Code']
+        self.date = []
+        self.name = None
+        del self._row['Code']
+
+        self._createNodes()
+        self._init(False)
+
+    def _createNodes(self):
+        stock = []
+        name = self._row['Name']
+        for attr, val in self._row.items():
+            if attr.isnumeric() or attr.count('/') == 2:
+                self.date.append(attr)
+                if val.isnumeric():
+                    stock.append(float(val))
+                else:
+                    stock.append(-1)
+            elif attr not in ['Name']:
+                setattr(self, attr, val)
+
+        if ')' in self.StockData:
+            self.StockData = self.StockData.split('(')[0]
+        else:
+            self.StockData = None
+
+        if '-' in name:
+            self.name = utils.reformat_value(name.split('- ')[-1])
+            setattr(self, self.name, stock)
+
+
+class CSV_Core:
+    def __init__(self, row: dict):
+        self._row = utils.reformat_dict(row)
+
+        self.firm = Firm()
+        self.case = Case()
+        self.undertaking = Undertaking()
+        self.holding = Holding()
+
+        self._createNodes()
+
+    def _createNodes(self):
+        for attr, val in self.__dict__.items():
+            if isinstance(val, Node):
+                node = getattr(self, attr)
+                for nodeAttr in node.__dict__:
+                    if not nodeAttr.startswith('_'):
+                        node._setVar(nodeAttr, self._row[nodeAttr])
+
+                node._data = self._row
+                node.post_init()
+                node._init()
 
 
 class Case(Node):
@@ -142,57 +215,6 @@ class Case(Node):
         self.M20ticker = None
 
         self.EC_Event_dec_file = None
-
-
-class StockMeta(Node):
-    def __init__(self, row: dict):
-        super().__init__('StockMeta')
-        self._row = reformat(row)
-
-        self.StockMeta = self._row['Type']
-        del self._row['Type']
-
-        self._createNodes()
-        self._init()
-
-    def _createNodes(self):
-        for attr, val in self._row.items():
-            setattr(self, attr, val)
-
-
-class StockData(Node):
-    def __init__(self, row: dict):
-        super().__init__('StockData')
-        self._row = reformat(row)
-
-        self.CURRENCY = None
-        self.StockData = self._row['Code']
-        del self._row['Code']
-
-        self._createNodes()
-        self._init(False)
-
-    def _createNodes(self):
-        stock = []
-        years = []
-        name = self._row['Name']
-        for attr, val in self._row.items():
-            if attr.isnumeric():
-                if val.isnumeric():
-                    stock.append(int(val))
-                    years.append(int(attr))
-            elif attr not in ['Name']:
-                setattr(self, attr, val)
-
-        if ')' in self.StockData:
-            self.StockData = self.StockData.split('(')[0]
-        else:
-            self.StockData = None
-
-        if '-' in name:
-            name = reformat_value(name.split('- ')[-1])
-            setattr(self, name + '_stock', stock)
-            setattr(self, name + '_years', years)
 
 
 class Firm(Node):
