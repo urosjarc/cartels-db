@@ -1,6 +1,7 @@
 from py2neo import Node as NeoNode
 from src import utils
 import csv
+import datetime
 
 
 class Path:
@@ -110,9 +111,9 @@ class StockData(Node):
 
             return finish_stock_data_nodes
 
-    def __init__(self, row: dict):
+    def __init__(self, row: dict, hasDates=False):
         super().__init__('StockData')
-        self._row = utils.reformat_dict(row)
+        self._row = utils.reformat_dict(row, hasDates)
 
         self.CURRENCY = None
         self.StockData = self._row['Code']
@@ -127,9 +128,11 @@ class StockData(Node):
         stock = []
         name = self._row['Name']
         for attr, val in self._row.items():
-            if attr.isnumeric() or attr.count('/') == 2:
+            isDate = attr.count('/') == 2
+            attr = str(int(datetime.datetime.strptime(attr, '%m/%d/%Y').timestamp())) if isDate else attr
+            if attr.isnumeric() or isDate:
                 self.date.append(attr)
-                if val.isnumeric():
+                if val.replace('.','',1).isdigit():
                     stock.append(float(val))
                 else:
                     stock.append(-1)

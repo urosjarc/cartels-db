@@ -6,7 +6,10 @@ from src import auth, domain
 import http.client, urllib.parse
 
 
-def reformat_value(val: str):
+def reformat_value(val: str, hasDates=False):
+    if val.count('/') == 2:
+        return val
+
     return val \
         .replace('(', '') \
         .replace(')', '') \
@@ -19,11 +22,11 @@ def reformat_value(val: str):
         .replace("'", '')
 
 
-def reformat_dict(row: dict):
+def reformat_dict(row: dict, hasDates=False):
     delKeys = []
     pairs = []
     for k, v in row.items():
-        new_key = reformat_value(k)
+        new_key = reformat_value(k, hasDates)
         pairs.append([new_key, v])
         delKeys.append(k)
     for k in delKeys:
