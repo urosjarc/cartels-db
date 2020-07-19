@@ -57,6 +57,7 @@ def init():
                 setattr(sd, name, sd.values)
                 setattr(sd, name+"_dates", sd.dates)
                 delattr(sd, 'values')
+                delattr(sd, 'dates')
                 stockDatas[sd.StockData] = sd
             else:
                 nameVal = getattr(stockDatas[sd.StockData], name, None)
@@ -83,9 +84,9 @@ def init():
 
     for sd in stockDatas.values():
         sd._init()
+        this.stock_data_rows.append(sd)
 
     print(f'\nAttributes added: {round(missingVal/vals * 100, 2)}% out of {vals}')
-    return stockDatas.values()
 
 
 # DELETE ALL IN DATABASE
