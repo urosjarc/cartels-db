@@ -6,10 +6,7 @@ from src import auth, domain
 import http.client, urllib.parse
 
 
-def reformat_value(val: str, hasDates=False):
-    if val.count('/') == 2:
-        return val
-
+def reformat_value(val: str):
     return val \
         .replace('(', '') \
         .replace(')', '') \
@@ -22,19 +19,17 @@ def reformat_value(val: str, hasDates=False):
         .replace("'", '')
 
 
-def reformat_dict(row: dict, hasDates=False):
-    delKeys = []
+def reformat_dict(row: dict):
     pairs = []
-    for k, v in row.items():
-        new_key = reformat_value(k, hasDates)
-        pairs.append([new_key, v])
-        delKeys.append(k)
-    for k in delKeys:
-        row.pop(k)
-    for k, v in pairs:
-        row[k] = v
+    nrow = {}
 
-    return row
+    for k, v in row.items():
+        new_key = reformat_value(k)
+        pairs.append([new_key, v])
+    for k, v in pairs:
+        nrow[k] = v
+
+    return nrow
 
 
 def currentDir(_file_, path):

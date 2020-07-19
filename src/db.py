@@ -16,7 +16,7 @@ this.stock_data_rows: List[StockData] = []
 
 this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
-this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/stock-data'))]
+this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/stock-data/test'))]
 
 # DATABASE
 def init():
@@ -32,13 +32,11 @@ def init():
         for row in reader:
             this.stock_meta_rows.append(StockMeta(row))
 
+    stockDataRows = {}
     for path in this.csvStockDataPaths:
-        name = path.split("/")[-1]
-        addMissingAttributes = False
-        if name in ['annual.csv']:
-            addMissingAttributes = True
-        print(f'Parsing: {name} addMissingAttr={addMissingAttributes}')
-        this.stock_data_rows += StockData.parse(path, addMissingAttributes)
+        name = path.split("/")[-1].split(',')[1][1:].replace(' ', '_')
+        print(f'Parsing: [{name + "]":<62}')
+        stockDataRows[name] = StockData.parse(path)
 
 
 # DELETE ALL IN DATABASE
@@ -94,6 +92,26 @@ def create_nodes_stock_data():
 
         if row._exists:
             this.graph.merge(row._instance, 'StockData', 'StockData')
+
+# TESTS
+def test_nodes_stock_data():
+    nansCount = 0
+
+    for filePath in this.csvStockDataPaths:
+        if filePath.split('/')[-1] not in StockData.addMissingAttributesFiles():
+            with open(filePath) as f:
+                nansCount += f.read().count(',NA,')
+
+    nansCountParsed = 0
+    for row in this.stock_data_rows:
+        if row.file not in StockData.addMissingAttributesFiles():
+            for attr, val in row.__dict__.items():
+                if isinstance(val, list):
+                    nansCountParsed += val.count(-1)
+
+    print(nansCount, nansCountParsed, round(nansCountParsed/nansCount * 100, 2))
+
+
 
 
 # CREATE CONNECTIONS

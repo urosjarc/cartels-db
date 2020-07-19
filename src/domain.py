@@ -1,5 +1,5 @@
 from py2neo import Node as NeoNode
-from src import utils
+from src import utils, db
 import csv
 import datetime
 
@@ -69,84 +69,54 @@ class StockMeta(Node):
 class StockData(Node):
 
     @staticmethod
-    def parse(path: str, addMissingAttributes: bool=False):
+    def addMissingAttributesFiles():
+        return ['L#A1012M, annual figures, local, euro.csv']
+
+    @staticmethod
+    def parse(path: str):
+        returned = []
         with open(path) as csvfile:
             reader = csv.DictReader(csvfile)
-
-            stock_data_rows = {}
-            finish_stock_data_nodes = []
-            unique_names = set()
-            default_values = []
 
             for row in reader:
                 sa = StockData(row)
 
                 if sa.StockData is None:
                     continue
-
-                if sa.StockData not in stock_data_rows:
-                    stock_data_rows[sa.StockData] = [sa]
                 else:
-                    stock_data_rows[sa.StockData].append(sa)
+                    returned.append(sa)
 
-            # Merganje propertijev
-            for k, vs in stock_data_rows.items():
-                SA = vs[0]
-                default_values = [-1 for date in SA.date]
+            return returned
 
-                unique_names.add(SA.name)
-                delattr(SA, 'name')
-                for i in range(1, len(vs)):
-                    unique_names.add(vs[i].name)
-                    setattr(SA, vs[i].name, getattr(vs[i], vs[i].name))
-
-                SA._init()
-                finish_stock_data_nodes.append(SA)
-
-            # Adding other non existing attributes
-            if addMissingAttributes:
-                for node in finish_stock_data_nodes:
-                    for attr in unique_names:
-                        setattr(node, attr, getattr(node, attr, default_values))
-
-            return finish_stock_data_nodes
-
-    def __init__(self, row: dict, hasDates=False):
+    def __init__(self, row: dict):
         super().__init__('StockData')
-        self._row = utils.reformat_dict(row, hasDates)
+        self._row = row
+
+        self.StockData = self._row['Code']
+        del self._row['Code']
 
         self.CURRENCY = None
-        self.StockData = self._row['Code']
         self.date = []
-        self.name = None
-        del self._row['Code']
+        self.dateValues = []
 
         self._createNodes()
         self._init(False)
 
     def _createNodes(self):
-        stock = []
-        name = self._row['Name']
         for attr, val in self._row.items():
             isDate = attr.count('/') == 2
             attr = str(int(datetime.datetime.strptime(attr, '%m/%d/%Y').timestamp())) if isDate else attr
             if attr.isnumeric() or isDate:
-                self.date.append(attr)
+                self.date.append(int(attr))
                 if val.replace('.','',1).isdigit():
-                    stock.append(float(val))
+                    self.dateValues.append(float(val))
                 else:
-                    stock.append(-1)
+                    self.dateValues.append(-1)
             elif attr not in ['Name']:
                 setattr(self, attr, val)
 
         if ')' in self.StockData:
             self.StockData = self.StockData.split('(')[0]
-        else:
-            self.StockData = None
-
-        if '-' in name:
-            self.name = utils.reformat_value(name.split('- ')[-1])
-            setattr(self, self.name, stock)
 
 
 class CSV_Core:
