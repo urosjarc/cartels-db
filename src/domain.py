@@ -53,16 +53,16 @@ class Node:
 class StockMeta(Node):
     def __init__(self, row: dict):
         super().__init__('StockMeta')
-        self._row = utils.reformat_dict(row)
+        self._data = utils.reformat_dict(row)
 
-        self.StockMeta = self._row['Type']
-        del self._row['Type']
+        self.StockMeta = self._data['Type']
+        del self._data['Type']
 
         self._createNodes()
         self._init()
 
     def _createNodes(self):
-        for attr, val in self._row.items():
+        for attr, val in self._data.items():
             setattr(self, attr, val)
 
 
@@ -90,28 +90,27 @@ class StockData(Node):
 
     def __init__(self, row: dict):
         super().__init__('StockData')
-        self._row = row
+        self._data = row
 
-        self.StockData = self._row['Code']
-        del self._row['Code']
+        self.StockData = self._data['Code']
+        del self._data['Code']
 
-        self.CURRENCY = None
-        self.date = []
-        self.dateValues = []
+        self.dates = []
+        self.values = []
 
         self._createNodes()
         self._init(False)
 
     def _createNodes(self):
-        for attr, val in self._row.items():
+        for attr, val in self._data.items():
             isDate = attr.count('/') == 2
             attr = str(int(datetime.datetime.strptime(attr, '%m/%d/%Y').timestamp())) if isDate else attr
             if attr.isnumeric() or isDate:
-                self.date.append(int(attr))
+                self.dates.append(int(attr))
                 if val.replace('.','',1).isdigit():
-                    self.dateValues.append(float(val))
+                    self.values.append(float(val))
                 else:
-                    self.dateValues.append(-1)
+                    self.values.append(-1)
             elif attr not in ['Name']:
                 setattr(self, attr, val)
 
