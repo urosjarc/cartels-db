@@ -28,7 +28,11 @@ user: neo4j
 url: https://34-66-123-143.gcp-neo4j-sandbox.com:7473/
 ```
 
-# Connecting
+# Will do...
 
-Todo: (static) Firm, Undertaking, Holding => Stock.Type
-Todo: (L#A1012M) -//- => Stock
+1. Import to db from stock_data_fix.
+2. Connect all from stock-data.
+3. Create additional nodes from stock_info
+4. Connect them all "povezovalni element" iz "Datastream podatki..."
+5. Potem sledi "Navodila za obdelavo podatkov..." glej stolpec
+F[Prepis/obdelava v isti stolpec] in G[Nove spremenljivke ->] in nadalni stolpci 
