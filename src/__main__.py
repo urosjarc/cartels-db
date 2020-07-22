@@ -1,9 +1,9 @@
 from src import db
 
+
 # INIT
 db.init()
 db.delete_all()
-# db.test_nodes_stock_data()
 
 # CREATE NODES
 # db.create_nodes_core()

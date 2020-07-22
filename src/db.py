@@ -16,22 +16,34 @@ this.stock_data_rows: List[StockData] = []
 
 this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
-this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/stock-data'))]
+this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
+this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
 
 # DATABASE
+
 def init():
+    init_db()
+    # init_nodes_core()
+    # init_nodes_stock_meta()
+    init_nodes_stock_data_A1012M()
+    init_nodes_stock_data_A1012M_annual()
+
+def init_db():
     this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
 
+def init_nodes_core():
     with open(this.csvCorePath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             this.core_rows.append(CSV_Core(row))
 
+def init_nodes_stock_meta():
     with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             this.stock_meta_rows.append(StockMeta(row))
 
+def init_nodes_stock_data_A1012M():
     # GET ALL FILES
     stockDatas = {} # code -> path -> StockData
     names = []
@@ -43,7 +55,7 @@ def init():
         names.append(name)
         dates[name] = None
 
-        sds = StockData.parse(path)
+        sds = StockData.parse_A1012M(path)
 
         # MERGE DATA
         for sd in sds:
@@ -83,11 +95,43 @@ def init():
     # Initing
 
     for sd in stockDatas.values():
-        sd._init()
         this.stock_data_rows.append(sd)
 
     print(f'\nAttributes added: {round(missingVal/vals * 100, 2)}% out of {vals}')
 
+def init_nodes_stock_data_A1012M_annual():
+    stockDatas = {} # code -> name -> StockData
+    uniqueNames = set()
+
+    sds = StockData.parse_A1012M_annual(this.csvStockDataAnnualPath)
+    sd_date = sds[0].dates
+    sd_default = [-1 for d in sd_date]
+
+    for sd in sds:
+        name = utils.reformat_value(sd._data['Name'].split(' - ')[-1])
+        if name == '#ERROR':
+            continue
+
+        name = 'annual_' + name
+
+        uniqueNames.add(name)
+        if sd.StockData not in stockDatas:
+            stockDatas[sd.StockData] = { name: sd }
+        else:
+            stockDatas[sd.StockData][name] = sd
+
+    for sd in this.stock_data_rows:
+        if sd.StockData in stockDatas:
+
+            setattr(sd, 'annual_dates', sd_date)
+
+            for k, v in stockDatas[sd.StockData].items():
+                setattr(sd, k, v.values)
+
+            for un in uniqueNames.difference(list(stockDatas[sd.StockData].keys())):
+                setattr(sd, un, sd_default)
+
+            sd._init()
 
 # DELETE ALL IN DATABASE
 def delete_all():

@@ -69,17 +69,34 @@ class StockMeta(Node):
 class StockData(Node):
 
     @staticmethod
-    def addMissingAttributesFiles():
-        return ['L#A1012M, annual figures, local, euro.csv']
-
-    @staticmethod
-    def parse(path: str):
+    def parse_A1012M(path: str):
         returned = []
         with open(path) as csvfile:
             reader = csv.DictReader(csvfile)
 
             for row in reader:
                 sa = StockData(row)
+                sa._create_A1012M_Nodes()
+                sa._init(False)
+
+                if sa.StockData is None:
+                    continue
+                else:
+                    returned.append(sa)
+
+            return returned
+
+    @staticmethod
+    def parse_A1012M_annual(path: str):
+        returned = []
+        with open(path) as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+                sa = StockData(row)
+                sa._create_A1012MAnnual_Nodes()
+                sa._name += 'Annual'
+                sa._init(False)
 
                 if sa.StockData is None:
                     continue
@@ -98,14 +115,27 @@ class StockData(Node):
         self.dates = []
         self.values = []
 
-        self._createNodes()
-        self._init(False)
-
-    def _createNodes(self):
+    def _create_A1012M_Nodes(self):
         for attr, val in self._data.items():
             isDate = attr.count('/') == 2
             attr = str(int(datetime.datetime.strptime(attr, '%m/%d/%Y').timestamp())) if isDate else attr
             if attr.isnumeric() or isDate:
+                self.dates.append(int(attr))
+                if val.replace('.','',1).isdigit():
+                    self.values.append(float(val))
+                else:
+                    self.values.append(-1)
+            elif attr not in ['Name']:
+                setattr(self, attr, val)
+
+        if ')' in self.StockData:
+            self.StockData = self.StockData.split('(')[0]
+
+    def _create_A1012MAnnual_Nodes(self):
+        for attr, val in self._data.items():
+            isDate = attr.isnumeric()
+            attr = str(int(datetime.datetime.strptime(attr, '%Y').timestamp())) if isDate else attr
+            if isDate:
                 self.dates.append(int(attr))
                 if val.replace('.','',1).isdigit():
                     self.values.append(float(val))
