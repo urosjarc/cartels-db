@@ -128,9 +128,6 @@ def init_nodes_stock_data_A1012M():
         sd._init()
         this.stock_data_rows.append(sd)
 
-    print(f'\nAttributes added: {round(missingVal / vals * 100, 2)}% out of {vals}')
-
-
 def init_nodes_stock_data_A1012M_annual():
     stockDatas = {}  # code -> name -> StockData
     uniqueNames = set()
@@ -243,8 +240,6 @@ def create_nodes_core():
         else:
             notExists['undertaking'] += 1
 
-    print(notExists)
-
 
 def create_nodes_stock_meta():
     size_stock = len(this.stock_meta_rows)
@@ -351,3 +346,11 @@ def get_firm_tickers():
         except:
             pass
     return list(tickers)
+
+
+def report():
+    print('REPORT:')
+    print(f'\t- CORE: {len(this.core_rows)}')
+    print(f'\t- STOCK META: {len(this.stock_meta_rows)}')
+    print(f'\t- STOCK DATA: {len(this.stock_data_rows)}')
+    print(f'\t- STOCK DATA OTHERS: {len(this.stock_data_others_rows)}')
