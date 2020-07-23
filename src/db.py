@@ -13,23 +13,51 @@ this.graph = None
 this.core_rows: List[CSV_Core] = []
 this.stock_meta_rows: List[StockMeta] = []
 this.stock_data_rows: List[StockData] = []
+this.stock_data_others_rows: List[StockData] = []
 
 this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
+this.csvStockData2IndustryPaths = [i for i in
+                                   utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/2IN'))]
+this.csvStockData4IndustryPaths = [i for i in
+                                   utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/4SE'))]
+this.csvStockDataMLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/MLOC'))]
+this.csvStockDataDSLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/DSLOC'))]
+this.csvStockDataTOTMKWDPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/TOTMKWD'))]
+
 
 # DATABASE
 
+
 def init():
     init_db()
-    # init_nodes_core()
-    # init_nodes_stock_meta()
+
+    init_nodes_core()
+    init_nodes_stock_meta()
     init_nodes_stock_data_A1012M()
     init_nodes_stock_data_A1012M_annual()
 
+    def industry_name(name):
+        return name.replace("WORLD-DS ", "").split(' - ')[0]
+
+    def mloc_name(name):
+        return name.split(' - ')[0]
+
+    def dsloc_name(name):
+        return name.split(' - ')[0].replace("-DS", "")
+
+    init_nodes_stock_data_other(this.csvStockData2IndustryPaths, industry_name)
+    init_nodes_stock_data_other(this.csvStockData4IndustryPaths, industry_name)
+    init_nodes_stock_data_other(this.csvStockDataMLOCPaths, mloc_name)
+    init_nodes_stock_data_other(this.csvStockDataDSLOCPaths, dsloc_name)
+    init_nodes_stock_data_other(this.csvStockDataTOTMKWDPaths, dsloc_name)
+
+
 def init_db():
     this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
+
 
 def init_nodes_core():
     with open(this.csvCorePath) as csvfile:
@@ -37,20 +65,22 @@ def init_nodes_core():
         for row in reader:
             this.core_rows.append(CSV_Core(row))
 
+
 def init_nodes_stock_meta():
     with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
             this.stock_meta_rows.append(StockMeta(row))
 
+
 def init_nodes_stock_data_A1012M():
     # GET ALL FILES
-    stockDatas = {} # code -> path -> StockData
+    stockDatas = {}  # code -> path -> StockData
     names = []
     dates = {}
     for path in this.csvStockDataPaths:
         name = path.split("/")[-1].split(',')[1][1:].replace(' ', '_')
-        print(f'Parsing: [{name + "]":<62}')
+        print(f'Parsing: [{name + "]":<30} {path.split("/")[-1]}')
 
         names.append(name)
         dates[name] = None
@@ -67,7 +97,7 @@ def init_nodes_stock_data_A1012M():
 
             if sd.StockData not in stockDatas:
                 setattr(sd, name, sd.values)
-                setattr(sd, name+"_dates", sd.dates)
+                setattr(sd, name + "_dates", sd.dates)
                 delattr(sd, 'values')
                 delattr(sd, 'dates')
                 stockDatas[sd.StockData] = sd
@@ -76,7 +106,7 @@ def init_nodes_stock_data_A1012M():
                 if nameVal is not None:
                     raise Exception(f'{name} is occuring multiple times for {sd.StockData}')
                 setattr(stockDatas[sd.StockData], name, sd.values)
-                setattr(stockDatas[sd.StockData], name+'_dates', sd.dates)
+                setattr(stockDatas[sd.StockData], name + '_dates', sd.dates)
 
     # Adding missing properties
     missingVal = 0
@@ -88,19 +118,21 @@ def init_nodes_stock_data_A1012M():
             if data is None:
                 zerros = [-1 for i in dates[n]]
                 setattr(stockData, n, zerros)
-                setattr(stockData, n+"_dates", dates[n])
-                missingVal+= 1
+                setattr(stockData, n + "_dates", dates[n])
+                missingVal += 1
             else:
-                vals+=1
+                vals += 1
     # Initing
 
     for sd in stockDatas.values():
+        sd._init()
         this.stock_data_rows.append(sd)
 
-    print(f'\nAttributes added: {round(missingVal/vals * 100, 2)}% out of {vals}')
+    print(f'\nAttributes added: {round(missingVal / vals * 100, 2)}% out of {vals}')
+
 
 def init_nodes_stock_data_A1012M_annual():
-    stockDatas = {} # code -> name -> StockData
+    stockDatas = {}  # code -> name -> StockData
     uniqueNames = set()
 
     sds = StockData.parse_A1012M_annual(this.csvStockDataAnnualPath)
@@ -116,7 +148,7 @@ def init_nodes_stock_data_A1012M_annual():
 
         uniqueNames.add(name)
         if sd.StockData not in stockDatas:
-            stockDatas[sd.StockData] = { name: sd }
+            stockDatas[sd.StockData] = {name: sd}
         else:
             stockDatas[sd.StockData][name] = sd
 
@@ -132,6 +164,52 @@ def init_nodes_stock_data_A1012M_annual():
                 setattr(sd, un, sd_default)
 
             sd._init()
+
+
+def init_nodes_stock_data_other(paths, nameReformat):
+    stockDatas = {}  # code -> path -> StockData
+    uniqueNames = set()
+    def_val = None
+    def_date = None
+
+    for path in paths:
+
+        name = path.split("/")[-1].split(',')[1][1:].replace(' ', '_')
+        uniqueNames.add(name)
+
+        print(f'Parsing: [{name + "]":<30} {path.split("/")[-1]}')
+
+        sds = StockDataOther.parse(path)
+
+        def_val = [-1 for _ in sds[0].values]
+        def_date = sds[0].dates
+
+        # MERGE DATA
+        for sd in sds:
+            sd.name = nameReformat(sd._data['Name'])
+
+            if sd.StockDataOther not in stockDatas:
+                setattr(sd, name, sd.values)
+                setattr(sd, name + "_dates", sd.dates)
+                delattr(sd, 'values')
+                delattr(sd, 'dates')
+                stockDatas[sd.StockDataOther] = sd
+            else:
+                nameVal = getattr(stockDatas[sd.StockDataOther], name, None)
+                if nameVal is not None:
+                    raise Exception(f'{name} is occuring multiple times for {sd.StockDataOther}')
+                setattr(stockDatas[sd.StockDataOther], name, sd.values)
+                setattr(stockDatas[sd.StockDataOther], name + '_dates', sd.dates)
+
+    for sd in stockDatas.values():
+        diff = uniqueNames.difference(sd.__dict__.keys())
+        for att in diff:
+            setattr(sd, att, def_val)
+            setattr(sd, att + '_dates', def_date)
+
+        sd._init()
+        this.stock_data_others_rows.append(sd)
+
 
 # DELETE ALL IN DATABASE
 def delete_all():
@@ -187,23 +265,15 @@ def create_nodes_stock_data():
         if row._exists:
             this.graph.merge(row._instance, 'StockData', 'StockData')
 
-# TESTS
-def test_nodes_stock_data():
-    nansCount = 0
 
-    for filePath in this.csvStockDataPaths:
-        if filePath.split('/')[-1] not in StockData.addMissingAttributesFiles():
-            with open(filePath) as f:
-                nansCount += f.read().count(',NA,')
+def create_nodes_stock_data_others():
+    size = len(this.stock_data_others_rows)
+    for i, row in enumerate(this.stock_data_others_rows):
+        if i % 10 == 0:
+            print(f'CREATING STOCK DATA OTHERS NODES: {round(i / size * 100)}%')
 
-    nansCountParsed = 0
-    for row in this.stock_data_rows:
-        for attr, val in row.__dict__.items():
-            nansCountParsed += val.values(-1)
-
-    print(nansCount, nansCountParsed, round(nansCountParsed/nansCount * 100, 2))
-
-
+        if row._exists:
+            this.graph.merge(row._instance, 'StockDataOther', 'StockDataOther')
 
 
 # CREATE CONNECTIONS

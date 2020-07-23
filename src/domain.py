@@ -129,7 +129,7 @@ class StockData(Node):
                 setattr(self, attr, val)
 
         if ')' in self.StockData:
-            self.StockData = self.StockData.split('(')[0]
+            self.StockData = str(self.StockData.split('(')[0]).upper()
 
     def _create_A1012MAnnual_Nodes(self):
         for attr, val in self._data.items():
@@ -146,6 +146,54 @@ class StockData(Node):
 
         if ')' in self.StockData:
             self.StockData = self.StockData.split('(')[0]
+
+
+class StockDataOther(Node):
+
+    @staticmethod
+    def parse(path: str):
+        returned = []
+        with open(path) as csvfile:
+            reader = csv.DictReader(csvfile)
+
+            for row in reader:
+                sa = StockDataOther(row)
+                sa._create_nodes()
+                sa._init(False)
+
+                if sa.StockDataOther in [None, '']:
+                    continue
+                else:
+                    returned.append(sa)
+
+            return returned
+
+    def __init__(self, row: dict):
+        super().__init__('StockDataOther')
+        self._data = row
+
+        self.StockDataOther = self._data['Code']
+        del self._data['Code']
+
+        self.dates = []
+        self.values = []
+
+
+    def _create_nodes(self):
+        for attr, val in self._data.items():
+            isDate = attr.count('/') == 2
+            attr = str(int(datetime.datetime.strptime(attr, '%m/%d/%Y').timestamp())) if isDate else attr
+            if attr.isnumeric() or isDate:
+                self.dates.append(int(attr))
+                if val.replace('.','',1).isdigit():
+                    self.values.append(float(val))
+                else:
+                    self.values.append(-1)
+            elif attr not in ['Name']:
+                setattr(self, attr, val)
+
+        if ')' in self.StockDataOther:
+            self.StockDataOther = str(self.StockDataOther.split('(')[0]).upper()
 
 
 class CSV_Core:
