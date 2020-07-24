@@ -95,7 +95,6 @@ class StockData(Node):
             for row in reader:
                 sa = StockData(row)
                 sa._create_A1012MAnnual_Nodes()
-                sa._name += 'Annual'
                 sa._init(False)
 
                 if sa.StockData is None:
@@ -111,6 +110,8 @@ class StockData(Node):
 
         self.StockData = self._data['Code']
         del self._data['Code']
+
+        self.type = None
 
         self.dates = []
         self.values = []

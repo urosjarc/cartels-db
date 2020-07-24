@@ -12,8 +12,13 @@ this.graph = None
 
 this.core_rows: List[CSV_Core] = []
 this.stock_meta_rows: List[StockMeta] = []
-this.stock_data_rows: List[StockData] = []
-this.stock_data_others_rows: List[StockData] = []
+
+this.A1012M_rows: List[StockData] = []
+this.DSLOC_rows: List[StockData] = []
+this.LEV2IN_rows: List[StockData] = []
+this.LEV4SE_rows: List[StockData] = []
+this.MLOC_rows: List[StockData] = []
+this.TOTMKWD_rows: List[StockData] = []
 
 this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
@@ -48,11 +53,11 @@ def init():
     def dsloc_name(name):
         return name.split(' - ')[0].replace("-DS", "")
 
-    init_nodes_stock_data_other(this.csvStockData2IndustryPaths, industry_name)
-    init_nodes_stock_data_other(this.csvStockData4IndustryPaths, industry_name)
-    init_nodes_stock_data_other(this.csvStockDataMLOCPaths, mloc_name)
-    init_nodes_stock_data_other(this.csvStockDataDSLOCPaths, dsloc_name)
-    init_nodes_stock_data_other(this.csvStockDataTOTMKWDPaths, dsloc_name)
+    this.LEV2IN_rows = init_nodes_stock_data_other(this.csvStockData2IndustryPaths, industry_name, 'LEV2IN')
+    this.LEV4SE_rows = init_nodes_stock_data_other(this.csvStockData4IndustryPaths, industry_name, 'LEV4SE')
+    this.MLOC_rows = init_nodes_stock_data_other(this.csvStockDataMLOCPaths, mloc_name, 'MLOC')
+    this.DSLOC_rows = init_nodes_stock_data_other(this.csvStockDataDSLOCPaths, dsloc_name, 'DSLOC')
+    this.TOTMKWD_rows = init_nodes_stock_data_other(this.csvStockDataTOTMKWDPaths, dsloc_name, 'TOTMKWD')
 
 
 def init_db():
@@ -125,8 +130,10 @@ def init_nodes_stock_data_A1012M():
     # Initing
 
     for sd in stockDatas.values():
+        sd.type = 'A1012M'
         sd._init()
-        this.stock_data_rows.append(sd)
+        this.A1012M_rows.append(sd)
+
 
 def init_nodes_stock_data_A1012M_annual():
     stockDatas = {}  # code -> name -> StockData
@@ -149,7 +156,7 @@ def init_nodes_stock_data_A1012M_annual():
         else:
             stockDatas[sd.StockData][name] = sd
 
-    for sd in this.stock_data_rows:
+    for sd in this.A1012M_rows:
         if sd.StockData in stockDatas:
 
             setattr(sd, 'annual_dates', sd_date)
@@ -163,7 +170,7 @@ def init_nodes_stock_data_A1012M_annual():
             sd._init()
 
 
-def init_nodes_stock_data_other(paths, nameReformat):
+def init_nodes_stock_data_other(paths, nameReformat, type):
     stockDatas = {}  # code -> path -> StockData
     uniqueNames = set()
     def_val = None
@@ -198,14 +205,18 @@ def init_nodes_stock_data_other(paths, nameReformat):
                 setattr(stockDatas[sd.StockDataOther], name, sd.values)
                 setattr(stockDatas[sd.StockDataOther], name + '_dates', sd.dates)
 
+    arr = []
     for sd in stockDatas.values():
         diff = uniqueNames.difference(sd.__dict__.keys())
         for att in diff:
             setattr(sd, att, def_val)
             setattr(sd, att + '_dates', def_date)
 
+        sd.type = type
         sd._init()
-        this.stock_data_others_rows.append(sd)
+        arr.append(sd)
+
+    return arr
 
 
 # DELETE ALL IN DATABASE
@@ -252,23 +263,16 @@ def create_nodes_stock_meta():
 
 
 def create_nodes_stock_data():
-    size = len(this.stock_data_rows)
-    for i, row in enumerate(this.stock_data_rows):
-        if i % 100 == 0:
-            print(f'CREATING STOCK DATA NODES: {round(i / size * 100)}%')
+    for name in ["A1012M", "DSLOC", "LEV2IN", "LEV4SE", "MLOC", "TOTMKWD"]:
+        arr = getattr(this, name + "_rows")
+        size = len(arr)
+        parr = 'StockData' if name == "A1012M" else 'StockDataOther'
+        for i, row in enumerate(arr):
+            if i % (size / 10) == 0:
+                print(f'CREATING {name} NODES: {round(i / size * 100)}%')
 
-        if row._exists:
-            this.graph.merge(row._instance, 'StockData', 'StockData')
-
-
-def create_nodes_stock_data_others():
-    size = len(this.stock_data_others_rows)
-    for i, row in enumerate(this.stock_data_others_rows):
-        if i % 10 == 0:
-            print(f'CREATING STOCK DATA OTHERS NODES: {round(i / size * 100)}%')
-
-        if row._exists:
-            this.graph.merge(row._instance, 'StockDataOther', 'StockDataOther')
+            if row._exists:
+                this.graph.merge(row._instance, parr, parr)
 
 
 # CREATE CONNECTIONS
@@ -324,11 +328,11 @@ def create_relationships_stock_meta():
             StockMeta=row.StockMeta)
 
 
-def create_relationships_stock_data():
-    size = len(this.stock_data_rows)
-    for i, row in enumerate(this.stock_data_rows):
+def create_relationships_stock_A1012M():
+    size = len(this.A1012M_rows)
+    for i, row in enumerate(this.A1012M_rows):
         if i % 100 == 0:
-            print(f'CONNECTING STOCK DATA: {round(i / size * 100)}%')
+            print(f'CONNECTING STOCK DATA A1012M: {round(i / size * 100)}%')
 
         if not row._exists:
             raise Exception(f'Not exists: {i} {row.__dict__}')
@@ -338,19 +342,71 @@ def create_relationships_stock_data():
             StockData=row.StockData)
 
 
-def get_firm_tickers():
-    tickers = set()
-    for row in this.core_rows:
-        try:
-            tickers.add(row.firm.Ticker_firm.split(':')[1])
-        except:
-            pass
-    return list(tickers)
+def create_relationships_stock_LEV2IN():
+    size = len(this.LEV2IN_rows)
+    for i, row in enumerate(this.LEV2IN_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK DATA LEV2IN: {round(i / size * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {i} {row.__dict__}')
+
+        this.graph.run(
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL2_SECTOR_NAME=$type AND sd.type=$type MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            type=row.type)
 
 
-def report():
-    print('REPORT:')
-    print(f'\t- CORE: {len(this.core_rows)}')
-    print(f'\t- STOCK META: {len(this.stock_meta_rows)}')
-    print(f'\t- STOCK DATA: {len(this.stock_data_rows)}')
-    print(f'\t- STOCK DATA OTHERS: {len(this.stock_data_others_rows)}')
+def create_relationships_stock_LEV4SE():
+    size = len(this.LEV4SE_rows)
+    for i, row in enumerate(this.LEV4SE_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK DATA LEV4SE: {round(i / size * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {i} {row.__dict__}')
+
+        this.graph.run(
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$type AND sd.type=$type MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            type=row.type)
+
+
+def create_relationships_stock_DSLOC():
+    size = len(this.DSLOC_rows)
+    for i, row in enumerate(this.DSLOC_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK DATA DSLOC: {round(i / size * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {i} {row.__dict__}')
+
+        this.graph.run(
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$type AND sd.type=$type MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            type=row.type)
+
+
+def create_relationships_stock_MLOC():
+    size = len(this.MLOC_rows)
+    for i, row in enumerate(this.MLOC_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK DATA MLOC: {round(i / size * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {i} {row.__dict__}')
+
+        this.graph.run(
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$type AND sd.type=$type MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            type=row.type)
+
+
+def create_relationships_stock_TOTMKWD():
+    size = len(this.TOTMKWD_rows)
+    for i, row in enumerate(this.TOTMKWD_rows):
+        if i % 100 == 0:
+            print(f'CONNECTING STOCK DATA TOTMKWD: {round(i / size * 100)}%')
+
+        if not row._exists:
+            raise Exception(f'Not exists: {i} {row.__dict__}')
+
+        this.graph.run(
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$type AND sd.type=$type MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            type=row.type)
