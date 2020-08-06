@@ -237,6 +237,7 @@ def init_LEV_REL():
         for row in reader:
             this.LEV4SE_REL[row['code']] = row['name']
 
+    pass
 
 # DELETE ALL IN DATABASE
 def delete_all():
@@ -372,7 +373,7 @@ def create_relationships_stock_LEV2IN():
             raise Exception(f'Not exists: {i} {row.__dict__}')
 
         this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL2_SECTOR_NAME=$name AND sd.code=$code MERGE (sm)-[r:REL_STOCK_LEV2IN]->(sd) RETURN type(r)',
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL2_SECTOR_NAME=$name AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_LEV2IN]->(sd) RETURN type(r)',
             name=this.LEV2IN_REL[row.StockDataOther], code=row.StockDataOther)
 
 
@@ -386,7 +387,7 @@ def create_relationships_stock_LEV4SE():
             raise Exception(f'Not exists: {i} {row.__dict__}')
 
         this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$name AND sd.code=$code MERGE (sm)-[r:REL_STOCK_LEV4SE]->(sd) RETURN type(r)',
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$name AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_LEV4SE]->(sd) RETURN type(r)',
             name=this.LEV4SE_REL[row.StockDataOther], code=row.StockDataOther)
 
 
