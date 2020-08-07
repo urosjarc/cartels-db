@@ -1,14 +1,12 @@
-from py2neo import Graph
+from py2neo import Graph, NodeMatcher, RelationshipMatch
 import sys
-import csv
-from src import utils
 from src import auth as aut
 from src.domain import *
 from typing import List
-import os
 
 this = sys.modules[__name__]
-this.graph = None
+this.graph: Graph = None
+this.matcher: NodeMatcher = None
 
 this.core_rows: List[CSV_Core] = []
 this.stock_meta_rows: List[StockMeta] = []
@@ -70,7 +68,7 @@ def init():
 
 def init_db():
     this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
-
+    this.matcher = NodeMatcher(this.graph)
 
 def init_nodes_core():
     with open(this.csvCorePath) as csvfile:
@@ -307,7 +305,7 @@ def create_relationships_core():
         # Firm => Case
         if row.firm._exists and row.case._exists:
             this.graph.run(
-                'MATCH (c:Case), (f:Firm) WHERE c.Case=$Case AND f.Firm=$Firm MERGE (f)-[r:REL]->(c) RETURN type(r)',
+                'MATCH (c:Case), (f:Firm) WHERE c.Case=$Case AND f.Firm=$Firm MERGE (f)-[r:REL_CORE]->(c) RETURN type(r)',
                 Case=row.case.Case, Firm=row.firm.Firm)
         else:
             raise Exception(f'Not exists: {row.firm} {row.case}')
@@ -315,7 +313,7 @@ def create_relationships_core():
         # Firm => Undertaking
         if row.firm._exists and row.undertaking._exists:
             this.graph.run(
-                'MATCH (f:Firm), (u:Undertaking) WHERE f.Firm=$Firm AND u.Undertaking=$Undertaking MERGE (f)-[r:REL]->(u) RETURN type(r)',
+                'MATCH (f:Firm), (u:Undertaking) WHERE f.Firm=$Firm AND u.Undertaking=$Undertaking MERGE (f)-[r:REL_CORE]->(u) RETURN type(r)',
                 Firm=row.firm.Firm, Undertaking=row.undertaking.Undertaking)
         else:
             raise Exception(f'Not exists: {row.firm} {row.undertaking}')
@@ -401,7 +399,7 @@ def create_relationships_stock_DSLOC():
             raise Exception(f'Not exists: {i} {row.__dict__}')
 
         this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.DATASTREAM_INDEX=$code AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_DATA_OTHER]->(sd) RETURN type(r)',
+            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.DATASTREAM_INDEX=$code AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_DSLOC]->(sd) RETURN type(r)',
             code=row.StockDataOther)
 
 
