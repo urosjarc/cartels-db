@@ -13,7 +13,16 @@ def EC_duration():
     TODO: Readoption_amendment je nedokoncan stolpec, kaj mi manjka???
     '''
     for case in list(db.matcher.match('Case')):
-        print(case['Readoption_amendment'], case['EC_Date_of_decision'])
+        print(
+            case['EC_Date_of_decision'],
+            case['Readoption_amendment'],
+            case['Ex_offo'],
+            case['Notification'],
+            case['Complaint'],
+            case['Leniency'],
+            case['Statement_of_objections'],
+            case['Dawn_raid']
+        )
 
 def EC_decision_year():
     '''
@@ -47,11 +56,44 @@ def N_firms_within_EC_case():
                          case=case['Case']).data()[0]['count(r)']
         print(num,'\t' ,case['Case'])
 
+def N_firms_within_under():
+    '''
+    N_firms_within_under (število firm notraj Undertaking-a znotraj Case-a)
+    '''
+    for undertaking in list(db.matcher.match('Undertaking')):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
+                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+        print(num, '\t' ,undertaking['Undertaking'])
 
+def Multiple_firm_under():
+    '''
+        Multiple_firm_under (dummy 01, če je samo ena firma znotraj undertakinga, potem 0, če jih je več 1)
+    '''
+    for undertaking in list(db.matcher.match('Undertaking')):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
+                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+        print(1 if num>1 else 0, '\t' ,undertaking['Undertaking'])
 
+def Repeat_firm_N_EC_cases():
+    '''
+    Repeat_Firm_N_EC_cases (število Case-ov, v katerih se pojavi to eno in isto podjetje)
+    '''
+    for firm in list(db.matcher.match('Firm')):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN count(r)',
+                           firm=firm['Firm']).data()[0]['count(r)']
+        print(num, '\t' ,firm['Firm'])
 
+def Recidivist_firm_D():
+    '''Recidivist_firm_D (dummy 01, če se pojavi samo enkrat v Case-ih, potem, če se pojavi vsaj 2-krat, potem 1)'''
+    for firm in list(db.matcher.match('Firm')):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN count(r)',
+                           firm=firm['Firm']).data()[0]['count(r)']
+        print(1 if num >= 2 else 0, '\t' ,firm['Firm'])
 
-
+def Recidivist_firm_2nd_time_D():
+    '''
+    Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
+    '''
 
 if __name__ == '__main__':
-    N_firms_within_EC_case()
+    Recidivist_firm_D()
