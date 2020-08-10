@@ -1,7 +1,9 @@
-from py2neo import Node as NeoNode
-from src import utils, db
 import csv
 import datetime
+
+from py2neo import Node as NeoNode
+
+from src import utils
 
 
 class Path:

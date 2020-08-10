@@ -3,6 +3,7 @@
 ```
 sudo pip3 install py2neo
 sudo apt install neo4j
+sudo pip3 install pycountry
 ```
 
 # Starting DB

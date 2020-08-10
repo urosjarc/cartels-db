@@ -1,5 +1,6 @@
-from src import db
+from src import db, utils
 from datetime import datetime
+import pycountry
 import sys
 
 this = sys.modules[__name__]
@@ -95,5 +96,40 @@ def Recidivist_firm_2nd_time_D():
     Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
     '''
 
+def N_Firm_Inc_states_within_EC_case():
+    '''
+        N_Firm_Inc_states_within_EC_case (število vseh držav znotraj Case)
+    '''
+    for case in list(db.matcher.match('Case')):
+        firms_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                           case=case['Case']).data()
+
+        states = set()
+        for firm_r in firms_r:
+            states.add(firm_r['f']['Incorporation_state'])
+        print(len(states),case['Case'], sep='\t->\t')
+
+def European_firm():
+    '''Todo: make this happend...'''
+    for firm in list(db.matcher.match('Firm')):
+        try:
+            country = pycountry.countries.search_fuzzy(firm['Incorporation_state'])
+        except:
+            country = []
+        c_r = None
+        for c in country:
+            if c.name == firm['Incorporation_state']:
+                c_r = c
+                break
+
+        if c_r is not None:
+            cinfo = utils.getCountryInfo(c_r.name)
+            if cinfo is not None:
+                print(cinfo.get('continent'), firm['Incorporation_state'])
+            else:
+                print('cinfo', firm['Incorporation_state'])
+        else:
+            print('c_r', firm['Incorporation_state'])
+
 if __name__ == '__main__':
-    Recidivist_firm_D()
+    European_firm()
