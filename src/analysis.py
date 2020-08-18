@@ -310,6 +310,57 @@ def N_under_within_EC_case():
     #                        undertaking=undertaking['Undertaking']).data()[0]['count(r)']
     #     print(num, '\t', undertaking['Undertaking'])
 
+def N_under_within_EC_case():
+    '''
+    Todo: Malce pojasnil, saj ne razumem ravno najbolje.
+    :return:
+    '''
+
+def N_Under_Inc_states_within_EC_dec():
+    '''
+    Todo: Malce pojasnil, saj ne razumem ravno najbolje.
+    :return:
+    '''
+
+def European_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Extra_Europe_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def EU_all_time_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Old_EU_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 1st_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 2nd_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 3rd_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 4th_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 5th_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 6th_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def 7th_enlarge_EU_under():
+    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def USA_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Japan_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Common_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Civil_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def English_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def French_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def German_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+def Scandinavian_Law_under():
+        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
+
 if __name__ == '__main__':
     European_firm()
 
