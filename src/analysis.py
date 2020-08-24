@@ -322,6 +322,28 @@ def N_under_within_EC_case():
     #                        undertaking=undertaking['Undertaking']).data()[0]['count(r)']
     #     print(num, '\t', undertaking['Undertaking'])
 
+def DUMMY_VARIABLES():
+    case_dumies = ['Ticker_Case']
+    firm_dumies = ['Ticker_Firm']
+    undertaking_dumies = [ 'Ticker_Undertaking' ]
+
+    for case in db.matcher.match('Case'):
+        for d in case_dumies:
+            case[f'{d}_D'] = case[d] is not None
+        db.graph.push(case)
+
+    for firm in db.matcher.match('Firm'):
+        for d in firm_dumies:
+            firm[f'{d}_D'] = firm[d] is not None
+        db.graph.push(firm)
+
+    for undertaking in db.matcher.match('Undertaking'):
+        for d in undertaking_dumies:
+            undertaking[f'{d}_D'] = undertaking[d] is not None
+        db.graph.push(undertaking)
+
+
+
 if __name__ == '__main__':
-    EC_decision_year()
+    DUMMY_VARIABLES()
 
