@@ -1,7 +1,7 @@
 # Dependencies
 
 ```
-sudo pip3 install py2neo
+sudo pip3 install py2neo==5.0b5
 sudo apt install neo4j
 sudo pip3 install pycountry
 ```

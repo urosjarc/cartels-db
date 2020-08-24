@@ -1,6 +1,5 @@
 from src import db, utils
 from datetime import datetime
-import pycountry
 import sys
 
 this = sys.modules[__name__]
@@ -12,27 +11,40 @@ db.init_db()
 def EC_duration():
     '''
     EC_duration (datum izdaje odločbe minus (najstarejši datum enega od stolpcev (Readoption_amendment Ex offo  Notification Complaint Leniency Statement of objections Dawn raid))
-    TODO: Readoption_amendment je nedokoncan stolpec, kaj mi manjka???
     '''
-    for case in list(db.matcher.match('Case')):
-        print(
-            case['EC_Date_of_decision'],
-            case['Readoption_amendment'],
-            case['Ex_offo'],
-            case['Notification'],
-            case['Complaint'],
-            case['Leniency'],
-            case['Statement_of_objections'],
-            case['Dawn_raid']
-        )
+    for case in db.matcher.match('Case'):
+        oldest = None
+        dates = [
+            'EC_Date_of_decision',
+            'Readoption_amendment',
+            'Ex_offo',
+            'Notification',
+            'Complaint',
+            'Leniency',
+            'Statement_of_objections',
+            'Dawn_raid',
+        ]
 
+        for date in dates:
+            dS:str = case[date]
+            if dS.count('/') == 2:
+                timestamp = datetime.strptime(dS, '%m/%d/%Y')
+                if oldest is None or oldest > timestamp:
+                    oldest = timestamp
+
+        if oldest is None:
+            raise Exception('Not found oldest!')
+
+        case['EC_duration'] = oldest
+        db.graph.push(case)
 
 def EC_decision_year():
     '''
     EC_decision_year (vstavi se samo leto izdaje odločbe)
     '''
     for case in list(db.matcher.match('Case')):
-        print(case['EC_Date_of_decision'].split('/')[-1])
+        case['EC_decision_year'] = int(case['EC_Date_of_decision'].split('/')[-1])
+        db.graph.push(case)
 
 
 def EC_dec_may_2004():
@@ -310,57 +322,6 @@ def N_under_within_EC_case():
     #                        undertaking=undertaking['Undertaking']).data()[0]['count(r)']
     #     print(num, '\t', undertaking['Undertaking'])
 
-def N_under_within_EC_case():
-    '''
-    Todo: Malce pojasnil, saj ne razumem ravno najbolje.
-    :return:
-    '''
-
-def N_Under_Inc_states_within_EC_dec():
-    '''
-    Todo: Malce pojasnil, saj ne razumem ravno najbolje.
-    :return:
-    '''
-
-def European_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Extra_Europe_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def EU_all_time_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Old_EU_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 1st_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 2nd_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 3rd_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 4th_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 5th_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 6th_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def 7th_enlarge_EU_under():
-    '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def USA_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Japan_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Common_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Civil_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def English_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def French_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def German_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-def Scandinavian_Law_under():
-        '''Todo: Malce pojasnil kaj tocno se tukaj zeli narediti...'''
-
 if __name__ == '__main__':
-    European_firm()
+    EC_decision_year()
 
