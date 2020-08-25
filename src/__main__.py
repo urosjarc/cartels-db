@@ -1,5 +1,6 @@
 from src import db
 
+raise Exception('Do not run this file :) ...')
 
 # INIT
 db.init()

@@ -686,6 +686,19 @@ def Scandinavian_Law_Undertaking():
 def Ticker_Holding():
     pass
 
+def Holding_Ticker_D_Firm():
+    for firm in db.matcher.match('Firm'):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(Holding) where f.Firm=$firm RETURN count(r)',
+                           firm=firm['Firm']).data()[0]['count(r)']
+        firm['Holding_Ticker_D_Firm'] = 1 if int(num) > 0 else 0
+        db.graph.push(firm)
+
+def Holding_Ticker_D_Undertaking():
+    for undertaking in db.matcher.match('Undertaking'):
+        num = db.graph.run('MATCH (u:Undertaking)-[r]->(Holding) where u.Undertaking=$undertaking RETURN count(r)',
+                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+        undertaking['Holding_Ticker_D_Undertaking'] = 1 if int(num) > 0 else 0
+        db.graph.push(undertaking)
 
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']
@@ -693,20 +706,22 @@ def DUMMY_VARIABLES():
     undertaking_dumies = ['Ticker_Undertaking']
     holding_dumies = ['Holding_Ticker_parent']
 
-    # for case in db.matcher.match('Case'):
-    #     for d in case_dumies:
-    #         case[f'{d}_D'] = 1 if case[d] is not None else 0
-    #     db.graph.push(case)
-    #
-    # for firm in db.matcher.match('Firm'):
-    #     for d in firm_dumies:
-    #         firm[f'{d}_D'] = 1 if firm[d] is not None else 0
-    #     db.graph.push(firm)
-    #
-    # for undertaking in db.matcher.match('Undertaking'):
-    #     for d in undertaking_dumies:
-    #         undertaking[f'{d}_D'] = 1 if undertaking[d] is not None else 0
-    #     db.graph.push(undertaking)
+    '''
+    for case in db.matcher.match('Case'):
+        for d in case_dumies:
+            case[f'{d}_D'] = 1 if case[d] is not None else 0
+        db.graph.push(case)
+
+    for firm in db.matcher.match('Firm'):
+        for d in firm_dumies:
+            firm[f'{d}_D'] = 1 if firm[d] is not None else 0
+        db.graph.push(firm)
+
+    for undertaking in db.matcher.match('Undertaking'):
+        for d in undertaking_dumies:
+            undertaking[f'{d}_D'] = 1 if undertaking[d] is not None else 0
+        db.graph.push(undertaking)
+    '''
 
     count = 0
     all = 0
@@ -721,4 +736,3 @@ def DUMMY_VARIABLES():
     print(all, count)
 
         # db.graph.push(holding)
-DUMMY_VARIABLES()
