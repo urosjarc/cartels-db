@@ -12,25 +12,23 @@ def EC_duration():
     '''
     EC_duration (datum izdaje odločbe minus (najstarejši datum enega od stolpcev (Readoption_amendment Ex offo  Notification Complaint Leniency Statement of objections Dawn raid))
     '''
-    for case in db.matcher.match('Case'):
-        oldest = None
-        dates = [
-            'EC_Date_of_decision',
-            'Readoption_amendment',
-            'Ex_offo',
-            'Notification',
-            'Complaint',
-            'Leniency',
-            'Statement_of_objections',
-            'Dawn_raid',
-        ]
+    dates = [
+        'EC_Date_of_decision',
+        'Readoption_amendment',
+        'Ex_offo',
+        'Notification',
+        'Complaint',
+        'Leniency',
+        'Statement_of_objections',
+        'Dawn_raid',
+    ]
 
+    for case in db.matcher.match('Case'):
+        oldest = datetime.now()
         for date in dates:
-            dS:str = case[date]
-            if dS.count('/') == 2:
-                timestamp = datetime.strptime(dS, '%m/%d/%Y')
-                if oldest is None or oldest > timestamp:
-                    oldest = timestamp
+            timestamp = utils.parseDate(case[date])
+            if timestamp is not None and oldest > timestamp:
+                oldest = timestamp
 
         if oldest is None:
             raise Exception('Not found oldest!')
@@ -38,11 +36,12 @@ def EC_duration():
         case['EC_duration'] = oldest
         db.graph.push(case)
 
+
 def EC_decision_year():
     '''
     EC_decision_year (vstavi se samo leto izdaje odločbe)
     '''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         case['EC_decision_year'] = int(case['EC_Date_of_decision'].split('/')[-1])
         db.graph.push(case)
 
@@ -51,48 +50,50 @@ def EC_dec_may_2004():
     '''
     EC_dec_may_2004 (dummy 01, če je bil datum izdaje pred 1. majem 2004 - 0, če je bil datum po 1)
     '''
-    date_format = '%m/%d/%Y'
-    weightDate = datetime.strptime('5/01/2004', date_format)
-    for case in list(db.matcher.match('Case')):
-        date = datetime.strptime(case['EC_Date_of_decision'], date_format)
-        dummy = (weightDate - date).days > 0
-        print(dummy)
+    weightDate = utils.parseDate('5/01/2004')
+    for case in db.matcher.match('Case'):
+        date = utils.parseDate(case['EC_Date_of_decision'])
+        case['EC_dec_may_2004'] = (weightDate - date).days > 0
+        db.graph.push(case)
 
 
 def EC_dec_EN():
     # (dummy, 01, če je 1, če ni 0)
-    for case in list(db.matcher.match('Case')):
-        print(len(case['Case_File']) > 0, str(case['Case_File']).isspace(), '\t', case['Case_File'])
-
+    for case in db.matcher.match('Case'):
+        case['EC_dec_EN'] = utils.exists(case['Case_File'])
+        db.graph.push(case)
 
 def N_firms_within_EC_case():
     '''
     N_firms_within_EC_case (število vseh firm znotraj Case)
     '''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         num = db.graph.run('MATCH (Firm)-[r]->(c:Case) where c.Case=$case RETURN count(r)',
                            case=case['Case']).data()[0]['count(r)']
-        print(num, '\t', case['Case'])
+        case['N_firms_within_EC_case'] = num
+        db.graph.push(case)
 
 
 def N_firms_within_under():
     '''
     N_firms_within_under (število firm notraj Undertaking-a znotraj Case-a)
     '''
-    for undertaking in list(db.matcher.match('Undertaking')):
+    for undertaking in db.matcher.match('Undertaking'):
         num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
                            undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        print(num, '\t', undertaking['Undertaking'])
+        undertaking['N_firms_within_under'] = num
+        db.graph.push(undertaking)
 
 
 def Multiple_firm_under():
     '''
         Multiple_firm_under (dummy 01, če je samo ena firma znotraj undertakinga, potem 0, če jih je več 1)
     '''
-    for undertaking in list(db.matcher.match('Undertaking')):
+    for undertaking in db.matcher.match('Undertaking'):
         num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
                            undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        print(1 if num > 1 else 0, '\t', undertaking['Undertaking'])
+        undertaking['Multiple_firm_under'] = 1 if num > 1 else 0
+        db.graph.push(undertaking)
 
 
 def Repeat_firm_N_EC_cases():
@@ -311,6 +312,7 @@ def National_only_case():
 
         print(case['Case'], theSameCountry)
 
+
 def N_under_within_EC_case():
     '''
     Todo: Ali dam vsoto firm ki so znotraj katerega koli undertakinga???
@@ -322,10 +324,11 @@ def N_under_within_EC_case():
     #                        undertaking=undertaking['Undertaking']).data()[0]['count(r)']
     #     print(num, '\t', undertaking['Undertaking'])
 
+
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']
     firm_dumies = ['Ticker_Firm']
-    undertaking_dumies = [ 'Ticker_Undertaking' ]
+    undertaking_dumies = ['Ticker_Undertaking']
 
     for case in db.matcher.match('Case'):
         for d in case_dumies:
@@ -343,7 +346,5 @@ def DUMMY_VARIABLES():
         db.graph.push(undertaking)
 
 
-
 if __name__ == '__main__':
-    DUMMY_VARIABLES()
-
+    EC_dec_EN()

@@ -1,6 +1,7 @@
 import http
 from src.countryinfo import countries
 import json
+from datetime import datetime
 import pathlib
 import os
 import urllib
@@ -61,6 +62,14 @@ def getCountryInfo(country):
             return c
 
 
+def parseDate(date: str):
+    if date.count('/') != 2:
+        return None
+    date_format = '%m/%d/%Y'
+    return datetime.strptime(date, date_format)
+
+def exists(property: str):
+    return len(property.strip()) > 0
 
 def absoluteFilePaths(directory):
     for dirpath, _, filenames in os.walk(directory):
