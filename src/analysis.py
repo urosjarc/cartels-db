@@ -700,28 +700,32 @@ def Holding_Ticker_D_Undertaking():
         undertaking['Holding_Ticker_D_Undertaking'] = 1 if int(num) > 0 else 0
         db.graph.push(undertaking)
 
+
 def Private_firm():
     for firm in db.matcher.match('Firm'):
-        Association_firm:bool = utils.exists(firm['Firm_type'])
-        Public_firm:bool = utils.exists(firm['Ticker_firm'])
+        Association_firm: bool = utils.exists(firm['Firm_type'])
+        Public_firm: bool = utils.exists(firm['Ticker_firm'])
         firm['Private_firm'] = 1 if (not Association_firm and not Public_firm) else 0
         db.graph.push(firm)
+
 
 def Public_firm():
     for firm in db.matcher.match('Firm'):
         firm['Public_firm'] = 1 if utils.exists(firm['Ticker_firm']) else 0
         db.graph.push(firm)
 
+
 def Association_firm():
     for firm in db.matcher.match('Firm'):
         firm['Association_firm'] = 1 if utils.exists(firm['Firm_type']) else 0
         db.graph.push(firm)
 
+
 def Firm_governance():
     for firm in db.matcher.match('Firm'):
-        Association_firm:bool = utils.exists(firm['Firm_type'])
-        Public_firm:bool = utils.exists(firm['Ticker_firm'])
-        Private_firm:bool = not Association_firm and not Public_firm
+        Association_firm: bool = utils.exists(firm['Firm_type'])
+        Public_firm: bool = utils.exists(firm['Ticker_firm'])
+        Private_firm: bool = not Association_firm and not Public_firm
 
         fg = 'Private'
         if Association_firm:
@@ -731,16 +735,18 @@ def Firm_governance():
 
         firm['Firm_governance'] = fg
         db.graph.push(firm)
-        
+
+
 def Private_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
         firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
                             firm=undertaking['Undertaking']).data()[0]['f']
 
-        Association_Undertaking:bool = utils.exists(firm['Firm_type'])
-        Public_Undertaking:bool = utils.exists(firm['Ticker_firm'])
+        Association_Undertaking: bool = utils.exists(firm['Firm_type'])
+        Public_Undertaking: bool = utils.exists(firm['Ticker_firm'])
         undertaking['Private_undertaking'] = 1 if (not Association_Undertaking and not Public_Undertaking) else 0
         db.graph.push(undertaking)
+
 
 def Public_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
@@ -750,21 +756,23 @@ def Public_undertaking():
         undertaking['Public_undertaking'] = 1 if utils.exists(firm['Ticker_firm']) else 0
         db.graph.push(undertaking)
 
+
 def Association_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
         firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                           firm=undertaking['Undertaking']).data()[0]['f']
+                            firm=undertaking['Undertaking']).data()[0]['f']
 
         undertaking['Association_undertaking'] = 1 if utils.exists(firm['Firm_type']) else 0
         db.graph.push(undertaking)
+
 
 def Undertaking_governance():
     for undertaking in db.matcher.match('Undertaking'):
         firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
                             firm=undertaking['Undertaking']).data()[0]['f']
 
-        Association_Undertaking:bool = utils.exists(firm['Firm_type'])
-        Public_Undertaking:bool = utils.exists(firm['Ticker_firm'])
+        Association_Undertaking: bool = utils.exists(firm['Firm_type'])
+        Public_Undertaking: bool = utils.exists(firm['Ticker_firm'])
 
         ug = 'Private'
         if Association_Undertaking:
@@ -774,6 +782,100 @@ def Undertaking_governance():
 
         undertaking['Undertaking_governance'] = ug
         db.graph.push(undertaking)
+
+
+def Case_A101_only():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        A101_only = True
+        for firm in firms:
+            if not utils.exists(firm['A_101']):
+                A101_only = False
+
+        case['Case_A101_only'] = 1 if A101_only else 0
+        db.graph.push(case)
+
+
+def Case_A102_only():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        A102_only = True
+        for firm in firms:
+            if not utils.exists(firm['A_102']):
+                A102_only = False
+
+        case['Case_A102_only'] = 1 if A102_only else 0
+        db.graph.push(case)
+
+
+def Case_A101_A102_only():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        A101_102_only = True
+        for firm in firms:
+            if not utils.exists(firm['A101_102']):
+                A101_102_only = False
+
+        case['Case_A101_102_only'] = 1 if A101_102_only else 0
+        db.graph.push(case)
+
+
+def Case_a101():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        a101 = False
+        for firm in firms:
+            if utils.exists(firm['a_101']):
+                a101 = True
+                break
+
+        case['Case_a101'] = 1 if a101 else 0
+        db.graph.push(case)
+
+def Case_a102():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        a102 = False
+        for firm in firms:
+            if utils.exists(firm['a_102']):
+                a102 = True
+                break
+
+        case['Case_a102'] = 1 if a102 else 0
+        db.graph.push(case)
+
+def Case_cartel_VerR():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        Cartel_VerR = False
+        for firm in firms:
+            if utils.exists(firm['Cartel_VerR']):
+                Cartel_VerR = True
+                break
+
+        case['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
+        db.graph.push(case)
+
+def Case_Ringleader():
+    for case in db.matcher.match('Case'):
+        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
+                             case=case['Case']).data()
+        rl = False
+        for firm in firms:
+            if utils.exists(firm['Ringleader']):
+                rl = True
+                break
+
+        case['Case_Ringleader'] = 1 if rl else 0
+        db.graph.push(case)
+
+
 
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']
