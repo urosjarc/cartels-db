@@ -468,6 +468,14 @@ class Undertaking(Node):
         self.Stock_exchange_undertaking = None
         self._Undertaking_type = None
 
+        self.A_101 = None
+        self.A_102 = None
+        self.A101_102 = None
+        self.a_101 = None
+        self.a_102 = None
+        self.Cartel_VerR = None
+        self.Ringleader = None
+
     def post_init(self):
         type = None
 
