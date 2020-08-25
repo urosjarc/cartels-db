@@ -734,45 +734,45 @@ def Firm_governance():
         
 def Private_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
-        Association_undertaking:bool = utils.exists(undertaking['Undertaking_type'])
-        Public_undertaking:bool = utils.exists(undertaking['Ticker_undertaking'])
-        undertaking['Private_undertaking'] = 1 if (not Association_undertaking and not Public_undertaking) else 0
+        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
+                            firm=undertaking['Undertaking']).data()[0]['f']
+
+        Association_Undertaking:bool = utils.exists(firm['Firm_type'])
+        Public_Undertaking:bool = utils.exists(firm['Ticker_firm'])
+        undertaking['Private_undertaking'] = 1 if (not Association_Undertaking and not Public_Undertaking) else 0
         db.graph.push(undertaking)
 
 def Public_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
-        undertaking['Public_undertaking'] = 1 if utils.exists(undertaking['Ticker_undertaking']) else 0
+        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
+                            firm=undertaking['Undertaking']).data()[0]['f']
+
+        undertaking['Public_undertaking'] = 1 if utils.exists(firm['Ticker_firm']) else 0
         db.graph.push(undertaking)
 
 def Association_undertaking():
     for undertaking in db.matcher.match('Undertaking'):
-        rezult = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                           firm=undertaking['Undertaking']).data()
+        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
+                           firm=undertaking['Undertaking']).data()[0]['f']
 
-        if len(rezult) > 0:
-            firm = rezult[0]['f']
-            # print(firm)
-        elif len(rezult) == 0:
-            print(undertaking['Undertaking'], rezult)
+        undertaking['Association_undertaking'] = 1 if utils.exists(firm['Firm_type']) else 0
+        db.graph.push(undertaking)
 
-        # if num > 1:
-        #     print(undertaking['Undertaking'], num)
-        # undertaking['Association_undertaking'] = 1 if utils.exists(undertaking['Undertaking_type']) else 0
-        # db.graph.push(undertaking)
-Association_undertaking()
 def Undertaking_governance():
     for undertaking in db.matcher.match('Undertaking'):
-        Association_undertaking:bool = utils.exists(undertaking['Undertaking_type'])
-        Public_undertaking:bool = utils.exists(undertaking['Ticker_undertaking'])
-        Private_undertaking:bool = not Association_undertaking and not Public_undertaking
+        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
+                            firm=undertaking['Undertaking']).data()[0]['f']
 
-        fg = 'Private'
-        if Association_undertaking:
-            fg = 'Association'
-        elif Public_undertaking:
-            fg = 'Public'
+        Association_Undertaking:bool = utils.exists(firm['Firm_type'])
+        Public_Undertaking:bool = utils.exists(firm['Ticker_firm'])
 
-        undertaking['Undertaking_governance'] = fg
+        ug = 'Private'
+        if Association_Undertaking:
+            ug = 'Association'
+        elif Public_Undertaking:
+            ug = 'Public'
+
+        undertaking['Undertaking_governance'] = ug
         db.graph.push(undertaking)
 
 def DUMMY_VARIABLES():
