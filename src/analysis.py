@@ -13,7 +13,6 @@ def EC_duration():
     EC_duration (datum izdaje odločbe minus (najstarejši datum enega od stolpcev (Readoption_amendment Ex offo  Notification Complaint Leniency Statement of objections Dawn raid))
     '''
     dates = [
-        'EC_Date_of_decision',
         'Readoption_amendment',
         'Ex_offo',
         'Notification',
@@ -33,7 +32,8 @@ def EC_duration():
         if oldest is None:
             raise Exception('Not found oldest!')
 
-        case['EC_duration'] = oldest
+        dateOfDecision = utils.parseDate(case['EC_Date_of_decision'])
+        case['EC_duration'] = (dateOfDecision - oldest).days
         db.graph.push(case)
 
 
@@ -63,6 +63,7 @@ def EC_dec_EN():
         case['EC_dec_EN'] = utils.exists(case['Case_File'])
         db.graph.push(case)
 
+
 def N_firms_within_EC_case():
     '''
     N_firms_within_EC_case (število vseh firm znotraj Case)
@@ -70,7 +71,7 @@ def N_firms_within_EC_case():
     for case in db.matcher.match('Case'):
         num = db.graph.run('MATCH (Firm)-[r]->(c:Case) where c.Case=$case RETURN count(r)',
                            case=case['Case']).data()[0]['count(r)']
-        case['N_firms_within_EC_case'] = num
+        case['N_firms_within_EC_case'] = int(num)
         db.graph.push(case)
 
 
@@ -81,7 +82,7 @@ def N_firms_within_under():
     for undertaking in db.matcher.match('Undertaking'):
         num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
                            undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        undertaking['N_firms_within_under'] = num
+        undertaking['N_firms_within_under'] = int(num)
         db.graph.push(undertaking)
 
 
@@ -92,7 +93,7 @@ def Multiple_firm_under():
     for undertaking in db.matcher.match('Undertaking'):
         num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
                            undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        undertaking['Multiple_firm_under'] = 1 if num > 1 else 0
+        undertaking['Multiple_firm_under'] = 1 if int(num) > 1 else 0
         db.graph.push(undertaking)
 
 
@@ -100,21 +101,44 @@ def Repeat_firm_N_EC_cases():
     '''
     Repeat_Firm_N_EC_cases (število Case-ov, v katerih se pojavi to eno in isto podjetje)
     '''
-    for firm in list(db.matcher.match('Firm')):
+    for firm in db.matcher.match('Firm'):
         num = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN count(r)',
                            firm=firm['Firm']).data()[0]['count(r)']
-        print(num, '\t', firm['Firm'])
+
+        firm['Repeat_firm_N_EC_cases'] = int(num)
+        db.graph.push(firm)
+
+
+def Repeat_undertaking_N_EC_cases():
+    for undertaking in db.matcher.match('Undertaking'):
+        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
+                           firm=undertaking['Undertaking']).data()[0]['count(r)']
+
+        undertaking['Repeat_undertaking_N_EC_cases'] = int(num)
+        db.graph.push(undertaking)
 
 
 def Recidivist_firm_D():
-    '''Recidivist_firm_D (dummy 01, če se pojavi samo enkrat v Case-ih, potem, če se pojavi vsaj 2-krat, potem 1)'''
-    for firm in list(db.matcher.match('Firm')):
-        num = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN count(r)',
-                           firm=firm['Firm']).data()[0]['count(r)']
-        print(1 if num >= 2 else 0, '\t', firm['Firm'])
+    '''
+        Recidivist_firm_D (dummy 01, če se pojavi samo enkrat v Case-ih, potem, če se pojavi vsaj 2-krat, potem 1)
+        Todo: Za ispis (preko tabele)
+    '''
+
+
+def Recidivist_undertaking_D():
+    '''
+        Recidivist_firm_D (dummy 01, če se pojavi samo enkrat v Case-ih, potem, če se pojavi vsaj 2-krat, potem 1)
+        Todo: Za ispis (preko tabele)
+    '''
 
 
 def Recidivist_firm_2nd_time_D():
+    '''
+    Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
+    '''
+
+
+def Recidivist_undertaking_2nd_time_D():
     '''
     Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
     '''
@@ -124,14 +148,16 @@ def N_Firm_Inc_states_within_EC_case():
     '''
         N_Firm_Inc_states_within_EC_case (število vseh držav znotraj Case)
     '''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         firms_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
                                case=case['Case']).data()
 
         states = set()
         for firm_r in firms_r:
             states.add(firm_r['f']['Incorporation_state'])
-        print(len(states), case['Case'], sep='\t->\t')
+
+        case['N_Firm_Inc_states_within_EC_case'] = len(states)
+        db.graph.push(case)
 
 
 def European_firm():
@@ -139,7 +165,8 @@ def European_firm():
     for firm in firms:
         country = firm['Incorporation_state']
         cinfo = utils.getCountryInfo(country)
-        print(cinfo.get('continent'), country)
+        firm['European_firm'] = 1 if cinfo.get('continent') == 'Europe' else 0
+        db.graph.push(firm)
 
 
 def Extra_Europe_firm():
@@ -152,38 +179,122 @@ def Extra_Europe_firm():
     firms = list(db.matcher.match('Firm'))
     for firm in firms:
         country = firm['Incorporation_state']
-        print(country, country in extra_eu)
 
+        firm['Extra_Europe_firm'] = 1 if country in extra_eu else 0
+        db.graph.push(firm)
 
 def EU_all_time_firm():
+    slovarDrzav = {
+        'Ireland': '1/1/1973', # %m/%d/%Y
+        'UK': '1/1/1973',
+        'Belgium': '7/23/1952',
+        'France': '7/23/1952',
+        'Greece': '1/1/1981',
+        'Italy': '7/23/1952',
+        'Lithuania': '5/1/2004',
+        'Luxembourg': '7/23/1952',
+        'Netherlands': '7/23/1952',
+        'Portugal': '1/1/1986',
+        'Romania': '1/1/2007',
+        'Spain': '1/1/1986',
+        'Austria': '1/1/1995',
+        'Croatia': '7/1/2013',
+        'Czech Republic': '5/1/2004',
+        'Estonia': '5/1/2004',
+        'Germany': '7/23/1952',
+        'Hungary': '5/1/2004',
+        'Latvia': '5/1/2004',
+        'Poland': '5/1/2004',
+        'Slovakia': '5/1/2004',
+        'Slovenia': '5/1/2004',
+        'Denmark': '1/1/1973',
+        'Finland': '1/1/1995',
+        'Sweden': '1/1/1995',
+    }
+    '''
+    EU_all_time_firm(dummy 01, če je bila kadarkoli v EU, 1, če ne 0) '''
+    for firm in db.matcher.match('Firm'):
+        country = firm['Incorporation_state']
+        datumPriklucitve = slovarDrzav.get(country, None)
+        firm['EU_all_time_firm'] = 1 if datumPriklucitve is not None else 0
+        db.graph.push(firm)
+
+def EU_EC_decision_firm():
+    '''Todo:  Izspis'''
+    slovarDrzav = {
+        'Ireland': '1/1/1973', # %m/%d/%Y
+        'UK': '1/1/1973',
+        'Belgium': '7/23/1952',
+        'France': '7/23/1952',
+        'Greece': '1/1/1981',
+        'Italy': '7/23/1952',
+        'Lithuania': '5/1/2004',
+        'Luxembourg': '7/23/1952',
+        'Netherlands': '7/23/1952',
+        'Portugal': '1/1/1986',
+        'Romania': '1/1/2007',
+        'Spain': '1/1/1986',
+        'Austria': '1/1/1995',
+        'Croatia': '7/1/2013',
+        'Czech Republic': '5/1/2004',
+        'Estonia': '5/1/2004',
+        'Germany': '7/23/1952',
+        'Hungary': '5/1/2004',
+        'Latvia': '5/1/2004',
+        'Poland': '5/1/2004',
+        'Slovakia': '5/1/2004',
+        'Slovenia': '5/1/2004',
+        'Denmark': '1/1/1973',
+        'Finland': '1/1/1995',
+        'Sweden': '1/1/1995',
+    }
     '''
     Todo: ????
     EU_all_time_firm(dummy 01, če je bila kadarkoli v EU, 1, če ne 0) '''
+    for firm in db.matcher.match('Firm'):
+        country = firm['Incorporation_state']
+        cinfo = utils.getCountryInfo(country)
+        if cinfo.get('continent') == 'Europe':
+            datumPriklucitve = slovarDrzav.get(country, None)
+            if datumPriklucitve is not None:
+                cases_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN c',
+                                       firm=firm['Firm']).data()
+
+                print(firm['Firm'])
+                for case in cases_r:
+                    case = case['c']
+                    EC_date = utils.parseDate(case['EC_Date_of_decision'])
+                    prikl_date = utils.parseDate(datumPriklucitve)
+
+                    if prikl_date < EC_date:
+                        print('\t', case['Case'], 1)
+                    else:
+                        print('\t', case['Case'], 0)
+                print('----------------------')
 
 
 def Old_EU_firm():
     '''
     Old_EU_firm(če gre za ustavno članico EU iz l. 1952, potem 1, drugače 0) '''
-    firms = list(db.matcher.match('Firm'))
     EU_founders = ['Belgium', 'France', 'Germany', 'Italy', 'Luxembourg', 'Netherland']
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in EU_founders)
+        firm['Old_EU_firm'] = 1 if country in EU_founders else 0
+        db.graph.push(firm)
 
 
 def USA_firm():
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country == 'USA')
+        firm['USA_firm'] = 1 if country == 'USA' else 0
+        db.graph.push(firm)
 
 
 def Japan_firm():
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country == 'Japan')
-
+        firm['Japan_firm'] = 1 if country == 'Japan' else 0
+        db.graph.push(firm)
 
 def Common_Law_Firm():
     countries_common_law = [
@@ -192,10 +303,9 @@ def Common_Law_Firm():
         'Ireland', 'Israel', 'Malaysia', 'New Zealand', 'Republic of South Africa',
         'Singapore', 'UK', 'USA']
 
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in countries_common_law)
+        firm['Common_Law_Firm'] = 1 if country in countries_common_law else 0
 
 
 def English_Law_Firm():
@@ -208,10 +318,10 @@ def English_Law_Firm():
         'Hong Kong', 'India', 'Ireland', 'Israel', 'Malaysia', 'New Zealand', 'Republic of South Africa', 'Singapore',
         'UK', 'USA']
 
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in english_law)
+        firm['English_Law_Firm'] = 1 if country in english_law else 0
+        db.graph.push(firm)
 
 
 def French_Law_Firm():
@@ -222,10 +332,10 @@ def French_Law_Firm():
         'Romania', 'Spain', 'Tunisia'
     ]
 
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in french_law)
+        firm['French_Law_Firm'] = 1 if country in french_law else 0
+        db.graph.push(firm)
 
 
 def German_Law():
@@ -235,10 +345,10 @@ def German_Law():
         'Slovenia', 'South Korea', 'Switzerland', 'Taiwan'
     ]
 
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in german_law)
+        firm['German_Law'] = 1 if country in german_law else 0
+        db.graph.push(firm)
 
 
 def Scandinavian_Law_Firm():
@@ -250,17 +360,18 @@ def Scandinavian_Law_Firm():
         'Sweden'
     ]
 
-    firms = list(db.matcher.match('Firm'))
-    for firm in firms:
+    firms = list()
+    for firm in db.matcher.match('Firm'):
         country = firm['Incorporation_state']
-        print(country, country in scandinavian_law)
+        firm['Scandinavian_Law_Firm'] = 1 if country in scandinavian_law else 0
+        db.graph.push(firm)
 
 
 def Transcontinental_case():
     '''
     Transcontinental_case (dummy, če je vsaj ena firma v Case-u izven Europe, potem 1, če je v Europe 0)
     '''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         firms_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
                                case=case['Case']).data()
 
@@ -272,14 +383,15 @@ def Transcontinental_case():
                 isTranscontinental = True
                 break
 
-        print(case['Case'], isTranscontinental)
+        case['Transcontinental_case'] = 1 if isTranscontinental else 0
+        db.graph.push(case)
 
 
 def Europe_only_case():
     '''
     Europe_only_case (dummy 01, obrnjeno od prenšnjega stolpca, če je v Case-u samo Europe 1, če je Extra_Europe potem 0)
     '''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         firms_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
                                case=case['Case']).data()
 
@@ -291,12 +403,13 @@ def Europe_only_case():
                 isEuropeOnly = False
                 break
 
-        print(case['Case'], isEuropeOnly)
+        case['Europe_only_case'] = 1 if isEuropeOnly else 0
+        db.graph.push(case)
 
 
 def National_only_case():
     '''National_only_case (dummy 01, če so vse Firme znotraj Case iz iste države, potem 1, drugače 0)'''
-    for case in list(db.matcher.match('Case')):
+    for case in db.matcher.match('Case'):
         firms_r = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
                                case=case['Case']).data()
 
@@ -310,7 +423,8 @@ def National_only_case():
                 theSameCountry = False
                 break
 
-        print(case['Case'], theSameCountry)
+        case['National_only_case'] = 1 if theSameCountry else 0
+        db.graph.push(case)
 
 
 def N_under_within_EC_case():
@@ -344,7 +458,3 @@ def DUMMY_VARIABLES():
         for d in undertaking_dumies:
             undertaking[f'{d}_D'] = undertaking[d] is not None
         db.graph.push(undertaking)
-
-
-if __name__ == '__main__':
-    EC_dec_EN()
