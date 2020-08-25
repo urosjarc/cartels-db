@@ -109,14 +109,6 @@ def Repeat_firm_N_EC_cases():
         db.graph.push(firm)
 
 
-def Repeat_undertaking_N_EC_cases():
-    for undertaking in db.matcher.match('Undertaking'):
-        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
-                           firm=undertaking['Undertaking']).data()[0]['count(r)']
-
-        undertaking['Repeat_undertaking_N_EC_cases'] = int(num)
-        db.graph.push(undertaking)
-
 
 def Recidivist_firm_D():
     '''
@@ -124,23 +116,16 @@ def Recidivist_firm_D():
         Todo: Za ispis (preko tabele)
     '''
 
-
-def Recidivist_undertaking_D():
-    '''
-        Recidivist_firm_D (dummy 01, če se pojavi samo enkrat v Case-ih, potem, če se pojavi vsaj 2-krat, potem 1)
-        Todo: Za ispis (preko tabele)
-    '''
-
+    for firm in db.matcher.match('Firm'):
+        num = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where f.Firm=$firm RETURN count(r)',
+                           firm=firm['Firm']).data()[0]['count(r)']
+        firm['Recidivist_firm_D'] = 1 if num >= 2 else 0
+        db.graph.push(firm)
 
 def Recidivist_firm_2nd_time_D():
     '''
     Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
-    '''
-
-
-def Recidivist_undertaking_2nd_time_D():
-    '''
-    Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
+    Todo: Za izspis
     '''
 
 
@@ -437,6 +422,41 @@ def N_under_within_EC_case():
     #     num = db.graph.run('MATCH (f:Firm)-[r]->(u:Undertaking) where u.Undertaking=$undertaking RETURN count(r)',
     #                        undertaking=undertaking['Undertaking']).data()[0]['count(r)']
     #     print(num, '\t', undertaking['Undertaking'])
+
+def N_undertaking_within_EC_case():
+    '''
+    N_firms_within_EC_case (število vseh firm znotraj Case)
+    '''
+    for case in db.matcher.match('Case'):
+        num = db.graph.run('MATCH (Undertaking)-[r]->(c:Case) where c.Case=$case RETURN count(r)',
+                           case=case['Case']).data()[0]['count(r)']
+        case['N_undertaking_within_EC_case'] = int(num)
+        db.graph.push(case)
+
+def Repeat_undertaking_N_EC_cases():
+    '''
+    Repeat_Firm_N_EC_cases (število Case-ov, v katerih se pojavi to eno in isto podjetje)
+    '''
+    for undertaking in db.matcher.match('Undertaking'):
+        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
+                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+
+        undertaking['Repeat_undertaking_N_EC_cases'] = int(num)
+        db.graph.push(undertaking)
+
+def Recidivist_undertaking_2nd_time_D():
+    '''
+    Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
+    '''
+
+
+def Recidivist_undertaking_D():
+    for undertaking in db.matcher.match('Undertaking'):
+        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
+                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+        undertaking['Recidivist_undertaking_D'] = 1 if num >= 2 else 0
+        db.graph.push(undertaking)
+
 
 
 def DUMMY_VARIABLES():
