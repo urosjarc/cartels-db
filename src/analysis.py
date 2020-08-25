@@ -683,23 +683,42 @@ def Scandinavian_Law_Undertaking():
         undertaking['Scandinavian_Law_Undertaking'] = 1 if country in scandinavian_law else 0
         db.graph.push(undertaking)
 
+def Ticker_Holding():
+    pass
+
 
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']
     firm_dumies = ['Ticker_Firm']
     undertaking_dumies = ['Ticker_Undertaking']
+    holding_dumies = ['Holding_Ticker_parent']
 
-    for case in db.matcher.match('Case'):
-        for d in case_dumies:
-            case[f'{d}_D'] = case[d] is not None
-        db.graph.push(case)
+    # for case in db.matcher.match('Case'):
+    #     for d in case_dumies:
+    #         case[f'{d}_D'] = 1 if case[d] is not None else 0
+    #     db.graph.push(case)
+    #
+    # for firm in db.matcher.match('Firm'):
+    #     for d in firm_dumies:
+    #         firm[f'{d}_D'] = 1 if firm[d] is not None else 0
+    #     db.graph.push(firm)
+    #
+    # for undertaking in db.matcher.match('Undertaking'):
+    #     for d in undertaking_dumies:
+    #         undertaking[f'{d}_D'] = 1 if undertaking[d] is not None else 0
+    #     db.graph.push(undertaking)
 
-    for firm in db.matcher.match('Firm'):
-        for d in firm_dumies:
-            firm[f'{d}_D'] = firm[d] is not None
-        db.graph.push(firm)
+    count = 0
+    all = 0
+    for holding in db.matcher.match('Holding'):
+        all+=1
+        for d in holding_dumies:
+            print(d, holding[d])
+            holding[f'{d}_D'] = 1 if holding[d] is not None else 0
+            if holding[f'{d}_D'] == 0:
+                count+=1
 
-    for undertaking in db.matcher.match('Undertaking'):
-        for d in undertaking_dumies:
-            undertaking[f'{d}_D'] = undertaking[d] is not None
-        db.graph.push(undertaking)
+    print(all, count)
+
+        # db.graph.push(holding)
+DUMMY_VARIABLES()

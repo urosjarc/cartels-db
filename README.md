@@ -37,3 +37,4 @@ url: https://34-66-123-143.gcp-neo4j-sandbox.com:7473/
 4. Connect them all "povezovalni element" iz "Datastream podatki..."
 5. Potem sledi "Navodila za obdelavo podatkov..." glej stolpec
 F[Prepis/obdelava v isti stolpec] in G[Nove spremenljivke ->] in nadalni stolpci 
+
