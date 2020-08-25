@@ -700,6 +700,22 @@ def Holding_Ticker_D_Undertaking():
         undertaking['Holding_Ticker_D_Undertaking'] = 1 if int(num) > 0 else 0
         db.graph.push(undertaking)
 
+def Private_firm():
+    for firm in db.matcher.match('Firm'):
+        Association_firm:bool = utils.exists(firm['Firm_type'])
+        Public_firm:bool = utils.exists(firm['Ticker_firm'])
+        firm['Private_firm'] = 1 if (not Association_firm and not Public_firm) else 0
+        db.graph.push(firm)
+
+def Public_firm():
+    for firm in db.matcher.match('Firm'):
+        firm['Public_firm'] = 1 if utils.exists(firm['Ticker_firm']) else 0
+        db.graph.push(firm)
+
+def Association_firm():
+    for firm in db.matcher.match('Firm'):
+        firm['Association_firm'] = 1 if utils.exists(firm['Firm_type']) else 0
+        db.graph.push(firm)
 
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']

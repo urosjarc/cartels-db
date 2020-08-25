@@ -69,6 +69,8 @@ def parseDate(date: str):
     return datetime.strptime(date, date_format)
 
 def exists(property: str):
+    if property is None:
+        return False
     return len(property.strip()) > 0
 
 def absoluteFilePaths(directory):
