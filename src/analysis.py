@@ -6,7 +6,6 @@ this = sys.modules[__name__]
 this.matcher = None
 
 
-
 def EC_duration():
     db.core_fields.append('EC_duration')
     '''
@@ -35,7 +34,6 @@ def EC_duration():
         dateOfDecision = utils.parseDate(row['EC_Date_of_decision'])
 
         row['EC_duration'] = (dateOfDecision - oldest).days
-
 
 
 def EC_decision_year():
@@ -99,7 +97,7 @@ def Multiple_firm_under():
         Multiple_firm_under (dummy 01, če je samo ena firma znotraj undertakinga, potem 0, če jih je več 1)
     '''
     for row in db.core:
-        row['Multiple_firm_under'] = 1 if row['N_firms_within_under']>1 else 0
+        row['Multiple_firm_under'] = 1 if row['N_firms_within_under'] > 1 else 0
 
 
 def Repeat_firm_N_EC_cases():
@@ -126,6 +124,7 @@ def Recidivist_firm_D():
     for row in db.core:
         row['Recidivist_firm_D'] = 1 if row['Repeat_Firm_N_EC_cases'] >= 2 else 0
 
+
 def Recidivist_firm_2nd_time_D():
     db.core_fields.append('Recidivist_firm_2nd_time_D')
     '''
@@ -149,10 +148,6 @@ def Recidivist_firm_2nd_time_D():
                 firm['Recidivist_firm_2nd_time_D'] = 1
 
 
-
-
-
-
 def N_Firm_Inc_states_within_EC_case():
     db.core_fields.append('N_Firm_Inc_states_within_EC_case')
     '''
@@ -174,6 +169,7 @@ def European_firm():
         country = row['Incorporation_state']
         cinfo = utils.getCountryInfo(country)
         row['European_firm'] = 1 if cinfo.get('continent') == 'Europe' else 0
+
 
 def Extra_Europe_firm():
     db.core_fields.append('Extra_Europe_firm')
@@ -270,7 +266,6 @@ def EU_EC_decision_firm():
                 wasInEU = 1
 
         row['EU_EC_decision_firm'] = wasInEU
-
 
 
 def Old_EU_firm():
@@ -385,8 +380,6 @@ def Transcontinental_case():
         row['Transcontinental_case'] = 1 if isTranscontinental else 0
 
 
-
-
 def National_only_case():
     db.core_fields.append('National_only_case')
     '''National_only_case (dummy 01, če so vse Firme znotraj Case iz iste države, potem 1, drugače 0)'''
@@ -399,45 +392,54 @@ def National_only_case():
         row['National_only_case'] = 1 if len(countries) == 1 else 0
 
 
-def N_under_within_EC_case():
-
-
 def N_undertaking_within_EC_case():
-    '''
-    N_firms_within_EC_case (število vseh firm znotraj Case)
-    '''
-    for case in db.matcher.match('Case'):
-        num = db.graph.run('MATCH (Undertaking)-[r]->(c:Case) where c.Case=$case RETURN count(r)',
-                           case=case['Case']).data()[0]['count(r)']
-        case['N_undertaking_within_EC_case'] = int(num)
-        db.graph.push(case)
+    db.core_fields.append('N_undertaking_within_EC_case')
+    for row in db.core:
+        undertakings = set()
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                undertakings.add(row2['Undertaking'])
+
+        row['N_undertaking_within_EC_case'] = len(undertakings)
 
 
 def Repeat_undertaking_N_EC_cases():
+    db.core_fields.append('Repeat_undertaking_N_EC_cases')
     '''
     Repeat_Firm_N_EC_cases (število Case-ov, v katerih se pojavi to eno in isto podjetje)
     '''
-    for undertaking in db.matcher.match('Undertaking'):
-        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
-                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
+    for row in db.core:
+        cases = set()
+        for row2 in db.core:
+            if row['Undertaking'] == row2['Undertaking']:
+                cases.add(row2['Case'])
 
-        undertaking['Repeat_undertaking_N_EC_cases'] = int(num)
-        db.graph.push(undertaking)
+        row['Repeat_undertaking_N_EC_cases'] = len(cases)
 
 
 def Recidivist_undertaking_D():
-    for undertaking in db.matcher.match('Undertaking'):
-        num = db.graph.run('MATCH (u:Undertaking)-[r]->(c:Case) where u.Undertaking=$undertaking RETURN count(r)',
-                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        undertaking['Recidivist_undertaking_D'] = 1 if num >= 2 else 0
-        db.graph.push(undertaking)
+    db.core_fields.append('Recidivist_undertaking_D')
+    for row in db.core:
+        row['Recidivist_undertaking_D'] = 1 if row['Repeat_undertaking_N_EC_cases'] >= 2 else 0
 
 
 def Recidivist_undertaking_2nd_time_D():
-    '''
-    Todo: Recidivist_firm_2nd_time_D (dummy 01, ko se firma, ki je recidivist datumsko glede na EC_Date_of_decision prvič pojavi v bazi je tudi 0 (in ne 1 kot pri prejšnjem dummy-ju), ko se pa pojavi časovno gledano drugič, tretjič itd. pa je 1)
-    Todo: Za izspis
-    '''
+    db.core_fields.append('Recidivist_undertaking_2nd_time_D')
+    for row in db.core:
+        undertakings = []
+        dates = []
+        for row2 in db.core:
+            if row['Firm'] == row2['Firm']:
+                undertakings.append(row2)
+                dates.append(utils.parseDate(row2['EC_Date_of_decision']))
+
+        najstarejsa = min(dates)
+        index_najs = dates.index(najstarejsa)
+        for i, undertaking in enumerate(undertakings):
+            if i == index_najs:
+                undertaking['Recidivist_undertaking_2nd_time_D'] = 0
+            else:
+                undertaking['Recidivist_undertaking_2nd_time_D'] = 1
 
 
 def N_Undertaking_Inc_states_within_EC_case():
@@ -888,8 +890,7 @@ def InfringeDurationOverallFirm():
         print(firm['Firm'])
         for caseName, firm in db.getFirmsRows(firm['Firm']).items():
             diff = analysis_utils.InfringeDurationOverall(firm)
-            print(diff/365, caseName)
-
+            print(diff / 365, caseName)
 
 
 def InfringeDurationOverallUndertaking():
@@ -925,7 +926,6 @@ def InfringeDurationOverallUndertaking():
         db.graph.push(undertaking)
 
 
-
 def DUMMY_VARIABLES():
     case_dumies = ['Ticker_Case']
     firm_dumies = ['Ticker_Firm']
@@ -952,5 +952,6 @@ def DUMMY_VARIABLES():
             print(d, holding[d])
             holding[f'{d}_D'] = 1 if holding[d] is not None else 0
         db.graph.push(holding)
+
 
 db.save_core()
