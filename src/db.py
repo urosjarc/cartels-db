@@ -2,7 +2,10 @@ from py2neo import Graph, NodeMatcher, RelationshipMatch
 import sys
 from src import auth as aut
 from src.domain import *
-from typing import List
+from typing import List, Dict
+
+matcher: NodeMatcher = None
+graph: Graph = None
 
 this = sys.modules[__name__]
 this.graph: Graph = None
@@ -20,7 +23,8 @@ this.LEV4SE_rows: List[StockDataOther] = []
 this.MLOC_rows: List[StockDataOther] = []
 this.TOTMKWD_rows: List[StockDataOther] = []
 
-this.csvCorePath = utils.currentDir(__file__, '../data/csv/core.csv')
+this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
+this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
@@ -37,7 +41,34 @@ this.csvStockDataTOTMKWDPaths = [i for i in utils.absoluteFilePaths(utils.curren
 
 
 # DATABASE
+core = None
+core_fields = None
+this.core: List[Dict] = []
+this.core_fields: List[str] = []
 
+def init_core():
+    with open(this.csvCorePathIn, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.core.append(row)
+
+    this.core_fields = list(this.core[0].keys())
+
+def save_core():
+    with open(this.csvCorePathOut, 'w') as csvfile:
+        writer= csv.DictWriter(csvfile,fieldnames=this.core_fields)
+        writer.writeheader()
+        writer.writerows(this.core)
+
+def getFirmsRows(firmName):
+    with open(this.csvCorePath) as csvfile:
+        reader = csv.DictReader(csvfile)
+        firms = {}
+        for row in reader:
+            if row['Firm'] == firmName:
+                firms[row['Case']] = row
+
+        return firms
 
 def init():
     init_db()

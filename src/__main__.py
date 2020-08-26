@@ -1,21 +1,28 @@
-from src import db
+from src import db,analysis
 
-raise Exception('Do not run this file :) ...')
+db.init_core()
 
-# INIT
-db.init()
-db.delete_all()
-
-# CREATE NODES
-db.create_nodes_core()
-db.create_nodes_stock_meta()
-db.create_nodes_stock_data()
-
-# CREATE RELATIONSHIPS
-db.create_relationships_core()
-db.create_relationships_stock_meta()
-db.create_relationships_stock_A1012M()
-db.create_relationships_stock_LEV2IN()
-db.create_relationships_stock_LEV4SE()
-db.create_relationships_stock_DSLOC()
-db.create_relationships_stock_MLOC()
+analysis.EC_duration()
+analysis.EC_decision_year()
+analysis.N_firms_within_EC_case()
+analysis.N_firms_within_under()
+analysis.Multiple_firm_under()
+analysis.Repeat_firm_N_EC_cases()
+analysis.Recidivist_firm_D()
+analysis.Recidivist_firm_2nd_time_D()
+analysis.N_Firm_Inc_states_within_EC_case()
+analysis.European_firm()
+analysis.Extra_Europe_firm()
+analysis.EU_all_time_firm()
+analysis.EU_EC_decision_firm()
+analysis.Old_EU_firm()
+analysis.USA_firm()
+analysis.Japan_firm()
+analysis.Common_Law_Firm()
+analysis.English_Law_Firm()
+analysis.French_Law_Firm()
+analysis.German_Law_Firm()
+analysis.Scandinavian_Law_Firm()
+analysis.Transcontinental_case()
+analysis.National_only_case()
+db.save_core()

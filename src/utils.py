@@ -63,8 +63,12 @@ def getCountryInfo(country):
 
 
 def parseDate(date: str):
+    if date is None:
+        return None
+
     if date.count('/') != 2:
         return None
+
     date_format = '%m/%d/%Y'
     return datetime.strptime(date, date_format)
 
