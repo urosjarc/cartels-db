@@ -85,7 +85,7 @@ def N_firms_within_under():
     for row in db.core:
         firms = set()
         for row2 in db.core:
-            if row['Case'] == row2['Under']:
+            if row['Case'] == row2['Undertaking']:
                 firms.add(row2['Firm'])
 
         row['N_firms_within_under'] = len(firms)
@@ -122,7 +122,7 @@ def Recidivist_firm_D():
     '''
 
     for row in db.core:
-        row['Recidivist_firm_D'] = 1 if row['Repeat_Firm_N_EC_cases'] >= 2 else 0
+        row['Recidivist_firm_D'] = 1 if row['Repeat_firm_N_EC_cases'] >= 2 else 0
 
 
 def Recidivist_firm_2nd_time_D():
@@ -752,8 +752,8 @@ def Association_undertaking():
 def Undertaking_governance():
     db.core_fields.append('Undertaking_governance')
     for row in db.core:
-        Association_Undertaking: bool = row['Association_Undertaking']
-        Public_Undertaking: bool = row['Public_Undertaking']
+        Association_Undertaking: bool = row['Association_undertaking']
+        Public_Undertaking: bool = row['Public_undertaking']
 
         ug = 'Private'
         if Association_Undertaking:
@@ -812,7 +812,7 @@ def Case_a101():
         a101 = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if utils.exists(row2['a101']):
+                if utils.exists(row2['a_101']):
                     a101 = True
                     break
 
@@ -825,7 +825,7 @@ def Case_a102():
         a102 = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if utils.exists(row2['a102']):
+                if utils.exists(row2['a_102']):
                     a102 = True
                     break
 
