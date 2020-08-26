@@ -429,7 +429,7 @@ def Recidivist_undertaking_2nd_time_D():
         undertakings = []
         dates = []
         for row2 in db.core:
-            if row['Firm'] == row2['Firm']:
+            if row['Undertaking'] == row2['Undertaking']:
                 undertakings.append(row2)
                 dates.append(utils.parseDate(row2['EC_Date_of_decision']))
 
@@ -443,44 +443,43 @@ def Recidivist_undertaking_2nd_time_D():
 
 
 def N_Undertaking_Inc_states_within_EC_case():
+    db.core_fields.append('N_Undertaking_Inc_states_within_EC_case')
     '''
         N_Undertaking_Inc_states_within_EC_case (število vseh držav znotraj Case)
     '''
-    for case in db.matcher.match('Case'):
-        undertakings_r = db.graph.run('MATCH (f:Undertaking)-[r]->(c:Case) where c.Case=$case RETURN f',
-                                      case=case['Case']).data()
+    for row in db.core:
 
         states = set()
-        for undertaking_r in undertakings_r:
-            states.add(undertaking_r['f']['Incorporation_state'])
+        for row2 in db.core:
+            if row['Undertaking'] == row2['Undertaking']:
+                states.add(row2['IncorpStateUnder'])
 
-        case['N_Undertaking_Inc_states_within_EC_case'] = len(states)
-        db.graph.push(case)
+        row['N_Undertaking_Inc_states_within_EC_case'] = len(states)
 
 
 def European_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
+    db.core_fields.append('European_undertaking')
+    for row in db.core:
+        country = row['IncorpStateUnder']
         cinfo = utils.getCountryInfo(country)
-        undertaking['European_undertaking'] = 1 if cinfo.get('continent') == 'Europe' else 0
-        db.graph.push(undertaking)
+        row['European_undertaking'] = 1 if cinfo.get('continent') == 'Europe' else 0
 
 
 def Extra_Europe_undertaking():
+    db.core_fields.append('Extra_Europe_undertaking')
     extra_eu = [
         'Australia', 'Bermuda', 'British Virgin Islands', 'Canada',
         'Cayman Islands', 'Hong Kong', 'India', 'Israel', 'Malaysia',
         'New Zealand', 'Republic of South Africa', 'Singapore', 'USA', 'Brasil',
         'Chile', 'Kuwait', 'Mexico', 'Tunisia', 'China', 'Japan', 'South Korea', 'Taiwan',
     ]
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-
-        undertaking['Extra_Europe_undertaking'] = 1 if country in extra_eu else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['Extra_Europe_undertaking'] = 1 if country in extra_eu else 0
 
 
 def EU_all_time_undertaking():
+    db.core_fields.append('EU_all_time_undertaking')
     slovarDrzav = {
         'Ireland': '1/1/1973',  # %m/%d/%Y
         'UK': '1/1/1973',
@@ -508,15 +507,14 @@ def EU_all_time_undertaking():
         'Finland': '1/1/1995',
         'Sweden': '1/1/1995',
     }
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
+    for row in db.core:
+        country = row['IncorpStateUnder']
         datumPriklucitve = slovarDrzav.get(country, None)
-        undertaking['EU_all_time_undertaking'] = 1 if datumPriklucitve is not None else 0
-        db.graph.push(undertaking)
+        row['EU_all_time_undertaking'] = 1 if datumPriklucitve is not None else 0
 
 
 def EU_EC_decision_undertaking():
-    '''Todo:  Izspis'''
+    db.core_fields.append('EU_EC_decision_undertaking')
     slovarDrzav = {
         'Ireland': '1/1/1973',  # %m/%d/%Y
         'UK': '1/1/1973',
@@ -544,84 +542,70 @@ def EU_EC_decision_undertaking():
         'Finland': '1/1/1995',
         'Sweden': '1/1/1995',
     }
-    '''
-    Todo: ????
-    EU_all_time_undertaking(dummy 01, če je bila kadarkoli v EU, 1, če ne 0) '''
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        cinfo = utils.getCountryInfo(country)
-        if cinfo.get('continent') == 'Europe':
-            datumPriklucitve = slovarDrzav.get(country, None)
-            if datumPriklucitve is not None:
-                cases_r = db.graph.run('MATCH (f:Undertaking)-[r]->(c:Case) where f.Undertaking=$undertaking RETURN c',
-                                       undertaking=undertaking['Undertaking']).data()
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        wasInEU = 0
 
-                print(undertaking['Undertaking'])
-                for case in cases_r:
-                    case = case['c']
-                    EC_date = utils.parseDate(case['EC_Date_of_decision'])
-                    prikl_date = utils.parseDate(datumPriklucitve)
+        datumPriklucitve = utils.parseDate(slovarDrzav.get(country, None))
+        EC_dod = utils.parseDate(row['EC_Date_of_decision'])
+        if datumPriklucitve is not None:
+            if datumPriklucitve < EC_dod:
+                wasInEU = 1
 
-                    if prikl_date < EC_date:
-                        print('\t', case['Case'], 1)
-                    else:
-                        print('\t', case['Case'], 0)
-                print('----------------------')
+        row['EU_EC_decision_undertaking'] = wasInEU
 
 
 def Old_EU_undertaking():
+    db.core_fields.append('Old_EU_undertaking')
     '''
     Old_EU_undertaking(če gre za ustavno članico EU iz l. 1952, potem 1, drugače 0) '''
     EU_founders = ['Belgium', 'France', 'Germany', 'Italy', 'Luxembourg', 'Netherland']
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['Old_EU_undertaking'] = 1 if country in EU_founders else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['Old_EU_undertaking'] = 1 if country in EU_founders else 0
 
 
 def USA_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['USA_undertaking'] = 1 if country == 'USA' else 0
-        db.graph.push(undertaking)
+    db.core_fields.append('USA_undertaking')
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['USA_undertaking'] = 1 if country == 'USA' else 0
 
 
 def Japan_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['Japan_undertaking'] = 1 if country == 'Japan' else 0
-        db.graph.push(undertaking)
+    db.core_fields.append('Japan_undertaking')
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['Japan_undertaking'] = 1 if country == 'Japan' else 0
 
 
-def Common_Law_undertaking():
+def Common_Law_Undertaking():
+    db.core_fields.append('Common_Law_Undertaking')
     countries_common_law = [
         'Australia', 'Bermuda', 'British Virgin Islands', 'Canada',
         'Cayman Islands', 'Channel Islands', 'Hong Kong', 'India',
         'Ireland', 'Israel', 'Malaysia', 'New Zealand', 'Republic of South Africa',
         'Singapore', 'UK', 'USA']
 
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['Common_Law_Undertaking'] = 1 if country in countries_common_law else 0
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['Common_Law_Undertaking'] = 1 if country in countries_common_law else 0
 
 
-def English_Law_undertaking():
-    '''
-    English_Law_Undertaking (dummy 01, če je English 1, če ni 0)
-    '''
-
+def English_Law_Undertaking():
+    db.core_fields.append('English_Law_Undertaking')
     english_law = [
         'Australia', 'Bermuda', 'British Virgin Islands', 'Canada', 'Cayman Islands', 'Channel Islands',
         'Hong Kong', 'India', 'Ireland', 'Israel', 'Malaysia', 'New Zealand', 'Republic of South Africa', 'Singapore',
         'UK', 'USA']
 
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['English_Law_Undertaking'] = 1 if country in english_law else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['English_Law_Undertaking'] = 1 if country in english_law else 0
 
 
 def French_Law_Undertaking():
+    db.core_fields.append('French_Law_Undertaking')
     french_law = [
         'Belgium', 'Brasil', 'Chile', 'France',
         'Greece', 'Italy', 'Kuwait', 'Lithuania',
@@ -629,26 +613,27 @@ def French_Law_Undertaking():
         'Romania', 'Spain', 'Tunisia'
     ]
 
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['French_Law_Undertaking'] = 1 if country in french_law else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['French_Law_Undertaking'] = 1 if country in french_law else 0
 
 
 def German_Law_Undertaking():
+    db.core_fields.append('German_Law_Undertaking')
     german_law = [
         'Austria', 'China', 'Croatia', 'Czech Republic', 'Estonia', 'Germany',
         'Hungary', 'Japan', 'Latvia', 'Liechtenstein', 'Poland', 'Slovakia',
         'Slovenia', 'South Korea', 'Switzerland', 'Taiwan'
     ]
 
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['German_Law'] = 1 if country in german_law else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['German_Law_Undertaking'] = 1 if country in german_law else 0
 
 
 def Scandinavian_Law_Undertaking():
+    db.core_fields.append('Scandinavian_Law_Undertaking')
+
     scandinavian_law = [
         'Denmark',
         'Finland',
@@ -657,53 +642,59 @@ def Scandinavian_Law_Undertaking():
         'Sweden'
     ]
 
-    for undertaking in db.matcher.match('Undertaking'):
-        country = undertaking['Incorporation_state']
-        undertaking['Scandinavian_Law_Undertaking'] = 1 if country in scandinavian_law else 0
-        db.graph.push(undertaking)
+    for row in db.core:
+        country = row['IncorpStateUnder']
+        row['Scandinavian_Law_Undertaking'] = 1 if country in scandinavian_law else 0
 
 
 def Holding_Ticker_D_Firm():
-    for firm in db.matcher.match('Firm'):
-        num = db.graph.run('MATCH (f:Firm)-[r]->(Holding) where f.Firm=$firm RETURN count(r)',
-                           firm=firm['Firm']).data()[0]['count(r)']
-        firm['Holding_Ticker_D_Firm'] = 1 if int(num) > 0 else 0
-        db.graph.push(firm)
+    db.core_fields.append('Holding_Ticker_D_Firm')
+
+    for row in db.core:
+        row['Holding_Ticker_D_Firm'] = 1 if utils.exists(row['Holding_Ticker_parent']) else 0
 
 
 def Holding_Ticker_D_Undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        num = db.graph.run('MATCH (u:Undertaking)-[r]->(Holding) where u.Undertaking=$undertaking RETURN count(r)',
-                           undertaking=undertaking['Undertaking']).data()[0]['count(r)']
-        undertaking['Holding_Ticker_D_Undertaking'] = 1 if int(num) > 0 else 0
-        db.graph.push(undertaking)
+    db.core_fields.append('Holding_Ticker_D_Undertaking')
+
+    for row in db.core:
+        rows = []
+        htp = None
+        for row2 in db.core:
+            if row['Undertaking'] == row2['Undertaking'] and row['Case'] == row2['Case']:
+                rows.append(row2)
+                if utils.exists(row2['Holding_Ticker_parent']):
+                    htp = row2['Holding_Ticker_parent']
+
+        for r in rows:
+            r['Holding_Ticker_D_Undertaking'] = 1 if htp else 0
 
 
 def Private_firm():
-    for firm in db.matcher.match('Firm'):
-        Association_firm: bool = utils.exists(firm['Firm_type'])
-        Public_firm: bool = utils.exists(firm['Ticker_firm'])
-        firm['Private_firm'] = 1 if (not Association_firm and not Public_firm) else 0
-        db.graph.push(firm)
+    db.core_fields.append('Private_firm')
+    for row in db.core:
+        Association_firm: bool = utils.exists(row['Firm_type'])
+        Public_firm: bool = utils.exists(row['Ticker_firm'])
+        row['Private_firm'] = 1 if (not Association_firm and not Public_firm) else 0
 
 
 def Public_firm():
-    for firm in db.matcher.match('Firm'):
-        firm['Public_firm'] = 1 if utils.exists(firm['Ticker_firm']) else 0
-        db.graph.push(firm)
+    db.core_fields.append('Public_firm')
+    for row in db.core:
+        row['Public_firm'] = 1 if utils.exists(row['Ticker_firm']) else 0
 
 
 def Association_firm():
-    for firm in db.matcher.match('Firm'):
-        firm['Association_firm'] = 1 if utils.exists(firm['Firm_type']) else 0
-        db.graph.push(firm)
+    db.core_fields.append('Association_firm')
+    for row in db.core:
+        row['Association_firm'] = 1 if utils.exists(row['Firm_type']) else 0
 
 
 def Firm_governance():
-    for firm in db.matcher.match('Firm'):
-        Association_firm: bool = utils.exists(firm['Firm_type'])
-        Public_firm: bool = utils.exists(firm['Ticker_firm'])
-        Private_firm: bool = not Association_firm and not Public_firm
+    db.core_fields.append('Firm_governance')
+    for row in db.core:
+        Association_firm: bool = utils.exists(row['Firm_type'])
+        Public_firm: bool = utils.exists(row['Ticker_firm'])
 
         fg = 'Private'
         if Association_firm:
@@ -711,46 +702,58 @@ def Firm_governance():
         elif Public_firm:
             fg = 'Public'
 
-        firm['Firm_governance'] = fg
-        db.graph.push(firm)
+        row['Firm_governance'] = fg
 
 
 def Private_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                            firm=undertaking['Undertaking']).data()[0]['f']
+    db.core_fields.append('Private_undertaking')
+    for row in db.core:
+        undertaking = row['Undertaking']
+        result1 = None
+        result2 = None
+        for row2 in db.core:
+            if undertaking == row2['Firm']:
+                result1 = utils.exists(row2['Ticker_undertaking'])
+                result2 = utils.exists(row2['Firm_type'])
 
-        Association_Undertaking: bool = utils.exists(firm['Firm_type'])
-        Public_Undertaking: bool = utils.exists(firm['Ticker_firm'])
-        undertaking['Private_undertaking'] = 1 if (not Association_Undertaking and not Public_Undertaking) else 0
-        db.graph.push(undertaking)
+        for row2 in db.core:
+            if undertaking == row2['Undertaking']:
+                row2['Private_undertaking'] = 1 if not result1 and not result2 else 0
 
 
 def Public_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                            firm=undertaking['Undertaking']).data()[0]['f']
+    db.core_fields.append('Public_undertaking')
+    for row in db.core:
+        undertaking = row['Undertaking']
+        result = None
+        for row2 in db.core:
+            if undertaking == row2['Firm']:
+                result = 1 if utils.exists(row2['Ticker_undertaking']) else 0
 
-        undertaking['Public_undertaking'] = 1 if utils.exists(firm['Ticker_firm']) else 0
-        db.graph.push(undertaking)
+        for row2 in db.core:
+            if undertaking == row2['Undertaking']:
+                row2['Public_undertaking'] = result
 
 
 def Association_undertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                            firm=undertaking['Undertaking']).data()[0]['f']
+    db.core_fields.append('Association_undertaking')
+    for row in db.core:
+        undertaking = row['Undertaking']
+        result = None
+        for row2 in db.core:
+            if undertaking == row2['Firm']:
+                result = 1 if utils.exists(row2['Firm_type']) else 0
 
-        undertaking['Association_undertaking'] = 1 if utils.exists(firm['Firm_type']) else 0
-        db.graph.push(undertaking)
+        for row2 in db.core:
+            if undertaking == row2['Undertaking']:
+                row2['Association_undertaking'] = result
 
 
 def Undertaking_governance():
-    for undertaking in db.matcher.match('Undertaking'):
-        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$firm RETURN f',
-                            firm=undertaking['Undertaking']).data()[0]['f']
-
-        Association_Undertaking: bool = utils.exists(firm['Firm_type'])
-        Public_Undertaking: bool = utils.exists(firm['Ticker_firm'])
+    db.core_fields.append('Undertaking_governance')
+    for row in db.core:
+        Association_Undertaking: bool = row['Association_Undertaking']
+        Public_Undertaking: bool = row['Public_Undertaking']
 
         ug = 'Private'
         if Association_Undertaking:
@@ -758,107 +761,106 @@ def Undertaking_governance():
         elif Public_Undertaking:
             ug = 'Public'
 
-        undertaking['Undertaking_governance'] = ug
-        db.graph.push(undertaking)
+        row['Undertaking_governance'] = ug
 
 
 def Case_A101_only():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
-        A101_only = True
-        for firm in firms:
-            if not utils.exists(firm['A_101']):
-                A101_only = False
+    db.core_fields.append('Case_A101_only')
 
-        case['Case_A101_only'] = 1 if A101_only else 0
-        db.graph.push(case)
+    for row in db.core:
+        A101_only = True
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if not utils.exists(row2['A_101']):
+                    A101_only = False
+                    break
+
+        row['Case_A101_only'] = 1 if A101_only else 0
 
 
 def Case_A102_only():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
+    db.core_fields.append('Case_A102_only')
+
+    for row in db.core:
         A102_only = True
-        for firm in firms:
-            if not utils.exists(firm['A_102']):
-                A102_only = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if not utils.exists(row2['A_102']):
+                    A102_only = False
+                    break
 
-        case['Case_A102_only'] = 1 if A102_only else 0
-        db.graph.push(case)
+        row['Case_A102_only'] = 1 if A102_only else 0
 
 
-def Case_A101_A102_only():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
-        A101_102_only = True
-        for firm in firms:
-            if not utils.exists(firm['A101_102']):
-                A101_102_only = False
+def Case_A101_102_only():
+    db.core_fields.append('Case_A101_102_only')
 
-        case['Case_A101_102_only'] = 1 if A101_102_only else 0
-        db.graph.push(case)
+    for row in db.core:
+        A101_102 = True
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if not utils.exists(row2['A101_102']):
+                    A101_102 = False
+                    break
+
+        row['Case_A101_102_only'] = 1 if A101_102 else 0
 
 
 def Case_a101():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
+    db.core_fields.append('Case_a101')
+    for row in db.core:
         a101 = False
-        for firm in firms:
-            if utils.exists(firm['a_101']):
-                a101 = True
-                break
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row2['a101']):
+                    a101 = True
+                    break
 
-        case['Case_a101'] = 1 if a101 else 0
-        db.graph.push(case)
+        row['Case_a101'] = 1 if a101 else 0
 
 
 def Case_a102():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
+    db.core_fields.append('Case_a102')
+    for row in db.core:
         a102 = False
-        for firm in firms:
-            if utils.exists(firm['a_102']):
-                a102 = True
-                break
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row2['a102']):
+                    a102 = True
+                    break
 
-        case['Case_a102'] = 1 if a102 else 0
-        db.graph.push(case)
+        row['Case_a102'] = 1 if a102 else 0
 
 
 def Case_cartel_VerR():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
+    db.core_fields.append('Case_cartel_VerR')
+    for row in db.core:
         Cartel_VerR = False
-        for firm in firms:
-            if utils.exists(firm['Cartel_VerR']):
-                Cartel_VerR = True
-                break
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row2['Cartel_VerR']):
+                    Cartel_VerR = True
+                    break
 
-        case['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
-        db.graph.push(case)
+        row['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
 
 
 def Case_Ringleader():
-    for case in db.matcher.match('Case'):
-        firms = db.graph.run('MATCH (f:Firm)-[r]->(c:Case) where c.Case=$case RETURN f',
-                             case=case['Case']).data()
+    db.core_fields.append('Case_Ringleader')
+    for row in db.core:
         rl = False
-        for firm in firms:
-            if utils.exists(firm['Ringleader']):
-                rl = True
-                break
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row2['Ringleader']):
+                    rl = True
+                    break
 
-        case['Case_Ringleader'] = 1 if rl else 0
-        db.graph.push(case)
+        row['Case_Ringleader'] = 1 if rl else 0
 
 
 def Investigation_begin():
-    for case in db.matcher.match('Case'):
+    db.core_fields.append('Investigation_begin')
+    for row in db.core:
         dates_prop = [
             'Readoption_amendment',
             'Notification',
@@ -871,87 +873,41 @@ def Investigation_begin():
 
         dates = []
         for dp in dates_prop:
-            d = utils.parseDate(case[dp])
+            d = utils.parseDate(row[dp])
             if d is not None:
                 dates.append(d)
 
-        if len(dates) > 0:
-            case['Investigation_begin'] = min(dates)
-            db.graph.push(case)
-        else:
-            raise Exception('Somthing is wrong!')
+        row['Investigation_begin'] = min(dates)
+
 
 
 def InfringeDurationOverallFirm():
-    for firm in db.matcher.match('Firm'):
-        if firm['Firm'] != 'Bayer AG':
-            continue
+    db.core_fields.append('InfringeDurationOverallFirm')
+    for row in db.core:
+        diff = analysis_utils.InfringeDurationOverall(row)
+        row['InfringeDurationOverallFirm'] = diff
 
-        print(firm['Firm'])
-        for caseName, firm in db.getFirmsRows(firm['Firm']).items():
-            diff = analysis_utils.InfringeDurationOverall(firm)
-            print(diff / 365, caseName)
 
 
 def InfringeDurationOverallUndertaking():
-    for undertaking in db.matcher.match('Undertaking'):
-        firm = db.graph.run('MATCH (f:Firm) where f.Firm=$name RETURN f',
-                            name=undertaking['Undertaking']).data()[0]['f']
+    db.core_fields.append('InfringeDurationOverallUndertaking')
+    for row in db.core:
+        diff = analysis_utils.InfringeDurationOverall(row)
+        row['InfringeDurationOverallUndertaking'] = diff
 
-        begin = {}
-        end = {}
-        for i in range(1, 13):
-            dateBegin = utils.parseDate(firm[f'InfrBegin{i}'])
-            dateEnd = utils.parseDate(firm[f'InfrEnd{i}'])
-            if dateBegin is not None:
-                begin[i] = dateBegin
-            if dateEnd is not None:
-                end[i] = dateEnd
+def Ticker_firm_D():
+    db.core_fields.append('Ticker_firm_D')
+    for row in db.core:
+        row['Ticker_firm_D'] = 1 if utils.exists(row['Ticker_firm']) else 0
 
-        beginMin: datetime = None
-        endMax: datetime = None
-        if len(begin.values()) > 0:
-            beginMin = min(begin.values())
-        if len(end.values()) > 0:
-            endMax = max(end.values())
+def Ticker_undertaking_D():
+    db.core_fields.append('Ticker_undertaking_D')
+    for row in db.core:
+        row['Ticker_undertaking_D'] = 1 if utils.exists(row['Ticker_undertaking']) else 0
 
-        if len(end.values()) == 0 and len(begin.values()) > 0:
-            endMax = utils.parseDate(firm['EC_Date_of_decision'])
-
-        diff = None
-        if endMax is not None and beginMin is not None:
-            diff = (endMax - beginMin).days
-
-        undertaking['InfringeDurationOverallUndertaking'] = diff
-        db.graph.push(undertaking)
-
-
-def DUMMY_VARIABLES():
-    case_dumies = ['Ticker_Case']
-    firm_dumies = ['Ticker_Firm']
-    undertaking_dumies = ['Ticker_Undertaking']
-    holding_dumies = []
-
-    for case in db.matcher.match('Case'):
-        for d in case_dumies:
-            case[f'{d}_D'] = 1 if case[d] is not None else 0
-        db.graph.push(case)
-
-    for firm in db.matcher.match('Firm'):
-        for d in firm_dumies:
-            firm[f'{d}_D'] = 1 if firm[d] is not None else 0
-        db.graph.push(firm)
-
-    for undertaking in db.matcher.match('Undertaking'):
-        for d in undertaking_dumies:
-            undertaking[f'{d}_D'] = 1 if undertaking[d] is not None else 0
-        db.graph.push(undertaking)
-
-    for holding in db.matcher.match('Holding'):
-        for d in holding_dumies:
-            print(d, holding[d])
-            holding[f'{d}_D'] = 1 if holding[d] is not None else 0
-        db.graph.push(holding)
-
+def Holding_Ticker_parent_D():
+    db.core_fields.append('Holding_Ticker_parent_D')
+    for row in db.core:
+        row['Holding_Ticker_parent_D'] = 1 if utils.exists(row['Holding_Ticker_parent']) else 0
 
 db.save_core()
