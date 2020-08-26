@@ -880,13 +880,11 @@ def Investigation_begin():
         row['Investigation_begin'] = min(dates)
 
 
-
 def InfringeDurationOverallFirm():
     db.core_fields.append('InfringeDurationOverallFirm')
     for row in db.core:
         diff = analysis_utils.InfringeDurationOverall(row)
         row['InfringeDurationOverallFirm'] = diff
-
 
 
 def InfringeDurationOverallUndertaking():
@@ -895,19 +893,23 @@ def InfringeDurationOverallUndertaking():
         diff = analysis_utils.InfringeDurationOverall(row)
         row['InfringeDurationOverallUndertaking'] = diff
 
+
 def Ticker_firm_D():
     db.core_fields.append('Ticker_firm_D')
     for row in db.core:
         row['Ticker_firm_D'] = 1 if utils.exists(row['Ticker_firm']) else 0
+
 
 def Ticker_undertaking_D():
     db.core_fields.append('Ticker_undertaking_D')
     for row in db.core:
         row['Ticker_undertaking_D'] = 1 if utils.exists(row['Ticker_undertaking']) else 0
 
+
 def Holding_Ticker_parent_D():
     db.core_fields.append('Holding_Ticker_parent_D')
     for row in db.core:
         row['Holding_Ticker_parent_D'] = 1 if utils.exists(row['Holding_Ticker_parent']) else 0
+
 
 db.save_core()
