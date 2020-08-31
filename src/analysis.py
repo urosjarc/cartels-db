@@ -1334,4 +1334,68 @@ def InfringeBeginYearCase():
         row['InfringeBeginYearCase'] = min(beginsTotal).year if len(beginsTotal) > 0 else None
 
 
+def Settlement_fine_firm():
+    db.core_fields.append('Settlement_fine_firm')
+    for row in db.core:
+        row['Settlement_fine_firm'] = 1 if utils.exists(row['Settlement_fine_reduction_in_percentage']) else 0
+
+
+def Settlement_fine_undertaking():
+    db.core_fields.append('Settlement_fine_undertaking')
+    for row in db.core:
+        sfr = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                if utils.exists(row['Settlement_fine_reduction_in_percentage']):
+                    sfr = True
+                    break
+
+        row['Settlement_fine_undertaking'] = 1 if sfr else 0
+
+
+def Settlement_fine_case():
+    db.core_fields.append('Settlement_fine_case')
+    for row in db.core:
+        sfr = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row['Settlement_fine_reduction_in_percentage']):
+                    sfr = True
+                    break
+
+        row['Settlement_fine_case'] = 1 if sfr else 0
+
+
+def Full_immunity_firm():
+    db.core_fields.append('Full_immunity_firm')
+    for row in db.core:
+        row['Full_immunity_firm'] = 1 if utils.exists(row['Full_immunity']) else 0
+
+
+def Full_immunity_undertaking():
+    db.core_fields.append('Full_immunity_undertaking')
+    for row in db.core:
+        fi = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                if utils.exists(row['Full_immunity']):
+                    fi = True
+                    break
+
+        row['Full_immunity_undertaking'] = 1 if fi else 0
+
+
+def Full_immunity_case():
+    db.core_fields.append('Full_immunity_case')
+    for row in db.core:
+        fi = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row['Full_immunity']):
+                    fi = True
+                    break
+
+        row['Full_immunity_case'] = 1 if fi else 0
+
+
 db.save_core()
