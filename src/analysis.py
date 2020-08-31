@@ -85,11 +85,10 @@ def N_firms_within_under():
     for row in db.core:
         firms = set()
         for row2 in db.core:
-            if row['Case'] == row2['Undertaking']:
+            if row['Undertaking'] == row2['Undertaking'] and row['Case'] == row2['Case']:
                 firms.add(row2['Firm'])
 
         row['N_firms_within_under'] = len(firms)
-
 
 def Multiple_firm_under():
     db.core_fields.append('Multiple_firm_under')
@@ -369,13 +368,13 @@ def Transcontinental_case():
     Transcontinental_case (dummy, če je vsaj ena firma v Case-u izven Europe, potem 1, če je v Europe 0)
     '''
     for row in db.core:
-        isTranscontinental = True
+        isTranscontinental = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
                 country = row2['Incorporation_state']
                 continent = utils.getCountryInfo(country)['continent']
                 if continent != 'Europe':
-                    isTranscontinental = False
+                    isTranscontinental = True
 
         row['Transcontinental_case'] = 1 if isTranscontinental else 0
 
@@ -451,7 +450,7 @@ def N_Undertaking_Inc_states_within_EC_case():
 
         states = set()
         for row2 in db.core:
-            if row['Undertaking'] == row2['Undertaking']:
+            if row['Case'] == row2['Case']:
                 states.add(row2['IncorpStateUnder'])
 
         row['N_Undertaking_Inc_states_within_EC_case'] = len(states)
@@ -771,12 +770,11 @@ def Case_A101_only():
         A101_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if not utils.exists(row2['A_101']):
+                if str(row2['A_101']) != '1':
                     A101_only = False
                     break
 
         row['Case_A101_only'] = 1 if A101_only else 0
-
 
 def Case_A102_only():
     db.core_fields.append('Case_A102_only')
@@ -785,7 +783,7 @@ def Case_A102_only():
         A102_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if not utils.exists(row2['A_102']):
+                if str(row2['A_102']) != '1':
                     A102_only = False
                     break
 
@@ -799,7 +797,7 @@ def Case_A101_102_only():
         A101_102 = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if not utils.exists(row2['A101_102']):
+                if str(row2['A101_102']) != '1':
                     A101_102 = False
                     break
 
@@ -812,7 +810,7 @@ def Case_a101():
         a101 = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if utils.exists(row2['a_101']):
+                if str(row2['a_101']) == '1':
                     a101 = True
                     break
 
@@ -825,7 +823,7 @@ def Case_a102():
         a102 = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if utils.exists(row2['a_102']):
+                if str(row2['a_102']) == '1':
                     a102 = True
                     break
 
@@ -836,26 +834,39 @@ def Case_cartel_VerR():
     db.core_fields.append('Case_cartel_VerR')
     for row in db.core:
         Cartel_VerR = False
+        Cartel_VerR_empty = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
                 if utils.exists(row2['Cartel_VerR']):
-                    Cartel_VerR = True
-                    break
+                    Cartel_VerR_empty = False
+                    if str(row2['Cartel_VerR']) == '1':
+                        Cartel_VerR = True
+                        break
 
-        row['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
+        if not Cartel_VerR_empty:
+            row['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
+        else:
+            row['Case_cartel_VerR'] = ''
 
 
 def Case_Ringleader():
     db.core_fields.append('Case_Ringleader')
     for row in db.core:
         rl = False
+        rl_empty = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
                 if utils.exists(row2['Ringleader']):
-                    rl = True
-                    break
+                    rl_empty = False
+                    if str(row2['Ringleader']) == '1':
+                        rl = True
+                        break
 
-        row['Case_Ringleader'] = 1 if rl else 0
+        if not rl_empty:
+            row['Case_Ringleader'] = 1 if rl else 0
+        else:
+            row['Case_Ringleader'] = ''
+
 
 
 def Investigation_begin():
