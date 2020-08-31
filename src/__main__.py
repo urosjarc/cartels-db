@@ -84,5 +84,8 @@ analysis.TwoOrMoreInfringements_per_case()
 analysis.MaxIndividualInfringeDurationFirm()
 analysis.MaxIndividualInfringeDurationUndertaking()
 analysis.MaxIndividualInfringeDurationCase()
+analysis.InfringeBeginYearFirm()
+analysis.InfringeBeginYearUndertaking()
+analysis.InfringeBeginYearCase()
 
 db.save_core()

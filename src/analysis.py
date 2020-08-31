@@ -1284,4 +1284,54 @@ def MaxIndividualInfringeDurationCase():
         row['MaxIndividualInfringeDurationCase'] = max(diffs) if len(diffs) > 0 else None
 
 
+def InfringeBeginYearFirm():
+    db.core_fields.append('InfringeBeginYearFirm')
+    for row in db.core:
+        begins = []
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            if dateBegin is not None:
+                begins.append(dateBegin)
+
+        row['InfringeBeginYearFirm'] = min(begins).year if len(begins) > 0 else None
+
+
+def InfringeBeginYearUndertaking():
+    db.core_fields.append('InfringeBeginYearUndertaking')
+    for row in db.core:
+        beginsTotal = []
+        for i in range(1, 13):
+            begins = []
+
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    if dateBegin is not None:
+                        begins.append(dateBegin)
+
+            if len(begins) > 0:
+                beginsTotal.append(min(begins))
+
+        row['InfringeBeginYearUndertaking'] = min(beginsTotal).year if len(beginsTotal) > 0 else None
+
+
+def InfringeBeginYearCase():
+    db.core_fields.append('InfringeBeginYearCase')
+    for row in db.core:
+        beginsTotal = []
+        for i in range(1, 13):
+            begins = []
+
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    if dateBegin is not None:
+                        begins.append(dateBegin)
+
+            if len(begins) > 0:
+                beginsTotal.append(min(begins))
+
+        row['InfringeBeginYearCase'] = min(beginsTotal).year if len(beginsTotal) > 0 else None
+
+
 db.save_core()
