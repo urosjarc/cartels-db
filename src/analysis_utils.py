@@ -27,4 +27,4 @@ def InfringeDurationOverall(row):
     if endMax is not None and beginMin is not None:
         diff = (endMax - beginMin).days
 
-    return diff
+    return (diff, beginMin, endMax)

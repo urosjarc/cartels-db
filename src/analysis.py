@@ -894,15 +894,25 @@ def Investigation_begin():
 def InfringeDurationOverallFirm():
     db.core_fields.append('InfringeDurationOverallFirm')
     for row in db.core:
-        diff = analysis_utils.InfringeDurationOverall(row)
+        diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row)
         row['InfringeDurationOverallFirm'] = diff
 
 
 def InfringeDurationOverallUndertaking():
     db.core_fields.append('InfringeDurationOverallUndertaking')
     for row in db.core:
-        diff = analysis_utils.InfringeDurationOverall(row)
-        row['InfringeDurationOverallUndertaking'] = diff
+        beginMins = []
+        endMaxs = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
+                beginMins.append(beginMin)
+                endMaxs.append(endMax)
+
+        minBegin = min(beginMins)
+        maxEnd = max(endMaxs)
+
+        row['InfringeDurationOverallUndertaking'] = (maxEnd - minBegin).days
 
 
 def Ticker_firm_D():
@@ -922,5 +932,5 @@ def Holding_Ticker_parent_D():
     for row in db.core:
         row['Holding_Ticker_parent_D'] = 1 if utils.exists(row['Holding_Ticker_parent']) else 0
 
-
+def
 db.save_core()
