@@ -848,7 +848,7 @@ def Case_cartel_VerR():
         if not Cartel_VerR_empty:
             row['Case_cartel_VerR'] = 1 if Cartel_VerR else 0
         else:
-            row['Case_cartel_VerR'] = ''
+            row['Case_cartel_VerR'] = None
 
 
 def Case_Ringleader():
@@ -867,7 +867,7 @@ def Case_Ringleader():
         if not rl_empty:
             row['Case_Ringleader'] = 1 if rl else 0
         else:
-            row['Case_Ringleader'] = ''
+            row['Case_Ringleader'] = None
 
 
 def Investigation_begin():
@@ -918,7 +918,7 @@ def InfringeDurationOverallUndertaking():
             maxEnd = max(endMaxs)
             row['InfringeDurationOverallUndertaking'] = (maxEnd - minBegin).days
         else:
-            row['InfringeDurationOverallUndertaking'] = ''
+            row['InfringeDurationOverallUndertaking'] = None
 
 
 def Ticker_firm_D():
@@ -957,7 +957,7 @@ def InfringeDurationOverallCase():
             maxEnd = max(endMaxs)
             row['InfringeDurationOverallCase'] = (maxEnd - minBegin).days
         else:
-            row['InfringeDurationOverallCase'] = ''
+            row['InfringeDurationOverallCase'] = None
 
 
 def In_flagrante_investigation_firm():
@@ -986,7 +986,7 @@ def In_flagrante_investigation_firm():
         if len(beginMins) > 0:
             row['In_flagrante_investigation_firm'] = 1 if maxEnd > inves_begin else 0
         else:
-            row['In_flagrante_investigation_firm'] = ''
+            row['In_flagrante_investigation_firm'] = None
 
 
 def In_flagrante_investigation_undertaking():
@@ -1013,7 +1013,7 @@ def In_flagrante_investigation_undertaking():
         if len(beginMins) > 0:
             row['In_flagrante_investigation_undertaking'] = 1 if maxEnd > inves_begin else 0
         else:
-            row['In_flagrante_investigation_undertaking'] = ''
+            row['In_flagrante_investigation_undertaking'] = None
 
 
 def In_flagrante_investigation_case():
@@ -1042,7 +1042,7 @@ def In_flagrante_investigation_case():
         if len(beginMins) > 0:
             row['In_flagrante_investigation_case'] = 1 if rezult else 0
         else:
-            row['In_flagrante_investigation_case'] = ''
+            row['In_flagrante_investigation_case'] = None
 
 
 def InfringeEndByDecision_firm():
@@ -1053,7 +1053,8 @@ def InfringeEndByDecision_firm():
         if beginMin is not None:
             row['InfringeEndByDecision_firm'] = 0 if endMax is None else 1
         else:
-            row['InfringeEndByDecision_firm'] = ''
+            row['InfringeEndByDecision_firm'] = None
+
 
 def InfringeEndByDecision_undertaking():
     db.core_fields.append('InfringeEndByDecision_undertaking')
@@ -1070,7 +1071,8 @@ def InfringeEndByDecision_undertaking():
         if len(beginMins) > 0:
             row['InfringeEndByDecision_undertaking'] = 1 if endMaxs.count(None) > 0 else 0
         else:
-            row['InfringeEndByDecision_undertaking'] = ''
+            row['InfringeEndByDecision_undertaking'] = None
+
 
 def InfringeEndByDecision_case():
     db.core_fields.append('InfringeEndByDecision_case')
@@ -1087,8 +1089,153 @@ def InfringeEndByDecision_case():
         if len(beginMins) > 0:
             row['InfringeEndByDecision_case'] = 1 if endMaxs.count(None) > 0 else 0
         else:
-            row['InfringeEndByDecision_case'] = ''
+            row['InfringeEndByDecision_case'] = None
 
+
+def InfringeDurationTillInvestigationFirm():
+    db.core_fields.append('InfringeDurationTillInvestigationFirm')
+    for row in db.core:
+        diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row)
+
+        inves_begin = row['Investigation_begin']
+
+        if endMax is None:
+            endMax = inves_begin
+        else:
+            endMax = min([inves_begin, endMax])
+
+        if beginMin is not None:
+            row['InfringeDurationTillInvestigationFirm'] = endMax
+        else:
+            row['InfringeDurationTillInvestigationFirm'] = None
+
+
+def InfringeDurationTillInvestigationUndertaking():
+    db.core_fields.append('InfringeDurationTillInvestigationUndertaking')
+    for row in db.core:
+        endMaxs = []
+        beginMins = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
+                if beginMin is not None:
+                    beginMins.append(beginMin)
+                if endMax is not None:
+                    endMaxs.append(endMax)
+
+        inves_begin = row['Investigation_begin']
+        maxEnd = min(endMaxs + [inves_begin])
+
+        if len(beginMins) > 0:
+            row['InfringeDurationTillInvestigationUndertaking'] = maxEnd
+        else:
+            row['InfringeDurationTillInvestigationUndertaking'] = None
+
+
+def InfringeDurationTillInvestigationCase():
+    db.core_fields.append('InfringeDurationTillInvestigationCase')
+    for row in db.core:
+        endMaxs = []
+        beginMins = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
+                if beginMin is not None:
+                    beginMins.append(beginMin)
+                if endMax is not None:
+                    endMaxs.append(endMax)
+
+        inves_begin = row['Investigation_begin']
+        maxEnd = min(endMaxs + [inves_begin])
+
+        if len(beginMins) > 0:
+            row['InfringeDurationTillInvestigationCase'] = maxEnd
+        else:
+            row['InfringeDurationTillInvestigationCase'] = None
+
+
+def Infringements_per_firm():
+    db.core_fields.append('Infringements_per_firm')
+    for row in db.core:
+        begins = []
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            if dateBegin is not None:
+                begins.append(dateBegin)
+
+        if len(begins) > 0:
+            row['Infringements_per_firm'] = len(begins)
+        else:
+            row['Infringements_per_firm'] = 1
+
+
+def Infringements_per_undertaking():
+    db.core_fields.append('Infringements_per_undertaking')
+    for row in db.core:
+        begins = []
+        for i in range(1, 13):
+            begins.append(False)
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    dateBegin = utils.parseDate(row[f'InfrBegin{i}']) is not None
+                    if dateBegin:
+                        begins[-1] = True
+                        break
+
+        row['Infringements_per_undertaking'] = begins.count(True) if begins.count(True) > 0 else 1
+
+
+def Infringements_per_case():
+    db.core_fields.append('Infringements_per_case')
+    for row in db.core:
+        begins = []
+        for i in range(1, 13):
+            begins.append(False)
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    dateBegin = utils.parseDate(row[f'InfrBegin{i}']) is not None
+                    if dateBegin:
+                        begins[-1] = True
+                        break
+
+        row['Infringements_per_case'] = begins.count(True) if begins.count(True) > 0 else 1
+
+
+def TwoOrMoreInfringements_per_firm():
+    db.core_fields.append('TwoOrMoreInfringements_per_firm')
+    for row in db.core:
+        row['TwoOrMoreInfringements_per_firm'] = 1 if row['Infringements_per_firm'] >= 2 else 0
+
+
+def TwoOrMoreInfringements_per_undertaking():
+    db.core_fields.append('TwoOrMoreInfringements_per_undertaking')
+    for row in db.core:
+        row['TwoOrMoreInfringements_per_undertaking'] = 1 if row['Infringements_per_undertaking'] >= 2 else 0
+
+
+def TwoOrMoreInfringements_per_case():
+    db.core_fields.append('TwoOrMoreInfringements_per_case')
+    for row in db.core:
+        row['TwoOrMoreInfringements_per_case'] = 1 if row['Infringements_per_case'] >= 2 else 0
+
+
+def MaxIndividualInfringeDurationFirm():
+    db.core_fields.append('MaxIndividualInfringeDurationFirm')
+    for row in db.core:
+        diffs = []
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            dateEnd = utils.parseDate(row[f'InfrEnd{i}'])
+            diff = None
+            if dateEnd is None:
+                dateEnd = utils.parseDate(row['EC_Date_of_decision'])
+            if dateBegin is not None:
+                diff = (dateEnd - dateBegin).days
+
+            if diff is not None:
+                diffs.append(diff)
+
+        row['MaxIndividualInfringeDurationFirm'] = max(diffs) if len(diffs) > 0 else None
 
 
 db.save_core()
