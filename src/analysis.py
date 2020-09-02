@@ -1426,4 +1426,196 @@ def Full_immunity_case():
         row['Full_immunity_case'] = 1 if fi else 0
 
 
+def Fine_imposed_D_firm():
+    db.core_fields.append('Fine_imposed_D_firm')
+    for row in db.core:
+        fines = [utils.exists(row['Fine_final_single_firm'])]
+        for i in range(1, 8):
+            fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
+
+        fines = list(filter(False, fines))
+
+        row['Fine_imposed_D_firm'] = 1 if len(fines) > 0 else 0
+
+
+def Fine_imposed_D_undertaking():
+    db.core_fields.append('Fine_imposed_D_undertaking')
+    for row in db.core:
+        fines = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                for i in range(1, 8):
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        fines = list(filter(False, fines))
+
+        row['Fine_imposed_D_undertaking'] = 1 if len(fines) > 0 else 0
+
+
+def Fine_imposed_D_case():
+    db.core_fields.append('Fine_imposed_D_case')
+    for row in db.core:
+        fines = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                for i in range(1, 8):
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        fines = list(filter(False, fines))
+
+        row['Fine_imposed_D_case'] = 1 if len(fines) > 0 else 0
+
+
+def Fine_max_firm():
+    db.core_fields.append('Fine_max_firm')
+    for row in db.core:
+        fines = []
+        if utils.exists(row['Fine_final_single_firm']):
+            fines = [float(row['Fine_final_single_firm'])]
+        for i in range(1, 8):
+            if utils.exists(row[f'Fine_jointly_severally_{i}']):
+                fines.append(float(row[f'Fine_jointly_severally_{i}']))
+
+        row['Fine_max_firm'] = sum(fines)
+
+
+def Fine_firm():
+    db.core_fields.append('Fine_firm')
+    for row in db.core:
+
+        ffsf = row['Fine_final_single_firm']
+        ffsf = float(ffsf) if utils.exists(ffsf) else 0
+        fines = [[ffsf, 1]]
+        for i in range(1, 8):
+            fjs = row[f'Fine_jointly_severally_{i}']
+            fjs = float(fjs) if utils.exists(fjs) else 0
+            fines.append([fjs, 0])
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                for i in range(1, 8):
+                    fjs = row2[f'Fine_jointly_severally_{i}']
+                    fjs = float(fjs) if utils.exists(fjs) else 0
+                    if fines[i][0] == fjs:
+                        fines[i][1] += 1
+
+        for i in range(0, 8):
+            fines[i] = fines[i][0] / fines[i][1]
+
+        row['Fine_firm'] = sum(fines)
+        print(row['Firm'], row['Fine_firm'])
+
+
+def Fine_undertaking():
+    db.core_fields.append('Fine_undertaking')
+    for row in db.core:
+        fines = [[] for _ in range(8)]
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                ffsf = row2['Fine_final_single_firm']
+                ffsf = float(ffsf) if utils.exists(ffsf) else 0
+                fines[0].append(ffsf)
+
+                for i in range(1, 8):
+                    fjs = row2[f'Fine_jointly_severally_{i}']
+                    fjs = float(fjs) if utils.exists(fjs) else 0
+                    fines[i].append(fjs)
+
+        for i in range(1, 8):
+            fines[i] = list(set(fines[i]))
+
+        row['Fine_undertaking'] = sum([sum(l) for l in fines])
+
+
+def Fine_case():
+    db.core_fields.append('Fine_case')
+    for row in db.core:
+        fines = [[] for _ in range(8)]
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                ffsf = row2['Fine_final_single_firm']
+                ffsf = float(ffsf) if utils.exists(ffsf) else 0
+                fines[0].append(ffsf)
+
+                for i in range(1, 8):
+                    fjs = row2[f'Fine_jointly_severally_{i}']
+                    fjs = float(fjs) if utils.exists(fjs) else 0
+                    fines[i].append(fjs)
+
+        for i in range(1, 8):
+            fines[i] = list(set(fines[i]))
+
+        row['Fine_case'] = sum([sum(l) for l in fines])
+
+
+def GC_fine_change_D_firm():
+    db.core_fields.append('GC_fine_change_D_firm')
+    for row in db.core:
+
+        GCs = [utils.exists(row['GC_case_SF'])]
+        fines = [utils.exists(row['Fine_final_single_firm'])]
+        GCdd = utils.parseDate(row['GC_Decision_date'])
+
+        for i in range(1, 8):
+            GCs.append(utils.exists(row[f'GC_case_JSF_{i}']))
+            fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
+
+        if GCdd is not None and fines.count(True) > 0:
+            row['GC_fine_change_D_firm'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['GC_fine_change_D_firm'] = None
+
+
+def GC_fine_change_D_undertaking():
+    db.core_fields.append('GC_fine_change_D_undertaking')
+    for row in db.core:
+
+        GCs = []
+        fines = []
+        GCdd = []
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                GCs.append(utils.exists(row2['GC_case_SF']))
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                GCdd.append(utils.parseDate(row2['GC_Decision_date']))
+
+                for i in range(1, 8):
+                    GCs.append(utils.exists(row2[f'GC_case_JSF_{i}']))
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        if GCdd.count(True) > 0 and fines.count(True) > 0:
+            row['GC_fine_change_D_undertaking'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['GC_fine_change_D_undertaking'] = None
+
+
+def GC_fine_change_D_case():
+    db.core_fields.append('GC_fine_change_D_case')
+    for row in db.core:
+
+        GCs = []
+        fines = []
+        GCdd = []
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                GCs.append(utils.exists(row2['GC_case_SF']))
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                GCdd.append(utils.parseDate(row2['GC_Decision_date']))
+
+                for i in range(1, 8):
+                    GCs.append(utils.exists(row2[f'GC_case_JSF_{i}']))
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        if GCdd.count(True) > 0 and fines.count(True) > 0:
+            row['GC_fine_change_D_case'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['GC_fine_change_D_case'] = None
+
+
 db.save_core()
