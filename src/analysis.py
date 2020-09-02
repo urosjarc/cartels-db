@@ -1038,10 +1038,19 @@ def In_flagrante_investigation_case():
 def InfringeEndByDecision_firm():
     db.core_fields.append('InfringeEndByDecision_firm')
     for row in db.core:
-        diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row)
+        isOneBeginAlone = False
+        begins = []
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            dateEnd = utils.parseDate(row[f'InfrEnd{i}'])
+            if dateBegin is not None:
+                begins.append(dateBegin)
+                if dateEnd is None:
+                    isOneBeginAlone = True
+                    break
 
-        if beginMin is not None:
-            row['InfringeEndByDecision_firm'] = 0 if endMax is None else 1
+        if len(begins) > 0:
+            row['InfringeEndByDecision_firm'] = 1 if isOneBeginAlone else 0
         else:
             row['InfringeEndByDecision_firm'] = None
 
@@ -1049,17 +1058,23 @@ def InfringeEndByDecision_firm():
 def InfringeEndByDecision_undertaking():
     db.core_fields.append('InfringeEndByDecision_undertaking')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+        isOneBeginAlone = False
+        begins = []
         for row2 in db.core:
-            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                endMaxs.append(endMax)
+            if row2['Case'] == row['Case'] and row['Undertaking'] == row2['Undertaking']:
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        begins.append(dateBegin)
+                        if dateEnd is None:
+                            isOneBeginAlone = True
+                            break
+                if isOneBeginAlone:
+                    break
 
-        if len(beginMins) > 0:
-            row['InfringeEndByDecision_undertaking'] = 1 if endMaxs.count(None) > 0 else 0
+        if len(begins) > 0:
+            row['InfringeEndByDecision_undertaking'] = 1 if isOneBeginAlone else 0
         else:
             row['InfringeEndByDecision_undertaking'] = None
 
@@ -1067,17 +1082,23 @@ def InfringeEndByDecision_undertaking():
 def InfringeEndByDecision_case():
     db.core_fields.append('InfringeEndByDecision_case')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+        isOneBeginAlone = False
+        begins = []
         for row2 in db.core:
-            if row['Case'] == row2['Case']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                endMaxs.append(endMax)
+            if row2['Case'] == row['Case']:
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        begins.append(dateBegin)
+                        if dateEnd is None:
+                            isOneBeginAlone = True
+                            break
+                if isOneBeginAlone:
+                    break
 
-        if len(beginMins) > 0:
-            row['InfringeEndByDecision_case'] = 1 if endMaxs.count(None) > 0 else 0
+        if len(begins) > 0:
+            row['InfringeEndByDecision_case'] = 1 if isOneBeginAlone else 0
         else:
             row['InfringeEndByDecision_case'] = None
 
