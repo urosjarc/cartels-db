@@ -982,8 +982,6 @@ def In_flagrante_investigation_firm():
             inves_begin = row['Investigation_begin']
             row['In_flagrante_investigation_firm'] = 1 if maxDateEnd >= inves_begin else 0
 
-        print(row['In_flagrante_investigation_firm'])
-
 
 def In_flagrante_investigation_undertaking():
     db.core_fields.append('In_flagrante_investigation_undertaking')
@@ -1107,7 +1105,7 @@ def InfringeDurationTillInvestigationFirm():
     db.core_fields.append('InfringeDurationTillInvestigationFirm')
     for row in db.core:
         infr = []
-        InvBegin = utils.parseDate(row['Investigation_begin'])
+        InvBegin = row['Investigation_begin']
 
         for i in range(1, 13):
             dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
@@ -1117,8 +1115,8 @@ def InfringeDurationTillInvestigationFirm():
                     dateEnd = InvBegin
                 infr.append((dateBegin, dateEnd))
 
-        ends = [infr[i][1] for i in range(infr)]
-        begins = [infr[i][0] for i in range(infr)]
+        ends = [infr[i][1] for i in range(len(infr))]
+        begins = [infr[i][0] for i in range(len(infr))]
 
         if len(infr) > 0:
             row['InfringeDurationTillInvestigationFirm'] = (max(ends) - min(begins)).days
@@ -1134,7 +1132,7 @@ def InfringeDurationTillInvestigationUndertaking():
 
         for row2 in db.core:
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                InvBegin = utils.parseDate(row2['Investigation_begin'])
+                InvBegin = row2['Investigation_begin']
 
                 for i in range(1, 13):
                     dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
@@ -1144,8 +1142,8 @@ def InfringeDurationTillInvestigationUndertaking():
                             dateEnd = InvBegin
                         infr.append((dateBegin, dateEnd))
 
-        ends = [infr[i][1] for i in range(infr)]
-        begins = [infr[i][0] for i in range(infr)]
+        ends = [infr[i][1] for i in range(len(infr))]
+        begins = [infr[i][0] for i in range(len(infr))]
 
         if len(infr) > 0:
             row['InfringeDurationTillInvestigationUndertaking'] = (max(ends) - min(begins)).days
@@ -1161,7 +1159,7 @@ def InfringeDurationTillInvestigationCase():
 
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                InvBegin = utils.parseDate(row2['Investigation_begin'])
+                InvBegin = row2['Investigation_begin']
 
                 for i in range(1, 13):
                     dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
@@ -1171,8 +1169,8 @@ def InfringeDurationTillInvestigationCase():
                             dateEnd = InvBegin
                         infr.append((dateBegin, dateEnd))
 
-        ends = [infr[i][1] for i in range(infr)]
-        begins = [infr[i][0] for i in range(infr)]
+        ends = [infr[i][1] for i in range(len(infr))]
+        begins = [infr[i][0] for i in range(len(infr))]
 
         if len(infr) > 0:
             row['InfringeDurationTillInvestigationCase'] = (max(ends) - min(begins)).days
@@ -1261,7 +1259,7 @@ def MaxIndividualInfringeDurationFirm():
             if diff is not None:
                 diffs.append(diff)
 
-        row['MaxIndividualInfringeDurationFirm'] = max(diffs).days if len(diffs) > 0 else None
+        row['MaxIndividualInfringeDurationFirm'] = max(diffs) if len(diffs) > 0 else None
 
 
 def MaxIndividualInfringeDurationUndertaking():
@@ -1505,7 +1503,6 @@ def Fine_firm():
             fines[i] = fines[i][0] / fines[i][1]
 
         row['Fine_firm'] = sum(fines)
-        print(row['Firm'], row['Fine_firm'])
 
 
 def Fine_undertaking():
