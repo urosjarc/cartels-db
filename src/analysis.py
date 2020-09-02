@@ -1647,8 +1647,10 @@ def ECJ_fine_change_D_undertaking():
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
                 GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
 
-                for i in range(1, 8):
+                for i in range(1, 4):
                     GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
+
+                for i in range(1, 8):
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
         if GCdd.count(True) > 0 and fines.count(True) > 0:
