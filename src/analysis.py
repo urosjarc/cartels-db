@@ -1106,17 +1106,22 @@ def InfringeEndByDecision_case():
 def InfringeDurationTillInvestigationFirm():
     db.core_fields.append('InfringeDurationTillInvestigationFirm')
     for row in db.core:
-        diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row)
+        infr = []
+        InvBegin = utils.parseDate(row['Investigation_begin'])
 
-        inves_begin = row['Investigation_begin']
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            dateEnd = utils.parseDate(row[f'InfrEnd{i}'])
+            if dateBegin is not None:
+                if dateEnd is None:
+                    dateEnd = InvBegin
+                infr.append((dateBegin, dateEnd))
 
-        if endMax is None:
-            endMax = inves_begin
-        else:
-            endMax = min([inves_begin, endMax])
+        ends = [infr[i][1] for i in range(infr)]
+        begins = [infr[i][0] for i in range(infr)]
 
-        if beginMin is not None:
-            row['InfringeDurationTillInvestigationFirm'] = endMax
+        if len(infr) > 0:
+            row['InfringeDurationTillInvestigationFirm'] = (max(ends) - min(begins)).days
         else:
             row['InfringeDurationTillInvestigationFirm'] = None
 
@@ -1124,21 +1129,26 @@ def InfringeDurationTillInvestigationFirm():
 def InfringeDurationTillInvestigationUndertaking():
     db.core_fields.append('InfringeDurationTillInvestigationUndertaking')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+
+        infr = []
+
         for row2 in db.core:
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                if endMax is not None:
-                    endMaxs.append(endMax)
+                InvBegin = utils.parseDate(row2['Investigation_begin'])
 
-        inves_begin = row['Investigation_begin']
-        maxEnd = min(endMaxs + [inves_begin])
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        if dateEnd is None:
+                            dateEnd = InvBegin
+                        infr.append((dateBegin, dateEnd))
 
-        if len(beginMins) > 0:
-            row['InfringeDurationTillInvestigationUndertaking'] = maxEnd
+        ends = [infr[i][1] for i in range(infr)]
+        begins = [infr[i][0] for i in range(infr)]
+
+        if len(infr) > 0:
+            row['InfringeDurationTillInvestigationUndertaking'] = (max(ends) - min(begins)).days
         else:
             row['InfringeDurationTillInvestigationUndertaking'] = None
 
@@ -1146,21 +1156,26 @@ def InfringeDurationTillInvestigationUndertaking():
 def InfringeDurationTillInvestigationCase():
     db.core_fields.append('InfringeDurationTillInvestigationCase')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+
+        infr = []
+
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                if endMax is not None:
-                    endMaxs.append(endMax)
+                InvBegin = utils.parseDate(row2['Investigation_begin'])
 
-        inves_begin = row['Investigation_begin']
-        maxEnd = min(endMaxs + [inves_begin])
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        if dateEnd is None:
+                            dateEnd = InvBegin
+                        infr.append((dateBegin, dateEnd))
 
-        if len(beginMins) > 0:
-            row['InfringeDurationTillInvestigationCase'] = maxEnd
+        ends = [infr[i][1] for i in range(infr)]
+        begins = [infr[i][0] for i in range(infr)]
+
+        if len(infr) > 0:
+            row['InfringeDurationTillInvestigationCase'] = (max(ends) - min(begins)).days
         else:
             row['InfringeDurationTillInvestigationCase'] = None
 
