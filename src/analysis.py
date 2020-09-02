@@ -1261,7 +1261,7 @@ def MaxIndividualInfringeDurationFirm():
             if diff is not None:
                 diffs.append(diff)
 
-        row['MaxIndividualInfringeDurationFirm'] = max(diffs) if len(diffs) > 0 else None
+        row['MaxIndividualInfringeDurationFirm'] = max(diffs).days if len(diffs) > 0 else None
 
 
 def MaxIndividualInfringeDurationUndertaking():
@@ -1285,7 +1285,7 @@ def MaxIndividualInfringeDurationUndertaking():
             if len(begins) > 0:
                 diffs.append(max(ends) - min(begins))
 
-        row['MaxIndividualInfringeDurationUndertaking'] = max(diffs) if len(diffs) > 0 else None
+        row['MaxIndividualInfringeDurationUndertaking'] = max(diffs).days if len(diffs) > 0 else None
 
 
 def MaxIndividualInfringeDurationCase():
@@ -1309,7 +1309,7 @@ def MaxIndividualInfringeDurationCase():
             if len(begins) > 0:
                 diffs.append(max(ends) - min(begins))
 
-        row['MaxIndividualInfringeDurationCase'] = max(diffs) if len(diffs) > 0 else None
+        row['MaxIndividualInfringeDurationCase'] = max(diffs).days if len(diffs) > 0 else None
 
 
 def InfringeBeginYearFirm():
@@ -1419,7 +1419,7 @@ def Full_immunity_case():
         fi = False
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if utils.exists(row['Full_immunity']):
+                if utils.exists(row2['Full_immunity']):
                     fi = True
                     break
 
