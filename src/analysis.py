@@ -1673,8 +1673,9 @@ def ECJ_fine_change_D_case():
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
                 GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
 
-                for i in range(1, 8):
+                for i in range(1, 4):
                     GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
+                for i in range(1, 8):
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
         if GCdd.count(True) > 0 and fines.count(True) > 0:
@@ -1690,6 +1691,10 @@ def GC_fine_change_firm():
         Fine_final_single_firm = row['Fine_final_single_firm']
         GC_case_SF = row['GC_case_SF']
         GC_Decision_date = row['GC_Decision_date']
+
+        if not utils.exists(GC_Decision_date):
+            row['GC_fine_change_firm'] = None
+            continue
 
         if not utils.exists(GC_case_SF) and utils.exists(GC_Decision_date):
             GC_case_SF = Fine_final_single_firm
@@ -1721,7 +1726,9 @@ def GC_fine_percent_reduction_firm():
         Fine_max_firm = row['Fine_max_firm']
         GC_fine_change_firm = row['GC_fine_change_firm']
 
-        row['GC_fine_percent_reduction_firm'] = GC_fine_change_firm / Fine_max_firm * 100
+        rezult = None
+        if Fine_max_firm is not None and GC_fine_change_firm is not None:
+            if Fine_max_firm > 0:
+                rezult = GC_fine_change_firm / Fine_max_firm * 100
 
-
-db.save_core()
+        row['GC_fine_percent_reduction_firm'] = rezult
