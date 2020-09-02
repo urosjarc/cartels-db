@@ -1617,6 +1617,7 @@ def GC_fine_change_D_case():
         else:
             row['GC_fine_change_D_case'] = None
 
+
 def ECJ_fine_change_D_firm():
     db.core_fields.append('ECJ_fine_change_D_firm')
     for row in db.core:
@@ -1658,6 +1659,7 @@ def ECJ_fine_change_D_undertaking():
         else:
             row['ECJ_fine_change_D_undertaking'] = None
 
+
 def ECJ_fine_change_D_case():
     db.core_fields.append('ECJ_fine_change_D_case')
     for row in db.core:
@@ -1680,5 +1682,47 @@ def ECJ_fine_change_D_case():
             row['ECJ_fine_change_D_case'] = 1 if GCs.count(True) > 0 else 0
         else:
             row['ECJ_fine_change_D_case'] = None
+
+
+def GC_fine_change_firm():
+    db.core_fields.append('GC_fine_change_firm')
+    for row in db.core:
+
+        Fine_final_single_firm = row['Fine_final_single_firm']
+        GC_case_SF = row['GC_case_SF']
+        GC_Decision_date = row['GC_Decision_date']
+
+        if not utils.exists(GC_case_SF) and utils.exists(GC_Decision_date):
+            GC_case_SF = Fine_final_single_firm
+
+        fines = []
+        if utils.exists(Fine_final_single_firm):
+            fines.append([float(Fine_final_single_firm), float(GC_case_SF)])
+
+        for i in range(1, 8):
+            Fine_jointly_severally = row[f'Fine_jointly_severally_{i}']
+            GC_case_JSF = row[f'GC_case_JSF{i}']
+
+            if not utils.exists(GC_case_JSF) and utils.exists(Fine_jointly_severally) and utils.exists(
+                    GC_Decision_date):
+                GC_case_JSF = Fine_jointly_severally
+
+            if utils.exists(Fine_jointly_severally):
+                fines.append([float(Fine_jointly_severally), float(GC_case_JSF)])
+
+        if len(fines) > 0:
+            row['GC_fine_change_firm'] = sum([fine[0] - fine[1] for fine in fines])
+        else:
+            row['GC_fine_change_firm'] = None
+
+
+def GC_fine_percent_reduction_firm():
+    db.core_fields.append('GC_fine_percent_reduction_firm')
+    for row in db.core:
+        Fine_max_firm = row['Fine_max_firm']
+        GC_fine_change_firm = row['GC_fine_change_firm']
+
+        row['GC_fine_percent_reduction_firm'] = GC_fine_change_firm / Fine_max_firm * 100
+
 
 db.save_core()
