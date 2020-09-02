@@ -1431,7 +1431,7 @@ def Fine_imposed_D_firm():
         for i in range(1, 8):
             fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
 
-        fines = list(filter(False, fines))
+        fines = list(filter(lambda x: x != False, fines))
 
         row['Fine_imposed_D_firm'] = 1 if len(fines) > 0 else 0
 
@@ -1446,7 +1446,7 @@ def Fine_imposed_D_undertaking():
                 for i in range(1, 8):
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
-        fines = list(filter(False, fines))
+        fines = list(filter(lambda x: x != False, fines))
 
         row['Fine_imposed_D_undertaking'] = 1 if len(fines) > 0 else 0
 
@@ -1461,7 +1461,7 @@ def Fine_imposed_D_case():
                 for i in range(1, 8):
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
-        fines = list(filter(False, fines))
+        fines = list(filter(lambda x: x != False, fines))
 
         row['Fine_imposed_D_case'] = 1 if len(fines) > 0 else 0
 
