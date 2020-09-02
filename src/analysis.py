@@ -1617,5 +1617,68 @@ def GC_fine_change_D_case():
         else:
             row['GC_fine_change_D_case'] = None
 
+def ECJ_fine_change_D_firm():
+    db.core_fields.append('ECJ_fine_change_D_firm')
+    for row in db.core:
+
+        GCs = [utils.exists(row['ECJ_SF_fine'])]
+        fines = [utils.exists(row['Fine_final_single_firm'])]
+        GCdd = utils.parseDate(row['ECJ_Decision_date'])
+
+        for i in range(1, 4):
+            GCs.append(utils.exists(row[f'ECJ_JSF{i}']))
+            fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
+
+        if GCdd is not None and fines.count(True) > 0:
+            row['ECJ_fine_change_D_firm'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['ECJ_fine_change_D_firm'] = None
+
+
+def ECJ_fine_change_D_undertaking():
+    db.core_fields.append('ECJ_fine_change_D_undertaking')
+    for row in db.core:
+
+        GCs = []
+        fines = []
+        GCdd = []
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                GCs.append(utils.exists(row2['ECJ_SF_fine']))
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
+
+                for i in range(1, 8):
+                    GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        if GCdd.count(True) > 0 and fines.count(True) > 0:
+            row['ECJ_fine_change_D_undertaking'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['ECJ_fine_change_D_undertaking'] = None
+
+def ECJ_fine_change_D_case():
+    db.core_fields.append('ECJ_fine_change_D_case')
+    for row in db.core:
+
+        GCs = []
+        fines = []
+        GCdd = []
+
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                GCs.append(utils.exists(row2['ECJ_SF_fine']))
+                fines.append(utils.exists(row2['Fine_final_single_firm']))
+                GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
+
+                for i in range(1, 8):
+                    GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
+                    fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
+
+        if GCdd.count(True) > 0 and fines.count(True) > 0:
+            row['ECJ_fine_change_D_case'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['ECJ_fine_change_D_case'] = None
 
 db.save_core()
