@@ -1558,7 +1558,7 @@ def GC_fine_change_D_firm():
         GCdd = utils.parseDate(row['GC_Decision_date'])
 
         for i in range(1, 8):
-            GCs.append(utils.exists(row[f'GC_case_JSF_{i}']))
+            GCs.append(utils.exists(row[f'GC_case_JSF{i}']))
             fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
 
         if GCdd is not None and fines.count(True) > 0:
@@ -1582,7 +1582,7 @@ def GC_fine_change_D_undertaking():
                 GCdd.append(utils.parseDate(row2['GC_Decision_date']))
 
                 for i in range(1, 8):
-                    GCs.append(utils.exists(row2[f'GC_case_JSF_{i}']))
+                    GCs.append(utils.exists(row2[f'GC_case_JSF{i}']))
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
         if GCdd.count(True) > 0 and fines.count(True) > 0:
@@ -1606,7 +1606,7 @@ def GC_fine_change_D_case():
                 GCdd.append(utils.parseDate(row2['GC_Decision_date']))
 
                 for i in range(1, 8):
-                    GCs.append(utils.exists(row2[f'GC_case_JSF_{i}']))
+                    GCs.append(utils.exists(row2[f'GC_case_JSF{i}']))
                     fines.append(utils.exists(row2[f'Fine_jointly_severally_{i}']))
 
         if GCdd.count(True) > 0 and fines.count(True) > 0:
