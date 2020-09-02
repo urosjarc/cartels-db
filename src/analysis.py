@@ -963,84 +963,76 @@ def InfringeDurationOverallCase():
 def In_flagrante_investigation_firm():
     db.core_fields.append('In_flagrante_investigation_firm')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
-        for row2 in db.core:
-            if row['Case'] == row2['Case']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                if endMax is not None:
-                    endMaxs.append(endMax)
 
-        inves_begin = row['Investigation_begin']
+        infr = []
+        ECdod = utils.parseDate(row['EC_Date_of_decision'])
 
-        maxEnd = None
-        if len(endMaxs) > 0:
-            maxEnd = max(endMaxs)
-        else:
-            maxEnd = utils.parseDate(row['EC_Date_of_decision'])
+        for i in range(1, 13):
+            dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
+            dateEnd = utils.parseDate(row[f'InfrEnd{i}'])
+            if dateBegin is not None:
+                if dateEnd is None:
+                    dateEnd = ECdod
+                infr.append((dateBegin, dateEnd))
 
-        if len(beginMins) > 0:
-            row['In_flagrante_investigation_firm'] = 1 if maxEnd > inves_begin else 0
-        else:
+        if len(infr) == 0:
             row['In_flagrante_investigation_firm'] = None
+        else:
+            maxDateEnd = max([infr[i][1] for i in range(len(infr))])
+            inves_begin = row['Investigation_begin']
+            row['In_flagrante_investigation_firm'] = 1 if maxDateEnd >= inves_begin else 0
+
+        print(row['In_flagrante_investigation_firm'])
 
 
 def In_flagrante_investigation_undertaking():
     db.core_fields.append('In_flagrante_investigation_undertaking')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+
+        infr = []
+
         for row2 in db.core:
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                if endMax is not None:
-                    endMaxs.append(endMax)
+                ECdod = utils.parseDate(row2['EC_Date_of_decision'])
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        if dateEnd is None:
+                            dateEnd = ECdod
+                        infr.append((dateBegin, dateEnd))
 
-        inves_begin = row['Investigation_begin']
-
-        maxEnd = None
-        if len(endMaxs) > 0:
-            maxEnd = max(endMaxs)
-        else:
-            maxEnd = utils.parseDate(row['EC_Date_of_decision'])
-
-        if len(beginMins) > 0:
-            row['In_flagrante_investigation_undertaking'] = 1 if maxEnd > inves_begin else 0
-        else:
+        if len(infr) == 0:
             row['In_flagrante_investigation_undertaking'] = None
+        else:
+            maxDateEnd = max([infr[i][1] for i in range(len(infr))])
+            inves_begin = row['Investigation_begin']
+            row['In_flagrante_investigation_undertaking'] = 1 if maxDateEnd >= inves_begin else 0
 
 
 def In_flagrante_investigation_case():
     db.core_fields.append('In_flagrante_investigation_case')
     for row in db.core:
-        endMaxs = []
-        beginMins = []
+
+        infr = []
+
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                diff, beginMin, endMax = analysis_utils.InfringeDurationOverall(row2)
-                if beginMin is not None:
-                    beginMins.append(beginMin)
-                if endMax is not None:
-                    endMaxs.append(endMax)
+                ECdod = utils.parseDate(row2['EC_Date_of_decision'])
+                for i in range(1, 13):
+                    dateBegin = utils.parseDate(row2[f'InfrBegin{i}'])
+                    dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
+                    if dateBegin is not None:
+                        if dateEnd is None:
+                            dateEnd = ECdod
+                        infr.append((dateBegin, dateEnd))
 
-        inves_begin = row['Investigation_begin']
-
-        rezult = False
-        if len(endMaxs) > 0:
-            maxEnd = max(endMaxs)
-            if maxEnd > inves_begin:
-                rezult = True
-        else:
-            rezult = utils.parseDate(row['EC_Date_of_decision']) > inves_begin
-
-        if len(beginMins) > 0:
-            row['In_flagrante_investigation_case'] = 1 if rezult else 0
-        else:
+        if len(infr) == 0:
             row['In_flagrante_investigation_case'] = None
+        else:
+            maxDateEnd = max([infr[i][1] for i in range(len(infr))])
+            inves_begin = row['Investigation_begin']
+            row['In_flagrante_investigation_case'] = 1 if maxDateEnd >= inves_begin else 0
 
 
 def InfringeEndByDecision_firm():
