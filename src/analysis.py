@@ -1828,3 +1828,206 @@ def ECJ_fine_change_case():
             row['ECJ_fine_change_case'] = sum(GC_fcfs_u)
         else:
             row['ECJ_fine_change_case'] = None
+
+def LeniencyFineReduction_D_firm():
+    db.core_fields.append("LeniencyFineReduction_D_firm")
+    for row in db.core:
+        l = row['Leniency__Single_Fine_red_in_percent']
+        row['LeniencyFineReduction_D_firm'] = 1 if utils.exists(l) else 0
+
+def LeniencyFineReduction_D_undertaking():
+    db.core_fields.append("LeniencyFineReduction_D_undertaking")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                ls.append(utils.exists(row2['Leniency__Single_Fine_red_in_percent']))
+
+        row['LeniencyFineReduction_D_undertaking'] = 1 if ls.count(True) > 0 else 0
+
+def LeniencyFineReduction_D_case():
+    db.core_fields.append("LeniencyFineReduction_D_case")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                ls.append(utils.exists(row2['Leniency__Single_Fine_red_in_percent']))
+
+        row['LeniencyFineReduction_D_case'] = 1 if ls.count(True) > 0 else 0
+
+def LeniencyPercentMaxRed_firm():
+    db.core_fields.append("LeniencyPercentMaxRed_firm")
+    for row in db.core:
+        ls = []
+        ls.append(row['Leniency__Single_Fine_red_in_percent'])
+        for i in range(1, 8):
+            ls.append(row[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMaxRed_firm'] = max(lsNew)/100
+        else:
+            row['LeniencyPercentMaxRed_firm'] = None
+
+def LeniencyPercentMaxRed_undertaking():
+    db.core_fields.append("LeniencyPercentMaxRed_undertaking")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                ls.append(row2['Leniency__Single_Fine_red_in_percent'])
+                for i in range(1, 8):
+                    ls.append(row2[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMaxRed_undertaking'] = max(lsNew)/100
+        else:
+            row['LeniencyPercentMaxRed_undertaking'] = None
+
+def LeniencyPercentMaxRed_case():
+    db.core_fields.append("LeniencyPercentMaxRed_case")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                ls.append(row2['Leniency__Single_Fine_red_in_percent'])
+                for i in range(1, 8):
+                    ls.append(row2[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMaxRed_case'] = max(lsNew)/100
+        else:
+            row['LeniencyPercentMaxRed_case'] = None
+
+def LeniencyPercentMinRed_firm():
+    db.core_fields.append("LeniencyPercentMinRed_firm")
+    for row in db.core:
+        ls = []
+        ls.append(row['Leniency__Single_Fine_red_in_percent'])
+        for i in range(1, 8):
+            ls.append(row[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMinRed_firm'] = min(lsNew)/100
+        else:
+            row['LeniencyPercentMinRed_firm'] = None
+
+def LeniencyPercentMinRed_undertaking():
+    db.core_fields.append("LeniencyPercentMinRed_undertaking")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                ls.append(row2['Leniency__Single_Fine_red_in_percent'])
+                for i in range(1, 8):
+                    ls.append(row2[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMinRed_undertaking'] = min(lsNew)/100
+        else:
+            row['LeniencyPercentMinRed_undertaking'] = None
+
+def LeniencyPercentMinRed_case():
+    db.core_fields.append("LeniencyPercentMinRed_case")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                ls.append(row2['Leniency__Single_Fine_red_in_percent'])
+                for i in range(1, 8):
+                    ls.append(row2[f'Reduction_{i}'])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l):
+                lsNew.append(float(l.replace('%', '')))
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentMinRed_case'] = min(lsNew)/100
+        else:
+            row['LeniencyPercentMinRed_case'] = None
+
+def LeniencyPercentAvgRed_firm():
+    db.core_fields.append("LeniencyPercentAvgRed_firm")
+    for row in db.core:
+        ls = []
+        ls.append([row['Leniency__Single_Fine_red_in_percent'], row['Fine_final_single_firm']])
+        for i in range(1, 8):
+            ls.append([row[f'Reduction_{i}'], row[f'Fine_jointly_severally_{i}']])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l[0]) and utils.exists(l[1]):
+                ln = float(l[0].replace('%', ''))/100 * float(l[1])
+                lsNew.append(ln)
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentAvgRed_firm'] = sum(lsNew) / len(lsNew)
+        else:
+            row['LeniencyPercentAvgRed_firm'] = None
+
+def LeniencyPercentAvgRed_undertaking():
+    db.core_fields.append("LeniencyPercentAvgRed_undertaking")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                ls.append([row2['Leniency__Single_Fine_red_in_percent'], row2['Fine_final_single_firm']])
+                for i in range(1, 8):
+                    ls.append([row2[f'Reduction_{i}'], row2[f'Fine_jointly_severally_{i}']])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l[0]) and utils.exists(l[1]):
+                ln = float(l[0].replace('%', ''))/100 * float(l[1])
+                lsNew.append(ln)
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentAvgRed_undertaking'] = sum(lsNew)/len(lsNew)
+        else:
+            row['LeniencyPercentAvgRed_undertaking'] = None
+
+def LeniencyPercentAvgRed_case():
+    db.core_fields.append("LeniencyPercentAvgRed_case")
+    for row in db.core:
+        ls = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                ls.append([row2['Leniency__Single_Fine_red_in_percent'], row2['Fine_final_single_firm']])
+                for i in range(1, 8):
+                    ls.append([row2[f'Reduction_{i}'], row2[f'Fine_jointly_severally_{i}']])
+
+        lsNew = []
+        for l in ls:
+            if utils.exists(l[0]) and utils.exists(l[1]):
+                ln = float(l[0].replace('%', ''))/100 * float(l[1])
+                lsNew.append(ln)
+
+        if len(lsNew) > 0:
+            row['LeniencyPercentAvgRed_case'] = sum(lsNew)/len(lsNew)
+        else:
+            row['LeniencyPercentAvgRed_case'] = None
