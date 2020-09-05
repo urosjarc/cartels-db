@@ -3354,7 +3354,7 @@ def Commission_caseload_Investigation_begin():
 
 
 def Commission_caseload_EC_decision():
-    db.core_fields.append('Commission_caseload_Investigation_begin')
+    db.core_fields.append('Commission_caseload_EC_decision')
     for row in db.core:
         for ECad in db.core_EC_annual_data:
             if ECad['RESOLVED'] == 'Formal (substantive) decisions':

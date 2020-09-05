@@ -49,6 +49,8 @@ this.core_EC_annual_data: List[Dict] = []
 this.core_ECJ_annual_data: List[Dict] = []
 this.core_fields: List[str] = []
 
+
+
 def init_core():
     with open(this.csv_EC_annual_data, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
