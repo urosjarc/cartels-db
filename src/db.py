@@ -24,6 +24,8 @@ this.MLOC_rows: List[StockDataOther] = []
 this.TOTMKWD_rows: List[StockDataOther] = []
 
 this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
+this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual_data.csv')
+this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
 this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
@@ -44,9 +46,21 @@ this.csvStockDataTOTMKWDPaths = [i for i in utils.absoluteFilePaths(utils.curren
 core = None
 core_fields = None
 this.core: List[Dict] = []
+this.core_EC_annual_data: List[Dict] = []
+this.core_ECJ_annual_data: List[Dict] = []
 this.core_fields: List[str] = []
 
 def init_core():
+    with open(this.csv_EC_annual_data, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.core_EC_annual_data.append(row)
+
+    with open(this.csv_ECJ_annual_data, 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.core_ECJ_annual_data.append(row)
+
     with open(this.csvCorePathIn, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
