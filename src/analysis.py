@@ -3139,3 +3139,77 @@ def ECJ_partial_success_case():
     for row in db.core:
         row['GC_partial_success_case'] = 1 if row['GC_total_loss_case'] == 0 and row[
             'GC_total_success_case'] == 0 else 0
+
+def ECJ_judgement_paragraphs_per_firm():
+    db.core_fields.append('ECJ_judgement_paragraphs_per_firm')
+    for row in db.core:
+
+        n = 0
+        for r in db.core:
+            if row['ECJ_Case_number'] == r['ECJ_Case_number']:
+                n += 1
+
+        if utils.exists(row['ECJ_judgement_Paragraphs']):
+            row['ECJ_judgement_paragraphs_per_firm'] = int(row['ECJ_judgement_Paragraphs']) / n
+
+
+def ECJ_judgement_paragraphs_per_undertaking():
+    db.core_fields.append('ECJ_judgement_paragraphs_per_undertaking')
+    for row in db.core:
+        fa = {}
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row['Undertaking'] == row2['Undertaking']:
+                if row2['ECJ_Case_number'] not in fa:
+                    if utils.exists(row2['ECJ_judgement_Paragraphs']):
+                        fa[row2['ECJ_Case_number']] = int(row2['ECJ_judgement_Paragraphs'])
+        row['ECJ_judgement_paragraphs_per_undertaking'] = None if sum(fa.values()) == 0 else sum(fa.values())
+
+
+def ECJ_judgement_paragraphs_for_EC_case():
+    db.core_fields.append('ECJ_judgement_paragraphs_for_EC_case')
+    for row in db.core:
+        fa = {}
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                if row2['ECJ_Case_number'] not in fa:
+                    if utils.exists(row2['ECJ_judgement_Paragraphs']):
+                        fa[row2['ECJ_Case_number']] = int(row2['ECJ_judgement_Paragraphs'])
+        row['ECJ_judgement_paragraphs_for_EC_case'] = None if sum(fa.values()) == 0 else sum(fa.values())
+
+
+def ECJ_judgement_Articles_per_firm():
+    db.core_fields.append('ECJ_judgement_Articles_per_firm')
+    for row in db.core:
+
+        n = 0
+        for r in db.core:
+            if row['ECJ_Case_number'] == r['ECJ_Case_number']:
+                n += 1
+
+        if utils.exists(row['ECJ_judgement_Articles']):
+            row['ECJ_judgement_Articles_per_firm'] = int(row['ECJ_judgement_Articles']) / n
+
+
+def ECJ_judgement_Articles_per_undertaking():
+    db.core_fields.append('ECJ_judgement_Articles_per_undertaking')
+    for row in db.core:
+        fa = {}
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row['Undertaking'] == row2['Undertaking']:
+                if row2['ECJ_Case_number'] not in fa:
+                    if utils.exists(row2['ECJ_judgement_Articles']):
+                        fa[row2['ECJ_Case_number']] = int(row2['ECJ_judgement_Articles'])
+        row['ECJ_judgement_Articles_per_undertaking'] = None if sum(fa.values()) == 0 else sum(fa.values())
+
+
+def ECJ_judgement_Articles_for_EC_case():
+    db.core_fields.append('GC_judgement_Articles_for_EC_case')
+    for row in db.core:
+        fa = {}
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                if row2['GC_Case_number'] not in fa:
+                    if utils.exists(row2['GC_judgement_Articles']):
+                        fa[row2['GC_Case_number']] = int(row2['GC_judgement_Articles'])
+        row['GC_judgement_Articles_for_EC_case'] = None if sum(fa.values()) == 0 else sum(fa.values())
+
