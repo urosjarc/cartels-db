@@ -1555,7 +1555,7 @@ def GC_fine_change_D_firm():
 
         GCs = [utils.exists(row['GC_case_SF'])]
         fines = [utils.exists(row['Fine_final_single_firm'])]
-        GCdd = utils.parseDate(row['GC_Decision_date'])
+        GCdd = utils.exists(row['GC_Decision_date'])
 
         for i in range(1, 8):
             GCs.append(utils.exists(row[f'GC_case_JSF{i}']))
@@ -1579,7 +1579,7 @@ def GC_fine_change_D_undertaking():
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
                 GCs.append(utils.exists(row2['GC_case_SF']))
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
-                GCdd.append(utils.parseDate(row2['GC_Decision_date']))
+                GCdd.append(utils.exists(row2['GC_Decision_date']))
 
                 for i in range(1, 8):
                     GCs.append(utils.exists(row2[f'GC_case_JSF{i}']))
@@ -1589,6 +1589,8 @@ def GC_fine_change_D_undertaking():
             row['GC_fine_change_D_undertaking'] = 1 if GCs.count(True) > 0 else 0
         else:
             row['GC_fine_change_D_undertaking'] = None
+
+        print(row['Case'], row['GC_fine_change_D_undertaking'])
 
 
 def GC_fine_change_D_case():
@@ -1603,7 +1605,7 @@ def GC_fine_change_D_case():
             if row['Case'] == row2['Case']:
                 GCs.append(utils.exists(row2['GC_case_SF']))
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
-                GCdd.append(utils.parseDate(row2['GC_Decision_date']))
+                GCdd.append(utils.exists(row2['GC_Decision_date']))
 
                 for i in range(1, 8):
                     GCs.append(utils.exists(row2[f'GC_case_JSF{i}']))
@@ -1621,7 +1623,7 @@ def ECJ_fine_change_D_firm():
 
         GCs = [utils.exists(row['ECJ_SF_fine'])]
         fines = [utils.exists(row['Fine_final_single_firm'])]
-        GCdd = utils.parseDate(row['ECJ_Decision_date'])
+        GCdd = utils.exists(row['ECJ_Decision_date'])
 
         for i in range(1, 4):
             GCs.append(utils.exists(row[f'ECJ_JSF{i}']))
@@ -1645,7 +1647,7 @@ def ECJ_fine_change_D_undertaking():
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
                 GCs.append(utils.exists(row2['ECJ_SF_fine']))
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
-                GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
+                GCdd.append(utils.exists(row2['ECJ_Decision_date']))
 
                 for i in range(1, 4):
                     GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
@@ -1671,7 +1673,7 @@ def ECJ_fine_change_D_case():
             if row['Case'] == row2['Case']:
                 GCs.append(utils.exists(row2['ECJ_SF_fine']))
                 fines.append(utils.exists(row2['Fine_final_single_firm']))
-                GCdd.append(utils.parseDate(row2['ECJ_Decision_date']))
+                GCdd.append(utils.exists(row2['ECJ_Decision_date']))
 
                 for i in range(1, 4):
                     GCs.append(utils.exists(row2[f'ECJ_JSF{i}']))
