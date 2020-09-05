@@ -75,7 +75,7 @@ def parseDate(date: str):
 def exists(property: str):
     if property is None:
         return False
-    return len(property.strip()) > 0
+    return len(str(property).strip()) > 0
 
 def absoluteFilePaths(directory):
     for dirpath, _, filenames in os.walk(directory):

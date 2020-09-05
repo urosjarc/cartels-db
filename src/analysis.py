@@ -1734,3 +1734,97 @@ def GC_fine_percent_reduction_firm():
                 rezult = GC_fine_change_firm / Fine_max_firm * 100
 
         row['GC_fine_percent_reduction_firm'] = rezult
+
+def ECJ_fine_change_firm():
+    db.core_fields.append('ECJ_fine_change_firm')
+    for row in db.core:
+
+        GCs = [utils.exists(row['ECJ_SF_fine'])]
+        fines = [utils.exists(row['Fine_final_single_firm'])]
+        GCdd = utils.exists(row['ECJ_Decision_date'])
+
+        for i in range(1, 4):
+            GCs.append(utils.exists(row[f'ECJ_JSF{i}']))
+
+        for i in range(1, 8):
+            fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
+
+        if GCdd is not None and fines.count(True) > 0:
+            row['ECJ_fine_change_firm'] = 1 if GCs.count(True) > 0 else 0
+        else:
+            row['ECJ_fine_change_firm'] = None
+
+def ECJ_fine_percent_reduction_firm():
+    db.core_fields.append('ECJ_fine_percent_reduction_firm')
+    for row in db.core:
+        Fine_max_firm = row['Fine_max_firm']
+        ECJ_fine_change_firm = row['ECJ_fine_change_firm']
+
+        rezult = None
+        if Fine_max_firm is not None and ECJ_fine_change_firm is not None:
+            if Fine_max_firm > 0:
+                rezult = ECJ_fine_change_firm / Fine_max_firm * 100
+
+        row['ECJ_fine_percent_reduction_firm'] = rezult
+
+def GC_fine_change_undertaking():
+    db.core_fields.append("GC_fine_change_undertaking")
+    for row in db.core:
+        GC_fcfs = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                GC_fcf = row2['GC_fine_change_firm']
+                if utils.exists(GC_fcf):
+                    GC_fcfs.append(GC_fcf)
+
+        if len(GC_fcfs) > 0:
+            row['GC_fine_change_undertaking'] = max(GC_fcfs)
+        else:
+            row['GC_fine_change_undertaking'] = None
+
+def GC_fine_change_case():
+    db.core_fields.append("GC_fine_change_case")
+    for row in db.core:
+        GC_fcfs_u = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                GC_fcu = row2['GC_fine_change_undertaking']
+                if utils.exists(GC_fcu):
+                    GC_fcfs_u.append(GC_fcu)
+
+
+        if len(GC_fcfs_u) > 0:
+            row['GC_fine_change_case'] = sum(GC_fcfs_u)
+        else:
+            row['GC_fine_change_case'] = None
+
+def ECJ_fine_change_undertaking():
+    db.core_fields.append("ECJ_fine_change_undertaking")
+    for row in db.core:
+        GC_fcfs = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+
+                ECJ_fcf = row2['ECJ_fine_change_firm']
+                if utils.exists(ECJ_fcf):
+                    GC_fcfs.append(ECJ_fcf)
+
+        if len(GC_fcfs) > 0:
+            row['ECJ_fine_change_undertaking'] = max(GC_fcfs)
+        else:
+            row['ECJ_fine_change_undertaking'] = None
+
+def ECJ_fine_change_case():
+    db.core_fields.append("ECJ_fine_change_case")
+    for row in db.core:
+        GC_fcfs_u = []
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                ECJ_fcf = row2['ECJ_fine_change_undertaking']
+                if utils.exists(ECJ_fcf):
+                    GC_fcfs_u.append(ECJ_fcf)
+
+        if len(GC_fcfs_u) > 0:
+            row['ECJ_fine_change_case'] = sum(GC_fcfs_u)
+        else:
+            row['ECJ_fine_change_case'] = None
