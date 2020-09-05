@@ -2031,3 +2031,354 @@ def LeniencyPercentAvgRed_case():
             row['LeniencyPercentAvgRed_case'] = sum(lsNew)/len(lsNew)
         else:
             row['LeniencyPercentAvgRed_case'] = None
+
+def DUMIES_10():
+    dumies = [
+        "Structural_remedy",
+        "Behavioral_remedy",
+        "Concrete_Behavioral_Remedy",
+        "Readoption_amendment",
+        "Ex_offo",
+        "Notification",
+        "Notification_additional_to_complaint",
+        "Complaint",
+        "Complaint_post_initiation",
+        "Leniency",
+        "Dawn_raid",
+        "Statement_of_objections",
+    ]
+
+    for row in db.core:
+        for i, d in enumerate(dumies):
+            var = None
+            if i <= 2:
+                var = f'{d}_D_firm'
+            else:
+                var = f'{d}_D'
+
+            db.core_fields.append(var)
+            row[var] = 1 if utils.exists(var) else 0
+
+    # Prvi tri dumiyi za undertaking
+    for i in range(3):
+        d = dumies[i]
+        var = f'{d}_D_undertaking'
+        db.core_fields.append(var)
+
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    exists.append(utils.exists(var))
+
+            row[var] = 1 if len(exists) > 0 else 0
+
+    # Prvi tri dumiyi za case
+    for i in range(3):
+        d = dumies[i]
+        var = f'{d}_D_case'
+        db.core_fields.append(var)
+
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    exists.append(utils.exists(var))
+
+            row[var] = 1 if len(exists) > 0 else 0
+
+def Investigation_begin_year():
+    db.core_fields.append('Investigation_begin_year')
+    for row in db.core:
+        row['Investigation_begin_year'] = row['Investigation_begin'].year
+
+def Type_of_investigation_begin():
+    db.core_fields.append('Type_of_investigation_begin')
+    for row in db.core:
+        dic = {
+            "Readoption_amendment": None,
+            "Notification": None,
+            "Complaint": None,
+            "Ex_offo": None,
+            "Leniency": None
+        }
+
+        for k, v in dic.items():
+            if utils.exists(row[k]):
+                dic[k] = True
+                row['Type_of_investigation_begin'] = k
+            else:
+                dic[k] = False
+
+def RecitalsEC_per_firm():
+    db.core_fields.append('RecitalsEC_per_firm')
+    for row in db.core:
+        reci = 0
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                if utils.exists(row2['Recitals']):
+                    reci += 1
+
+        row['RecitalsEC_per_firm'] = reci
+
+def RecitalsEC_per_undertaking():
+    db.core_fields.append('RecitalsEC_per_undertaking')
+    for row in db.core:
+        reci = 0
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                if utils.exists(row2['Recitals']):
+                    reci += 1
+
+        row['RecitalsEC_per_firm'] = reci
+
+def Articles_of_remedy_per_firm():
+    db.core_fields.append('Articles_of_remedy_per_firm')
+    for row in db.core:
+        art = int(row['Articles_of_remedy'])
+        nf = 0
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                nf += 1
+
+        row['Articles_of_remedy_per_firm'] = art/nf
+
+def Articles_of_remedy_per_undertaking():
+    db.core_fields.append('Articles_of_remedy_per_undertaking')
+    for row in db.core:
+        art = int(row['Articles_of_remedy'])
+        nf = 0
+        for row2 in db.core:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                nf += 1
+
+        row['Articles_of_remedy_per_undertaking'] = art/nf
+
+
+def Market_of_concern_COLUMS():
+    cases = {
+        'worldwide': "Worldwide_market",
+        'national': 'National_market',
+        'EU': 'EU_market'
+    }
+    for c in cases.values():
+        db.core_fields.append(c)
+
+    for row in db.core:
+        moc = row['Market_of_concern']
+        for k, v in cases.items():
+            row[v] = 1 if moc == k else 0
+
+
+def Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific():
+    ds = [
+        'Settlement',
+        'Whistleblower',
+        'Leniency_application',
+        'Dawn_raid_F_specific',
+    ]
+
+    for d in ds:
+        var = f'{d}_D_firm'
+        db.core_fields.append(var)
+        for row in db.core:
+            row[var] = 1 if utils.exists(row[var]) else 0
+
+        var = f'{d}_D_undertaking'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    exists.append(utils.exists(row2[var]))
+
+            row[var] = 1 if exists.count(True) > 0 else 0
+
+        var = f'{d}_D_case'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    exists.append(utils.exists(row2[var]))
+
+            row[var] = 1 if exists.count(True) > 0 else 0
+
+def Dawn_raid_USA_Japan_D():
+    db.core_fields.append('Dawn_raid_USA_Japan_D')
+    for row in db.core:
+        row['Dawn_raid_USA_Japan_D'] = 1 if utils.exists(row['Dawn_raid_USA_Japan']) else 0
+
+def Extra_EU_ongoing_invest_D():
+    db.core_fields.append('Extra_EU_ongoing_invest_D')
+    for row in db.core:
+        row['Extra_EU_ongoing_invest_D'] = 1 if utils.exists(row['Extra_EU_ongoing_invest']) else 0
+
+def GC_columns():
+    cs = [
+        'GC_File',
+        'GC_File_summary',
+        'GC_File_French',
+        'GC_File_Italian',
+        'GC_File_German',
+        'GC_File_Spanish',
+        'GC_File_Dutch',
+        'GC_New_party',
+        'GC_Case_number',
+        'GC_Decision_date',
+        'GC_Judgement_order',
+        'GC_Chamber_of_3',
+        'GC_Chamber_of_5',
+        'GC_Grand_Chamber',
+        'GC_Dismissing_action__entirely',
+        'GC_Manifestly_inadmissible',
+        'GC_Inadmissible',
+        'GC_Total_action_success',
+        'GC_No_need_to_adjudicate',
+        'GC_Total_annulment_of_EC_decision',
+        'GC_Partial_annulment_of_EC_decision',
+        'GC_Fine_partial_change_of_EC_decision',
+        'GC_Change_of_other_remedies_of_EC_decision',
+        'GC_judgement_Summary'
+    ]
+
+    for c in cs:
+        var = f'{c}_D_firm'
+        db.core_fields.append(var)
+
+        for row in db.core:
+            if utils.exists(row['GC_Decision_date']):
+                row[var] = 1 if utils.exists(row[c]) else 0
+
+        var = f'{c}_D_undertaking'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    exists.append(utils.exists(row2[c]))
+
+            if utils.exists(row['GC_Decision_date']):
+                row[var] = 1 if exists.count(True) > 0  else 0
+
+        var = f'{c}_D_case'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    exists.append(utils.exists(row2[c]))
+
+            if utils.exists(row['GC_Decision_date']):
+                row[var] = 1 if exists.count(True) > 0  else 0
+
+        var = f'{c}_only_D_undertaking'
+        db.core_fields.append(var)
+        for row in db.core:
+            values = set()
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    values.add(row2[c])
+
+            if utils.exists(row['GC_Decision_date']):
+                row[var] = 1 if len(values) == 1 else 0
+
+        var = f'{c}_only_D_case'
+        db.core_fields.append(var)
+        for row in db.core:
+            values = set()
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    values.add(row2[c])
+
+            if utils.exists(row['GC_Decision_date']):
+                row[var] = 1 if len(values) == 1 else 0
+
+
+def ECJ_columns():
+    cs = [
+        'ECJ_File',
+        'ECJ_File_summary',
+        'ECJ_File_French',
+        'ECJ_File_Italian',
+        'ECJ_File_German',
+        'ECJ_File_Spanish',
+        'ECJ_New_party',
+        'ECJ_Commission_appeal',
+        'ECJ_Cross_appeal_of_Commission',
+        'ECJ_Case_number',
+        'ECJ_Decision_date',
+        'ECJ_Judgement_order',
+        'ECJ_Chamber_of_3',
+        'ECJ_Chamber_of_5',
+        'ECJ_Grand_Chamber',
+        'AG_opinion',
+        'ECJ_Dissmissing_appeal',
+        'ECJ_Comm_T_Dissmiss',
+        'ECJ_Comm_P_Dissmiss',
+        'ECJ_Comm_T_Grant',
+        'ECJ_total_referral',
+        'ECJ_Partial_referral',
+        'ECJ_Total_change_of_GC_judgement',
+        'ECJ_Total_party_appeal_success',
+        'ECJ_Partial_change_of_EC_decision',
+        'ECJ_Total_confirmation_of_EC_decision_dissmisal_of_action_on_1st_instance',
+        'ECJ_Total_annulment_of_EC_decision',
+        'ECJ_Partial_annulment_of_EC_decision',
+        'ECJ_Fine_partial_change_of_EC_decision',
+        'ECJ_Change_of_other_remedies_of_EC_decision',
+        'ECJ_judgement_Summary',
+    ]
+
+    for c in cs:
+        var = f'{c}_D_firm'
+        db.core_fields.append(var)
+
+        for row in db.core:
+            if utils.exists(row['ECJ_Decision_date']):
+                row[var] = 1 if utils.exists(row[c]) else 0
+
+        var = f'{c}_D_undertaking'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    exists.append(utils.exists(row2[c]))
+
+            if utils.exists(row['ECJ_Decision_date']):
+                row[var] = 1 if exists.count(True) > 0  else 0
+
+        var = f'{c}_D_case'
+        db.core_fields.append(var)
+        for row in db.core:
+            exists = []
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    exists.append(utils.exists(row2[c]))
+
+            if utils.exists(row['ECJ_Decision_date']):
+                row[var] = 1 if exists.count(True) > 0  else 0
+
+        var = f'{c}_only_D_undertaking'
+        db.core_fields.append(var)
+        for row in db.core:
+            values = set()
+            for row2 in db.core:
+                if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
+                    values.add(row2[c])
+
+            if utils.exists(row['ECJ_Decision_date']):
+                row[var] = 1 if len(values) == 1 else 0
+
+        var = f'{c}_only_D_case'
+        db.core_fields.append(var)
+        for row in db.core:
+            values = set()
+            for row2 in db.core:
+                if row['Case'] == row2['Case']:
+                    values.add(row2[c])
+
+            if utils.exists(row['ECJ_Decision_date']):
+                row[var] = 1 if len(values) == 1 else 0
+
