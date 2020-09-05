@@ -44,6 +44,7 @@ def EC_decision_year():
     for row in db.core:
         row['EC_decision_year'] = int(row['EC_Date_of_decision'].split('/')[-1])
 
+
 class EC_decision_May_2004():
     db.core_fields.append('EC_decision_May_2004')
     may = utils.parseDate('05/01/2004')
@@ -1599,8 +1600,6 @@ def GC_fine_change_D_undertaking():
         else:
             row['GC_fine_change_D_undertaking'] = None
 
-        print(row['Case'], row['GC_fine_change_D_undertaking'])
-
 
 def GC_fine_change_D_case():
     db.core_fields.append('GC_fine_change_D_case')
@@ -2673,11 +2672,6 @@ def GC_partial_success_1():
             else:
                 row['GC_partial_success_1'] = 0
 
-            if row['GC_partial_success_1'] == row['GC_partial_success_firm']:
-                pass
-            else:
-                print(row['Firm'], row['GC_partial_success_1'], row['GC_partial_success_firm'])
-
 
 def GC_total_loss_undertaking():
     db.core_fields.append('GC_total_loss_undertaking')
@@ -3349,6 +3343,7 @@ def Commission_President_EC_decision():
             if utils.parseDate(vals[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(vals[1]):
                 row['Commissioner_for_competition_EC_decision'] = name
 
+
 def Commission_caseload_Investigation_begin():
     db.core_fields.append('Commision_caseload_Investigation_begin')
     for row in db.core:
@@ -3356,6 +3351,7 @@ def Commission_caseload_Investigation_begin():
             if ECad['RESOLVED'] == 'Formal (substantive) decisions':
                 row['Commission_caseload_Investigation_begin'] = ECad.get(str(row['Investigation_begin'].year), None)
                 break
+
 
 def Commission_caseload_EC_decision():
     db.core_fields.append('Commision_caseload_Investigation_begin')
@@ -3366,6 +3362,7 @@ def Commission_caseload_EC_decision():
                 row['Commission_caseload_EC_decision'] = ECad.get(str(d.year), None)
                 break
 
+
 def ECJ_pending_cases_EC_decision():
     db.core_fields.append('ECJ_pending_cases_EC_decision')
     for row in db.core:
@@ -3374,6 +3371,7 @@ def ECJ_pending_cases_EC_decision():
                 d = utils.parseDate(row['EC_Date_of_decision'])
                 row['ECJ_pending_cases_EC_decision'] = ECJad.get(str(d.year), None)
                 break
+
 
 def GC_pending_cases_EC_decision():
     db.core_fields.append('GC_pending_cases_EC_decision')
@@ -3384,27 +3382,34 @@ def GC_pending_cases_EC_decision():
                 row['GC_pending_cases_EC_decision'] = ECad.get(str(d.year), None)
                 break
 
+
 def EPP_D_Investigation_begin():
     db.core_fields.append('EPP_D_Investigation_begin')
     for row in db.core:
         row['EPP_D_Investigation_begin'] = 1 if row['Investigation_begin'].year >= 1999 else 0
+
 
 def EPP_D_EC_decision():
     db.core_fields.append('EPP_D_EC_decision')
     for row in db.core:
         row['EPP_D_EC_decision'] = 1 if utils.parseDate(row['EC_Date_of_decision']).year >= 1999 else 0
 
+
 def Leniency_notice_1996_D_Investigation_begin():
     db.core_fields.append('Leniency_notice_1996_D_Investigation_begin')
-    d = [ '7/18/1996', '2/19/2002']
+    d = ['7/18/1996', '2/19/2002']
     for row in db.core:
-        row['Leniency_notice_1996_D_Investigation_begin'] = 1 if utils.parseDate(d[0]) <= row['Investigation_begin'] <= utils.parseDate(d[1]) else 0
+        row['Leniency_notice_1996_D_Investigation_begin'] = 1 if utils.parseDate(d[0]) <= row[
+            'Investigation_begin'] <= utils.parseDate(d[1]) else 0
+
 
 def Leniency_notice_2002_D_Investigation_begin():
     db.core_fields.append('Leniency_notice_2002_D_Investigation_begin')
-    d = [ '2/19/2002','12/8/2006']
+    d = ['2/19/2002', '12/8/2006']
     for row in db.core:
-        row['Leniency_notice_2002_D_Investigation_begin'] = 1 if utils.parseDate(d[0]) <= row['Investigation_begin'] <= utils.parseDate(d[1]) else 0
+        row['Leniency_notice_2002_D_Investigation_begin'] = 1 if utils.parseDate(d[0]) <= row[
+            'Investigation_begin'] <= utils.parseDate(d[1]) else 0
+
 
 def Leniency_notice_2006_D_Investigation_begin():
     db.core_fields.append('Leniency_notice_2006_D_Investigation_begin')
@@ -3412,23 +3417,30 @@ def Leniency_notice_2006_D_Investigation_begin():
     for row in db.core:
         row['Leniency_notice_2006_D_Investigation_begin'] = 1 if utils.parseDate(d) <= row['Investigation_begin'] else 0
 
+
 def Leniency_notice_1996_D_EC_decision():
     db.core_fields.append('Leniency_notice_1996_D_EC_decision')
-    d = [ '7/18/1996', '2/19/2002']
+    d = ['7/18/1996', '2/19/2002']
     for row in db.core:
-        row['Leniency_notice_1996_D_EC_decision'] = 1 if utils.parseDate(d[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(d[1]) else 0
+        row['Leniency_notice_1996_D_EC_decision'] = 1 if utils.parseDate(d[0]) <= utils.parseDate(
+            row['EC_Date_of_decision']) <= utils.parseDate(d[1]) else 0
+
 
 def Leniency_notice_2002_D_EC_decision():
     db.core_fields.append('Leniency_notice_2002_D_EC_decision')
-    d = [ '2/19/2002','12/8/2006']
+    d = ['2/19/2002', '12/8/2006']
     for row in db.core:
-        row['Leniency_notice_2002_D_EC_decision'] = 1 if utils.parseDate(d[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(d[1]) else 0
+        row['Leniency_notice_2002_D_EC_decision'] = 1 if utils.parseDate(d[0]) <= utils.parseDate(
+            row['EC_Date_of_decision']) <= utils.parseDate(d[1]) else 0
+
 
 def Leniency_notice_2006_D_EC_decision():
     db.core_fields.append('Leniency_notice_2006_D_EC_decision')
     d = '12/8/2006'
     for row in db.core:
-        row['Leniency_notice_2006_D_EC_decision'] = 1 if utils.parseDate(d) <= utils.parseDate(row['EC_Date_of_decision']) else 0
+        row['Leniency_notice_2006_D_EC_decision'] = 1 if utils.parseDate(d) <= utils.parseDate(
+            row['EC_Date_of_decision']) else 0
+
 
 class Investigation_begin_May_2004():
     db.core_fields.append('Investigation_begin_May_2004')
@@ -3436,14 +3448,18 @@ class Investigation_begin_May_2004():
     for row in db.core:
         row['Investigation_begin_May_2004'] = 1 if utils.parseDate(row['Investigation_begin']) > may else 0
 
+
 def Settlement_regulation_D_Investigation_begin():
     db.core_fields.append('Settlement_regulation_D_Investigation_begin')
     d = '07/01/2008'
     for row in db.core:
-        row['Settlement_regulation_D_Investigation_begin'] = 1 if utils.parseDate(d) <= row['Investigation_begin'] else 0
+        row['Settlement_regulation_D_Investigation_begin'] = 1 if utils.parseDate(d) <= row[
+            'Investigation_begin'] else 0
+
 
 def Settlement_regulation_D_EC_decision():
     db.core_fields.append('Settlement_regulation_D_EC_decision')
     d = '07/01/2008'
     for row in db.core:
-        row['Settlement_regulation_D_EC_decision'] = 1 if utils.parseDate(d) <= utils.parseDate(row['EC_Date_of_decision']) else 0
+        row['Settlement_regulation_D_EC_decision'] = 1 if utils.parseDate(d) <= utils.parseDate(
+            row['EC_Date_of_decision']) else 0
