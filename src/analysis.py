@@ -3140,6 +3140,7 @@ def ECJ_partial_success_case():
         row['GC_partial_success_case'] = 1 if row['GC_total_loss_case'] == 0 and row[
             'GC_total_success_case'] == 0 else 0
 
+
 def ECJ_judgement_paragraphs_per_firm():
     db.core_fields.append('ECJ_judgement_paragraphs_per_firm')
     for row in db.core:
@@ -3213,3 +3214,128 @@ def ECJ_judgement_Articles_for_EC_case():
                         fa[row2['GC_Case_number']] = int(row2['GC_judgement_Articles'])
         row['GC_judgement_Articles_for_EC_case'] = None if sum(fa.values()) == 0 else sum(fa.values())
 
+
+def NEWS_EVENT_FILE():
+    col = [
+        [
+            'DR_dec_event', 'DR_dec_2M', 'DR_dec_15d',
+            'DR_dec_15d_DJN', 'DR_dec_15d_R', 'DR_dec_15d_FT',
+            'DR_dec_15d_WSJ',
+        ],
+        [
+            'EC_pre_dec_event', 'EC_dec_event', 'EC_dec_2M',
+            'EC_dec_15d', 'EC_dec_15d_DJN', 'EC_dec_15d_R',
+            'EC_dec_15d_FT', 'EC_dec_15d_WSJ',
+        ],
+        [
+            'GC_pre_dec_event', 'GC_dec_event', 'GC_dec_2M', 'GC_dec_15d',
+            'GC_dec_15d_DJN', 'GC_dec_15d_R', 'GC_dec_15d_FT', 'GC_dec_15d_WSJ',
+        ],
+        [
+            'ECJ_pre_dec_event', 'ECJ_dec_event', 'ECJ_dec_2M',
+            'ECJ_dec_15d', 'ECJ_dec_15d_DJN', 'ECJ_dec_15d_R',
+            'ECJ_dec_15d_FT', 'ECJ_dec_15d_WSJ',
+        ]
+    ]
+
+    for row in db.core:
+        for sklop in col:
+            jeVnos = False
+            for c in sklop:
+                if utils.exists(row[c]):
+                    jeVnos = True
+                    break
+
+            if jeVnos:
+                for c in sklop:
+                    row[c] = 0 if not utils.exists(row[c]) else row[c]
+
+
+def EVENT_FILES():
+    col = [
+        'DR_Event_File',
+        'EC_Event_dec_file',
+        'GC_Event_File',
+        'ECJ_Event_File',
+    ]
+    for c in col:
+        var = f'{c}_D_firm'
+        db.core_fields.append(var)
+        for row in db.core:
+            row[var] = 1 if utils.exists(row[c]) else 0
+
+
+def Commissioner_for_competition_investigation_begin():
+    db.core_fields.append('Commissioner_for_competition_investigation_begin')
+    comm = {
+        'Andriessen': ['1/1/1981', '1/1/1985'],
+        'Sutherland': ['1/1/1985', '1/1/1989'],
+        'Brittan': ['1/1/1989', '1/1/1993'],
+        'Miert': ['1/1/1993', '9/1/1999'],
+        'Monti': ['9/1/1999', '11/1/2004'],
+        'Kroes': ['11/1/2004', '2/1/2010'],
+        'Almunia': ['2/1/2010', '11/1/2014'],
+        'Vestager': ['11/1/2014', '1/1/2018'],
+
+    }
+    for row in db.core:
+        n = None
+        for name, vals in comm.items():
+            if utils.parseDate(vals[0]) <= row['Investigation_begin'] <= utils.parseDate(vals[1]):
+                row['Commissioner_for_competition_investigation_begin'] = name
+
+
+def Commissioner_for_competition_EC_decision():
+    db.core_fields.append('Commissioner_for_competition_EC_decision')
+    comm = {
+        'Andriessen': ['1/1/1981', '1/1/1985'],
+        'Sutherland': ['1/1/1985', '1/1/1989'],
+        'Brittan': ['1/1/1989', '1/1/1993'],
+        'Miert': ['1/1/1993', '9/1/1999'],
+        'Monti': ['9/1/1999', '11/1/2004'],
+        'Kroes': ['11/1/2004', '2/1/2010'],
+        'Almunia': ['2/1/2010', '11/1/2014'],
+        'Vestager': ['11/1/2014', '1/1/2018'],
+
+    }
+    for row in db.core:
+        n = None
+        for name, vals in comm.items():
+            if utils.parseDate(vals[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(vals[1]):
+                row['Commissioner_for_competition_EC_decision'] = name
+
+
+def Commission_President_investigation_begin():
+    db.core_fields.append('Commission_President_investigation_begin')
+    comm = {
+        'Thorn': ['1/19/1981', '1/6/1985'],
+        'Delors': ['1/6/1985', '1/24/1995'],
+        'Santer': ['1/24/1995', '3/15/1999'],
+        'Marín': ['3/15/1999', '9/17/1999'],
+        'Prodi': ['9/17/1999', '11/22/2004'],
+        'Barroso': ['11/22/2004', '11/1/2014'],
+        'Juncker': ['11/1/2014', '1/1/2018'],
+    }
+    for row in db.core:
+        n = None
+        for name, vals in comm.items():
+            if utils.parseDate(vals[0]) <= row['Investigation_begin'] <= utils.parseDate(vals[1]):
+                row['Commission_President_investigation_begin'] = name
+
+
+def Commission_President_EC_decision():
+    db.core_fields.append('Commission_President_EC_decision')
+    comm = {
+        'Thorn': ['1/19/1981', '1/6/1985'],
+        'Delors': ['1/6/1985', '1/24/1995'],
+        'Santer': ['1/24/1995', '3/15/1999'],
+        'Marín': ['3/15/1999', '9/17/1999'],
+        'Prodi': ['9/17/1999', '11/22/2004'],
+        'Barroso': ['11/22/2004', '11/1/2014'],
+        'Juncker': ['11/1/2014', '1/1/2018'],
+    }
+    for row in db.core:
+        n = None
+        for name, vals in comm.items():
+            if utils.parseDate(vals[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(vals[1]):
+                row['Commissioner_for_competition_EC_decision'] = name
