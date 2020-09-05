@@ -2214,7 +2214,7 @@ def Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific():
         var = f'{d}_D_firm'
         db.core_fields.append(var)
         for row in db.core:
-            row[var] = 1 if utils.exists(row[var]) else 0
+            row[var] = 1 if utils.exists(row[d]) else 0
 
         var = f'{d}_D_undertaking'
         db.core_fields.append(var)
@@ -2222,7 +2222,7 @@ def Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific():
             exists = []
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    exists.append(utils.exists(row2[var]))
+                    exists.append(utils.exists(row2[d]))
 
             row[var] = 1 if exists.count(True) > 0 else 0
 
@@ -2232,7 +2232,7 @@ def Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific():
             exists = []
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    exists.append(utils.exists(row2[var]))
+                    exists.append(utils.exists(row2[d]))
 
             row[var] = 1 if exists.count(True) > 0 else 0
 
@@ -3345,7 +3345,7 @@ def Commission_President_EC_decision():
 
 
 def Commission_caseload_Investigation_begin():
-    db.core_fields.append('Commision_caseload_Investigation_begin')
+    db.core_fields.append('Commission_caseload_Investigation_begin')
     for row in db.core:
         for ECad in db.core_EC_annual_data:
             if ECad['RESOLVED'] == 'Formal (substantive) decisions':
@@ -3354,7 +3354,7 @@ def Commission_caseload_Investigation_begin():
 
 
 def Commission_caseload_EC_decision():
-    db.core_fields.append('Commision_caseload_Investigation_begin')
+    db.core_fields.append('Commission_caseload_Investigation_begin')
     for row in db.core:
         for ECad in db.core_EC_annual_data:
             if ECad['RESOLVED'] == 'Formal (substantive) decisions':

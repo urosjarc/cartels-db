@@ -41,7 +41,6 @@ this.csvStockDataMLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDi
 this.csvStockDataDSLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/DSLOC'))]
 this.csvStockDataTOTMKWDPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/TOTMKWD'))]
 
-
 # DATABASE
 core = None
 core_fields = None
