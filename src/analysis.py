@@ -2074,15 +2074,15 @@ def DUMIES_10():
         "Statement_of_objections",
     ]
 
-    for row in db.core:
-        for i, d in enumerate(dumies):
-            var = None
-            if i <= 2:
-                var = f'{d}_D_firm'
-            else:
-                var = f'{d}_D'
+    for i, d in enumerate(dumies):
+        var = None
+        if i <= 2:
+            var = f'{d}_D_firm'
+        else:
+            var = f'{d}_D'
 
-            db.core_fields.append(var)
+        db.core_fields.append(var)
+        for row in db.core:
             row[var] = 1 if utils.exists(var) else 0
 
     # Prvi tri dumiyi za undertaking
