@@ -1571,7 +1571,7 @@ def GC_fine_change_D_firm():
             GCs.append(utils.exists(row[f'GC_case_JSF{i}']))
             fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
 
-        if GCdd is not None and fines.count(True) > 0:
+        if GCdd and fines.count(True) > 0:
             row['GC_fine_change_D_firm'] = 1 if GCs.count(True) > 0 else 0
         else:
             row['GC_fine_change_D_firm'] = None
@@ -1637,7 +1637,7 @@ def ECJ_fine_change_D_firm():
             GCs.append(utils.exists(row[f'ECJ_JSF{i}']))
             fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
 
-        if GCdd is not None and fines.count(True) > 0:
+        if GCdd and fines.count(True) > 0:
             row['ECJ_fine_change_D_firm'] = 1 if GCs.count(True) > 0 else 0
         else:
             row['ECJ_fine_change_D_firm'] = None
@@ -1701,13 +1701,16 @@ def GC_fine_change_firm():
         Fine_final_single_firm = row['Fine_final_single_firm']
         GC_case_SF = row['GC_case_SF']
         GC_Decision_date = row['GC_Decision_date']
+        missing_fines = []
 
         if not utils.exists(GC_Decision_date):
             row['GC_fine_change_firm'] = None
             continue
 
-        if not utils.exists(GC_case_SF) and utils.exists(GC_Decision_date):
+        if not utils.exists(GC_case_SF):
             GC_case_SF = Fine_final_single_firm
+        elif not utils.exists(Fine_final_single_firm):
+            missing_fines.append(float(GC_case_SF))
 
         fines = []
         if utils.exists(Fine_final_single_firm):
@@ -1717,9 +1720,11 @@ def GC_fine_change_firm():
             Fine_jointly_severally = row[f'Fine_jointly_severally_{i}']
             GC_case_JSF = row[f'GC_case_JSF{i}']
 
-            if not utils.exists(GC_case_JSF) and utils.exists(Fine_jointly_severally) and utils.exists(
-                    GC_Decision_date):
+            if not utils.exists(GC_case_JSF) and utils.exists(Fine_jointly_severally):
                 GC_case_JSF = Fine_jointly_severally
+
+            if utils.exists(GC_case_JSF) and not utils.exists(Fine_jointly_severally):
+                missing_fines.append(float(GC_case_JSF))
 
             if utils.exists(Fine_jointly_severally):
                 fines.append([float(Fine_jointly_severally), float(GC_case_JSF)])
@@ -1729,6 +1734,8 @@ def GC_fine_change_firm():
         else:
             row['GC_fine_change_firm'] = None
 
+        if len(missing_fines) > 0:
+            row['GC_fine_change_firm'] -= sum(missing_fines)
 
 def GC_fine_percent_reduction_firm():
     db.core_fields.append('GC_fine_percent_reduction_firm')
@@ -1748,20 +1755,44 @@ def ECJ_fine_change_firm():
     db.core_fields.append('ECJ_fine_change_firm')
     for row in db.core:
 
-        GCs = [utils.exists(row['ECJ_SF_fine'])]
-        fines = [utils.exists(row['Fine_final_single_firm'])]
-        GCdd = utils.exists(row['ECJ_Decision_date'])
+        Fine_final_single_firm = row['Fine_final_single_firm']
+        ECJ_SF_fine = row['ECJ_SF_fine']
+        ECJ_Decision_date = row['ECJ_Decision_date']
+        missing_fines = []
+
+        if not utils.exists(ECJ_Decision_date):
+            row['ECJ_fine_change_firm'] = None
+            continue
+
+        if not utils.exists(ECJ_SF_fine):
+            ECJ_SF_fine = Fine_final_single_firm
+        elif not utils.exists(Fine_final_single_firm):
+            missing_fines.append(float(ECJ_SF_fine))
+
+        fines = []
+        if utils.exists(Fine_final_single_firm):
+            fines.append([float(Fine_final_single_firm), float(ECJ_SF_fine)])
 
         for i in range(1, 4):
-            GCs.append(utils.exists(row[f'ECJ_JSF{i}']))
+            Fine_jointly_severally = row[f'Fine_jointly_severally_{i}']
+            ECJ_JSF = row[f'ECJ_JSF{i}']
 
-        for i in range(1, 8):
-            fines.append(utils.exists(row[f'Fine_jointly_severally_{i}']))
+            if not utils.exists(ECJ_JSF) and utils.exists(Fine_jointly_severally):
+                ECJ_JSF = Fine_jointly_severally
 
-        if GCdd is not None and fines.count(True) > 0:
-            row['ECJ_fine_change_firm'] = 1 if GCs.count(True) > 0 else 0
+            if utils.exists(ECJ_JSF) and not utils.exists(Fine_jointly_severally):
+                missing_fines.append(float(ECJ_JSF))
+
+            if utils.exists(Fine_jointly_severally):
+                fines.append([float(Fine_jointly_severally), float(ECJ_JSF)])
+
+        if len(fines) > 0:
+            row['ECJ_fine_change_firm'] = sum([fine[0] - fine[1] for fine in fines])
         else:
             row['ECJ_fine_change_firm'] = None
+
+        if len(missing_fines) > 0:
+            row['ECJ_fine_change_firm'] -= sum(missing_fines)
 
 
 def ECJ_fine_percent_reduction_firm():
@@ -1772,6 +1803,8 @@ def ECJ_fine_percent_reduction_firm():
 
         rezult = None
         if Fine_max_firm is not None and ECJ_fine_change_firm is not None:
+            Fine_max_firm = float(Fine_max_firm)
+            ECJ_fine_change_firm = float(ECJ_fine_change_firm)
             if Fine_max_firm > 0:
                 rezult = ECJ_fine_change_firm / Fine_max_firm * 100
 
@@ -1788,7 +1821,7 @@ def GC_fine_change_undertaking():
                 if utils.exists(GC_fcf):
                     GC_fcfs.append(GC_fcf)
 
-        if len(GC_fcfs) > 0:
+        if len(GC_fcfs) > 0 and utils.exists(row['GC_Decision_date']):
             row['GC_fine_change_undertaking'] = max(GC_fcfs)
         else:
             row['GC_fine_change_undertaking'] = None
@@ -1798,8 +1831,10 @@ def GC_fine_change_case():
     db.core_fields.append("GC_fine_change_case")
     for row in db.core:
         GC_fcfs_u = []
+        under = []
         for row2 in db.core:
-            if row2['Case'] == row['Case']:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] not in under:
+                under.append(row2['Undertaking'])
                 GC_fcu = row2['GC_fine_change_undertaking']
                 if utils.exists(GC_fcu):
                     GC_fcfs_u.append(GC_fcu)
@@ -1809,20 +1844,19 @@ def GC_fine_change_case():
         else:
             row['GC_fine_change_case'] = None
 
-
 def ECJ_fine_change_undertaking():
     db.core_fields.append("ECJ_fine_change_undertaking")
     for row in db.core:
-        GC_fcfs = []
+        ECJ_fcfs = []
         for row2 in db.core:
             if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
 
                 ECJ_fcf = row2['ECJ_fine_change_firm']
                 if utils.exists(ECJ_fcf):
-                    GC_fcfs.append(ECJ_fcf)
+                    ECJ_fcfs.append(ECJ_fcf)
 
-        if len(GC_fcfs) > 0:
-            row['ECJ_fine_change_undertaking'] = max(GC_fcfs)
+        if len(ECJ_fcfs) > 0 and utils.exists(row['ECJ_Decision_date']):
+            row['ECJ_fine_change_undertaking'] = max(ECJ_fcfs)
         else:
             row['ECJ_fine_change_undertaking'] = None
 
@@ -1831,8 +1865,10 @@ def ECJ_fine_change_case():
     db.core_fields.append("ECJ_fine_change_case")
     for row in db.core:
         GC_fcfs_u = []
+        under = []
         for row2 in db.core:
-            if row2['Case'] == row['Case']:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] not in under:
+                under.append(row2['Undertaking'])
                 ECJ_fcf = row2['ECJ_fine_change_undertaking']
                 if utils.exists(ECJ_fcf):
                     GC_fcfs_u.append(ECJ_fcf)
@@ -1846,8 +1882,11 @@ def ECJ_fine_change_case():
 def LeniencyFineReduction_D_firm():
     db.core_fields.append("LeniencyFineReduction_D_firm")
     for row in db.core:
-        l = row['Leniency__Single_Fine_red_in_percent']
-        row['LeniencyFineReduction_D_firm'] = 1 if utils.exists(l) else 0
+        ls = [utils.exists(row['Leniency__Single_Fine_red_in_percent'])]
+        for i in range(1, 8):
+            ls.append(utils.exists(row[f'Reduction_{i}']))
+
+        row['LeniencyFineReduction_D_firm'] = 1 if ls.count(True) > 0 else 0
 
 
 def LeniencyFineReduction_D_undertaking():
@@ -1857,6 +1896,8 @@ def LeniencyFineReduction_D_undertaking():
         for row2 in db.core:
             if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
                 ls.append(utils.exists(row2['Leniency__Single_Fine_red_in_percent']))
+                for i in range(1, 8):
+                    ls.append(utils.exists(row2[f'Reduction_{i}']))
 
         row['LeniencyFineReduction_D_undertaking'] = 1 if ls.count(True) > 0 else 0
 
@@ -1868,6 +1909,8 @@ def LeniencyFineReduction_D_case():
         for row2 in db.core:
             if row2['Case'] == row['Case']:
                 ls.append(utils.exists(row2['Leniency__Single_Fine_red_in_percent']))
+                for i in range(1, 8):
+                    ls.append(utils.exists(row2[f'Reduction_{i}']))
 
         row['LeniencyFineReduction_D_case'] = 1 if ls.count(True) > 0 else 0
 
@@ -1997,6 +2040,7 @@ def LeniencyPercentMinRed_case():
 def LeniencyPercentAvgRed_firm():
     db.core_fields.append("LeniencyPercentAvgRed_firm")
     for row in db.core:
+        fine_max_firm = row['Fine_max_firm']
         ls = []
         ls.append([row['Leniency__Single_Fine_red_in_percent'], row['Fine_final_single_firm']])
         for i in range(1, 8):
@@ -2004,8 +2048,8 @@ def LeniencyPercentAvgRed_firm():
 
         lsNew = []
         for l in ls:
-            if utils.exists(l[0]) and utils.exists(l[1]):
-                ln = float(l[0].replace('%', '')) / 100 * float(l[1])
+            if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
+                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
                 lsNew.append(ln)
 
         if len(lsNew) > 0:
@@ -2017,6 +2061,7 @@ def LeniencyPercentAvgRed_firm():
 def LeniencyPercentAvgRed_undertaking():
     db.core_fields.append("LeniencyPercentAvgRed_undertaking")
     for row in db.core:
+        fine_max_firm = row['Fine_max_firm']
         ls = []
         for row2 in db.core:
             if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
@@ -2026,8 +2071,8 @@ def LeniencyPercentAvgRed_undertaking():
 
         lsNew = []
         for l in ls:
-            if utils.exists(l[0]) and utils.exists(l[1]):
-                ln = float(l[0].replace('%', '')) / 100 * float(l[1])
+            if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
+                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
                 lsNew.append(ln)
 
         if len(lsNew) > 0:
@@ -2039,6 +2084,7 @@ def LeniencyPercentAvgRed_undertaking():
 def LeniencyPercentAvgRed_case():
     db.core_fields.append("LeniencyPercentAvgRed_case")
     for row in db.core:
+        fine_max_firm = row['Fine_max_firm']
         ls = []
         for row2 in db.core:
             if row2['Case'] == row['Case']:
@@ -2048,8 +2094,8 @@ def LeniencyPercentAvgRed_case():
 
         lsNew = []
         for l in ls:
-            if utils.exists(l[0]) and utils.exists(l[1]):
-                ln = float(l[0].replace('%', '')) / 100 * float(l[1])
+            if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
+                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
                 lsNew.append(ln)
 
         if len(lsNew) > 0:

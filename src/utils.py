@@ -72,7 +72,7 @@ def parseDate(date: str):
     date_format = '%m/%d/%Y'
     return datetime.strptime(date, date_format)
 
-def exists(property: str):
+def exists(property: str) -> bool:
     if property is None:
         return False
     return len(str(property).strip()) > 0
