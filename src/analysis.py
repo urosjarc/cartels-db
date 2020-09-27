@@ -883,6 +883,7 @@ def Case_Ringleader():
 def Investigation_begin():
     db.core_fields.append('Investigation_begin')
     for row in db.core:
+
         dates_prop = [
             'Readoption_amendment',
             'Notification',
@@ -1121,8 +1122,12 @@ def InfringeDurationTillInvestigationFirm():
             dateBegin = utils.parseDate(row[f'InfrBegin{i}'])
             dateEnd = utils.parseDate(row[f'InfrEnd{i}'])
             if dateBegin is not None:
+
                 if dateEnd is None:
                     dateEnd = InvBegin
+                elif InvBegin < dateEnd:
+                    dateEnd = InvBegin
+
                 infr.append((dateBegin, dateEnd))
 
         ends = [infr[i][1] for i in range(len(infr))]
@@ -1150,6 +1155,8 @@ def InfringeDurationTillInvestigationUndertaking():
                     if dateBegin is not None:
                         if dateEnd is None:
                             dateEnd = InvBegin
+                        elif InvBegin < dateEnd:
+                            dateEnd = InvBegin
                         infr.append((dateBegin, dateEnd))
 
         ends = [infr[i][1] for i in range(len(infr))]
@@ -1176,6 +1183,8 @@ def InfringeDurationTillInvestigationCase():
                     dateEnd = utils.parseDate(row2[f'InfrEnd{i}'])
                     if dateBegin is not None:
                         if dateEnd is None:
+                            dateEnd = InvBegin
+                        elif InvBegin < dateEnd:
                             dateEnd = InvBegin
                         infr.append((dateBegin, dateEnd))
 
@@ -1737,6 +1746,7 @@ def GC_fine_change_firm():
         if len(missing_fines) > 0:
             row['GC_fine_change_firm'] -= sum(missing_fines)
 
+
 def GC_fine_percent_reduction_firm():
     db.core_fields.append('GC_fine_percent_reduction_firm')
     for row in db.core:
@@ -1749,6 +1759,34 @@ def GC_fine_percent_reduction_firm():
                 rezult = GC_fine_change_firm / Fine_max_firm * 100
 
         row['GC_fine_percent_reduction_firm'] = rezult
+
+
+def GC_fine_percent_reduction_undertaking():
+    db.core_fields.append('GC_fine_percent_reduction_undertaking')
+    for row in db.core:
+        Fine_undertaking = row['Fine_undertaking']
+        GC_fine_change_undertaking = row['GC_fine_change_undertaking']
+
+        rezult = None
+        if Fine_undertaking is not None and GC_fine_change_undertaking is not None:
+            if Fine_undertaking > 0:
+                rezult = GC_fine_change_undertaking / Fine_undertaking * 100
+
+        row['GC_fine_percent_reduction_undertaking'] = rezult
+
+
+def GC_fine_percent_reduction_case():
+    db.core_fields.append('GC_fine_percent_reduction_case')
+    for row in db.core:
+        Fine_case = row['Fine_case']
+        GC_fine_change_case = row['GC_fine_change_case']
+
+        rezult = None
+        if Fine_case is not None and GC_fine_change_case is not None:
+            if Fine_case > 0:
+                rezult = GC_fine_change_case / Fine_case * 100
+
+        row['GC_fine_percent_reduction_case'] = rezult
 
 
 def ECJ_fine_change_firm():
@@ -1811,6 +1849,38 @@ def ECJ_fine_percent_reduction_firm():
         row['ECJ_fine_percent_reduction_firm'] = rezult
 
 
+def ECJ_fine_percent_reduction_undertaking():
+    db.core_fields.append('ECJ_fine_percent_reduction_undertaking')
+    for row in db.core:
+        Fine_undertaking = row['Fine_undertaking']
+        ECJ_fine_change_undertaking = row['ECJ_fine_change_undertaking']
+
+        rezult = None
+        if Fine_undertaking is not None and ECJ_fine_change_undertaking is not None:
+            Fine_undertaking = float(Fine_undertaking)
+            ECJ_fine_change_undertaking = float(ECJ_fine_change_undertaking)
+            if Fine_undertaking > 0:
+                rezult = ECJ_fine_change_undertaking / Fine_undertaking * 100
+
+        row['ECJ_fine_percent_reduction_firm'] = rezult
+
+
+def ECJ_fine_percent_reduction_case():
+    db.core_fields.append('ECJ_fine_percent_reduction_case')
+    for row in db.core:
+        Fine_case = row['Fine_case']
+        ECJ_fine_change_case = row['ECJ_fine_change_case']
+
+        rezult = None
+        if Fine_case is not None and ECJ_fine_change_case is not None:
+            Fine_case = float(Fine_case)
+            ECJ_fine_change_case = float(ECJ_fine_change_case)
+            if Fine_case > 0:
+                rezult = ECJ_fine_change_case / Fine_case * 100
+
+        row['ECJ_fine_percent_reduction_firm'] = rezult
+
+
 def GC_fine_change_undertaking():
     db.core_fields.append("GC_fine_change_undertaking")
     for row in db.core:
@@ -1843,6 +1913,7 @@ def GC_fine_change_case():
             row['GC_fine_change_case'] = sum(GC_fcfs_u)
         else:
             row['GC_fine_change_case'] = None
+
 
 def ECJ_fine_change_undertaking():
     db.core_fields.append("ECJ_fine_change_undertaking")
@@ -2046,14 +2117,17 @@ def LeniencyPercentAvgRed_firm():
         for i in range(1, 8):
             ls.append([row[f'Reduction_{i}'], row[f'Fine_jointly_severally_{i}']])
 
-        lsNew = []
+        lsNewUp = 0
+        lsNewDown = 0
+        lsCalculate = False
         for l in ls:
             if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
-                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
-                lsNew.append(ln)
+                lsNewUp += float(l[0].replace('%', '')) * float(l[1])
+                lsNewDown += float(l[1])
+                lsCalculate = True
 
-        if len(lsNew) > 0:
-            row['LeniencyPercentAvgRed_firm'] = sum(lsNew) / len(lsNew)
+        if lsCalculate:
+            row['LeniencyPercentAvgRed_firm'] = lsNewUp / lsNewDown
         else:
             row['LeniencyPercentAvgRed_firm'] = None
 
@@ -2069,14 +2143,17 @@ def LeniencyPercentAvgRed_undertaking():
                 for i in range(1, 8):
                     ls.append([row2[f'Reduction_{i}'], row2[f'Fine_jointly_severally_{i}']])
 
-        lsNew = []
+        lsNewUp = 0
+        lsNewDown = 0
+        lsCalculate = False
         for l in ls:
             if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
-                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
-                lsNew.append(ln)
+                lsNewUp += float(l[0].replace('%', '')) * float(l[1])
+                lsNewDown += float(l[1])
+                lsCalculate = True
 
-        if len(lsNew) > 0:
-            row['LeniencyPercentAvgRed_undertaking'] = sum(lsNew) / len(lsNew)
+        if lsCalculate:
+            row['LeniencyPercentAvgRed_undertaking'] = lsNewUp / lsNewDown
         else:
             row['LeniencyPercentAvgRed_undertaking'] = None
 
@@ -2092,14 +2169,17 @@ def LeniencyPercentAvgRed_case():
                 for i in range(1, 8):
                     ls.append([row2[f'Reduction_{i}'], row2[f'Fine_jointly_severally_{i}']])
 
-        lsNew = []
+        lsNewUp = 0
+        lsNewDown = 0
+        lsCalculate = False
         for l in ls:
             if utils.exists(l[0]) and utils.exists(l[1]) and fine_max_firm > 0:
-                ln = float(l[0].replace('%', '')) * float(l[1]) / fine_max_firm
-                lsNew.append(ln)
+                lsNewUp += float(l[0].replace('%', '')) * float(l[1])
+                lsNewDown += float(l[1])
+                lsCalculate = True
 
-        if len(lsNew) > 0:
-            row['LeniencyPercentAvgRed_case'] = sum(lsNew) / len(lsNew)
+        if lsCalculate and lsNewDown > 0:
+            row['LeniencyPercentAvgRed_case'] = lsNewUp / lsNewDown
         else:
             row['LeniencyPercentAvgRed_case'] = None
 
@@ -2141,7 +2221,7 @@ def DUMIES_10():
             exists = []
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    exists.append(utils.exists(var))
+                    exists.append(utils.exists(d))
 
             row[var] = 1 if len(exists) > 0 else 0
 
@@ -2155,7 +2235,7 @@ def DUMIES_10():
             exists = []
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    exists.append(utils.exists(var))
+                    exists.append(utils.exists(d))
 
             row[var] = 1 if len(exists) > 0 else 0
 
@@ -2194,7 +2274,7 @@ def RecitalsEC_per_firm():
                 if utils.exists(row2['Recitals']):
                     reci += 1
 
-        row['RecitalsEC_per_firm'] = reci
+        row['RecitalsEC_per_firm'] = reci / row['N_firms_within_EC_case']
 
 
 def RecitalsEC_per_undertaking():
@@ -2206,31 +2286,21 @@ def RecitalsEC_per_undertaking():
                 if utils.exists(row2['Recitals']):
                     reci += 1
 
-        row['RecitalsEC_per_firm'] = reci
+        row['RecitalsEC_per_undertaking'] = reci / row['N_undertaking_within_EC_case']
 
 
 def Articles_of_remedy_per_firm():
     db.core_fields.append('Articles_of_remedy_per_firm')
     for row in db.core:
         art = int(row['Articles_of_remedy'])
-        nf = 0
-        for row2 in db.core:
-            if row['Case'] == row2['Case']:
-                nf += 1
-
-        row['Articles_of_remedy_per_firm'] = art / nf
+        row['Articles_of_remedy_per_firm'] = art / row['N_firms_within_EC_case']
 
 
 def Articles_of_remedy_per_undertaking():
     db.core_fields.append('Articles_of_remedy_per_undertaking')
     for row in db.core:
         art = int(row['Articles_of_remedy'])
-        nf = 0
-        for row2 in db.core:
-            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                nf += 1
-
-        row['Articles_of_remedy_per_undertaking'] = art / nf
+        row['Articles_of_remedy_per_undertaking'] = art / row['N_undertaking_within_EC_case']
 
 
 def Market_of_concern_COLUMS():
@@ -2356,24 +2426,28 @@ def GC_columns():
         var = f'{c}_only_D_undertaking'
         db.core_fields.append(var)
         for row in db.core:
-            values = set()
+            allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    values.add(row2[c])
+                    if not utils.exists(row2[c]):
+                        allExists = False
+                        break
 
             if utils.exists(row['GC_Decision_date']):
-                row[var] = 1 if len(values) == 1 else 0
+                row[var] = 1 if allExists else 0
 
         var = f'{c}_only_D_case'
         db.core_fields.append(var)
         for row in db.core:
-            values = set()
+            allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    values.add(row2[c])
+                    if not utils.exists(row2[c]):
+                        allExists = False
+                        break
 
             if utils.exists(row['GC_Decision_date']):
-                row[var] = 1 if len(values) == 1 else 0
+                row[var] = 1 if allExists else 0
 
 
 def ECJ_columns():
@@ -2444,24 +2518,26 @@ def ECJ_columns():
         var = f'{c}_only_D_undertaking'
         db.core_fields.append(var)
         for row in db.core:
-            values = set()
+            allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    values.add(row2[c])
+                    if not utils.exists(row2[c]):
+                        allExists = False
 
             if utils.exists(row['ECJ_Decision_date']):
-                row[var] = 1 if len(values) == 1 else 0
+                row[var] = 1 if allExists else 0
 
         var = f'{c}_only_D_case'
         db.core_fields.append(var)
         for row in db.core:
-            values = set()
+            allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    values.add(row2[c])
+                    if not utils.exists(row2[c]):
+                        allExists = False
 
             if utils.exists(row['ECJ_Decision_date']):
-                row[var] = 1 if len(values) == 1 else 0
+                row[var] = 1 if allExists else 0
 
 
 def GC_N_judgements_on_EC_case_per_undertaking():
@@ -2584,14 +2660,14 @@ def GC_judgement_N_plaintiffs_undertaking():
     db.core_fields.append('GC_judgement_N_plaintiffs_undertaking')
     for row in db.core:
         cn = row['GC_Case_number']
-        n = 0
+        undertakings = set()
         for row2 in db.core:
             if row2['Case'] == row['Case'] and row['Undertaking'] == row2['Undertaking']:
                 if row2['GC_Case_number'] == cn:
-                    n += 1
+                    undertakings.add(row2['Undertaking'])
 
         if utils.exists(row['GC_Decision_date']):
-            row['GC_judgement_N_plaintiffs_undertaking'] = n
+            row['GC_judgement_N_plaintiffs_undertaking'] = len(undertakings)
         else:
             row['GC_judgement_N_plaintiffs_undertaking'] = None
 
@@ -2631,7 +2707,7 @@ def GC_duration_case():
         fa = []
 
         for row2 in db.core:
-            if row2['Case'] == row['Case'] and row['Undertaking'] == row2['Undertaking']:
+            if row2['Case'] == row['Case']:
                 if utils.exists(row2['GC_Decision_date']) and utils.exists(row2['GC_Filing_action']):
                     dd.append(utils.parseDate(row2['GC_Decision_date']))
                     fa.append(utils.parseDate(row2['GC_Filing_action']))
@@ -2649,6 +2725,30 @@ def GC_Pending():
             row['GC_Pending'] = 1 if not utils.exists(row['GC_Decision_date']) else 0
         else:
             row['GC_Pending'] = None
+
+def GC_Pending_undertaking():
+    db.core_fields.append('GC_Pending_undertaking')
+    for row in db.core:
+        flag = False
+        for row2 in db.core:
+            if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                if utils.exists(row2['GC_Case_number']) and not utils.exists(row2['GC_Decision_date']):
+                    flag = True
+                    break
+
+        row['GC_Pending_undertaking'] = 1 if flag else 0
+
+def GC_Pending_case():
+    db.core_fields.append('GC_Pending_case')
+    for row in db.core:
+        flag = False
+        for row2 in db.core:
+            if row2['Case'] == row['Case']:
+                if utils.exists(row2['GC_Case_number']) and not utils.exists(row2['GC_Decision_date']):
+                    flag = True
+                    break
+
+        row['GC_Pending_case'] = 1 if flag else 0
 
 
 def GC_total_loss_firm():
@@ -2786,15 +2886,22 @@ def GC_total_success_case():
 def GC_partial_success_undertaking():
     db.core_fields.append('GC_partial_success_undertaking')
     for row in db.core:
-        row['GC_partial_success_undertaking'] = 1 if row['GC_total_loss_undertaking'] == 0 and row[
-            'GC_total_success_undertaking'] == 0 else 0
+        if utils.exists(row['GC_Decision_date']):
+            row['GC_partial_success_undertaking'] = 1 if row['GC_total_loss_undertaking'] == 0 and row[
+                'GC_total_success_undertaking'] == 0 else 0
+        else:
+            row['GC_partial_success_undertaking'] = None
+
 
 
 def GC_partial_success_case():
     db.core_fields.append('GC_partial_success_case')
     for row in db.core:
-        row['GC_partial_success_case'] = 1 if row['GC_total_loss_case'] == 0 and row[
-            'GC_total_success_case'] == 0 else 0
+        if utils.exists(row['GC_Decision_date']):
+            row['GC_partial_success_case'] = 1 if row['GC_total_loss_case'] == 0 and row[
+                'GC_total_success_case'] == 0 else 0
+        else:
+            row['GC_partial_success_case'] = None
 
 
 def GC_judgement_paragraphs_per_firm():
@@ -2950,7 +3057,7 @@ def ECJ_N_undertaking_appellants_EC_case():
     for row in db.core:
         u = set()
         for row2 in db.core:
-            if row['Case'] == row2['Case']:
+            if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
                 if utils.exists(row2['ECJ_Appeal_lodged']):
                     u.add(row2['Undertaking'])
 
@@ -3179,15 +3286,21 @@ def ECJ_total_success_case():
 def ECJ_partial_success_undertaking():
     db.core_fields.append('ECJ_partial_success_undertaking')
     for row in db.core:
-        row['ECJ_partial_success_undertaking'] = 1 if row['ECJ_total_loss_undertaking'] == 0 and row[
-            'ECJ_total_success_undertaking'] == 0 else 0
+        if utils.exists(row['ECJ_Decision_date']):
+            row['ECJ_partial_success_undertaking'] = 1 if row['ECJ_total_loss_undertaking'] == 0 and row[
+                'ECJ_total_success_undertaking'] == 0 else 0
+        else:
+            row['ECJ_partial_success_undertaking'] = None
 
 
 def ECJ_partial_success_case():
-    db.core_fields.append('GC_partial_success_case')
+    db.core_fields.append('ECJ_partial_success_case')
     for row in db.core:
-        row['GC_partial_success_case'] = 1 if row['GC_total_loss_case'] == 0 and row[
-            'GC_total_success_case'] == 0 else 0
+        if utils.exists(row['ECJ_Decision_date']):
+            row['ECJ_partial_success_case'] = 1 if row['ECJ_total_loss_case'] == 0 and row[
+                'ECJ_total_success_case'] == 0 else 0
+        else:
+            row['ECJ_partial_success_case'] = None
 
 
 def ECJ_judgement_paragraphs_per_firm():
@@ -3253,18 +3366,122 @@ def ECJ_judgement_Articles_per_undertaking():
 
 
 def ECJ_judgement_Articles_for_EC_case():
-    db.core_fields.append('GC_judgement_Articles_for_EC_case')
+    db.core_fields.append('ECJ_judgement_Articles_for_EC_case')
     for row in db.core:
         fa = {}
         for row2 in db.core:
             if row2['Case'] == row['Case']:
-                if row2['GC_Case_number'] not in fa:
-                    if utils.exists(row2['GC_judgement_Articles']):
-                        fa[row2['GC_Case_number']] = int(row2['GC_judgement_Articles'])
-        row['GC_judgement_Articles_for_EC_case'] = None if sum(fa.values()) == 0 else sum(fa.values())
+                if row2['ECJ_Case_number'] not in fa:
+                    if utils.exists(row2['ECJ_judgement_Articles']):
+                        fa[row2['ECJ_Case_number']] = int(row2['ECJ_judgement_Articles'])
+        row['ECJ_judgement_Articles_for_EC_case'] = None if sum(fa.values()) == 0 else sum(fa.values())
 
 
 def NEWS_EVENT_FILE():
+    col = [
+        [
+            'DR_Date_News',
+            'DR_dec_event', 'DR_dec_2M', 'DR_dec_15d',
+            'DR_dec_15d_DJN', 'DR_dec_15d_R', 'DR_dec_15d_FT',
+            'DR_dec_15d_WSJ',
+        ],
+        [
+            'EC_pre_dec_event', 'EC_dec_event', 'EC_dec_2M',
+            'EC_dec_15d', 'EC_dec_15d_DJN', 'EC_dec_15d_R',
+            'EC_dec_15d_FT', 'EC_dec_15d_WSJ',
+        ],
+        [
+            'GC_pre_dec_event', 'GC_dec_event', 'GC_dec_2M', 'GC_dec_15d',
+            'GC_dec_15d_DJN', 'GC_dec_15d_R', 'GC_dec_15d_FT', 'GC_dec_15d_WSJ',
+        ],
+        [
+            'ECJ_pre_dec_event', 'ECJ_dec_event', 'ECJ_dec_2M',
+            'ECJ_dec_15d', 'ECJ_dec_15d_DJN', 'ECJ_dec_15d_R',
+            'ECJ_dec_15d_FT', 'ECJ_dec_15d_WSJ',
+        ]
+    ]
+
+    # Firm
+    for row in db.core:
+        for sklop in col:
+            jeVnos = False
+            for c in sklop:
+                if utils.exists(row[c]):
+                    jeVnos = True
+                    break
+
+            if jeVnos:
+                for c in sklop:
+                    row[c] = 0 if not utils.exists(row[c]) else row[c]
+
+    # Undertaking
+    sameUndertakingFirm = {}
+    sameUndertakingCase = {}
+
+    # Vnasaanje novih stolpcev
+    for i, sklop in enumerate(col):
+        if i < 2:
+            for c in sklop:
+                db.core_fields.append(f'{c}_undertaking')
+
+    # Iskanje same under z firm
+    for row in db.core:
+        if row['Undertaking'] == row['Firm']:
+            if row['Firm'] not in sameUndertakingFirm:
+                sameUndertakingFirm[row['Firm']] = row
+
+    # Overridanje z ostalimi stolpci
+    for bossRow in sameUndertakingFirm.values():
+        for row in db.core:
+            if bossRow['Undertaking'] == row['Undertaking'] and bossRow['Case'] == row['Case']:
+                for i, sklop in enumerate(col):
+                    if i < 2:
+                        for c in sklop:
+                            row[f'{c}_undertaking'] = 0 if not utils.exists(bossRow[c]) else bossRow[c]
+
+    # Grupiranje same under z case
+    for row in db.core:
+        name = f'{row["Undertaking"]}_{row["Case"]}'
+        if name in sameUndertakingCase:
+            sameUndertakingCase[name].append(row)
+        else:
+            sameUndertakingCase[name] = [row]
+
+
+    stNovihStol = 0
+    for name, rows in sameUndertakingCase.items():
+        # Grupiranje
+        GC_event_files = {}
+        for row in rows:
+            if utils.exists(row['GC_Event_File']) and row['Undertaking'] != row['Firm']:
+                if row['GC_Event_File'] not in GC_event_files:
+                    GC_event_files[row['GC_Event_File']] = row
+
+
+        # Ustvarjanje novih stolpcev
+        fileI = 1
+        for bossRow in GC_event_files.values():
+            for row in rows:
+                for j, sklop in enumerate(col):
+                    if j >= 2:
+                        for c in sklop:
+                            row[f'{c}_{fileI}_undertaking'] = 0 if not utils.exists(bossRow[c]) else bossRow[c]
+            fileI += 1
+
+        if fileI > stNovihStol:
+            stNovihStol = fileI
+
+    # Ustvarjanje novih stolpcev
+    for j, sklop in enumerate(col):
+        if j >= 2:
+            for c in sklop:
+                for i in range(stNovihStol):
+                    name = f'{c}_{i+1}_undertaking'
+                    db.core_fields.append(name)
+                    row[name] = row[name] if name in row else None
+
+
+def NEWS_EVENT_FILE_TEST():
     col = [
         [
             'DR_dec_event', 'DR_dec_2M', 'DR_dec_15d',
@@ -3289,15 +3506,19 @@ def NEWS_EVENT_FILE():
 
     for row in db.core:
         for sklop in col:
-            jeVnos = False
             for c in sklop:
-                if utils.exists(row[c]):
-                    jeVnos = True
-                    break
+                if not utils.exists(row[c]):
+                    continue
 
-            if jeVnos:
-                for c in sklop:
-                    row[c] = 0 if not utils.exists(row[c]) else row[c]
+                vsiIsti = True
+                for row2 in db.core:
+                    if row2['Undertaking'] == row['Undertaking'] and row2['Case'] == row['Case']:
+                        if utils.exists(row2[c]):
+                            if row2[c] != row[c]:
+                                vsiIsti = False
+                                break
+                if not vsiIsti:
+                    print(c, row['Case'], row['Undertaking'], sep=' ||| ')
 
 
 def EVENT_FILES():
@@ -3308,10 +3529,30 @@ def EVENT_FILES():
         'ECJ_Event_File',
     ]
     for c in col:
-        var = f'{c}_D_firm'
-        db.core_fields.append(var)
+        db.core_fields.append(f'{c}_D_firm')
+        db.core_fields.append(f'{c}_D_undertaking')
+        db.core_fields.append(f'{c}_D_case')
+
         for row in db.core:
-            row[var] = 1 if utils.exists(row[c]) else 0
+
+            undertakingExists = False
+            for row2 in db.core:
+                if row2['Case'] == row['Case'] and row2['Undertaking'] == row['Undertaking']:
+                    if utils.exists(row2[c]):
+                        undertakingExists = True
+                        break
+
+            caseExists = False
+            for row2 in db.core:
+                if row2['Case'] == row['Case']:
+                    if utils.exists(row2[c]):
+                        caseExists = True
+                        break
+
+            row[f'{c}_D_firm'] = 1 if utils.exists(row[c]) else 0
+            row[f'{c}_D_undertaking'] = 1 if undertakingExists else 0
+            row[f'{c}_D_case'] = 1 if caseExists else 0
+
 
 
 def Commissioner_for_competition_investigation_begin():
@@ -3387,7 +3628,7 @@ def Commission_President_EC_decision():
         n = None
         for name, vals in comm.items():
             if utils.parseDate(vals[0]) <= utils.parseDate(row['EC_Date_of_decision']) <= utils.parseDate(vals[1]):
-                row['Commissioner_for_competition_EC_decision'] = name
+                row['Commission_President_EC_decision'] = name
 
 
 def Commission_caseload_Investigation_begin():
