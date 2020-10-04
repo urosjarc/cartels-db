@@ -3329,8 +3329,6 @@ def ECJ_judgement_N_appellants_undertaking():
         else:
             row['ECJ_judgement_N_appellants_undertaking'] = None
 
-        print(row['Case'], row['ECJ_judgement_N_appellants_undertaking'])
-
 
 def ECJ_duration_firm():
     db.core_fields.append('ECJ_duration_firm')
@@ -4010,7 +4008,7 @@ def Investigation_begin_May_2004():
     db.core_fields.append('Investigation_begin_May_2004')
     may = utils.parseDate('05/01/2004')
     for row in db.core:
-        row['Investigation_begin_May_2004'] = 1 if utils.parseDate(row['Investigation_begin']) > may else 0
+        row['Investigation_begin_May_2004'] = 1 if row['Investigation_begin'] > may else 0
 
 
 def EC_decision_May_2004():
