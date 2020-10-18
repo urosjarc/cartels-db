@@ -1,6 +1,7 @@
 from src import db, utils, analysis_utils
 from datetime import datetime
 import sys
+from collections import OrderedDict
 
 this = sys.modules[__name__]
 this.matcher = None
@@ -1059,6 +1060,19 @@ def Ticker_undertaking_D():
     for row in db.core:
         row['Ticker_undertaking_D'] = 1 if utils.exists(row['Ticker_undertaking']) else 0
 
+def Infringement_begin():
+    db.core_fields.append('Infringement_begin')
+    for row in db.core:
+        dates = []
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                for i in range(1, 13):
+                    ib = utils.parseDate(row2[f'InfrBegin{i}'])
+                    if ib is not None:
+                        dates.append(ib)
+
+        row['Infringement_begin'] = min(dates) if len(dates) > 0 else None
+
 
 def InfringeDurationOverallCase():
     db.core_fields.append('InfringeDurationOverallCase')
@@ -1868,7 +1882,7 @@ def GC_fine_percent_reduction_firm():
             if Fine_max_firm > 0:
                 rezult = GC_fine_change_firm / Fine_max_firm * 100
 
-        row['GC_fine_percent_reduction_firm'] = rezult
+        row['GC_fine_percent_reduction_firm'] = rezult if utils.exists(row['GC_Decision_date']) else None
 
 
 def GC_fine_percent_reduction_undertaking():
@@ -1882,7 +1896,7 @@ def GC_fine_percent_reduction_undertaking():
             if Fine_undertaking > 0:
                 rezult = GC_fine_change_undertaking / Fine_undertaking * 100
 
-        row['GC_fine_percent_reduction_undertaking'] = rezult
+        row['GC_fine_percent_reduction_undertaking'] = rezult if utils.exists(row['GC_Decision_date']) else None
 
 
 def GC_fine_percent_reduction_case():
@@ -1896,7 +1910,7 @@ def GC_fine_percent_reduction_case():
             if Fine_case > 0:
                 rezult = GC_fine_change_case / Fine_case * 100
 
-        row['GC_fine_percent_reduction_case'] = rezult
+        row['GC_fine_percent_reduction_case'] = rezult if utils.exists(row['GC_Decision_date']) else None
 
 
 def GC_fine_relative_percent_reduction_case():
@@ -1974,7 +1988,7 @@ def ECJ_fine_percent_reduction_firm():
             if Fine_max_firm > 0:
                 rezult = ECJ_fine_change_firm / Fine_max_firm * 100
 
-        row['ECJ_fine_percent_reduction_firm'] = rezult
+        row['ECJ_fine_percent_reduction_firm'] = rezult if utils.exists(row['ECJ_Decision_date']) else None
 
 
 def ECJ_fine_percent_reduction_undertaking():
@@ -1990,7 +2004,7 @@ def ECJ_fine_percent_reduction_undertaking():
             if Fine_undertaking > 0:
                 rezult = ECJ_fine_change_undertaking / Fine_undertaking * 100
 
-        row['ECJ_fine_percent_reduction_undertaking'] = rezult
+        row['ECJ_fine_percent_reduction_undertaking'] = rezult if utils.exists(row['ECJ_Decision_date']) else None
 
 
 def ECJ_fine_percent_reduction_case():
@@ -2006,7 +2020,7 @@ def ECJ_fine_percent_reduction_case():
             if Fine_case > 0:
                 rezult = ECJ_fine_change_case / Fine_case * 100
 
-        row['ECJ_fine_percent_reduction_case'] = rezult
+        row['ECJ_fine_percent_reduction_case'] = rezult if utils.exists(row['ECJ_Decision_date']) else None
 
 
 def ECJ_fine_relative_percent_reduction_case():
@@ -2631,8 +2645,9 @@ def GC_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    if utils.exists(row['GC_Decision_date']) and not utils.exists(row2[c]):
-                        allExists = False
+                    if utils.exists(row['GC_Decision_date']):
+                        if not utils.exists(row2[c]):
+                            allExists = False
                         unique.add(row2[c])
                         break
 
@@ -2648,8 +2663,9 @@ def GC_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    if utils.exists(row['GC_Decision_date']) and not utils.exists(row2[c]):
-                        allExists = False
+                    if utils.exists(row['GC_Decision_date']):
+                        if not utils.exists(row2[c]):
+                            allExists = False
                         unique.add(row2[c])
                         break
 
@@ -2731,8 +2747,9 @@ def ECJ_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    if utils.exists(row['ECJ_Decision_date']) and not utils.exists(row2[c]):
-                        allExists = False
+                    if utils.exists(row['ECJ_Decision_date']):
+                        if not utils.exists(row2[c]):
+                            allExists = False
                         unique.add(row2[c])
                         break
 
@@ -2748,8 +2765,9 @@ def ECJ_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    if utils.exists(row['ECJ_Decision_date']) and not utils.exists(row2[c]):
-                        allExists = False
+                    if utils.exists(row['ECJ_Decision_date']):
+                        if not utils.exists(row2[c]):
+                            allExists = False
                         unique.add(row2[c])
                         break
 
@@ -3662,7 +3680,6 @@ def NEWS_EVENT_FILE():
 
     # Undertaking
     sameUndertakingFirm = {}
-    sameUndertakingCase = {}
 
     # Vnasaanje novih stolpcev
     for i, sklop in enumerate(col):
@@ -3677,15 +3694,14 @@ def NEWS_EVENT_FILE():
                 sameUndertakingFirm[row['Firm']] = row
 
     # Overridanje z ostalimi stolpci
-    for bossRow in sameUndertakingFirm.values():
-        for row in db.core:
-            if bossRow['Undertaking'] == row['Undertaking'] and bossRow['Case'] == row['Case']:
-                for i, sklop in enumerate(col):
-                    if i < 2:
-                        for c in sklop:
-                            row[f'{c}_undertaking'] = 0 if not utils.exists(bossRow[c]) else bossRow[c]
+    for row in db.core:
+        for i, sklop in enumerate(col):
+            if i < 2:
+                for c in sklop:
+                    row[f'{c}_undertaking'] = row[c]
 
-    # Grupiranje same under z case
+    # Grupiranje GC same under z case
+    sameUndertakingCase = {}
     for row in db.core:
         name = f'{row["Undertaking"]}_{row["Case"]}'
         if name in sameUndertakingCase:
@@ -3693,76 +3709,75 @@ def NEWS_EVENT_FILE():
         else:
             sameUndertakingCase[name] = [row]
 
+    # Grupiranje ECJ same under z case
+    sameUndertakingCase_ECJ = {}
+    for row in db.core:
+        name = f'{row["Undertaking"]}_{row["Case"]}'
+        if name in sameUndertakingCase_ECJ:
+            sameUndertakingCase_ECJ[name].append(row)
+        else:
+            sameUndertakingCase_ECJ[name] = [row]
+
+    # Vnasanje GC
     stNovihStol = 0
-    for name, rows in sameUndertakingCase.items():
+    for n, rows in sameUndertakingCase.items():
         # Grupiranje
-        GC_event_files = {}
+        decision_dates = {}
+        name = 'GC_Decision_date'
         for row in rows:
-            if utils.exists(row['GC_Event_File']) and row['Undertaking'] != row['Firm']:
-                if row['GC_Event_File'] not in GC_event_files:
-                    GC_event_files[row['GC_Event_File']] = row
+            if utils.exists(row[name]):
+                if row[name] not in decision_dates:
+                    decision_dates[row[name]] = [row]
+                else:
+                    decision_dates[row[name]].append(row)
 
-        # Ustvarjanje novih stolpcev
-        fileI = 1
-        for bossRow in GC_event_files.values():
-            for row in rows:
-                for j, sklop in enumerate(col):
-                    if j >= 2:
-                        for c in sklop:
-                            row[f'{c}_{fileI}_undertaking'] = 0 if not utils.exists(bossRow[c]) else bossRow[c]
-            fileI += 1
+        sameUndertakingCase[n] = decision_dates
 
-        if fileI > stNovihStol:
-            stNovihStol = fileI
+        if len(decision_dates) > stNovihStol:
+            stNovihStol = len(decision_dates)
 
-    # Ustvarjanje novih stolpcev
+    # Vnasanje ECJ
+    stNovihStol_ECJ = 0
+    for n, rows in sameUndertakingCase_ECJ.items():
+        # Grupiranje
+        decision_dates = {}
+        name = 'ECJ_Decision_date'
+        for row in rows:
+            if utils.exists(row[name]):
+                if row[name] not in decision_dates:
+                    decision_dates[row[name]] = [row]
+                else:
+                    decision_dates[row[name]].append(row)
+
+        sameUndertakingCase_ECJ[n] = decision_dates
+
+        if len(decision_dates) > stNovihStol_ECJ:
+            stNovihStol_ECJ = len(decision_dates)
+
+    # Ustvarjanje novih praznih stolpcev
     for j, sklop in enumerate(col):
-        if j >= 2:
+        if j == 2:
             for c in sklop:
                 for i in range(stNovihStol):
                     name = f'{c}_{i + 1}_undertaking'
                     db.core_fields.append(name)
-                    row[name] = row[name] if name in row else None
 
-
-def NEWS_EVENT_FILE_TEST():
-    col = [
-        [
-            'DR_dec_event', 'DR_dec_2M', 'DR_dec_15d',
-            'DR_dec_15d_DJN', 'DR_dec_15d_R', 'DR_dec_15d_FT',
-            'DR_dec_15d_WSJ',
-        ],
-        [
-            'EC_pre_dec_event', 'EC_dec_event', 'EC_dec_2M',
-            'EC_dec_15d', 'EC_dec_15d_DJN', 'EC_dec_15d_R',
-            'EC_dec_15d_FT', 'EC_dec_15d_WSJ',
-        ],
-        [
-            'GC_pre_dec_event', 'GC_dec_event', 'GC_dec_2M', 'GC_dec_15d',
-            'GC_dec_15d_DJN', 'GC_dec_15d_R', 'GC_dec_15d_FT', 'GC_dec_15d_WSJ',
-        ],
-        [
-            'ECJ_pre_dec_event', 'ECJ_dec_event', 'ECJ_dec_2M',
-            'ECJ_dec_15d', 'ECJ_dec_15d_DJN', 'ECJ_dec_15d_R',
-            'ECJ_dec_15d_FT', 'ECJ_dec_15d_WSJ',
-        ]
-    ]
-
-    for row in db.core:
-        for sklop in col:
+                    for under_case, decision_dates in sameUndertakingCase.items():
+                        for GC_case_number, rows in decision_dates.items():
+                            for row in rows:
+                                if i < len(decision_dates):
+                                    row[name] = decision_dates[list(decision_dates.keys())[i]][0][c]
+        if j == 3:
             for c in sklop:
-                if not utils.exists(row[c]):
-                    continue
+                for i in range(stNovihStol_ECJ):
+                    name = f'{c}_{i + 1}_undertaking'
+                    db.core_fields.append(name)
 
-                vsiIsti = True
-                for row2 in db.core:
-                    if row2['Undertaking'] == row['Undertaking'] and row2['Case'] == row['Case']:
-                        if utils.exists(row2[c]):
-                            if row2[c] != row[c]:
-                                vsiIsti = False
-                                break
-                # if not vsiIsti:
-                # print(c, row['Case'], row['Undertaking'], sep=' ||| ')
+                    for under_case, decision_dates in sameUndertakingCase_ECJ.items():
+                        for GC_case_number, rows in decision_dates.items():
+                            for row in rows:
+                                if i < len(decision_dates):
+                                    row[name] = decision_dates[list(decision_dates.keys())[i]][0][c]
 
 
 def EVENT_FILES():
@@ -4009,13 +4024,6 @@ def Investigation_begin_May_2004():
     may = utils.parseDate('05/01/2004')
     for row in db.core:
         row['Investigation_begin_May_2004'] = 1 if row['Investigation_begin'] > may else 0
-
-
-def EC_decision_May_2004():
-    db.core_fields.append('EC_decision_May_2004')
-    may = utils.parseDate('05/01/2004')
-    for row in db.core:
-        row['EC_decision_May_2004'] = 1 if utils.parseDate(row['EC_Date_of_decision']) > may else 0
 
 
 def Settlement_regulation_D_Investigation_begin():
