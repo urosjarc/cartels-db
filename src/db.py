@@ -24,7 +24,7 @@ this.TOTMKWD_rows: List[StockDataOther] = []
 this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual_data.csv')
 this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
-this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out.csv')
+this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
@@ -108,7 +108,8 @@ def init_nodes_stock_meta():
     with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            this.stock_meta_rows.append(StockMeta(row))
+            # this.stock_meta_rows.append(StockMeta(row))
+            this.stock_meta_rows.append(row)
 
 
 def init_nodes_stock_data_A1012M():

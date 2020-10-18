@@ -1,10 +1,6 @@
 from src import db, utils, analysis_utils
 from datetime import datetime
 import sys
-from collections import OrderedDict
-
-this = sys.modules[__name__]
-this.matcher = None
 
 
 def EC_duration():
@@ -1058,7 +1054,6 @@ def Ticker_case_D():
                     exists = True
                     break
 
-
         row['Ticker_case_D'] = 1 if exists else 0
 
 
@@ -1066,6 +1061,7 @@ def Ticker_undertaking_D():
     db.core_fields.append('Ticker_undertaking_D')
     for row in db.core:
         row['Ticker_undertaking_D'] = 1 if utils.exists(row['Ticker_undertaking']) else 0
+
 
 def Infringement_begin():
     db.core_fields.append('Infringement_begin')
@@ -1079,6 +1075,7 @@ def Infringement_begin():
                         dates.append(ib)
 
         row['Infringement_begin'] = min(dates) if len(dates) > 0 else None
+
 
 def InfringeDurationOverallCase():
     db.core_fields.append('InfringeDurationOverallCase')
