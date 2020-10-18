@@ -2651,7 +2651,7 @@ def GC_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    if utils.exists(row['GC_Decision_date']):
+                    if utils.exists(row2['GC_Decision_date']):
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
@@ -2668,7 +2668,7 @@ def GC_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    if utils.exists(row['GC_Decision_date']):
+                    if utils.exists(row2['GC_Decision_date']):
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
@@ -2751,7 +2751,7 @@ def ECJ_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                    if utils.exists(row['ECJ_Decision_date']):
+                    if utils.exists(row2['ECJ_Decision_date']):
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
@@ -2768,7 +2768,7 @@ def ECJ_columns():
             allExists = True
             for row2 in db.core:
                 if row['Case'] == row2['Case']:
-                    if utils.exists(row['ECJ_Decision_date']):
+                    if utils.exists(row2['ECJ_Decision_date']):
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
