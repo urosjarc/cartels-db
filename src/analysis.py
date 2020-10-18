@@ -2655,7 +2655,6 @@ def GC_columns():
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
-                        break
 
             if c in ['GC_Case_number', 'GC_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
@@ -2673,7 +2672,6 @@ def GC_columns():
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
-                        break
 
             if c in ['GC_Case_number', 'GC_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
@@ -2757,7 +2755,6 @@ def ECJ_columns():
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
-                        break
 
             if c in ['ECJ_Case_number', 'ECJ_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
@@ -2775,7 +2772,6 @@ def ECJ_columns():
                         if not utils.exists(row2[c]):
                             allExists = False
                         unique.add(row2[c])
-                        break
 
             if c in ['ECJ_Case_number', 'ECJ_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
