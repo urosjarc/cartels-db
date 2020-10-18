@@ -46,7 +46,7 @@ def EC_decision_year():
         row['EC_decision_year'] = int(row['EC_Date_of_decision'].split('/')[-1])
 
 
-class EC_decision_May_2004():
+def EC_decision_May_2004():
     db.core_fields.append('EC_decision_May_2004')
     may = utils.parseDate('05/01/2004')
     '''
