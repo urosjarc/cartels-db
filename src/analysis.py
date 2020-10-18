@@ -1048,11 +1048,18 @@ def Ticker_firm_D():
 def Ticker_case_D():
     db.core_fields.append('Ticker_case_D')
     for row in db.core:
-        tf = utils.exists(row['Ticker_firm'])
-        tu = utils.exists(row['Ticker_undertaking'])
-        th = utils.exists(row['Holding_Ticker_parent'])
+        exists = False
+        for row2 in db.core:
+            if row['Case'] == row2['Case']:
+                tf = utils.exists(row2['Ticker_firm'])
+                tu = utils.exists(row2['Ticker_undertaking'])
+                th = utils.exists(row2['Holding_Ticker_parent'])
+                if tf or tu or th:
+                    exists = True
+                    break
 
-        row['Ticker_case_D'] = 1 if (tf or tu or th) else 0
+
+        row['Ticker_case_D'] = 1 if exists else 0
 
 
 def Ticker_undertaking_D():
