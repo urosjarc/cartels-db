@@ -1080,7 +1080,6 @@ def Infringement_begin():
 
         row['Infringement_begin'] = min(dates) if len(dates) > 0 else None
 
-
 def InfringeDurationOverallCase():
     db.core_fields.append('InfringeDurationOverallCase')
     for row in db.core:
