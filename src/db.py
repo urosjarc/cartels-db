@@ -11,9 +11,7 @@ this = sys.modules[__name__]
 this.graph: Graph = None
 this.matcher: NodeMatcher = None
 
-this.core_rows: List[CSV_Core] = []
 this.stock_meta_rows: List[StockMeta] = []
-
 this.A1012M_rows: List[StockData] = []
 this.DSLOC_rows: List[StockDataOther] = []
 this.LEV2IN_REL = {}
@@ -30,11 +28,11 @@ this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
-this.csvStockData2RelIndustryPaths= utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV2IN.csv')
+this.csvStockData2RelIndustryPaths = utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV2IN.csv')
 this.csvStockData2IndustryPaths = [i for i in
                                    utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/2IN'))]
 
-this.csvStockData4RelIndustryPaths= utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV4SE.csv')
+this.csvStockData4RelIndustryPaths = utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV4SE.csv')
 this.csvStockData4IndustryPaths = [i for i in
                                    utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/4SE'))]
 this.csvStockDataMLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/MLOC'))]
@@ -48,7 +46,6 @@ this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
 this.core_ECJ_annual_data: List[Dict] = []
 this.core_fields: List[str] = []
-
 
 
 def init_core():
@@ -69,28 +66,19 @@ def init_core():
 
     this.core_fields = list(this.core[0].keys())
 
+
 def save_core():
     with open(this.csvCorePathOut, 'w') as csvfile:
-        writer= csv.DictWriter(csvfile,fieldnames=this.core_fields)
+        writer = csv.DictWriter(csvfile, fieldnames=this.core_fields)
         writer.writeheader()
         writer.writerows(this.core)
 
-def getFirmsRows(firmName):
-    with open(this.csvCorePath) as csvfile:
-        reader = csv.DictReader(csvfile)
-        firms = {}
-        for row in reader:
-            if row['Firm'] == firmName:
-                firms[row['Case']] = row
-
-        return firms
 
 def init():
     init_db()
 
     init_LEV_REL()
 
-    init_nodes_core()
     init_nodes_stock_meta()
     init_nodes_stock_data_A1012M()
     init_nodes_stock_data_A1012M_annual()
@@ -111,16 +99,9 @@ def init():
     this.TOTMKWD_rows = init_nodes_stock_data_other(this.csvStockDataTOTMKWDPaths, dsloc_name, 'TOTMKWD')
 
 
-
 def init_db():
     this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
     this.matcher = NodeMatcher(this.graph)
-
-def init_nodes_core():
-    with open(this.csvCorePath) as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            this.core_rows.append(CSV_Core(row))
 
 
 def init_nodes_stock_meta():
@@ -270,6 +251,7 @@ def init_nodes_stock_data_other(paths, nameReformat, type):
 
     return arr
 
+
 def init_LEV_REL():
     with open(this.csvStockData2RelIndustryPaths) as csvfile:
         reader = csv.DictReader(csvfile)
@@ -283,37 +265,10 @@ def init_LEV_REL():
 
     pass
 
+
 # DELETE ALL IN DATABASE
 def delete_all():
     this.graph.delete_all()
-
-
-# CREATE NODES
-def create_nodes_core():
-    size = len(this.core_rows)
-    notExists = {
-        'firm': 0,
-        'case': 0,
-        'holding': 0,
-        'undertaking': 0,
-    }
-
-    for i, row in enumerate(this.core_rows):
-        if i % 100 == 0:
-            print(f'CREATING CORE NODES: {round(i / size * 100)}%')
-
-        if row.firm._exists:
-            this.graph.merge(row.firm._instance, 'Firm', 'Firm')
-        if row.case._exists:
-            this.graph.merge(row.case._instance, 'Case', 'Case')
-        if row.holding._exists:
-            this.graph.merge(row.holding._instance, 'Holding', 'Holding')
-        else:
-            notExists['holding'] += 1
-        if row.undertaking._exists:
-            this.graph.merge(row.undertaking._instance, 'Undertaking', 'Undertaking')
-        else:
-            notExists['undertaking'] += 1
 
 
 def create_nodes_stock_meta():
@@ -338,59 +293,6 @@ def create_nodes_stock_data():
 
             if row._exists:
                 this.graph.merge(row._instance, parr, parr)
-
-
-# CREATE CONNECTIONS
-def create_relationships_core():
-    size = len(this.core_rows)
-
-    for i, row in enumerate(this.core_rows):
-        if i % 100 == 0:
-            print(f'CONNECTING CORE: {round(i / size * 100)}%')
-
-        # Firm => Case
-        if row.firm._exists and row.case._exists:
-            this.graph.run(
-                'MATCH (c:Case), (f:Firm) WHERE c.Case=$Case AND f.Firm=$Firm MERGE (f)-[r:REL_CORE]->(c) RETURN type(r)',
-                Case=row.case.Case, Firm=row.firm.Firm)
-        else:
-            raise Exception(f'Not exists: {row.firm} {row.case}')
-
-        # Firm => Undertaking
-        if row.firm._exists and row.undertaking._exists:
-            this.graph.run(
-                'MATCH (f:Firm), (u:Undertaking) WHERE f.Firm=$Firm AND u.Undertaking=$Undertaking MERGE (f)-[r:REL_CORE]->(u) RETURN type(r)',
-                Firm=row.firm.Firm, Undertaking=row.undertaking.Undertaking)
-        else:
-            raise Exception(f'Not exists: {row.firm} {row.undertaking}')
-
-        # Undertaking => Holding
-        if row.undertaking._exists and row.holding._exists:
-            this.graph.run(
-                'MATCH (u:Undertaking), (h:Holding) WHERE u.Undertaking=$Undertaking AND h.Holding=$Holding MERGE (u)-[r:REL_CORE]->(h) RETURN type(r)',
-                Undertaking=row.undertaking.Undertaking, Holding=row.holding.Holding)
-
-
-def create_relationships_stock_meta():
-    size = len(this.stock_meta_rows)
-    for i, row in enumerate(this.stock_meta_rows):
-        if i % 100 == 0:
-            print(f'CONNECTING STOCK META: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {row.StockMeta}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (f:Firm) WHERE sm.StockMeta=$StockMeta AND f.Stock_exchange_firm=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(f) RETURN type(r)',
-            StockMeta=row.StockMeta)
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (u:Undertaking) WHERE sm.StockMeta=$StockMeta AND u.Stock_exchange_undertaking=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(u) RETURN type(r)',
-            StockMeta=row.StockMeta)
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (h:Holding) WHERE sm.StockMeta=$StockMeta AND h.Stock_exchange_holding=$StockMeta MERGE (sm)-[r:REL_STOCK_META]->(h) RETURN type(r)',
-            StockMeta=row.StockMeta)
 
 
 def create_relationships_stock_A1012M():
@@ -461,5 +363,3 @@ def create_relationships_stock_MLOC():
         this.graph.run(
             'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LOCAL_INDEX=$code AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_MLOC]->(sd) RETURN type(r)',
             code=row.StockDataOther)
-
-
