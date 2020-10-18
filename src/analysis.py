@@ -2659,7 +2659,8 @@ def GC_columns():
             if c in ['GC_Case_number', 'GC_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
             else:
-                row[var] = 1 if allExists else 0
+                if utils.exists(row['GC_Decision_date']):
+                    row[var] = 1 if allExists else 0
 
         var = f'{c}_only_D_case'
         db.core_fields.append(var)
@@ -2676,7 +2677,8 @@ def GC_columns():
             if c in ['GC_Case_number', 'GC_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
             else:
-                row[var] = 1 if allExists else 0
+                if utils.exists(row['GC_Decision_date']):
+                    row[var] = 1 if allExists else 0
 
 
 def ECJ_columns():
@@ -2759,7 +2761,8 @@ def ECJ_columns():
             if c in ['ECJ_Case_number', 'ECJ_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
             else:
-                row[var] = 1 if allExists else 0
+                if utils.exists(row['ECJ_Decision_date']):
+                    row[var] = 1 if allExists else 0
 
         var = f'{c}_only_D_case'
         db.core_fields.append(var)
@@ -2776,7 +2779,8 @@ def ECJ_columns():
             if c in ['ECJ_Case_number', 'ECJ_Decision_date']:
                 row[var] = 1 if len(unique) == 1 else 0
             else:
-                row[var] = 1 if allExists else 0
+                if utils.exists(row['ECJ_Decision_date']):
+                    row[var] = 1 if allExists else 0
 
 
 def GC_N_judgements_on_EC_case_per_undertaking():
