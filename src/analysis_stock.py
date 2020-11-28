@@ -228,7 +228,7 @@ def Datastream_local_index():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['DATASTREAM LOCAL INDEX']
+                    result = sr['DATASTREAM INDEX 3']
                     break
 
             if result is not None:
@@ -241,9 +241,8 @@ def ICB_industry_DS_index():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['ICB Industry DS Index']
+                    result = sr['ICB Industry Index']
                     break
-
             if result is not None:
                 row[f'ICB_industry_DS_index_{type}'] = result
 
@@ -254,7 +253,7 @@ def FT_sector_DS_index():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['ICB Industry DS Index']
+                    result = sr['FT SECTOR Index']
                     break
 
             if result is not None:
