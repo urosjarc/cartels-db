@@ -82,3 +82,28 @@ def absoluteFilePaths(directory):
         for f in filenames:
             yield os.path.abspath(os.path.join(dirpath, f))
 
+def getCode(code):
+    return code.split("(")[0]
+
+def get_annual_years(row):
+    names_dates = []
+    for k in row.keys():
+        if k.isnumeric():
+            names_dates.append(k)
+
+    return names_dates
+
+def create_annual_row(new_var, row):
+    names_dates = get_annual_years(row)
+    d = {
+        'Name': row['Name'].split('-')[0] + f' - {new_var}',
+        'Code': row['Code'].split("(")[0],
+        'CURRENCY': row['CURRENCY']
+     }
+    for da in names_dates:
+        d[str(da)] = 0
+
+    return d
+
+
+

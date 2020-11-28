@@ -1,5 +1,6 @@
 from py2neo import Graph, NodeMatcher, RelationshipMatch
 import sys
+from src import utils
 from src import auth as aut
 from src.domain import *
 from typing import List, Dict
@@ -12,7 +13,8 @@ this.graph: Graph = None
 this.matcher: NodeMatcher = None
 
 this.stock_meta_rows: List[StockMeta] = []
-this.A1012M_rows: List[StockData] = []
+this.A1012M_EU_rows= {}
+this.A1012M_LOCAL_rows= {}
 this.DSLOC_rows: List[StockDataOther] = []
 this.LEV2IN_REL = {}
 this.LEV2IN_rows: List[StockDataOther] = []
@@ -25,9 +27,12 @@ this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual_data.csv')
 this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
 this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
+this.csvAnualLocalPathOut = utils.currentDir(__file__, '../data/csv/annual_local_out_tickers.csv')
+this.csvAnualEuPathOut = utils.currentDir(__file__, '../data/csv/annual_eu_out_tickers.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
-this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures.csv')
+this.csvStockDataAnnualEuPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures_eu.csv')
+this.csvStockDataAnnualLocalPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures_local.csv')
 this.csvStockData2RelIndustryPaths = utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV2IN.csv')
 this.csvStockData2IndustryPaths = [i for i in
                                    utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/2IN'))]
@@ -73,15 +78,35 @@ def save_core():
         writer.writeheader()
         writer.writerows(this.core)
 
+    with open(this.csvAnualEuPathOut, 'w') as csvfile:
+        l = []
+        for k, rows in this.A1012M_EU_rows.items():
+            for row in rows:
+                l.append(row)
+
+        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
+        writer.writeheader()
+        writer.writerows(l)
+
+    with open(this.csvAnualLocalPathOut, 'w') as csvfile:
+        l = []
+        for k, rows in this.A1012M_LOCAL_rows.items():
+            for row in rows:
+                l.append(row)
+
+        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
+        writer.writeheader()
+        writer.writerows(l)
+
 
 def init():
     init_db()
 
-    init_LEV_REL()
-
-    init_nodes_stock_meta()
-    init_nodes_stock_data_A1012M()
-    init_nodes_stock_data_A1012M_annual()
+    # init_LEV_REL()
+    #
+    # init_nodes_stock_meta()
+    # init_nodes_stock_data_A1012M()
+    init_nodes_stock_data_A1012M_EU_annual()
 
     def industry_name(name):
         return name.replace("WORLD-DS ", "").split(' - ')[0]
@@ -166,43 +191,38 @@ def init_nodes_stock_data_A1012M():
     for sd in stockDatas.values():
         sd.type = 'A1012M'
         sd._init()
-        this.A1012M_rows.append(sd)
+        this.A1012M_EU_rows.append(sd)
 
 
-def init_nodes_stock_data_A1012M_annual():
-    stockDatas = {}  # code -> name -> StockData
-    uniqueNames = set()
+def init_nodes_stock_data_A1012M_EU_annual():
+    with open(this.csvStockDataAnnualEuPath) as csvfile:
+        reader = csv.DictReader(csvfile)
+        li = []
+        for row in reader:
+            li.append(row)
+        for l in li:
+            if l['Name'] == '#ERROR':
+                continue
+            ticker = utils.getCode(l['Code'])
+            if ticker not in this.A1012M_EU_rows:
+                this.A1012M_EU_rows[ticker] = [l]
+            else:
+                this.A1012M_EU_rows[ticker].append(l)
 
-    sds = StockData.parse_A1012M_annual(this.csvStockDataAnnualPath)
-    sd_date = sds[0].dates
-    sd_default = [-1 for d in sd_date]
-
-    for sd in sds:
-        name = utils.reformat_value(sd._data['Name'].split(' - ')[-1])
-        if name == '#ERROR':
-            continue
-
-        name = 'annual_' + name
-
-        uniqueNames.add(name)
-        if sd.StockData not in stockDatas:
-            stockDatas[sd.StockData] = {name: sd}
-        else:
-            stockDatas[sd.StockData][name] = sd
-
-    for sd in this.A1012M_rows:
-        if sd.StockData in stockDatas:
-
-            setattr(sd, 'annual_dates', sd_date)
-
-            for k, v in stockDatas[sd.StockData].items():
-                setattr(sd, k, v.values)
-
-            for un in uniqueNames.difference(list(stockDatas[sd.StockData].keys())):
-                setattr(sd, un, sd_default)
-
-            sd._init()
-
+def init_nodes_stock_data_A1012M_LOCAL_annual():
+    with open(this.csvStockDataAnnualLocalPath) as csvfile:
+        reader = csv.DictReader(csvfile)
+        li = []
+        for row in reader:
+            li.append(row)
+        for l in li:
+            if l['Name'] == '#ERROR':
+                continue
+            ticker = utils.getCode(l['Code'])
+            if ticker not in this.A1012M_LOCAL_rows:
+                this.A1012M_LOCAL_rows[ticker] = [l]
+            else:
+                this.A1012M_LOCAL_rows[ticker].append(l)
 
 def init_nodes_stock_data_other(paths, nameReformat, type):
     stockDatas = {}  # code -> path -> StockData
@@ -297,8 +317,8 @@ def create_nodes_stock_data():
 
 
 def create_relationships_stock_A1012M():
-    size = len(this.A1012M_rows)
-    for i, row in enumerate(this.A1012M_rows):
+    size = len(this.A1012M_EU_rows)
+    for i, row in enumerate(this.A1012M_EU_rows):
         if i % 5 == 0:
             print(f'CONNECTING STOCK DATA A1012M: {round(i / size * 100)}%')
 

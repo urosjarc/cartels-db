@@ -163,7 +163,7 @@ def Level_2_sector_name():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['LEVEL 2 SECTOR']
+                    result = sr['LEVEL2 SECTOR NAME']
                     break
 
             if result is not None:
@@ -176,7 +176,7 @@ def Level_3_sector_name():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['LEVEL 3 SECTOR NAME']
+                    result = sr['LEVEL3 SECTOR NAME']
                     break
 
             if result is not None:
@@ -189,7 +189,7 @@ def Level_4_sector_name():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['LEVEL 4 SECTOR NAME']
+                    result = sr['LEVEL4 SECTOR NAME']
                     break
 
             if result is not None:
@@ -202,7 +202,7 @@ def Level_5_sector_name():
             result = None
             for sr in db.stock_meta_rows:
                 if row[ticker_type] == sr['Type']:
-                    result = sr['LEVEL 5 SECTOR NAME']
+                    result = sr['LEVEL5 SECTOR NAME']
                     break
 
             if result is not None:
