@@ -1,5 +1,9 @@
 from src import db, utils
 
+"""
+Nove spremenljivke annual
+"""
+
 def Current_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
@@ -67,14 +71,14 @@ def Cash_ratio():
                 if found:
                     break
 
-def Dept_ratio():
+def Debt_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
             found = False
             for row in rows:
                 for row1 in rows:
                     if 'TOTAL LIABILITIES' in row['Name'] and 'TOTAL ASSETS' in row1['Name']:
-                        new_row = utils.create_annual_row('DEPT RATIO', row)
+                        new_row = utils.create_annual_row('DEBT RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
                                 new_row[year] = float(row[year]) / float(row1[year])
@@ -87,14 +91,14 @@ def Dept_ratio():
                 if found:
                     break
 
-def Dept_to_equity_ratio():
+def Debt_to_equity_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
             found = False
             for row in rows:
                 for row1 in rows:
                     if 'TOTAL LIABILITIES' in row['Name'] and "COMMON SHAREHOLDERS'EQUITY" in row1['Name']:
-                        new_row = utils.create_annual_row('DEPT TO EQUITY RATIO', row)
+                        new_row = utils.create_annual_row('DEBT TO EQUITY RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
                                 new_row[year] = float(row[year]) / float(row1[year])

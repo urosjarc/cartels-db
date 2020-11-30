@@ -1,12 +1,10 @@
 import http
-from src.countryinfo import countries
 import json
 from datetime import datetime
+from src.countryinfo import countries
 import pathlib
 import os
 import urllib
-
-from src import domain, auth
 
 
 def reformat_value(val: str):
@@ -39,23 +37,6 @@ def currentDir(_file_, path):
     return str(pathlib.PurePath(_file_).parent.joinpath(path))
 
 
-def getCoordinates(query):
-    conn = http.client.HTTPConnection('api.positionstack.com')
-
-    params = urllib.parse.urlencode({
-        'access_key': auth.positionstack,
-        'query': query,
-        # 'region': region,
-        'limit': 1,
-    })
-
-    conn.request('GET', '/v1/forward?{}'.format(params))
-
-    res = conn.getresponse()
-    res: dict = json.loads(res.read())
-    data = res.get('data', [{}])
-    return domain.Path(data[0] if len(data) == 1 else {})
-
 def getCountryInfo(country):
     for c in countries:
         if c['name'] == country:
@@ -72,18 +53,83 @@ def parseDate(date: str):
     date_format = '%m/%d/%Y'
     return datetime.strptime(date, date_format)
 
+
 def exists(property: str) -> bool:
     if property is None:
         return False
     return len(str(property).strip()) > 0
+
 
 def absoluteFilePaths(directory):
     for dirpath, _, filenames in os.walk(directory):
         for f in filenames:
             yield os.path.abspath(os.path.join(dirpath, f))
 
+
 def getCode(code):
     return code.split("(")[0]
+
+def getName(name):
+    names = [
+        'NET SALES OR REVENUES',
+        'COST OF GOODS SOLD/SALES',
+        'TOTAL ASSETS',
+        'CASH',
+        'CURRENT ASSETS - TOTAL',
+        'TOTAL INVENTORIES',
+        'TOTAL LIABILITIES & SHAREHOLDE',
+        'TOTAL LIABILITIES',
+        "COMMON SHAREHOLDERS' EQUITY",
+        'LONG TERM DEBT',
+        'SHORT TERM DEBT & CURRENT PORT',
+        'RETAINED EARNINGS',
+        'WORKING CAPITAL',
+        'EARNINGS BEF INTEREST & TAXES',
+        'EBIT & DEPRECIATION',
+        'OPERATING INCOME',
+        'OPERATING PROFIT MARGIN',
+        'GROSS PROFIT MARGIN',
+        'EARNINGS PER SHR',
+        'EARNINGS PER SHARE',
+        'EMPLOYEES',
+        'ASSETS PER EMPLOYEE',
+        'INVENTORY TURNOVER',
+        'TOTAL ASSET TURNOVER',
+        'Involuntary Turnover of Employees',
+        'Voluntary Turnover of Employees',
+        'EX-DIVID DATE',
+        'DIV PAY DATE',
+        'DIVIDEND TYPE',
+        'DIVIDENDS PER SHARE - FISCAL',
+        'DIVIDENDS PER SHARE',
+        'DIVIDEND PAYOUT PER SHARE',
+        'DIVIDEND YIELD',
+        'RETURN ON ASSETS',
+        'RETURN ON EQUITY - TOTAL (%)',
+        'CURRENT LIABILITIES',
+        'COST OF GOODS SOLD (EXCL DEP)',
+        'NET INCOME - BASIC',
+        'NET INCOME BEFORE PREFERRED DI',
+
+        # New vars
+        'CURRENT RATIO',
+        'ACID TEST RATIO',
+        'CASH RATIO',
+        'DEBT RATIO',
+        'DEBT TO EQUITY RATIO',
+        'EQUITY RATIO'
+    ]
+    for n in names:
+        if n in name:
+            return n.\
+                replace(' ', '_')\
+                .replace('&_', '')\
+                .replace('-_', '')\
+                .replace('(', '')\
+                .replace(')', '')\
+                .replace("'", '')\
+                .replace("%", '')\
+                .lower().capitalize()
 
 def get_annual_years(row):
     names_dates = []
@@ -93,17 +139,15 @@ def get_annual_years(row):
 
     return names_dates
 
+
 def create_annual_row(new_var, row):
     names_dates = get_annual_years(row)
     d = {
         'Name': row['Name'].split('-')[0] + f' - {new_var}',
         'Code': row['Code'].split("(")[0],
         'CURRENCY': row['CURRENCY']
-     }
+    }
     for da in names_dates:
         d[str(da)] = 0
 
     return d
-
-
-

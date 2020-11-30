@@ -1,52 +1,31 @@
-from py2neo import Graph, NodeMatcher, RelationshipMatch
 import sys
+import csv
 from src import utils
-from src import auth as aut
-from src.domain import *
 from typing import List, Dict
 
-matcher: NodeMatcher = None
-graph: Graph = None
-
 this = sys.modules[__name__]
-this.graph: Graph = None
-this.matcher: NodeMatcher = None
 
-this.stock_meta_rows: List[StockMeta] = []
-this.A1012M_EU_rows= {}
-this.A1012M_LOCAL_rows= {}
-this.DSLOC_rows: List[StockDataOther] = []
-this.LEV2IN_REL = {}
-this.LEV2IN_rows: List[StockDataOther] = []
-this.LEV4SE_REL = {}
-this.LEV4SE_rows: List[StockDataOther] = []
-this.MLOC_rows: List[StockDataOther] = []
-this.TOTMKWD_rows: List[StockDataOther] = []
+this.stock_meta_rows = []
+this.A1012M_EU_rows = {}
+this.A1012M_LOCAL_rows = {}
 
+# INPUT
 this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
 this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual_data.csv')
 this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
-this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
-this.csvAnualLocalPathOut = utils.currentDir(__file__, '../data/csv/annual_local_out_tickers.csv')
-this.csvAnualEuPathOut = utils.currentDir(__file__, '../data/csv/annual_eu_out_tickers.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
-this.csvStockDataPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/A1012M/data'))]
-this.csvStockDataAnnualEuPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures_eu.csv')
-this.csvStockDataAnnualLocalPath = utils.currentDir(__file__, '../data/csv/A1012M/annual_figures_local.csv')
-this.csvStockData2RelIndustryPaths = utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV2IN.csv')
-this.csvStockData2IndustryPaths = [i for i in
-                                   utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/2IN'))]
+this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/')
 
-this.csvStockData4RelIndustryPaths = utils.currentDir(__file__, '../data/csv/LEV/REL_STOCK_LEV4SE.csv')
-this.csvStockData4IndustryPaths = [i for i in
-                                   utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/LEV/4SE'))]
-this.csvStockDataMLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/MLOC'))]
-this.csvStockDataDSLOCPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/DSLOC'))]
-this.csvStockDataTOTMKWDPaths = [i for i in utils.absoluteFilePaths(utils.currentDir(__file__, '../data/csv/TOTMKWD'))]
+# OUTPUT
+this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
+this.csvAnnualPathOut = utils.currentDir(__file__, '../data/csv/')
 
 # DATABASE
 core = None
 core_fields = None
+core_EC_annual_data: List[Dict] = []
+core_ECJ_annual_data: List[Dict] = []
+
 this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
 this.core_ECJ_annual_data: List[Dict] = []
@@ -72,63 +51,6 @@ def init_core():
     this.core_fields = list(this.core[0].keys())
 
 
-def save_core():
-    with open(this.csvCorePathOut, 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=this.core_fields)
-        writer.writeheader()
-        writer.writerows(this.core)
-
-    with open(this.csvAnualEuPathOut, 'w') as csvfile:
-        l = []
-        for k, rows in this.A1012M_EU_rows.items():
-            for row in rows:
-                l.append(row)
-
-        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
-        writer.writeheader()
-        writer.writerows(l)
-
-    with open(this.csvAnualLocalPathOut, 'w') as csvfile:
-        l = []
-        for k, rows in this.A1012M_LOCAL_rows.items():
-            for row in rows:
-                l.append(row)
-
-        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
-        writer.writeheader()
-        writer.writerows(l)
-
-
-def init():
-    init_db()
-
-    # init_LEV_REL()
-    #
-    # init_nodes_stock_meta()
-    # init_nodes_stock_data_A1012M()
-    init_nodes_stock_data_A1012M_EU_annual()
-
-    def industry_name(name):
-        return name.replace("WORLD-DS ", "").split(' - ')[0]
-
-    def mloc_name(name):
-        return name.split(' - ')[0]
-
-    def dsloc_name(name):
-        return name.split(' - ')[0].replace("-DS", "")
-
-    this.LEV2IN_rows = init_nodes_stock_data_other(this.csvStockData2IndustryPaths, industry_name, 'LEV2IN')
-    this.LEV4SE_rows = init_nodes_stock_data_other(this.csvStockData4IndustryPaths, industry_name, 'LEV4SE')
-    this.MLOC_rows = init_nodes_stock_data_other(this.csvStockDataMLOCPaths, mloc_name, 'MLOC')
-    this.DSLOC_rows = init_nodes_stock_data_other(this.csvStockDataDSLOCPaths, dsloc_name, 'DSLOC')
-    this.TOTMKWD_rows = init_nodes_stock_data_other(this.csvStockDataTOTMKWDPaths, dsloc_name, 'TOTMKWD')
-
-
-def init_db():
-    this.graph = Graph(uri=aut.dbUrl, auth=aut.neo4j, max_connection=3600 * 24 * 30, keep_alive=True)
-    this.matcher = NodeMatcher(this.graph)
-
-
 def init_nodes_stock_meta():
     with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
@@ -137,69 +59,25 @@ def init_nodes_stock_meta():
             this.stock_meta_rows.append(row)
 
 
-def init_nodes_stock_data_A1012M():
-    # GET ALL FILES
-    stockDatas = {}  # code -> path -> StockData
-    names = []
-    dates = {}
-    for path in this.csvStockDataPaths:
-        name = path.split("/")[-1].split(',')[1][1:].replace(' ', '_')
-        print(f'Parsing: [{name + "]":<30} {path.split("/")[-1]}')
+def init_nodes_annual(dir, saved_one=True):
+    this.A1012M_EU_rows = {}
+    this.A1012M_LOCAL_rows = {}
 
-        names.append(name)
-        dates[name] = None
-
-        sds = StockData.parse_A1012M(path)
-
-        # MERGE DATA
-        for sd in sds:
-            if dates[name] is None:
-                dates[name] = sd.dates
-
-            if sd.StockData in [None, '']:
-                continue
-
-            if sd.StockData not in stockDatas:
-                setattr(sd, name, sd.values)
-                setattr(sd, name + "_dates", sd.dates)
-                delattr(sd, 'values')
-                delattr(sd, 'dates')
-                stockDatas[sd.StockData] = sd
-            else:
-                nameVal = getattr(stockDatas[sd.StockData], name, None)
-                if nameVal is not None:
-                    raise Exception(f'{name} is occuring multiple times for {sd.StockData}')
-                setattr(stockDatas[sd.StockData], name, sd.values)
-                setattr(stockDatas[sd.StockData], name + '_dates', sd.dates)
-
-    # Adding missing properties
-    missingVal = 0
-    vals = 0
-    for code, stockData in stockDatas.items():
-        for n in names:
-            data = getattr(stockData, n, None)
-
-            if data is None:
-                zerros = [-1 for i in dates[n]]
-                setattr(stockData, n, zerros)
-                setattr(stockData, n + "_dates", dates[n])
-                missingVal += 1
-            else:
-                vals += 1
-    # Initing
-
-    for sd in stockDatas.values():
-        sd.type = 'A1012M'
-        sd._init()
-        this.A1012M_EU_rows.append(sd)
-
-
-def init_nodes_stock_data_A1012M_EU_annual():
-    with open(this.csvStockDataAnnualEuPath) as csvfile:
+    csvFile1 = None
+    if saved_one:
+        csvFile1 = open(this.csvStockDataAnnualPath + dir + '/annual_figures_eu_1.csv')
+    with open(this.csvStockDataAnnualPath + dir + '/annual_figures_eu.csv') as csvfile:
         reader = csv.DictReader(csvfile)
+        if saved_one:
+            reader1 = csv.DictReader(csvFile1)
         li = []
+
         for row in reader:
             li.append(row)
+        if saved_one:
+            for row1 in reader1:
+                li.append(row1)
+
         for l in li:
             if l['Name'] == '#ERROR':
                 continue
@@ -209,12 +87,18 @@ def init_nodes_stock_data_A1012M_EU_annual():
             else:
                 this.A1012M_EU_rows[ticker].append(l)
 
-def init_nodes_stock_data_A1012M_LOCAL_annual():
-    with open(this.csvStockDataAnnualLocalPath) as csvfile:
+    if saved_one:
+        csvFile1 = open(this.csvStockDataAnnualPath + dir + 'annual_figures_local_1.csv')
+    with open(this.csvStockDataAnnualPath + dir + 'annual_figures_local.csv') as csvfile:
         reader = csv.DictReader(csvfile)
+        if saved_one:
+            reader1 = csv.DictReader(csvFile1)
         li = []
         for row in reader:
             li.append(row)
+        if saved_one:
+            for row1 in reader1:
+                li.append(row1)
         for l in li:
             if l['Name'] == '#ERROR':
                 continue
@@ -224,163 +108,31 @@ def init_nodes_stock_data_A1012M_LOCAL_annual():
             else:
                 this.A1012M_LOCAL_rows[ticker].append(l)
 
-def init_nodes_stock_data_other(paths, nameReformat, type):
-    stockDatas = {}  # code -> path -> StockData
-    uniqueNames = set()
-    def_val = None
-    def_date = None
 
-    for path in paths:
-
-        name = path.split("/")[-1].split(',')[1][1:].replace(' ', '_')
-        uniqueNames.add(name)
-
-        print(f'Parsing: [{name + "]":<30} {path.split("/")[-1]}')
-
-        sds = StockDataOther.parse(path)
-
-        def_val = [-1 for _ in sds[0].values]
-        def_date = sds[0].dates
-
-        # MERGE DATA
-        for sd in sds:
-            sd.name = nameReformat(sd._data['Name'])
-
-            if sd.StockDataOther not in stockDatas:
-                setattr(sd, name, sd.values)
-                setattr(sd, name + "_dates", sd.dates)
-                delattr(sd, 'values')
-                delattr(sd, 'dates')
-                stockDatas[sd.StockDataOther] = sd
-            else:
-                nameVal = getattr(stockDatas[sd.StockDataOther], name, None)
-                if nameVal is not None:
-                    raise Exception(f'{name} is occuring multiple times for {sd.StockDataOther}')
-                setattr(stockDatas[sd.StockDataOther], name, sd.values)
-                setattr(stockDatas[sd.StockDataOther], name + '_dates', sd.dates)
-
-    arr = []
-    for sd in stockDatas.values():
-        diff = uniqueNames.difference(sd.__dict__.keys())
-        for att in diff:
-            setattr(sd, att, def_val)
-            setattr(sd, att + '_dates', def_date)
-
-        sd.type = type
-        sd._init()
-        arr.append(sd)
-
-    return arr
+def save_core():
+    with open(this.csvCorePathOut, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.core_fields)
+        writer.writeheader()
+        writer.writerows(this.core)
 
 
-def init_LEV_REL():
-    with open(this.csvStockData2RelIndustryPaths) as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            this.LEV2IN_REL[row['code']] = row['name']
+def save_annual():
+    with open(this.csvAnnualPathOut + '/annual_figures_eu.csv', 'w') as csvfile:
+        l = []
+        for k, rows in this.A1012M_EU_rows.items():
+            for row in rows:
+                l.append(row)
 
-    with open(this.csvStockData4RelIndustryPaths) as csvfile:
-        reader = csv.DictReader(csvfile, quotechar="'")
-        for row in reader:
-            this.LEV4SE_REL[row['code']] = row['name']
+        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
+        writer.writeheader()
+        writer.writerows(l)
 
-    pass
+    with open(this.csvAnnualPathOut + '/annual_figures_local.csv', 'w') as csvfile:
+        l = []
+        for k, rows in this.A1012M_LOCAL_rows.items():
+            for row in rows:
+                l.append(row)
 
-
-# DELETE ALL IN DATABASE
-def delete_all():
-    this.graph.delete_all()
-
-
-def create_nodes_stock_meta():
-    size_stock = len(this.stock_meta_rows)
-    for i, row in enumerate(this.stock_meta_rows):
-        if i % 100 == 0:
-            print(f'CREATING STOCK META NODES: {round(i / size_stock * 100)}%')
-
-        if row._exists:
-            this.graph.merge(row._instance, 'StockMeta', 'StockMeta')
-
-
-def create_nodes_stock_data():
-    for name in ["A1012M", "DSLOC", "LEV2IN", "LEV4SE", "MLOC", "TOTMKWD"]:
-        arr = getattr(this, name + "_rows")
-        size = len(arr)
-        parr = 'StockData' if name == "A1012M" else 'StockDataOther'
-        log_iter = ((size // 10) if size > 10 else size)
-        for i, row in enumerate(arr):
-            if i % log_iter == 0:
-                print(f'CREATING {name} NODES: {round(i / size * 100)}%')
-
-            if row._exists:
-                this.graph.merge(row._instance, parr, parr)
-
-
-def create_relationships_stock_A1012M():
-    size = len(this.A1012M_EU_rows)
-    for i, row in enumerate(this.A1012M_EU_rows):
-        if i % 5 == 0:
-            print(f'CONNECTING STOCK DATA A1012M: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {i} {row.__dict__}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockData) WHERE sm.StockMeta=$StockData AND sd.StockData=$StockData MERGE (sm)-[r:REL_STOCK_A1012M]->(sd) RETURN type(r)',
-            StockData=row.StockData)
-
-
-def create_relationships_stock_LEV2IN():
-    size = len(this.LEV2IN_rows)
-    for i, row in enumerate(this.LEV2IN_rows):
-        if i % 5 == 0:
-            print(f'CONNECTING STOCK DATA LEV2IN: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {i} {row.__dict__}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL2_SECTOR_NAME=$name AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_LEV2IN]->(sd) RETURN type(r)',
-            name=this.LEV2IN_REL[row.StockDataOther], code=row.StockDataOther)
-
-
-def create_relationships_stock_LEV4SE():
-    size = len(this.LEV4SE_rows)
-    for i, row in enumerate(this.LEV4SE_rows):
-        if i % 5 == 0:
-            print(f'CONNECTING STOCK DATA LEV4SE: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {i} {row.__dict__}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LEVEL4_SECTOR_NAME=$name AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_LEV4SE]->(sd) RETURN type(r)',
-            name=this.LEV4SE_REL[row.StockDataOther], code=row.StockDataOther)
-
-
-def create_relationships_stock_DSLOC():
-    size = len(this.DSLOC_rows)
-    for i, row in enumerate(this.DSLOC_rows):
-        if i % 5 == 0:
-            print(f'CONNECTING STOCK DATA DSLOC: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {i} {row.__dict__}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.DATASTREAM_INDEX=$code AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_DSLOC]->(sd) RETURN type(r)',
-            code=row.StockDataOther)
-
-
-def create_relationships_stock_MLOC():
-    size = len(this.MLOC_rows)
-    for i, row in enumerate(this.MLOC_rows):
-        if i % 5 == 0:
-            print(f'CONNECTING STOCK DATA MLOC: {round(i / size * 100)}%')
-
-        if not row._exists:
-            raise Exception(f'Not exists: {i} {row.__dict__}')
-
-        this.graph.run(
-            'MATCH (sm:StockMeta), (sd:StockDataOther) WHERE sm.LOCAL_INDEX=$code AND sd.StockDataOther=$code MERGE (sm)-[r:REL_STOCK_MLOC]->(sd) RETURN type(r)',
-            code=row.StockDataOther)
+        writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
+        writer.writeheader()
+        writer.writerows(l)
