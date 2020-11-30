@@ -71,15 +71,24 @@ def getCode(code):
 
 def getName(name):
     names = [
+        # New vars
+        'CURRENT RATIO',
+        'ACID TEST RATIO',
+        'CASH RATIO',
+        'DEBT RATIO',
+        'DEBT TO EQUITY RATIO',
+        'EQUITY RATIO',
+        
+        # Stare spremenljivke
         'NET SALES OR REVENUES',
         'COST OF GOODS SOLD/SALES',
         'TOTAL ASSETS',
         'CASH',
         'CURRENT ASSETS - TOTAL',
         'TOTAL INVENTORIES',
-        'TOTAL LIABILITIES & SHAREHOLDE',
+        'TOTAL_LIABILITIES & SHAREHOLDE',
         'TOTAL LIABILITIES',
-        "COMMON SHAREHOLDERS' EQUITY",
+        "COMMON SHAREHOLDERS EQUITY",
         'LONG TERM DEBT',
         'SHORT TERM DEBT & CURRENT PORT',
         'RETAINED EARNINGS',
@@ -110,14 +119,6 @@ def getName(name):
         'COST OF GOODS SOLD (EXCL DEP)',
         'NET INCOME - BASIC',
         'NET INCOME BEFORE PREFERRED DI',
-
-        # New vars
-        'CURRENT RATIO',
-        'ACID TEST RATIO',
-        'CASH RATIO',
-        'DEBT RATIO',
-        'DEBT TO EQUITY RATIO',
-        'EQUITY RATIO'
     ]
     for n in names:
         if n in name:

@@ -8,7 +8,7 @@ db.init_nodes_annual('/shranjeni/', saved_one=True)
 core_out_tickers.csv
 """
 # analysis_core.EC_duration()
-# analysis_core.EC_decision_year()
+analysis_core.EC_decision_year()
 # analysis_core.EC_decision_May_2004()
 # analysis_core.N_firms_within_EC_case()
 # analysis_core.N_firms_within_under()
@@ -75,8 +75,9 @@ core_out_tickers.csv
 # analysis_core.Case_cartel_VerR_undertaking()
 # analysis_core.Case_Ringleader_undertaking()
 #
-# analysis_core.Investigation_begin()
-# analysis_core.Investigation_begin_year()
+analysis_core.Investigation_begin()
+analysis_core.Investigation_begin_year()
+analysis_core.Dawn_raid_year()
 # analysis_core.InfringeDurationOverallFirm()
 # analysis_core.InfringeDurationOverallUndertaking()
 # analysis_core.Ticker_firm_D()
@@ -160,7 +161,9 @@ analysis_core.InfringeBeginYearCase()
 # analysis_core.Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific()
 # analysis_core.Dawn_raid_USA_Japan_D()
 # analysis_core.Extra_EU_ongoing_invest_D()
+analysis_core.GC_decision_year()
 # analysis_core.GC_columns()
+analysis_core.ECJ_decision_year()
 # analysis_core.ECJ_columns()
 # analysis_core.GC_N_judgements_on_EC_case_per_undertaking()
 # analysis_core.GC_N_judgements_on_EC_case()
@@ -282,14 +285,56 @@ analysis_anual.Debt_ratio()
 analysis_anual.Debt_to_equity_ratio()
 analysis_anual.Equity_ratio()
 
+'''
+Reloading with new rows
+'''
 db.save_annual()
-exit()
 db.init_nodes_annual('/../', saved_one=False)
 
 """
 annual connection to core
 """
-analysis_core_anual.Ime_Currency_Firm_infringement_begin_year()
+
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearFirm')
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearFirm', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearFirm', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearFirm', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Ticker_undertaking')
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Holding_Ticker_parent')
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Holding_Ticker_parent', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Holding_Ticker_parent', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('InfringeBeginYearUndertaking', ticker='Holding_Ticker_parent', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('Investigation_begin_year')
+analysis_core_anual.Ime_Currency_VAR('Investigation_begin_year', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('Investigation_begin_year', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('Investigation_begin_year', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('Dawn_raid_year')
+analysis_core_anual.Ime_Currency_VAR('Dawn_raid_year', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('Dawn_raid_year', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('Dawn_raid_year', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('EC_decision_year')
+analysis_core_anual.Ime_Currency_VAR('EC_decision_year', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('EC_decision_year', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('EC_decision_year', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('GC_decision_year')
+analysis_core_anual.Ime_Currency_VAR('GC_decision_year', year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('GC_decision_year', year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('GC_decision_year', year_minus=5)
+
+analysis_core_anual.Ime_Currency_VAR('ECJ_decision_year')
+analysis_core_anual.Ime_Currency_VAR('ECJ_decision_year',year_minus=1)
+analysis_core_anual.Ime_Currency_VAR('ECJ_decision_year',year_minus=3)
+analysis_core_anual.Ime_Currency_VAR('ECJ_decision_year',year_minus=5)
+
 
 db.save_core()
 db.save_annual()

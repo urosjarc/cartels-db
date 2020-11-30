@@ -2461,6 +2461,10 @@ def Investigation_begin_year():
     for row in db.core:
         row['Investigation_begin_year'] = row['Investigation_begin'].year
 
+def Dawn_raid_year():
+    db.core_fields.append('Dawn_raid_year')
+    for row in db.core:
+        row['Dawn_raid_year'] = row['Dawn_raid'].split('/')[-1]
 
 def Type_of_investigation_begin():
     db.core_fields.append('Type_of_investigation_begin')
@@ -2582,6 +2586,11 @@ def Extra_EU_ongoing_invest_D():
     for row in db.core:
         row['Extra_EU_ongoing_invest_D'] = 1 if utils.exists(row['Extra_EU_ongoing_invest']) else 0
 
+def GC_decision_year():
+    db.core_fields.append('GC_decision_year')
+    for row in db.core:
+        row['GC_decision_year'] = row['GC_Decision_date'].split('/')[-1]
+
 
 def GC_columns():
     cs = [
@@ -2677,6 +2686,10 @@ def GC_columns():
                 if utils.exists(row['GC_Decision_date']):
                     row[var] = 1 if allExists else 0
 
+def ECJ_decision_year():
+    db.core_fields.append('ECJ_decision_year')
+    for row in db.core:
+        row['ECJ_decision_year'] = row['ECJ_Decision_date'].split('/')[-1]
 
 def ECJ_columns():
     cs = [

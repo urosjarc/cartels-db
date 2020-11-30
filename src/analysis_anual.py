@@ -10,7 +10,7 @@ def Current_ratio():
             found = False
             for row in rows:
                 for row1 in rows:
-                    if 'CURRENT ASSETS - TOTAL' in row['Name'] and 'CURRENT LIABILITIES-TOTAL' in row1['Name']:
+                    if 'CURRENT ASSETS - TOTAL' in row['Name'] and 'CURRENT LIABILITIES' in row1['Name']:
                         new_row = utils.create_annual_row('CURRENT RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
@@ -18,7 +18,7 @@ def Current_ratio():
                             except Exception:
                                 new_row[year] = 'NA'
 
-                        db.A1012M_EU_rows[ticker].append(new_row)
+                        rows_group[ticker].append(new_row)
                         found = True
                         break
                 if found:
@@ -33,7 +33,7 @@ def Acid_test_ratio():
                     for row2 in rows:
                         if \
                                 'CURRENT ASSETS - TOTAL' in row['Name'] and\
-                                'CURRENT LIABILITIES-TOTAL' in row1['Name'] and\
+                                'CURRENT LIABILITIES' in row1['Name'] and\
                                 'TOTAL INVENTORIES' in row2['Name']:
 
                             new_row = utils.create_annual_row('ACID TEST RATIO', row)
@@ -43,7 +43,7 @@ def Acid_test_ratio():
                                 except Exception:
                                     new_row[year] = 'NA'
 
-                            db.A1012M_EU_rows[ticker].append(new_row)
+                            rows_group[ticker].append(new_row)
                             found = True
                             break
                     if found:
@@ -57,7 +57,7 @@ def Cash_ratio():
             found = False
             for row in rows:
                 for row1 in rows:
-                    if 'CASH' in row['Name'] and 'CURRENT LIABILITIES - TOTAL' in row1['Name']:
+                    if 'CASH' in row['Name'] and 'CURRENT LIABILITIES' in row1['Name']:
                         new_row = utils.create_annual_row('CASH RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
@@ -65,7 +65,7 @@ def Cash_ratio():
                             except Exception:
                                 new_row[year] = 'NA'
 
-                        db.A1012M_EU_rows[ticker].append(new_row)
+                        rows_group[ticker].append(new_row)
                         found = True
                         break
                 if found:
@@ -85,7 +85,7 @@ def Debt_ratio():
                             except Exception:
                                 new_row[year] = 'NA'
 
-                        db.A1012M_EU_rows[ticker].append(new_row)
+                        rows_group[ticker].append(new_row)
                         found = True
                         break
                 if found:
@@ -97,7 +97,7 @@ def Debt_to_equity_ratio():
             found = False
             for row in rows:
                 for row1 in rows:
-                    if 'TOTAL LIABILITIES' in row['Name'] and "COMMON SHAREHOLDERS'EQUITY" in row1['Name']:
+                    if 'TOTAL LIABILITIES' in row['Name'] and "COMMON SHAREHOLDERS EQUITY" in row1['Name']:
                         new_row = utils.create_annual_row('DEBT TO EQUITY RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
@@ -105,7 +105,7 @@ def Debt_to_equity_ratio():
                             except Exception:
                                 new_row[year] = 'NA'
 
-                        db.A1012M_EU_rows[ticker].append(new_row)
+                        rows_group[ticker].append(new_row)
                         found = True
                         break
                 if found:
@@ -117,7 +117,7 @@ def Equity_ratio():
             found = False
             for row in rows:
                 for row1 in rows:
-                    if "COMMON SHAREHOLDERS'EQUITY" in row['Name'] and "TOTAL ASSETS" in row1['Name']:
+                    if "COMMON SHAREHOLDERS EQUITY" in row['Name'] and "TOTAL ASSETS" in row1['Name']:
                         new_row = utils.create_annual_row('EQUITY RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
@@ -125,7 +125,7 @@ def Equity_ratio():
                             except Exception:
                                 new_row[year] = 'NA'
 
-                        db.A1012M_EU_rows[ticker].append(new_row)
+                        rows_group[ticker].append(new_row)
                         found = True
                         break
                 if found:
