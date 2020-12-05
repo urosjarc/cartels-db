@@ -123,6 +123,7 @@ def save_annual():
             for row in rows:
                 l.append(row)
 
+
         writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
         writer.writeheader()
         writer.writerows(l)
