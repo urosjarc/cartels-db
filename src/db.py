@@ -122,12 +122,11 @@ def init_nodes_A1012M():
                 this.core_A1012M[n].append(row)
 
 def save_A1012M():
-    for n in this.names_A1012M:
-        rows = this.core_A1012M[n]
-        with open(this.csvStockDataAnnualPath + f'/../{n}.csv', 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=rows[0].keys())
-            writer.writeheader()
-            writer.writerows(rows)
+    rows = this.core_A1012M_all
+    with open(this.csvStockDataAnnualPath + f'/../A1012M_all.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=rows[0].keys())
+        writer.writeheader()
+        writer.writerows(rows)
 
 def save_core():
     with open(this.csvCorePathOut, 'w') as csvfile:

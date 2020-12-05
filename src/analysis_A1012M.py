@@ -5,7 +5,7 @@ dates_names = [
     'Dawn_raid'
 ]
 def adjusted_price():
-    for row in db.core_A1012M:
+    for row in db.core_A1012M['adjusted_price_local']:
         for core_row in db.core:
             if utils.getCode(row['Code']) == core_row['Ticker_firm']:
                 for n in dates_names:
