@@ -1,8 +1,9 @@
-from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual
+from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M
 
 db.init_core()
 db.init_nodes_stock_meta()
 db.init_nodes_annual('/shranjeni/', saved_one=True)
+db.init_nodes_A1012M()
 
 """
 core_out_tickers.csv
@@ -258,7 +259,7 @@ analysis_core.ECJ_decision_year()
 #
 # analysis_stock.Active_ticker_D()
 # analysis_stock.Euro_currency_ticker_D()
-# analysis_stock.Active_date()
+analysis_stock.Active_date()
 # analysis_stock.Stock_exchange_name()
 # analysis_stock.Multiple_listings_D()
 # analysis_stock.Stock_indexing_D()
@@ -295,7 +296,7 @@ db.init_nodes_annual('/../', saved_one=False)
 annual connection to core
 """
 
-analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm')
+# analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=5)
@@ -303,7 +304,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=4)
 
-analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking')
+# analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=5)
@@ -311,7 +312,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=3, ticker='Ticker_undertaking')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=5, ticker='Ticker_undertaking')
 
-analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent')
+# analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent', year_minus=5)
@@ -319,7 +320,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=3, info='HOLDING', ticker='Holding_Ticker_parent')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=5, info='HOLDING', ticker='Holding_Ticker_parent')
 
-analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year')
+# analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year', year_minus=5)
@@ -327,7 +328,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Investigation_begin_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Investigation_begin_year', trend_year=5)
 
-analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year')
+# analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year', year_minus=5)
@@ -335,7 +336,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Dawn_raid_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Dawn_raid_year', trend_year=5)
 
-analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year')
+# analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year', year_minus=5)
@@ -343,7 +344,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('EC_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('EC_decision_year', trend_year=5)
 
-analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year')
+# analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year', year_minus=5)
@@ -351,7 +352,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('GC_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('GC_decision_year', trend_year=5)
 
-analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year')
+# analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year', year_minus=3)
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year', year_minus=5)
@@ -359,11 +360,17 @@ analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('ECJ_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('ECJ_decision_year', trend_year=5)
 
-analysis_core_anual.Ime__Currency__Infr_begin_to_Inv_Beg_trend()
-analysis_core_anual.Ime__Currency__Infr_begin_to_EC_Dec_trend()
-analysis_core_anual.Ime__Currency__Inv_begin_to_EC_Dec_trend()
-analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
-analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
+# analysis_core_anual.Ime__Currency__Infr_begin_to_Inv_Beg_trend()
+# analysis_core_anual.Ime__Currency__Infr_begin_to_EC_Dec_trend()
+# analysis_core_anual.Ime__Currency__Inv_begin_to_EC_Dec_trend()
+# analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
+# analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
+
+"""
+Analysis A1012M
+"""
+analysis_A1012M.adjusted_price()
 
 db.save_core()
 db.save_annual()
+db.save_A1012M()

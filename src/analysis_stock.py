@@ -53,14 +53,18 @@ def Active_date():
                 for sr in db.stock_meta_rows:
                     if row[ticker_type] == sr['Type']:
 
+                        base_date = utils.parseDate(sr['BASE OR ST DATE'])
                         date = utils.parseDate(row[date_var])
-                        inactive_date = utils.parseDate(sr['DEAD DATE'])
+                        dead_date = utils.parseDate(sr['DEAD DATE'])
 
-                        if date is not None and inactive_date is not None:
-                            result = 1 if date < inactive_date else 0
+                        if date is not None and base_date is not None:
+                            if dead_date is not None:
+                                result = base_date <= date <= dead_date
+                            else:
+                                result = base_date <= date
 
                 if result is not None:
-                    row[f'{var}_active_ticker_{type}'] = result
+                    row[f'{var}_active_ticker_{type}'] = 1 if result else 0
 
 
 def Stock_exchange_name():

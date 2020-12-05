@@ -30,6 +30,11 @@ this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
 this.core_ECJ_annual_data: List[Dict] = []
 this.core_fields: List[str] = []
+this.core_A1012M: dict = {}
+this.core_A1012M_all = []
+this.names_A1012M = [
+    'adjusted_price_local'
+]
 
 
 def init_core():
@@ -108,6 +113,21 @@ def init_nodes_annual(dir, saved_one=True):
             else:
                 this.A1012M_LOCAL_rows[ticker].append(l)
 
+def init_nodes_A1012M():
+    for n in this.names_A1012M:
+        with open(this.csvStockDataAnnualPath + f'/data/{n}.csv', 'r') as csvfile:
+            reader = csv.DictReader(csvfile)
+            this.core_A1012M[n] = []
+            for row in reader:
+                this.core_A1012M[n].append(row)
+
+def save_A1012M():
+    for n in this.names_A1012M:
+        rows = this.core_A1012M[n]
+        with open(this.csvStockDataAnnualPath + f'/../{n}.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=rows[0].keys())
+            writer.writeheader()
+            writer.writerows(rows)
 
 def save_core():
     with open(this.csvCorePathOut, 'w') as csvfile:

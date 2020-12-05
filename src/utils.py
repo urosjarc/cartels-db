@@ -152,3 +152,15 @@ def create_annual_row(new_var, row):
         d[str(da)] = 0
 
     return d
+
+def create_A1012M_row(name, row, date):
+    d = {
+        'Name': name + ' - ' + row['Name'],
+        'Code': row['Code'],
+        'CURRENCY': row['CURRENCY'],
+        'Date': date
+    }
+    for i in range(-300, 301):
+        d[i] = 0
+
+    return d
