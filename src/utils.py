@@ -1,6 +1,7 @@
 import http
+from src import utils
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from src.countryinfo import countries
 import pathlib
 import os
@@ -140,7 +141,6 @@ def get_annual_years(row):
 
     return names_dates
 
-
 def create_annual_row(new_var, row):
     names_dates = get_annual_years(row)
     d = {
@@ -153,14 +153,25 @@ def create_annual_row(new_var, row):
 
     return d
 
-def create_A1012M_row(name, row, date):
+def create_A1012M_row(name: str, row: dict, date: str):
     d = {
         'Name': name + ' - ' + row['Name'],
         'Code': row['Code'],
         'CURRENCY': row['CURRENCY'],
-        'Date': date
+        'Date': f'{date.month}/{date.day}/{date.year}' if isinstance(date, datetime) else date
     }
-    for i in range(-300, 301):
-        d[i] = 0
+    if isinstance(date, str):
+        date = utils.parseDate(date)
 
+    i = -300
+    count = -300
+    while True:
+        ndate = date + timedelta(days=i)
+        if ndate.weekday() not in [5, 6]:
+            value = row.get(f'{ndate.month}/{ndate.day}/{ndate.year}', None)
+            d[count] = value if value not in ['NA'] else None
+            count += 1
+        i+=1
+        if count == 300:
+            break
     return d
