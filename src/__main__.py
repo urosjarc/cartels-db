@@ -1,9 +1,10 @@
 from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M
 
+A1012M_type = input("Vnesi tip A1012M [local/euro]: ")
 db.init_core()
 db.init_nodes_stock_meta()
 db.init_nodes_annual('/shranjeni/', saved_one=True)
-db.init_nodes_A1012M()
+db.init_nodes_A1012M(A1012M_type)
 
 """
 core_out_tickers.csv
@@ -369,8 +370,10 @@ annual connection to core
 """
 Analysis A1012M
 """
-analysis_A1012M.adjusted_price()
+for name in db.names_A1012M:
+    print(f"Analysis A1012M: {name}")
+    analysis_A1012M.NAMES_A1012(name, A1012M_type)
 
 db.save_core()
 db.save_annual()
-db.save_A1012M()
+db.save_A1012M(A1012M_type)

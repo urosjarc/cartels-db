@@ -1,4 +1,6 @@
 import sys
+from os import listdir
+from os.path import isfile, join
 import csv
 from src import utils
 from typing import List, Dict
@@ -30,11 +32,14 @@ this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
 this.core_ECJ_annual_data: List[Dict] = []
 this.core_fields: List[str] = []
-this.core_A1012M: dict = {}
-this.core_A1012M_all = []
-this.names_A1012M = [
-    'adjusted_price_local'
-]
+
+this.core_A1012M_local: dict = {}
+this.core_A1012M_euro: dict = {}
+
+this.core_A1012M_all_euro = []
+this.core_A1012M_all_local = []
+
+this.names_A1012M = set()
 
 
 def init_core():
@@ -113,20 +118,51 @@ def init_nodes_annual(dir, saved_one=True):
             else:
                 this.A1012M_LOCAL_rows[ticker].append(l)
 
-def init_nodes_A1012M():
-    for n in this.names_A1012M:
-        with open(this.csvStockDataAnnualPath + f'/data/{n}.csv', 'r') as csvfile:
-            reader = csv.DictReader(csvfile)
-            this.core_A1012M[n] = []
-            for row in reader:
-                this.core_A1012M[n].append(row)
 
-def save_A1012M():
-    rows = this.core_A1012M_all
-    with open(this.csvStockDataAnnualPath + f'/../A1012M_all.csv', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=rows[0].keys())
-        writer.writeheader()
-        writer.writerows(rows)
+def init_nodes_A1012M(type):
+    local_path = this.csvStockDataAnnualPath + f'/data/local'
+    euro_path = this.csvStockDataAnnualPath + f'/data/euro'
+
+    local_files = [f for f in listdir(local_path) if isfile(join(local_path, f))]
+    euro_files = [f for f in listdir(euro_path) if isfile(join(euro_path, f))]
+
+    if type == 'local':
+        for n in local_files:
+            name = n.split(", ")[1].replace(' ', '_')
+            this.names_A1012M.add(name)
+            with open(this.csvStockDataAnnualPath + f'/data/local/{n}', 'r', errors='ignore') as csvfile:
+                print(csvfile.name)
+                reader = csv.DictReader(csvfile)
+                this.core_A1012M_local[name] = []
+                for row in reader:
+                    this.core_A1012M_local[name].append(row)
+
+    if type == 'euro':
+        for n in euro_files:
+            name = n.split(", ")[1].replace(' ', '_')
+            this.names_A1012M.add(name)
+            with open(this.csvStockDataAnnualPath + f'/data/euro/{n}', 'r', errors='ignore') as csvfile:
+                reader = csv.DictReader(csvfile)
+                this.core_A1012M_euro[name] = []
+                for row in reader:
+                    this.core_A1012M_euro[name].append(row)
+
+
+def save_A1012M(type):
+    rows_local = this.core_A1012M_all_local
+    rows_euro = this.core_A1012M_all_euro
+    if type == 'local':
+        with open(this.csvStockDataAnnualPath + f'/../A1012M_local.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=rows_local[0].keys())
+            writer.writeheader()
+            writer.writerows(rows_local)
+
+    if type == 'euro':
+        with open(this.csvStockDataAnnualPath + f'/../A1012M_euro.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=rows_euro[0].keys())
+            writer.writeheader()
+            writer.writerows(rows_euro)
+
 
 def save_core():
     with open(this.csvCorePathOut, 'w') as csvfile:
@@ -141,7 +177,6 @@ def save_annual():
         for k, rows in this.A1012M_EU_rows.items():
             for row in rows:
                 l.append(row)
-
 
         writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
         writer.writeheader()

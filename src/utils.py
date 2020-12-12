@@ -172,6 +172,6 @@ def create_A1012M_row(name: str, row: dict, date: str):
             d[count] = value if value not in ['NA'] else None
             count += 1
         i+=1
-        if count == 300:
+        if count == 302:
             break
     return d
