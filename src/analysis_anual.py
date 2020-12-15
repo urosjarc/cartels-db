@@ -14,7 +14,7 @@ def Current_ratio():
                         new_row = utils.create_annual_row('CURRENT RATIO', row)
                         for year in utils.get_annual_years(row):
                             try:
-                                new_row[year] = float(row[year]) - float(row1[year])
+                                new_row[year] = float(row[year]) / float(row1[year])
                             except Exception:
                                 new_row[year] = 'NA'
 

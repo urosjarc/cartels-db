@@ -153,11 +153,14 @@ def create_annual_row(new_var, row):
 
     return d
 
-def create_A1012M_row(name: str, row: dict, date: str):
+def create_A1012M_row(name: str, row: dict, date: str, VAR=None):
     d = {
-        'Name': name + ' - ' + row['Name'],
+        'Name': row['Name'],
+        'Var': VAR,
+        'Ticker': utils.getCode(row['Code']),
         'Code': row['Code'],
         'CURRENCY': row['CURRENCY'],
+        'Date_type': name,
         'Date': f'{date.month}/{date.day}/{date.year}' if isinstance(date, datetime) else date
     }
     if isinstance(date, str):
@@ -175,3 +178,15 @@ def create_A1012M_row(name: str, row: dict, date: str):
         if count == 302:
             break
     return d
+
+def find_closest_value(row, zero_day):
+    for day_delta in range(0, 40):
+        plus_day = row[zero_day + day_delta]
+        minus_day = row[zero_day - day_delta]
+        if plus_day is not None:
+            return (float(plus_day), +day_delta)
+        elif minus_day is not None:
+            return (float(minus_day), -day_delta)
+
+    return (None, None)
+

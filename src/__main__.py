@@ -79,6 +79,7 @@ analysis_core.EC_decision_year()
 #
 analysis_core.Investigation_begin()
 analysis_core.Investigation_begin_year()
+analysis_core.Investigation_begin_without_dawn_raid()
 analysis_core.Dawn_raid_year()
 # analysis_core.InfringeDurationOverallFirm()
 # analysis_core.InfringeDurationOverallUndertaking()
@@ -374,6 +375,17 @@ for name in db.names_A1012M:
     print(f"Analysis A1012M: {name}")
     analysis_A1012M.NAMES_A1012(name, A1012M_type)
 
+'''
+New wars in A1012M
+'''
+analysis_A1012M.momentum_year(A1012M_type)
+analysis_A1012M.raw_returns(A1012M_type)
+analysis_A1012M.ln_returns(A1012M_type)
+analysis_A1012M.raw_volume_turn_over(A1012M_type)
+analysis_A1012M.ln_volume_turn_over(A1012M_type)
+
+print("Saving A1012M...")
+db.save_A1012M(A1012M_type)
+
 db.save_core()
 db.save_annual()
-db.save_A1012M(A1012M_type)

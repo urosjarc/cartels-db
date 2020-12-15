@@ -5,6 +5,12 @@ this = sys.modules[__name__]
 this.COLUMS_Ime_Currency_VAR_Info = []
 this.COLUMS_Ime_Currency_VAR_Info_YearTrend = []
 
+matcher = {
+    'Ticker_firm': 'firm',
+    'Ticker_undertaking': 'undertaking',
+    'Holding_Ticker_parent': 'holding'
+}
+
 def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
     print("ANALYSIS CORE ANNUAL: ", VAR, year_minus)
     colums = set()
@@ -25,7 +31,7 @@ def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
                             raise Exception(annual_row['Name'])
 
                         value = annual_row.get(str(int(core_row[VAR])-year_minus), None)
-                        colum_name = f'{name}__{currency}__{VAR}_{info}' + ('' if year_minus == 0 else f'{year_minus}')
+                        colum_name = f'{name}__{currency}__{VAR}__{matcher[ticker]}__{info}' + ('' if year_minus == 0 else f'{year_minus}')
                         core_row[colum_name] = value
                         colums.add(colum_name)
 
@@ -53,7 +59,7 @@ def Ime_Currency_VAR_Info_YearTrend(VAR, trend_year, ticker='Ticker_firm', info=
 
                         value0 = annual_row.get(str(int(core_row[VAR])), None)
                         valueX = annual_row.get(str(int(core_row[VAR])-trend_year), None)
-                        colum_name = f'{name}__{currency}__{VAR}_{info}_{trend_year}trend'
+                        colum_name = f'{name}__{currency}__{VAR}__{matcher[ticker]}__{info}_{trend_year}trend'
                         try:
                             if None not in [valueX, value0] and 'NA' not in [value0, valueX] and float(valueX) != 0:
                                 core_row[colum_name] = float(value0)/float(valueX)

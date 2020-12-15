@@ -1005,6 +1005,18 @@ def Investigation_begin():
 
         row['Investigation_begin'] = min(dates)
 
+def Investigation_begin_without_dawn_raid():
+    db.core_fields.append('Investigation_begin_without_dawn_raid')
+    for row in db.core:
+
+        inv_begin = row['Investigation_begin']
+        dawn_raid = utils.parseDate(row['Dawn_raid'])
+
+        if dawn_raid not in [1, None]:
+            row['Investigation_begin_without_dawn_raid'] = inv_begin if inv_begin < dawn_raid else dawn_raid
+        else:
+            row['Investigation_begin_without_dawn_raid'] = inv_begin
+
 
 def InfringeDurationOverallFirm():
     db.core_fields.append('InfringeDurationOverallFirm')
@@ -4056,3 +4068,5 @@ def Settlement_regulation_D_EC_decision():
     for row in db.core:
         row['Settlement_regulation_D_EC_decision'] = 1 if utils.parseDate(d) <= utils.parseDate(
             row['EC_Date_of_decision']) else 0
+
+
