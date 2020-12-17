@@ -53,15 +53,21 @@ def momentum_year(type):
                 row['Momentum_year_delta260'] = day260_delta
             else:
                 row['Momentum_year'] = None
+                row['Momentum_year_delta0'] = None
+                row['Momentum_year_delta260'] = None
         else:
             row['Momentum_year'] = None
+            row['Momentum_year_delta0'] = None
+            row['Momentum_year_delta260'] = None
 
 def ln_returns(type):
     print('ln_returns', type)
     dict_type = db.core_A1012M_all_local if type == 'local' else db.core_A1012M_all_euro
+    rows = []
     for row in dict_type:
-        if row['Var'] in ['unadjusted_price', 'adjusted_price', 'turnover_volume', 'price_index']:
+        if row['Var'] in ['unadjusted_price', 'adjusted_price', 'turnover_volume']:
             row_copy = deepcopy(row)
+            row_copy['Var'] = 'ln_returns'
             for i in range(-300, 301):
                 today = row[i+1]
                 yesterday = row[i]
@@ -74,14 +80,17 @@ def ln_returns(type):
                         row_copy[i] = None
                 else:
                     row_copy[i] = None
-            dict_type.append(row_copy)
+            rows.append(row_copy)
+    dict_type += rows
 
 def raw_returns(type):
     print('raw_returns', type)
     dict_type = db.core_A1012M_all_local if type == 'local' else db.core_A1012M_all_euro
+    rows = []
     for row in dict_type:
         if row['Var'] in ['unadjusted_price', 'adjusted_price', 'turnover_volume', 'price_index']:
             row_copy = deepcopy(row)
+            row_copy['Var'] = 'raw_returns'
             for i in range(-300, 301):
                 today = row[i+1]
                 yesterday = row[i]
@@ -94,4 +103,5 @@ def raw_returns(type):
                         row_copy[i] = None
                 else:
                     row_copy[i] = None
-            dict_type.append(row_copy)
+            rows.append(row_copy)
+    dict_type += rows

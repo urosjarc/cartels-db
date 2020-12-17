@@ -381,8 +381,6 @@ New wars in A1012M
 analysis_A1012M.momentum_year(A1012M_type)
 analysis_A1012M.raw_returns(A1012M_type)
 analysis_A1012M.ln_returns(A1012M_type)
-analysis_A1012M.raw_volume_turn_over(A1012M_type)
-analysis_A1012M.ln_volume_turn_over(A1012M_type)
 
 print("Saving A1012M...")
 db.save_A1012M(A1012M_type)
