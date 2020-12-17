@@ -1,10 +1,10 @@
 from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M
 
-A1012M_type = input("Vnesi tip A1012M [local/euro]: ")
 db.init_core()
 db.init_nodes_stock_meta()
 db.init_nodes_annual('/shranjeni/', saved_one=True)
-db.init_nodes_A1012M(A1012M_type)
+# A1012M_type = db.init_nodes_A1012M()
+db.init_nodes_market_indices()
 
 """
 core_out_tickers.csv
@@ -368,22 +368,23 @@ annual connection to core
 # analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
 # analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
 
-"""
-Analysis A1012M
-"""
-for name in db.names_A1012M:
-    print(f"Analysis A1012M: {name}")
-    analysis_A1012M.NAMES_A1012(name, A1012M_type)
+if analysis_A1012M != None:
+    """
+    Analysis A1012M
+    """
+    for name in db.names_A1012M:
+        print(f"Analysis A1012M: {name}")
+        analysis_A1012M.NAMES_A1012(name, A1012M_type)
 
-'''
-New wars in A1012M
-'''
-analysis_A1012M.momentum_year(A1012M_type)
-analysis_A1012M.raw_returns(A1012M_type)
-analysis_A1012M.ln_returns(A1012M_type)
+    '''
+    New wars in A1012M
+    '''
+    analysis_A1012M.momentum_year(A1012M_type)
+    analysis_A1012M.raw_returns(A1012M_type)
+    analysis_A1012M.ln_returns(A1012M_type)
 
-print("Saving A1012M...")
-db.save_A1012M(A1012M_type)
+    print("Saving A1012M...")
+    db.save_A1012M(A1012M_type)
 
 db.save_core()
 db.save_annual()

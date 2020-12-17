@@ -153,8 +153,9 @@ def create_annual_row(new_var, row):
 
     return d
 
-def create_A1012M_row(name: str, row: dict, date: str, VAR=None):
+def create_A1012M_MI_row(name: str, row: dict, date: str, VAR=None, TYPE=None):
     d = {
+        'Type': TYPE,
         'Name': row['Name'],
         'Var': VAR,
         'Ticker': utils.getCode(row['Code']),

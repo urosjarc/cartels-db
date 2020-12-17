@@ -19,7 +19,7 @@ def NAMES_A1012(name: str, type):
                 if ticker_code is not None and ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
                     for n in dates_names:
                         if core_row[n] is not None and core_row[n] != '':
-                            new_row = utils.create_A1012M_row(n, row, core_row[n], VAR=name)
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row[n], VAR=name, TYPE='A1012M')
                             db.core_A1012M_all_local.append(new_row)
 
     if type == 'euro':
@@ -31,7 +31,7 @@ def NAMES_A1012(name: str, type):
                 if ticker_code is not None and ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
                     for n in dates_names:
                         if core_row[n] is not None and core_row[n] != '':
-                            new_row = utils.create_A1012M_row(n, row, core_row[n], VAR=name)
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row[n], VAR=name, TYPE='A1012M')
                             db.core_A1012M_all_euro.append(new_row)
 
 def momentum_year(type):

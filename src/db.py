@@ -17,6 +17,7 @@ this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual
 this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
 this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/')
+this.csvPath = utils.currentDir(__file__, '../data/csv/')
 
 # OUTPUT
 this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
@@ -27,6 +28,7 @@ core = None
 core_fields = None
 core_EC_annual_data: List[Dict] = []
 core_ECJ_annual_data: List[Dict] = []
+core_market_indices: Dict[str,Dict[str,list]] = {}
 
 this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
@@ -35,9 +37,11 @@ this.core_fields: List[str] = []
 
 this.core_A1012M_local: dict = {}
 this.core_A1012M_euro: dict = {}
-
 this.core_A1012M_all_euro = []
 this.core_A1012M_all_local = []
+
+this.core_market_indices = {}
+this.core_market_indices_all = {}
 
 this.names_A1012M = set()
 
@@ -119,7 +123,8 @@ def init_nodes_annual(dir, saved_one=True):
                 this.A1012M_LOCAL_rows[ticker].append(l)
 
 
-def init_nodes_A1012M(type):
+def init_nodes_A1012M():
+    type = input("Vnesi tip A1012M [local/euro]: ")
     local_path = this.csvStockDataAnnualPath + f'/data/local'
     euro_path = this.csvStockDataAnnualPath + f'/data/euro'
 
@@ -147,6 +152,29 @@ def init_nodes_A1012M(type):
                 for row in reader:
                     this.core_A1012M_euro[name].append(row)
 
+    return A1012M_type
+
+def init_nodes_market_indices():
+    paths = [
+        this.csvPath + f'/LEV/2IN',
+        this.csvPath + f'/LEV/4SE',
+        this.csvPath + f'/DSLOC',
+        this.csvPath + f'/MLOC',
+        this.csvPath + f'/TOTMKWD',
+    ]
+    for path in paths:
+        files_paths = [f for f in listdir(path) if isfile(join(path, f))]
+        dicts = {}
+        for file_path in files_paths:
+            name = file_path.split(", ")[1].replace(' ', '_')
+            with open(f'{path}/{file_path}', 'r', errors='ignore') as csvfile:
+                print(csvfile.name)
+                reader = csv.DictReader(csvfile)
+                dicts[name] = []
+                for row in reader:
+                    dicts[name].append(row)
+        this.core_market_indices[path.split('/')[-1]] = dicts
+    pass
 
 def save_A1012M(type):
     rows_local = this.core_A1012M_all_local
