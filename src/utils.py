@@ -153,15 +153,17 @@ def create_annual_row(new_var, row):
 
     return d
 
-def create_A1012M_MI_row(name: str, row: dict, date: str, VAR=None, TYPE=None):
+def create_A1012M_MI_row(date_name: str, row: dict, core_row, VAR=None, TYPE=None, index=None, ticker=None):
+    date = core_row[date_name]
     d = {
         'Type': TYPE,
         'Name': row['Name'],
         'Var': VAR,
-        'Ticker': utils.getCode(row['Code']),
+        'Ticker': ticker,
+        'Index': index,
         'Code': row['Code'],
         'CURRENCY': row['CURRENCY'],
-        'Date_type': name,
+        'Date_type': date_name,
         'Date': f'{date.month}/{date.day}/{date.year}' if isinstance(date, datetime) else date
     }
     if isinstance(date, str):

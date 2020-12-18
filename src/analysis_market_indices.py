@@ -9,18 +9,20 @@ dates_names = [
     'GC_Decision_date',
     "ECJ_Decision_date",
 ]
-def NAMES(name: str):
-    for TYPE, dicts in db.core_market_indices[name]:
-        for VAR, rows in dicts.items():
+def NAMES_DSLOC():
+        for VAR, rows in db.core_market_indices['DSLOC'].items():
             for row in rows:
-                if row['Name'] == '#ERROR':
-                    continue
+                code = utils.getCode(row['Code'])
+                ticker_code = None
+                for meta_row in db.stock_meta_rows:
+                    if meta_row['DATASTREAM INDEX'] == code:
+                        ticker_code = meta_row['Type']
+                        break
                 for core_row in db.core:
-                    ticker_code = utils.getCode(row['Code']) # Todo: Kako se market indices povezujejo z corom?
-                    if ticker_code is not None and ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                    if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
                         for n in dates_names:
                             if core_row[n] is not None and core_row[n] != '':
-                                new_row = utils.create_A1012M_MI_row(n, row, core_row[n], VAR=VAR, TYPE=TYPE)
+                                new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='DSLOC', ticker=ticker_code, index=code)
                                 db.core_market_indices_all.append(new_row)
 
 # def momentum_year(type):

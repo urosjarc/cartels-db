@@ -21,6 +21,7 @@ this.csvPath = utils.currentDir(__file__, '../data/csv/')
 
 # OUTPUT
 this.csvCorePathOut = utils.currentDir(__file__, '../data/csv/core_out_tickers.csv')
+this.csvMarketIndicesOut = utils.currentDir(__file__, '../data/csv/core_market_indices.csv')
 this.csvAnnualPathOut = utils.currentDir(__file__, '../data/csv/')
 
 # DATABASE
@@ -41,7 +42,7 @@ this.core_A1012M_all_euro = []
 this.core_A1012M_all_local = []
 
 this.core_market_indices = {}
-this.core_market_indices_all = {}
+this.core_market_indices_all = []
 
 this.names_A1012M = set()
 
@@ -174,7 +175,6 @@ def init_nodes_market_indices():
                 for row in reader:
                     dicts[name].append(row)
         this.core_market_indices[path.split('/')[-1]] = dicts
-    pass
 
 def save_A1012M(type):
     rows_local = this.core_A1012M_all_local
@@ -219,3 +219,10 @@ def save_annual():
         writer = csv.DictWriter(csvfile, fieldnames=l[0].keys())
         writer.writeheader()
         writer.writerows(l)
+
+
+def save_market_indices():
+    with open(this.csvMarketIndicesOut, 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.core_market_indices_all[0].keys())
+        writer.writeheader()
+        writer.writerows(this.core_market_indices_all)

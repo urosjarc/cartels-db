@@ -1,9 +1,9 @@
-from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M
+from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M, analysis_market_indices
 
 db.init_core()
 db.init_nodes_stock_meta()
 db.init_nodes_annual('/shranjeni/', saved_one=True)
-# A1012M_type = db.init_nodes_A1012M()
+A1012M_type = None #db.init_nodes_A1012M()
 db.init_nodes_market_indices()
 
 """
@@ -386,5 +386,9 @@ if analysis_A1012M != None:
     print("Saving A1012M...")
     db.save_A1012M(A1012M_type)
 
+
+analysis_market_indices.NAMES_DSLOC()
+
+db.save_market_indices()
 db.save_core()
 db.save_annual()
