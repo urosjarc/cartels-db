@@ -388,6 +388,10 @@ if analysis_A1012M != None:
 
 
 analysis_market_indices.NAMES_DSLOC()
+analysis_market_indices.NAMES_LEV2IN()
+analysis_market_indices.NAMES_LEV4SE()
+analysis_market_indices.NAMES_MLOC()
+analysis_market_indices.NAMES_TOTMKWD()
 
 db.save_market_indices()
 db.save_core()

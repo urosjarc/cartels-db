@@ -29,7 +29,7 @@ core = None
 core_fields = None
 core_EC_annual_data: List[Dict] = []
 core_ECJ_annual_data: List[Dict] = []
-core_market_indices: Dict[str,Dict[str,list]] = {}
+core_market_indices: Dict[str, Dict[str, list]] = {}
 
 this.core: List[Dict] = []
 this.core_EC_annual_data: List[Dict] = []
@@ -43,6 +43,8 @@ this.core_A1012M_all_local = []
 
 this.core_market_indices = {}
 this.core_market_indices_all = []
+this.REL_STOCK_LEV2IN = []
+this.REL_STOCK_LEV4SE = []
 
 this.names_A1012M = set()
 
@@ -155,6 +157,7 @@ def init_nodes_A1012M():
 
     return A1012M_type
 
+
 def init_nodes_market_indices():
     paths = [
         this.csvPath + f'/LEV/2IN',
@@ -175,6 +178,18 @@ def init_nodes_market_indices():
                 for row in reader:
                     dicts[name].append(row)
         this.core_market_indices[path.split('/')[-1]] = dicts
+
+    with open(f'{this.csvPath}/LEV/REL_STOCK_LEV2IN.csv', 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.REL_STOCK_LEV2IN.append(row)
+    with open(f'{this.csvPath}/LEV/REL_STOCK_LEV4SE.csv', 'r') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.REL_STOCK_LEV4SE.append(row)
+
+
+
 
 def save_A1012M(type):
     rows_local = this.core_A1012M_all_local

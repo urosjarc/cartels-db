@@ -9,6 +9,7 @@ dates_names = [
     'GC_Decision_date',
     "ECJ_Decision_date",
 ]
+
 def NAMES_DSLOC():
         for VAR, rows in db.core_market_indices['DSLOC'].items():
             for row in rows:
@@ -24,6 +25,76 @@ def NAMES_DSLOC():
                             if core_row[n] is not None and core_row[n] != '':
                                 new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='DSLOC', ticker=ticker_code, index=code)
                                 db.core_market_indices_all.append(new_row)
+
+def NAMES_TOTMKWD():
+    for VAR, rows in db.core_market_indices['TOTMKWD'].items():
+        row = rows[0]
+        code = utils.getCode(row['Code'])
+        for meta_row in db.stock_meta_rows:
+            ticker_code = meta_row['Type']
+            for core_row in db.core:
+                if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                    for n in dates_names:
+                        if core_row[n] is not None and core_row[n] != '':
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='TOTMKWD', ticker=ticker_code, index=code)
+                            db.core_market_indices_all.append(new_row)
+def NAMES_MLOC():
+    for VAR, rows in db.core_market_indices['MLOC'].items():
+        for row in rows:
+            code = utils.getCode(row['Code'])
+            ticker_code = None
+            for meta_row in db.stock_meta_rows:
+                if meta_row['LOCAL INDEX'] == code:
+                    ticker_code = meta_row['Type']
+                    break
+            for core_row in db.core:
+                if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                    for n in dates_names:
+                        if core_row[n] is not None and core_row[n] != '':
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='MLOC', ticker=ticker_code, index=code)
+                            db.core_market_indices_all.append(new_row)
+
+def NAMES_LEV2IN():
+    for VAR, rows in db.core_market_indices['2IN'].items():
+        for row in rows:
+            code = utils.getCode(row['Code'])
+            industry_name = None
+            for rel_row in db.REL_STOCK_LEV2IN:
+                if rel_row['code'] == code:
+                    industry_name = rel_row['name']
+                    break
+            ticker_code = None
+            for meta_row in db.stock_meta_rows:
+                if meta_row['LEVEL2 SECTOR NAME'] == industry_name:
+                    ticker_code = meta_row['Type']
+                    break
+            for core_row in db.core:
+                if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                    for n in dates_names:
+                        if core_row[n] is not None and core_row[n] != '':
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='LEV2IN', ticker=ticker_code, index=code)
+                            db.core_market_indices_all.append(new_row)
+
+def NAMES_LEV4SE():
+    for VAR, rows in db.core_market_indices['4SE'].items():
+        for row in rows:
+            code = utils.getCode(row['Code'])
+            industry_name = None
+            for rel_row in db.REL_STOCK_LEV4SE:
+                if rel_row['code'] == code:
+                    industry_name = rel_row['name']
+                    break
+            ticker_code = None
+            for meta_row in db.stock_meta_rows:
+                if meta_row['LEVEL4 SECTOR NAME'] == industry_name:
+                    ticker_code = meta_row['Type']
+                    break
+            for core_row in db.core:
+                if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                    for n in dates_names:
+                        if core_row[n] is not None and core_row[n] != '':
+                            new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='LEV4SE', ticker=ticker_code, index=code)
+                            db.core_market_indices_all.append(new_row)
 
 # def momentum_year(type):
 #     print('momentum_year', type)

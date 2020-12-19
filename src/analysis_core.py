@@ -1013,7 +1013,7 @@ def Investigation_begin_without_dawn_raid():
         dawn_raid = utils.parseDate(row['Dawn_raid'])
 
         if dawn_raid not in [1, None]:
-            row['Investigation_begin_without_dawn_raid'] = inv_begin if inv_begin < dawn_raid else dawn_raid
+            row['Investigation_begin_without_dawn_raid'] = inv_begin if inv_begin < dawn_raid else None
         else:
             row['Investigation_begin_without_dawn_raid'] = inv_begin
 
