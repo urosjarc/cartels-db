@@ -15,7 +15,7 @@ def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
     print("ANALYSIS CORE ANNUAL: ", VAR, year_minus)
     colums = set()
     for i, rows_group in enumerate([db.A1012M_EU_rows, db.A1012M_LOCAL_rows]):
-        currency = "euros" if i==0 else "local"
+        currency = "E" if i==0 else "L"
         for annual_ticker, annual_rows in rows_group.items():
             for core_row in db.core:
                 if core_row[ticker] == annual_ticker:
@@ -44,7 +44,7 @@ def Ime_Currency_VAR_Info_YearTrend(VAR, trend_year, ticker='Ticker_firm', info=
     print("ANALYSIS CORE ANNUAL TREND: ", VAR, trend_year)
     colums = set()
     for i, rows_group in enumerate([db.A1012M_EU_rows, db.A1012M_LOCAL_rows]):
-        currency = "euros" if i==0 else "local"
+        currency = "E" if i==0 else "L"
         for annual_ticker, annual_rows in rows_group.items():
             for core_row in db.core:
                 if core_row[ticker] == annual_ticker:

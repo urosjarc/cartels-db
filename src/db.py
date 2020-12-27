@@ -12,10 +12,10 @@ this.A1012M_EU_rows = {}
 this.A1012M_LOCAL_rows = {}
 
 # INPUT
-this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/core.csv')
-this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/core_EC_annual_data.csv')
-this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/core_ECJ_annual_data.csv')
-this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/stock-meta.csv')
+this.csvCorePathIn = utils.currentDir(__file__, '../data/csv/CORE/core.csv')
+this.csv_EC_annual_data = utils.currentDir(__file__, '../data/csv/CORE/core_EC_annual_data.csv')
+this.csv_ECJ_annual_data = utils.currentDir(__file__, '../data/csv/CORE/core_ECJ_annual_data.csv')
+this.csvStockMetaPath = utils.currentDir(__file__, '../data/csv/CORE/stock-meta.csv')
 this.csvStockDataAnnualPath = utils.currentDir(__file__, '../data/csv/A1012M/')
 this.csvPath = utils.currentDir(__file__, '../data/csv/')
 
@@ -139,7 +139,7 @@ def init_nodes_A1012M():
             name = n.split(", ")[1].replace(' ', '_')
             this.names_A1012M.add(name)
             with open(this.csvStockDataAnnualPath + f'/data/local/{n}', 'r', errors='ignore') as csvfile:
-                print(csvfile.name)
+                # print(csvfile.name)
                 reader = csv.DictReader(csvfile)
                 this.core_A1012M_local[name] = []
                 for row in reader:
@@ -155,7 +155,7 @@ def init_nodes_A1012M():
                 for row in reader:
                     this.core_A1012M_euro[name].append(row)
 
-    return A1012M_type
+    return type
 
 
 def init_nodes_market_indices():
@@ -171,24 +171,26 @@ def init_nodes_market_indices():
         dicts = {}
         for file_path in files_paths:
             name = file_path.split(", ")[1].replace(' ', '_')
+            currency = file_path.split("__")[-1].replace(".csv", "")
             with open(f'{path}/{file_path}', 'r', errors='ignore') as csvfile:
-                print(csvfile.name)
+                # print(csvfile.name)
                 reader = csv.DictReader(csvfile)
                 dicts[name] = []
                 for row in reader:
+                    row['currency'] = currency
                     dicts[name].append(row)
         this.core_market_indices[path.split('/')[-1]] = dicts
 
     with open(f'{this.csvPath}/LEV/REL_STOCK_LEV2IN.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            row['currency'] = currency
             this.REL_STOCK_LEV2IN.append(row)
     with open(f'{this.csvPath}/LEV/REL_STOCK_LEV4SE.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            row['currency'] = currency
             this.REL_STOCK_LEV4SE.append(row)
-
-
 
 
 def save_A1012M(type):

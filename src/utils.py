@@ -87,7 +87,7 @@ def getName(name):
         'CASH',
         'CURRENT ASSETS - TOTAL',
         'TOTAL INVENTORIES',
-        'TOTAL_LIABILITIES & SHAREHOLDE',
+        'TOTAL LIABILITIES & SHAREHOLDE',
         'TOTAL LIABILITIES',
         "COMMON SHAREHOLDERS EQUITY",
         'LONG TERM DEBT',
@@ -159,6 +159,7 @@ def create_A1012M_MI_row(date_name: str, row: dict, core_row, VAR=None, TYPE=Non
         'Type': TYPE,
         'Name': row['Name'],
         'Var': VAR,
+        'currency_type': row.get('currency', None),
         'Ticker': ticker,
         'Index': index,
         'Code': row['Code'],
@@ -192,4 +193,3 @@ def find_closest_value(row, zero_day):
             return (float(minus_day), -day_delta)
 
     return (None, None)
-

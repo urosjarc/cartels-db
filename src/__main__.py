@@ -3,14 +3,14 @@ from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core
 db.init_core()
 db.init_nodes_stock_meta()
 db.init_nodes_annual('/shranjeni/', saved_one=True)
-A1012M_type = None #db.init_nodes_A1012M()
+A1012M_type = db.init_nodes_A1012M()
 db.init_nodes_market_indices()
 
 """
 core_out_tickers.csv
 """
 # analysis_core.EC_duration()
-analysis_core.EC_decision_year()
+# analysis_core.EC_decision_year()
 # analysis_core.EC_decision_May_2004()
 # analysis_core.N_firms_within_EC_case()
 # analysis_core.N_firms_within_under()
@@ -78,9 +78,9 @@ analysis_core.EC_decision_year()
 # analysis_core.Case_Ringleader_undertaking()
 #
 analysis_core.Investigation_begin()
-analysis_core.Investigation_begin_year()
+# analysis_core.Investigation_begin_year()
 analysis_core.Investigation_begin_without_dawn_raid()
-analysis_core.Dawn_raid_year()
+# analysis_core.Dawn_raid_year()
 # analysis_core.InfringeDurationOverallFirm()
 # analysis_core.InfringeDurationOverallUndertaking()
 # analysis_core.Ticker_firm_D()
@@ -106,9 +106,9 @@ analysis_core.Infringement_begin()
 # analysis_core.MaxIndividualInfringeDurationFirm()
 # analysis_core.MaxIndividualInfringeDurationUndertaking()
 # analysis_core.MaxIndividualInfringeDurationCase()
-analysis_core.InfringeBeginYearFirm()
-analysis_core.InfringeBeginYearUndertaking()
-analysis_core.InfringeBeginYearCase()
+# analysis_core.InfringeBeginYearFirm()
+# analysis_core.InfringeBeginYearUndertaking()
+# analysis_core.InfringeBeginYearCase()
 # analysis_core.Settlement_fine_firm()
 # analysis_core.Settlement_fine_undertaking()
 # analysis_core.Settlement_fine_case()
@@ -164,9 +164,9 @@ analysis_core.InfringeBeginYearCase()
 # analysis_core.Settlement_Whistleblower_Leniency_application_Dawn_raid_F_specific()
 # analysis_core.Dawn_raid_USA_Japan_D()
 # analysis_core.Extra_EU_ongoing_invest_D()
-analysis_core.GC_decision_year()
+# analysis_core.GC_decision_year()
 # analysis_core.GC_columns()
-analysis_core.ECJ_decision_year()
+# analysis_core.ECJ_decision_year()
 # analysis_core.ECJ_columns()
 # analysis_core.GC_N_judgements_on_EC_case_per_undertaking()
 # analysis_core.GC_N_judgements_on_EC_case()
@@ -261,7 +261,7 @@ analysis_core.ECJ_decision_year()
 #
 # analysis_stock.Active_ticker_D()
 # analysis_stock.Euro_currency_ticker_D()
-analysis_stock.Active_date()
+# analysis_stock.Active_date()
 # analysis_stock.Stock_exchange_name()
 # analysis_stock.Multiple_listings_D()
 # analysis_stock.Stock_indexing_D()
@@ -278,26 +278,26 @@ analysis_stock.Active_date()
 # analysis_stock.ICB_industry_DS_index()
 # analysis_stock.FT_sector_DS_index()
 #
-"""
-annual_[eu/local]_out_tickers.csv
-"""
-analysis_anual.Current_ratio()
-analysis_anual.Acid_test_ratio()
-analysis_anual.Cash_ratio()
-analysis_anual.Debt_ratio()
-analysis_anual.Debt_to_equity_ratio()
-analysis_anual.Equity_ratio()
-
-'''
-Reloading with new rows
-'''
-db.save_annual()
-db.init_nodes_annual('/../', saved_one=False)
-
-"""
-annual connection to core
-"""
-
+# """
+# annual_[eu/local]_out_tickers.csv
+# """
+# analysis_anual.Current_ratio()
+# analysis_anual.Acid_test_ratio()
+# analysis_anual.Cash_ratio()
+# analysis_anual.Debt_ratio()
+# analysis_anual.Debt_to_equity_ratio()
+# analysis_anual.Equity_ratio()
+#
+# '''
+# Reloading with new rows
+# '''
+# db.save_annual()
+# db.init_nodes_annual('/../', saved_one=False)
+#
+# """
+# annual connection to core
+# """
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=3)
@@ -305,7 +305,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=4)
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=3)
@@ -313,7 +313,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=1, ticker='Ticker_undertaking')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=3, ticker='Ticker_undertaking')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=5, ticker='Ticker_undertaking')
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent')
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', info='HOLDING', ticker='Holding_Ticker_parent', year_minus=3)
@@ -321,7 +321,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=1, info='HOLDING', ticker='Holding_Ticker_parent')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=3, info='HOLDING', ticker='Holding_Ticker_parent')
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearUndertaking', trend_year=5, info='HOLDING', ticker='Holding_Ticker_parent')
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('Investigation_begin_year', year_minus=3)
@@ -329,7 +329,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Investigation_begin_year', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Investigation_begin_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Investigation_begin_year', trend_year=5)
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('Dawn_raid_year', year_minus=3)
@@ -337,7 +337,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Dawn_raid_year', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Dawn_raid_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('Dawn_raid_year', trend_year=5)
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('EC_decision_year', year_minus=3)
@@ -345,7 +345,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('EC_decision_year', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('EC_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('EC_decision_year', trend_year=5)
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('GC_decision_year', year_minus=3)
@@ -353,7 +353,7 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('GC_decision_year', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('GC_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('GC_decision_year', trend_year=5)
-
+#
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year')
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year', year_minus=1)
 # analysis_core_anual.Ime_Currency_VAR_Info('ECJ_decision_year', year_minus=3)
@@ -361,38 +361,43 @@ annual connection to core
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('ECJ_decision_year', trend_year=1)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('ECJ_decision_year', trend_year=3)
 # analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('ECJ_decision_year', trend_year=5)
-
+#
 # analysis_core_anual.Ime__Currency__Infr_begin_to_Inv_Beg_trend()
 # analysis_core_anual.Ime__Currency__Infr_begin_to_EC_Dec_trend()
 # analysis_core_anual.Ime__Currency__Inv_begin_to_EC_Dec_trend()
 # analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
 # analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
-
-if analysis_A1012M != None:
-    """
-    Analysis A1012M
-    """
-    for name in db.names_A1012M:
-        print(f"Analysis A1012M: {name}")
-        analysis_A1012M.NAMES_A1012(name, A1012M_type)
-
-    '''
-    New wars in A1012M
-    '''
-    analysis_A1012M.momentum_year(A1012M_type)
-    analysis_A1012M.raw_returns(A1012M_type)
-    analysis_A1012M.ln_returns(A1012M_type)
-
-    print("Saving A1012M...")
-    db.save_A1012M(A1012M_type)
-
-
+#
+# if analysis_A1012M != None:
+#     """
+#     Analysis A1012M
+#     """
+#     for name in db.names_A1012M:
+#         print(f"Analysis A1012M: {name}")
+#         analysis_A1012M.NAMES_A1012(name, A1012M_type)
+#
+#     '''
+#     New wars in A1012M
+#     '''
+#     analysis_A1012M.momentum_year(A1012M_type)
+#     analysis_A1012M.raw_returns(A1012M_type)
+#     analysis_A1012M.ln_returns(A1012M_type)
+#
+#     print("Saving A1012M...")
+#     db.save_A1012M(A1012M_type)
+#
+#
 analysis_market_indices.NAMES_DSLOC()
 analysis_market_indices.NAMES_LEV2IN()
 analysis_market_indices.NAMES_LEV4SE()
 analysis_market_indices.NAMES_MLOC()
 analysis_market_indices.NAMES_TOTMKWD()
 
+# analysis_market_indices.momentum_year()
+# analysis_market_indices.raw_returns()
+# analysis_market_indices.ln_returns()
+
+
 db.save_market_indices()
-db.save_core()
-db.save_annual()
+# db.save_core()
+# db.save_annual()
