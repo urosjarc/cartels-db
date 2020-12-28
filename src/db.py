@@ -63,6 +63,9 @@ def init_core():
     with open(this.csvCorePathIn, 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
+            row['Ticker_firm'] = utils.formatTicker(row['Ticker_firm'])
+            row['Ticker_undertaking'] = utils.formatTicker(row['Ticker_undertaking'])
+            row['Holding_Ticker_parent'] = utils.formatTicker(row['Holding_Ticker_parent'])
             this.core.append(row)
 
     this.core_fields = list(this.core[0].keys())
@@ -72,7 +75,7 @@ def init_nodes_stock_meta():
     with open(this.csvStockMetaPath) as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            # this.stock_meta_rows.append(StockMeta(row))
+            row['Type'] = utils.formatTicker(row['Type'])
             this.stock_meta_rows.append(row)
 
 

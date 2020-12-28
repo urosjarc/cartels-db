@@ -1,5 +1,6 @@
 from src import db, utils
 import sys
+from src.utils import formatTicker
 
 this = sys.modules[__name__]
 this.COLUMS_Ime_Currency_VAR_Info = []
@@ -18,7 +19,7 @@ def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
         currency = "E" if i==0 else "L"
         for annual_ticker, annual_rows in rows_group.items():
             for core_row in db.core:
-                if core_row[ticker] == annual_ticker:
+                if formatTicker(core_row[ticker]) == formatTicker(annual_ticker):
                     for annual_row in annual_rows:
 
                         if core_row[VAR] in [None, '']:
@@ -47,7 +48,7 @@ def Ime_Currency_VAR_Info_YearTrend(VAR, trend_year, ticker='Ticker_firm', info=
         currency = "E" if i==0 else "L"
         for annual_ticker, annual_rows in rows_group.items():
             for core_row in db.core:
-                if core_row[ticker] == annual_ticker:
+                if formatTicker(core_row[ticker]) == formatTicker(annual_ticker):
                     for annual_row in annual_rows:
                         if core_row[VAR] in [None, '']:
                             continue

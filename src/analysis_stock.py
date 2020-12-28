@@ -1,6 +1,7 @@
 from src import db, utils, analysis_utils
 from datetime import datetime
 import sys
+from src.utils import formatTicker
 
 mapping = {
     'firm': 'Ticker_firm',
@@ -16,7 +17,7 @@ def Active_ticker_D():
 
             result = None
             for sr in db.stock_meta_rows:
-                if row[ticker_type] == sr['Type']:
+                if formatTicker(row[ticker_type]) == formatTicker(sr['Type']):
                     result = 1 if sr['EQUITIES STATUS'] == 'ACT.' else 0
 
             if result is not None:

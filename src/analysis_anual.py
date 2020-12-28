@@ -1,4 +1,5 @@
 from src import db, utils
+from src.utils import formatTicker
 
 """
 Nove spremenljivke annual
@@ -7,6 +8,7 @@ Nove spremenljivke annual
 def Current_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:
@@ -27,6 +29,7 @@ def Current_ratio():
 def Acid_test_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:
@@ -54,6 +57,7 @@ def Acid_test_ratio():
 def Cash_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:
@@ -74,6 +78,7 @@ def Cash_ratio():
 def Debt_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:
@@ -94,6 +99,7 @@ def Debt_ratio():
 def Debt_to_equity_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:
@@ -114,6 +120,7 @@ def Debt_to_equity_ratio():
 def Equity_ratio():
     for rows_group in [db.A1012M_EU_rows, db.A1012M_LOCAL_rows]:
         for ticker, rows in rows_group.items():
+            ticker = formatTicker(ticker)
             found = False
             for row in rows:
                 for row1 in rows:

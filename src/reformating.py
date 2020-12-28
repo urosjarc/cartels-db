@@ -1,5 +1,5 @@
 from src import db, utils
-import re
+import re, os
 import csv
 import sys
 import copy
@@ -12,6 +12,11 @@ this.annual_figures_eu = []
 this.annual_figures_local = []
 this.annual_figures_eu_new = []
 this.annual_figures_local_new = []
+this.core_reformat = {}
+this.A1012M_euro = []
+this.A1012M_local = []
+this.A1012M_euro_new = []
+this.A1012M_local_new = []
 
 
 def init_core(with_new_vars=False):
@@ -21,6 +26,19 @@ def init_core(with_new_vars=False):
         for row in reader:
             this.core.append(row)
     this.core_vars = [key for key in this.core[0].keys()]
+
+
+def init_core_reformat():
+    p = f'{db.csvPath}/REFORMAT/core/'
+    for f in os.listdir(p):
+        name = f.split('.')[0]
+
+        with open(p + f) as csvfile:
+            vars = csvfile.read().split('\n')
+            this.core_reformat[name] = []
+            for l in vars:
+                if len(l) > 0:
+                    this.core_reformat[name].append(l)
 
 
 def init_annual_figures():
@@ -37,21 +55,47 @@ def init_annual_figures():
         for row in reader:
             this.annual_figures_local.append(row)
 
+def init_A1012M():
+    this.A1012M_euro= []
+    this.A1012M_local = []
+
+    with open(db.csvPath + '/A1012M_euro.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.A1012M_euro.append(row)
+
+    with open(db.csvPath + '/A1012M_local.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            this.A1012M_local.append(row)
+
+def save_A1012M():
+    with open(db.csvPath + '/OUT_A1012M_local.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_local_new[0].keys())
+        writer.writeheader()
+        writer.writerows(this.A1012M_local_new)
+    with open(db.csvPath + '/OUT_A1012M_euro.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_euro_new[0].keys())
+        writer.writeheader()
+        writer.writerows(this.A1012M_euro_new)
+
+
 def save_annual_figures():
-    with open(db.csvPath + '/OUT annual_figures_local.csv', 'w') as csvfile:
+    with open(db.csvPath + '/OUT_annual_figures_local.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=this.annual_figures_local_new[0].keys())
         writer.writeheader()
         writer.writerows(this.annual_figures_local_new)
-    with open(db.csvPath + '/OUT annual_figures_eu.csv', 'w') as csvfile:
+    with open(db.csvPath + '/OUT_annual_figures_eu.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=this.annual_figures_eu_new[0].keys())
         writer.writeheader()
         writer.writerows(this.annual_figures_eu_new)
 
-def save_core():
-    with open(f'{db.csvPath}/OUT_core.csv', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=this.core[0].keys())
-        writer.writeheader()
-        writer.writerows(this.core)
+
+# def save_core():
+#     with open(f'{db.csvPath}/OUT_core.csv', 'w') as csvfile:
+#         writer = csv.DictWriter(csvfile, fieldnames=this.core[0].keys())
+#         writer.writeheader()
+#         writer.writerows(this.core)
 
 
 def save_long_vars():
@@ -59,6 +103,45 @@ def save_long_vars():
         writer = csv.DictWriter(csvfile, fieldnames=['OLD', 'NEW'])
         writer.writeheader()
         writer.writerows(this.core_vars_changes)
+
+
+def save_core():
+    rows_groups = {}
+    for name in this.core_reformat.keys():
+        rows_groups[name] = []
+
+    case_rows = []
+    case_name = None
+    for row in this.core:
+        if case_name is None:
+            case_name = row['Case']
+        if case_name != row['Case']:
+            new_row = {}
+            for var in this.core_reformat['Case']:
+                new_row[var] = row[var]
+            case_rows.append(new_row)
+            case_name = row['Case']
+
+    u_rows = []
+    u_name = None
+    for row in this.core:
+        if u_name is None:
+            u_name = row['Case'] + row['Undertaking']
+        if u_name != (row['Case'] + row['Undertaking']):
+            new_row = {}
+            for var in this.core_reformat['Undertaking']:
+                new_row[var] = row[var]
+            u_rows.append(new_row)
+            u_name = row['Case'] + row['Undertaking']
+
+    with open(f'{db.csvPath}/OUT_core_case.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=case_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(case_rows)
+    with open(f'{db.csvPath}/OUT_core_undertaking.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=u_rows[0].keys())
+        writer.writeheader()
+        writer.writerows(u_rows)
 
 
 def change_long_vars():
@@ -164,6 +247,24 @@ def change_long_vars():
                 'OLD': key,
                 'NEW': newkey
             })
+
+    for name, vars in this.core_reformat.items():
+        new_vars = []
+        for var in vars:
+            newkey = var
+            if len(newkey) > 32:
+                for old, new in changes.items():
+                    pattern = re.compile(old, re.IGNORECASE)
+                    newkey = pattern.sub(new, newkey)
+            newkey = newkey\
+                .replace('undertaking', 'UD') \
+                .replace('trend', 'T') \
+                .replace('__', '_') \
+                .replace('case', 'C') \
+                .replace('only', 'ONY')
+            new_vars.append(newkey)
+        this.core_reformat[name] = new_vars
+
 
     core_lines = open(db.csvCorePathOut, 'r').readlines()
     for old, new in core_changes.items():
@@ -316,6 +417,79 @@ def change_annual_structure():
                     new_row[u_type] = None
             this.annual_figures_eu_new.append(new_row)
 
+def change_A1012M_structure():
+    unique_tickers = set()
+    unique_date_type = set()
+    years = set()
+    for row in this.annual_figures_local + this.annual_figures_eu:
+        ticker = utils.getCode(row['Code'])
+        if len(ticker) > 2:
+            unique_tickers.add(ticker)
+        for key in row.keys():
+            if str(key).isnumeric():
+                years.add(key)
+    years = sorted(years)
+
+    new_format_local = {}
+    new_format_eu = {}
+    tn = 0
+    for ticker in unique_tickers:
+        print('Ticker:', tn)
+        tn += 1
+        new_format_local[ticker] = {}
+        new_format_eu[ticker] = {}
+        for year in years:
+            type_dict = {}
+            for row in this.annual_figures_local:
+                row_ticker = utils.getCode(row['Code'])
+                if row_ticker == ticker:
+                    row_type = mapping[row['Name'].split(' - ')[-1]]
+                    year_value = row[year]
+                    type_dict[row_type] = year_value
+            new_format_local[ticker][year] = type_dict
+
+            type_dict = {}
+            for row in this.annual_figures_eu:
+                row_ticker = utils.getCode(row['Code'])
+                if row_ticker == ticker:
+                    row_type = mapping[row['Name'].split(' - ')[-1]]
+                    year_value = row[year]
+                    type_dict[row_type] = year_value
+            new_format_eu[ticker][year] = type_dict
+
+    for ticker, ticker_dict in new_format_local.items():
+        for year, year_dict in ticker_dict.items():
+            new_row = {
+                'ticker': ticker,
+                'year': year
+            }
+            for type, val in year_dict.items():
+                try:
+                    float(val)
+                    new_row[type] = val
+                except:
+                    new_row[type] = None
+            for u_type in unique_mapping:
+                if u_type not in new_row:
+                    new_row[u_type] = None
+            this.annual_figures_local_new.append(new_row)
+    for ticker, ticker_dict in new_format_eu.items():
+        for year, year_dict in ticker_dict.items():
+            new_row = {
+                'ticker': ticker,
+                'year': year
+            }
+            for type, val in year_dict.items():
+                try:
+                    float(val)
+                    new_row[type] = val
+                except:
+                    new_row[type] = None
+            for u_type in unique_mapping:
+                if u_type not in new_row:
+                    new_row[u_type] = None
+            this.annual_figures_eu_new.append(new_row)
+
 
 # for row in this.annual_figures_local:
 #     ticker = utils.getCode(row['Code'])
@@ -338,10 +512,12 @@ def change_annual_structure():
 
 
 if __name__ == '__main__':
-    # init_core(with_new_vars=False)
-    # change_long_vars()
-    # init_core(with_new_vars=True)
-    # save_long_vars()
-    init_annual_figures()
-    change_annual_structure()
-    save_annual_figures()
+    init_core(with_new_vars=False)
+    init_core_reformat()
+    change_long_vars()
+    init_core(with_new_vars=True)
+    save_long_vars()
+    # init_annual_figures()
+    # change_annual_structure()
+    # save_annual_figures()
+    save_core()

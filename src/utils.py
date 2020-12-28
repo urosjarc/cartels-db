@@ -68,7 +68,10 @@ def absoluteFilePaths(directory):
 
 
 def getCode(code):
-    return code.split("(")[0]
+    return str(code.split("(")[0]).strip()
+
+def formatTicker(ticker):
+    return str(ticker).strip()
 
 def getName(name):
     names = [
@@ -145,7 +148,7 @@ def create_annual_row(new_var, row):
     names_dates = get_annual_years(row)
     d = {
         'Name': row['Name'].split('-')[0] + f' - {new_var}',
-        'Code': row['Code'].split("(")[0],
+        'Code': getCode(row['Code']),
         'CURRENCY': row['CURRENCY']
     }
     for da in names_dates:

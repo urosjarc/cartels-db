@@ -1,4 +1,5 @@
 from src import db, utils
+from src.utils import formatTicker
 from math import log, e
 from copy import deepcopy
 
@@ -19,10 +20,10 @@ def NAMES_DSLOC():
             code = utils.getCode(row['Code'])
             for meta_row in db.stock_meta_rows:
                 if meta_row['DATASTREAM INDEX'] == code:
-                    ticker_code = meta_row['Type']
+                    ticker_code = formatTicker(meta_row['Type'])
                     for core_row in db.core:
-                        if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'],
-                                           core_row['Holding_Ticker_parent']]:
+                        if ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']),
+                                           formatTicker(core_row['Holding_Ticker_parent'])]:
                             for n in dates_names:
                                 if core_row[n] is not None and core_row[n] != '':
                                     new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='DSLOC',
@@ -36,10 +37,10 @@ def NAMES_TOTMKWD():
         row = rows[0]
         code = utils.getCode(row['Code'])
         for meta_row in db.stock_meta_rows:
-            ticker_code = meta_row['Type']
+            ticker_code = formatTicker(meta_row['Type'])
             for core_row in db.core:
-                if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'],
-                                   core_row['Holding_Ticker_parent']]:
+                if ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']),
+                                   formatTicker(core_row['Holding_Ticker_parent'])]:
                     for n in dates_names:
                         if core_row[n] is not None and core_row[n] != '':
                             new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='TOTMKWD',
@@ -54,10 +55,10 @@ def NAMES_MLOC():
             code = utils.getCode(row['Code'])
             for meta_row in db.stock_meta_rows:
                 if meta_row['LOCAL INDEX'] == code:
-                    ticker_code = meta_row['Type']
+                    ticker_code = formatTicker(meta_row['Type'])
                     for core_row in db.core:
-                        if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'],
-                                           core_row['Holding_Ticker_parent']]:
+                        if ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']),
+                                           formatTicker(core_row['Holding_Ticker_parent'])]:
                             for n in dates_names:
                                 if core_row[n] is not None and core_row[n] != '':
                                     new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='MLOC',
@@ -76,10 +77,10 @@ def NAMES_LEV2IN():
                     industry_name = rel_row['name']
             for meta_row in db.stock_meta_rows:
                 if meta_row['LEVEL2 SECTOR NAME'] == industry_name:
-                    ticker_code = meta_row['Type']
+                    ticker_code = formatTicker(meta_row['Type'])
                     for core_row in db.core:
-                        if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'],
-                                           core_row['Holding_Ticker_parent']]:
+                        if ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']),
+                                           formatTicker(core_row['Holding_Ticker_parent'])]:
                             for n in dates_names:
                                 if core_row[n] is not None and core_row[n] != '':
                                     new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='LEV2IN',
@@ -99,10 +100,10 @@ def NAMES_LEV4SE():
                     break
             for meta_row in db.stock_meta_rows:
                 if meta_row['LEVEL4 SECTOR NAME'] == industry_name:
-                    ticker_code = meta_row['Type']
+                    ticker_code = formatTicker(meta_row['Type'])
                     for core_row in db.core:
-                        if ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'],
-                                           core_row['Holding_Ticker_parent']]:
+                        if ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']),
+                                           formatTicker(core_row['Holding_Ticker_parent'])]:
                             for n in dates_names:
                                 if core_row[n] is not None and core_row[n] != '':
                                     new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=VAR, TYPE='LEV4SE',

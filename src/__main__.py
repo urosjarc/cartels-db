@@ -1,4 +1,5 @@
 from src import db, analysis_core, analysis_stock, analysis_anual, analysis_core_anual, analysis_A1012M, analysis_market_indices
+from src import reformating
 
 db.init_core()
 db.init_nodes_stock_meta()
@@ -368,36 +369,37 @@ analysis_core.Infringement_begin()
 # analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
 # analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
 #
-# if analysis_A1012M != None:
-#     """
-#     Analysis A1012M
-#     """
-#     for name in db.names_A1012M:
-#         print(f"Analysis A1012M: {name}")
-#         analysis_A1012M.NAMES_A1012(name, A1012M_type)
-#
-#     '''
-#     New wars in A1012M
-#     '''
-#     analysis_A1012M.momentum_year(A1012M_type)
-#     analysis_A1012M.raw_returns(A1012M_type)
-#     analysis_A1012M.ln_returns(A1012M_type)
-#
-#     print("Saving A1012M...")
-#     db.save_A1012M(A1012M_type)
-#
-#
+if analysis_A1012M != None:
+    """
+    Analysis A1012M
+    """
+    for name in db.names_A1012M:
+        print(f"Analysis A1012M: {name}")
+        analysis_A1012M.NAMES_A1012(name, A1012M_type)
+
+    '''
+    New wars in A1012M
+    '''
+    analysis_A1012M.momentum_year(A1012M_type)
+    analysis_A1012M.raw_returns(A1012M_type)
+    analysis_A1012M.ln_returns(A1012M_type)
+
+    print("Saving A1012M...")
+    db.save_A1012M(A1012M_type)
+
+
 analysis_market_indices.NAMES_DSLOC()
 analysis_market_indices.NAMES_LEV2IN()
 analysis_market_indices.NAMES_LEV4SE()
 analysis_market_indices.NAMES_MLOC()
 analysis_market_indices.NAMES_TOTMKWD()
 
-# analysis_market_indices.momentum_year()
-# analysis_market_indices.raw_returns()
-# analysis_market_indices.ln_returns()
+analysis_market_indices.momentum_year()
+analysis_market_indices.raw_returns()
+analysis_market_indices.ln_returns()
 
 
 db.save_market_indices()
-# db.save_core()
-# db.save_annual()
+db.save_core()
+db.save_annual()
+

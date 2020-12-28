@@ -1,4 +1,5 @@
 from src import db, utils
+from src.utils import formatTicker
 from math import log, e
 from copy import deepcopy
 dates_names = [
@@ -16,7 +17,7 @@ def NAMES_A1012(name: str, type):
                 continue
             for core_row in db.core:
                 ticker_code = utils.getCode(row['Code'])
-                if ticker_code is not None and ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                if ticker_code is not None and ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']), formatTicker(core_row['Holding_Ticker_parent'])]:
                     for n in dates_names:
                         if core_row[n] is not None and core_row[n] != '':
                             new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=name, TYPE='A1012M')
@@ -28,7 +29,7 @@ def NAMES_A1012(name: str, type):
                 continue
             for core_row in db.core:
                 ticker_code = utils.getCode(row['Code'])
-                if ticker_code is not None and ticker_code in [core_row['Ticker_firm'], core_row['Ticker_undertaking'], core_row['Holding_Ticker_parent']]:
+                if ticker_code is not None and ticker_code in [formatTicker(core_row['Ticker_firm']), formatTicker(core_row['Ticker_undertaking']), formatTicker(core_row['Holding_Ticker_parent'])]:
                     for n in dates_names:
                         if core_row[n] is not None and core_row[n] != '':
                             new_row = utils.create_A1012M_MI_row(n, row, core_row, VAR=name, TYPE='A1012M')
