@@ -1,8 +1,10 @@
+from datetime import timedelta
+import pandas as pd
+
 from src import db, utils
 import re, os
 import csv
 import sys
-import copy
 
 this = sys.modules[__name__]
 
@@ -17,6 +19,9 @@ this.A1012M_euro = []
 this.A1012M_local = []
 this.A1012M_euro_new = []
 this.A1012M_local_new = []
+
+this.ticker_returns_euro = []
+this.ticker_returns_local = []
 
 
 def init_core(with_new_vars=False):
@@ -55,29 +60,50 @@ def init_annual_figures():
         for row in reader:
             this.annual_figures_local.append(row)
 
+
 def init_A1012M():
-    this.A1012M_euro= []
-    this.A1012M_local = []
+    type = input("Vnesi tip A1012M [local/euro]: ")
+    if type == 'local':
+        this.A1012M_local = []
+        with open(db.csvPath + '/A1012M_local.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                this.A1012M_local.append(row)
+    else:
+        this.A1012M_euro = []
+        with open(db.csvPath + '/A1012M_euro.csv') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                this.A1012M_euro.append(row)
 
-    with open(db.csvPath + '/A1012M_euro.csv') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            this.A1012M_euro.append(row)
+    return type
 
-    with open(db.csvPath + '/A1012M_local.csv') as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            this.A1012M_local.append(row)
 
-def save_A1012M():
-    with open(db.csvPath + '/OUT_A1012M_local.csv', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_local_new[0].keys())
-        writer.writeheader()
-        writer.writerows(this.A1012M_local_new)
-    with open(db.csvPath + '/OUT_A1012M_euro.csv', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_euro_new[0].keys())
-        writer.writeheader()
-        writer.writerows(this.A1012M_euro_new)
+def save_A1012M(type):
+    if type == 'local':
+        with open(db.csvPath + '/OUT_A1012M_local.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_local_new[0].keys())
+            writer.writeheader()
+            writer.writerows(this.A1012M_local_new)
+    else:
+        with open(db.csvPath + '/OUT_A1012M_euro.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=this.A1012M_euro_new[0].keys())
+            writer.writeheader()
+            writer.writerows(this.A1012M_euro_new)
+
+
+def save_ticker_returns(type):
+    if type == 'local':
+        with open(db.csvPath + '/OUT_ticker_returns_local.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns_local[0].keys())
+            writer.writeheader()
+            writer.writerows(this.ticker_returns_local)
+    else:
+        with open(db.csvPath + '/OUT_ticker_returns_euro.csv', 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns_euro[0].keys())
+            writer.writeheader()
+            writer.writerows(this.ticker_returns_euro)
+
 
 
 def save_annual_figures():
@@ -89,13 +115,6 @@ def save_annual_figures():
         writer = csv.DictWriter(csvfile, fieldnames=this.annual_figures_eu_new[0].keys())
         writer.writeheader()
         writer.writerows(this.annual_figures_eu_new)
-
-
-# def save_core():
-#     with open(f'{db.csvPath}/OUT_core.csv', 'w') as csvfile:
-#         writer = csv.DictWriter(csvfile, fieldnames=this.core[0].keys())
-#         writer.writeheader()
-#         writer.writerows(this.core)
 
 
 def save_long_vars():
@@ -256,7 +275,7 @@ def change_long_vars():
                 for old, new in changes.items():
                     pattern = re.compile(old, re.IGNORECASE)
                     newkey = pattern.sub(new, newkey)
-            newkey = newkey\
+            newkey = newkey \
                 .replace('undertaking', 'UD') \
                 .replace('trend', 'T') \
                 .replace('__', '_') \
@@ -264,7 +283,6 @@ def change_long_vars():
                 .replace('only', 'ONY')
             new_vars.append(newkey)
         this.core_reformat[name] = new_vars
-
 
     core_lines = open(db.csvCorePathOut, 'r').readlines()
     for old, new in core_changes.items():
@@ -417,107 +435,164 @@ def change_annual_structure():
                     new_row[u_type] = None
             this.annual_figures_eu_new.append(new_row)
 
-def change_A1012M_structure():
-    unique_tickers = set()
-    unique_date_type = set()
-    years = set()
-    for row in this.annual_figures_local + this.annual_figures_eu:
+
+def change_A1012M_structure(type):
+    rel2 = {}
+    rel4 = {}
+    for row in db.REL_STOCK_LEV2IN:
+        rel2[row['name']] = row['code']
+    for row in db.REL_STOCK_LEV4SE:
+        rel4[row['name']] = row['code']
+    row_group = this.A1012M_local if type == 'local' else this.A1012M_euro
+    for row in row_group:
         ticker = utils.getCode(row['Code'])
-        if len(ticker) > 2:
-            unique_tickers.add(ticker)
-        for key in row.keys():
-            if str(key).isnumeric():
-                years.add(key)
-    years = sorted(years)
+        Market_DSLOC = None
+        Market_MLOC = None
+        Market_LEV2IN = None
+        Market_LEV4SE = None
+        for static_row in db.stock_meta_rows:
+            if ticker == utils.formatTicker(static_row['Type']):
+                Market_DSLOC = static_row['DATASTREAM INDEX']
+                Market_MLOC = static_row['LOCAL INDEX']
+                Market_LEV2IN = rel2[static_row['LEVEL2 SECTOR NAME']]
+                Market_LEV4SE = rel4[static_row['LEVEL4 SECTOR NAME'].replace(",", "")]
+                break
 
-    new_format_local = {}
-    new_format_eu = {}
-    tn = 0
-    for ticker in unique_tickers:
-        print('Ticker:', tn)
-        tn += 1
-        new_format_local[ticker] = {}
-        new_format_eu[ticker] = {}
-        for year in years:
-            type_dict = {}
-            for row in this.annual_figures_local:
-                row_ticker = utils.getCode(row['Code'])
-                if row_ticker == ticker:
-                    row_type = mapping[row['Name'].split(' - ')[-1]]
-                    year_value = row[year]
-                    type_dict[row_type] = year_value
-            new_format_local[ticker][year] = type_dict
+        new_row = {
+            'Date': row['Date'],
+            'Competition_event': row['Date_type'],
+            'Ticker': ticker,
+            'Market_DSLOC': Market_DSLOC,
+            'Market_MLOC': Market_MLOC,
+            'Market_LEV2IN': Market_LEV2IN,
+            'Market_LEV4SE': Market_LEV4SE,
+            'Market_TOTMKWD': 'TOTMKWD'
+        }
+        if type == 'local':
+            this.A1012M_local_new.append(new_row)
+        else:
+            this.A1012M_euro_new.append(new_row)
 
-            type_dict = {}
-            for row in this.annual_figures_eu:
-                row_ticker = utils.getCode(row['Code'])
-                if row_ticker == ticker:
-                    row_type = mapping[row['Name'].split(' - ')[-1]]
-                    year_value = row[year]
-                    type_dict[row_type] = year_value
-            new_format_eu[ticker][year] = type_dict
 
-    for ticker, ticker_dict in new_format_local.items():
-        for year, year_dict in ticker_dict.items():
-            new_row = {
-                'ticker': ticker,
-                'year': year
-            }
-            for type, val in year_dict.items():
+def create_ticker_returns(type):
+    rel2 = {}
+    rel4 = {}
+    for row in db.REL_STOCK_LEV2IN:
+        rel2[row['name']] = row['code']
+    for row in db.REL_STOCK_LEV4SE:
+        rel4[row['name']] = row['code']
+
+    tickers_dict = {}
+    for static_row in db.stock_meta_rows:
+        tickers_dict[utils.getCode(static_row['Type'])] = {}
+
+
+
+    c=0
+    for chunk in pd.read_csv(db.csvPath + f'/A1012M_{type}.csv', chunksize=514):
+        c+=1
+        if c==50:
+            break
+        print('Complete:', c)
+        for i, row in chunk.iterrows():
+            ticker = utils.getCode(row['Code'])
+            tickers_dict[ticker][row['Var']] = []
+            Market_DSLOC = None
+            Market_MLOC = None
+            Market_LEV2IN = None
+            Market_LEV4SE = None
+            for static_row in db.stock_meta_rows:
+                if ticker == utils.formatTicker(static_row['Type']):
+                    Market_DSLOC = static_row['DATASTREAM INDEX']
+                    Market_MLOC = static_row['LOCAL INDEX']
+                    Market_LEV2IN = rel2[static_row['LEVEL2 SECTOR NAME']]
+                    Market_LEV4SE = rel4[static_row['LEVEL4 SECTOR NAME'].replace(",", "")]
+                    break
+
+            date0 = utils.parseDate(row['Date'])
+            start_number = -1 #-300
+            finish_number = 2 #101
+            days = start_number
+            count = start_number
+
+            while(True):
+                nextDate = date0 + timedelta(days = days)
+                if nextDate.weekday() not in [5, 6]:
+                    num = row[str(count)]
+                    new_row = {
+                        'Date': f'{nextDate.month}/{nextDate.day}/{nextDate.year}',
+                        row['Var']: num if str(num)!='nan' else None,
+                        'Ticker': ticker,
+                        'Market_DSLOC': Market_DSLOC,
+                        'Market_MLOC': Market_MLOC,
+                        'Market_LEV2IN': Market_LEV2IN,
+                        'Market_LEV4SE': Market_LEV4SE,
+                        'Market_TOTMKWD': 'TOTMKWD'
+                    }
+                    tickers_dict[ticker][row['Var']].append(new_row)
+                    count += 1
+                    if count == finish_number:
+                        break
+                days += 1
+
+    new_rows = []
+    for ticker, tickers_d in tickers_dict.items():
+        if len(tickers_d.keys()) == 0:
+            continue
+        for i in range(401):
+            first_row = None
+            for var, row_list in tickers_d.items():
                 try:
-                    float(val)
-                    new_row[type] = val
-                except:
-                    new_row[type] = None
-            for u_type in unique_mapping:
-                if u_type not in new_row:
-                    new_row[u_type] = None
-            this.annual_figures_local_new.append(new_row)
-    for ticker, ticker_dict in new_format_eu.items():
-        for year, year_dict in ticker_dict.items():
-            new_row = {
-                'ticker': ticker,
-                'year': year
-            }
-            for type, val in year_dict.items():
-                try:
-                    float(val)
-                    new_row[type] = val
-                except:
-                    new_row[type] = None
-            for u_type in unique_mapping:
-                if u_type not in new_row:
-                    new_row[u_type] = None
-            this.annual_figures_eu_new.append(new_row)
+                    row = row_list[i]
+                    if first_row is None:
+                        first_row = row
+                    for k, v in row.items():
+                        if k not in [ 'Date', 'Ticker', 'Market_DSLOC', 'Market_MLOC', 'Market_LEV2IN', 'Market_LEV4SE', 'Market_TOTMKWD' ]:
+                            first_row[k] = v if str(v)!='nan' else None
+                except Exception:
+                    pass
+
+            if first_row is not None and isinstance(first_row, dict):
+                new_rows.append(first_row)
+
+    if type == 'local':
+        this.ticker_returns_local = new_rows
+    else:
+        this.ticker_returns_euro = new_rows
 
 
-# for row in this.annual_figures_local:
-#     ticker = utils.getCode(row['Code'])
-#     type = mapping[row['Name'].split(' - ')[-1]]
-#
-#
-#     if ticker not in new_format_local:
-#         new_format_local[ticker] = {}
-#     else:
-#         pass
-# type_dict
-# for key, val in row.items():
-#     if isinstance(key, int):
-#         year_dict[key] = val
-# new_format_local[ticker][type] = year_dict
 
-# for ticker, ticker_dict in new_format_local.items():
-#     for type, type_dict in ticker_dict.items():
-#         for year
 
+    pass
 
 if __name__ == '__main__':
-    init_core(with_new_vars=False)
-    init_core_reformat()
-    change_long_vars()
-    init_core(with_new_vars=True)
-    save_long_vars()
+    # RESTRUCTURE CORE==========
+    # init_core(with_new_vars=False)
+    # init_core_reformat()
+    # change_long_vars()
+    # init_core(with_new_vars=True)
+    # save_long_vars()
+    # save_core()
+    # RESTRUCTURE CORE
+
+    # RESTRUCTURE ANNUAL=========
     # init_annual_figures()
     # change_annual_structure()
     # save_annual_figures()
-    save_core()
+    # RESTRUCTURE ANNUAL=========
+
+    # CREATE INDEX FILE==========
+    # db.init_nodes_stock_meta()
+    db.init_rel_stock()
+    # type = init_A1012M()
+    # change_A1012M_structure(type)
+    # save_A1012M(type)
+    # CREATE INDEX FILE==========
+
+    # CREATE ticker returns file =======
+    db.init_nodes_stock_meta()
+    type = input('local/euro?: ')
+    create_ticker_returns(type)
+    save_ticker_returns(type)
+
+    # CREATE ticker returns file =======

@@ -184,15 +184,16 @@ def init_nodes_market_indices():
                     dicts[name].append(row)
         this.core_market_indices[path.split('/')[-1]] = dicts
 
+    init_rel_stock()
+
+def init_rel_stock():
     with open(f'{this.csvPath}/LEV/REL_STOCK_LEV2IN.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            row['currency'] = currency
             this.REL_STOCK_LEV2IN.append(row)
     with open(f'{this.csvPath}/LEV/REL_STOCK_LEV4SE.csv', 'r') as csvfile:
         reader = csv.DictReader(csvfile)
         for row in reader:
-            row['currency'] = currency
             this.REL_STOCK_LEV4SE.append(row)
 
 
