@@ -1,5 +1,6 @@
 from datetime import timedelta
 import pandas as pd
+from math import log, e
 
 from src import db, utils
 import re, os
@@ -19,9 +20,7 @@ this.A1012M_euro = []
 this.A1012M_local = []
 this.A1012M_euro_new = []
 this.A1012M_local_new = []
-
-this.ticker_returns_euro = []
-this.ticker_returns_local = []
+this.market_indices = []
 
 
 def init_core(with_new_vars=False):
@@ -92,20 +91,6 @@ def save_A1012M(type):
             writer.writerows(this.A1012M_euro_new)
 
 
-def save_ticker_returns(type):
-    if type == 'local':
-        with open(db.csvPath + '/OUT_ticker_returns_local.csv', 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns_local[0].keys())
-            writer.writeheader()
-            writer.writerows(this.ticker_returns_local)
-    else:
-        with open(db.csvPath + '/OUT_ticker_returns_euro.csv', 'w') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns_euro[0].keys())
-            writer.writeheader()
-            writer.writerows(this.ticker_returns_euro)
-
-
-
 def save_annual_figures():
     with open(db.csvPath + '/OUT_annual_figures_local.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=this.annual_figures_local_new[0].keys())
@@ -122,6 +107,13 @@ def save_long_vars():
         writer = csv.DictWriter(csvfile, fieldnames=['OLD', 'NEW'])
         writer.writeheader()
         writer.writerows(this.core_vars_changes)
+
+
+def save_market_indices():
+    with open(f'{db.csvPath}/OUT_market_indices.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.market_indices[0].keys())
+        writer.writeheader()
+        writer.writerows(this.market_indices)
 
 
 def save_core():
@@ -444,7 +436,9 @@ def change_A1012M_structure(type):
     for row in db.REL_STOCK_LEV4SE:
         rel4[row['name']] = row['code']
     row_group = this.A1012M_local if type == 'local' else this.A1012M_euro
-    for row in row_group:
+    for i, row in enumerate(row_group):
+        if i == 10:
+            break
         ticker = utils.getCode(row['Code'])
         Market_DSLOC = None
         Market_MLOC = None
@@ -474,96 +468,76 @@ def change_A1012M_structure(type):
             this.A1012M_euro_new.append(new_row)
 
 
-def create_ticker_returns(type):
-    rel2 = {}
-    rel4 = {}
-    for row in db.REL_STOCK_LEV2IN:
-        rel2[row['name']] = row['code']
-    for row in db.REL_STOCK_LEV4SE:
-        rel4[row['name']] = row['code']
-
-    tickers_dict = {}
-    for static_row in db.stock_meta_rows:
-        tickers_dict[utils.getCode(static_row['Type'])] = {}
-
-
-
-    c=0
-    for chunk in pd.read_csv(db.csvPath + f'/A1012M_{type}.csv', chunksize=514):
-        c+=1
-        if c==50:
+def create_market_indices():
+    all_dates = set()
+    for VAR, file_rows in db.core_market_indices.items():
+        for market_name, row_group in file_rows.items():
+            for key, val in row_group[0].items():
+                if key.count('/') == 2:
+                    all_dates.add(utils.parseDate(key))
             break
-        print('Complete:', c)
-        for i, row in chunk.iterrows():
-            ticker = utils.getCode(row['Code'])
-            tickers_dict[ticker][row['Var']] = []
-            Market_DSLOC = None
-            Market_MLOC = None
-            Market_LEV2IN = None
-            Market_LEV4SE = None
-            for static_row in db.stock_meta_rows:
-                if ticker == utils.formatTicker(static_row['Type']):
-                    Market_DSLOC = static_row['DATASTREAM INDEX']
-                    Market_MLOC = static_row['LOCAL INDEX']
-                    Market_LEV2IN = rel2[static_row['LEVEL2 SECTOR NAME']]
-                    Market_LEV4SE = rel4[static_row['LEVEL4 SECTOR NAME'].replace(",", "")]
-                    break
+        break
 
-            date0 = utils.parseDate(row['Date'])
-            start_number = -1 #-300
-            finish_number = 2 #101
-            days = start_number
-            count = start_number
+    all_dates = sorted(all_dates)
+    dates = []
+    for d in all_dates:
+        if isinstance(d, str):
+            d = utils.parseDate(d)
+        if utils.parseDate('3/2/1987') <= d <= utils.parseDate('6/9/2020'):
+            dates.append(f'{d.month}/{d.day}/{d.year}')
 
-            while(True):
-                nextDate = date0 + timedelta(days = days)
-                if nextDate.weekday() not in [5, 6]:
-                    num = row[str(count)]
-                    new_row = {
-                        'Date': f'{nextDate.month}/{nextDate.day}/{nextDate.year}',
-                        row['Var']: num if str(num)!='nan' else None,
-                        'Ticker': ticker,
-                        'Market_DSLOC': Market_DSLOC,
-                        'Market_MLOC': Market_MLOC,
-                        'Market_LEV2IN': Market_LEV2IN,
-                        'Market_LEV4SE': Market_LEV4SE,
-                        'Market_TOTMKWD': 'TOTMKWD'
-                    }
-                    tickers_dict[ticker][row['Var']].append(new_row)
-                    count += 1
-                    if count == finish_number:
-                        break
-                days += 1
+    all_dates = dates
 
-    new_rows = []
-    for ticker, tickers_d in tickers_dict.items():
-        if len(tickers_d.keys()) == 0:
-            continue
-        for i in range(401):
-            first_row = None
-            for var, row_list in tickers_d.items():
-                try:
-                    row = row_list[i]
-                    if first_row is None:
-                        first_row = row
-                    for k, v in row.items():
-                        if k not in [ 'Date', 'Ticker', 'Market_DSLOC', 'Market_MLOC', 'Market_LEV2IN', 'Market_LEV4SE', 'Market_TOTMKWD' ]:
-                            first_row[k] = v if str(v)!='nan' else None
-                except Exception:
-                    pass
+    for VAR, file_rows in db.core_market_indices.items():
+        print(VAR)
+        price_index_rows = file_rows['price_index']
+        return_index_rows = file_rows['return_index']
 
-            if first_row is not None and isinstance(first_row, dict):
-                new_rows.append(first_row)
+        for row_i in range(len(price_index_rows)):
+            price_index_row = price_index_rows[row_i]
+            return_index_row = return_index_rows[row_i]
+            for date_i in range(len(all_dates) - 1):
 
-    if type == 'local':
-        this.ticker_returns_local = new_rows
-    else:
-        this.ticker_returns_euro = new_rows
+                # Dates for tomorow and today
+                date = all_dates[date_i]
+                date_next = all_dates[date_i + 1]
 
+                # Price index for today and tomorow
+                price_index = float(price_index_row[date]) if price_index_row[date] != 'NA' else None
+                price_index_next = float(price_index_row[date_next]) if price_index_row[date_next] != 'NA' else None
+                # Price index raw_return, ln_return
+                RR_price_index = None
+                ln_return_price_index = None
+                if price_index is not None and price_index_next is not None:
+                    RR_price_index = (price_index_next - price_index) / price_index if price_index > 0 else None
+                    ln_return_price_index = log(price_index_next, e) - log(price_index, e)
 
+                # Return index for today and tomorow
+                return_index = float(return_index_row[date]) if return_index_row[date] not in ['NA', ''] else None
+                return_index_next = float(return_index_row[date_next]) if return_index_row[date_next] not in ['NA',''] else None
 
+                # Return index raw_return, ln_return
+                RR_return_index = None
+                ln_return_return_index = None
+                if return_index is not None and return_index_next is not None:
+                    RR_return_index = ( return_index_next - return_index) / return_index if return_index > 0 else None
+                    ln_return_return_index = log(return_index_next, e) - log(return_index, e)
 
-    pass
+                new_row = {
+                    'Name': VAR,
+                    'Market_index': utils.getCode(price_index_row['Code']),
+                    'Date': date,
+                    'Currency_PI': price_index_row['currency'],
+                    'Currency_RI': return_index_row['currency'],
+                    'PI': price_index,
+                    'RI': return_index,
+                    'RR_PI': RR_price_index,
+                    'RR_RI': RR_return_index,
+                    'LNR_PI': ln_return_price_index,
+                    'LNR_RI': ln_return_return_index,
+                }
+                this.market_indices.append(new_row)
+
 
 if __name__ == '__main__':
     # RESTRUCTURE CORE==========
@@ -583,16 +557,14 @@ if __name__ == '__main__':
 
     # CREATE INDEX FILE==========
     # db.init_nodes_stock_meta()
-    db.init_rel_stock()
+    # db.init_rel_stock()
     # type = init_A1012M()
     # change_A1012M_structure(type)
     # save_A1012M(type)
     # CREATE INDEX FILE==========
 
-    # CREATE ticker returns file =======
-    db.init_nodes_stock_meta()
-    type = input('local/euro?: ')
-    create_ticker_returns(type)
-    save_ticker_returns(type)
-
-    # CREATE ticker returns file =======
+    # CREATE MARKET INDICES======
+    db.init_nodes_market_indices()
+    create_market_indices()
+    save_market_indices()
+    # CREATE MARKET INDICES======
