@@ -119,6 +119,7 @@ def save_market_indices(type):
 
 
 def save_ticker_returns(type):
+    print("SAVE TICKER RETURNS")
     with open(f'{db.csvPath}/OUT_ticker_returns_{type}.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns[0].keys())
         writer.writeheader()
@@ -564,10 +565,12 @@ def create_ticker_returns(type):
     unadjusted_price_rows = A1012M_rows['unadjusted_price']
 
     for row_i in range(len(adjusted_price_rows)):
+        print(row_i)
         adjusted_price_row = adjusted_price_rows[row_i]
         turnover_volume_row = turnover_volume_rows[row_i]
         unadjusted_price_row = unadjusted_price_rows[row_i * 2]
         for date_i in range(len(all_dates) - 1):
+
             # Dates for tomorow and today
             date = all_dates[date_i]
             date_next = all_dates[date_i + 1]
@@ -596,7 +599,7 @@ def create_ticker_returns(type):
             ln_adjusted_price = None
             if adjusted_price is not None and adjusted_price_next is not None:
                 RR_adjusted_price = (
-                                                adjusted_price_next - adjusted_price) / adjusted_price if adjusted_price > 0 else None
+                                            adjusted_price_next - adjusted_price) / adjusted_price if adjusted_price > 0 else None
                 if adjusted_price > 0 and adjusted_price_next > 0:
                     ln_adjusted_price = log(adjusted_price_next, e) - log(adjusted_price, e)
 
@@ -604,7 +607,7 @@ def create_ticker_returns(type):
             ln_turnover_volume = None
             if turnover_volume is not None and turnover_volume_next is not None:
                 RR_turnover_volume = (
-                                                 turnover_volume_next - turnover_volume) / turnover_volume if turnover_volume > 0 else None
+                                             turnover_volume_next - turnover_volume) / turnover_volume if turnover_volume > 0 else None
                 if turnover_volume > 0 and turnover_volume_next > 0:
                     ln_turnover_volume = log(turnover_volume_next, e) - log(turnover_volume, e)
 
@@ -612,7 +615,7 @@ def create_ticker_returns(type):
             ln_unadjusted_price = None
             if unadjusted_price is not None and unadjusted_price_next is not None:
                 RR_unadjusted_price = (
-                                                  unadjusted_price_next - unadjusted_price) / unadjusted_price if unadjusted_price > 0 else None
+                                              unadjusted_price_next - unadjusted_price) / unadjusted_price if unadjusted_price > 0 else None
                 if unadjusted_price > 0 and unadjusted_price_next > 0:
                     ln_unadjusted_price = log(unadjusted_price_next, e) - log(unadjusted_price, e)
 
@@ -659,10 +662,9 @@ if __name__ == '__main__':
 
     # CREATE MARKET INDICES======
     type = db.init_nodes_A1012M()
-    db.init_nodes_market_indices(type)
-    create_market_indices()
-    save_market_indices(type)
-    exit(0)
+    # db.init_nodes_market_indices(type)
+    # create_market_indices()
+    # save_market_indices(type)
     # CREATE MARKET INDICES======
 
     # CREATE DAILY VALUES=======
