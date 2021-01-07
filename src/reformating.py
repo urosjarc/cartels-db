@@ -447,8 +447,6 @@ def change_A1012M_structure(type):
         rel4[row['name']] = row['code']
     row_group = this.A1012M_local if type == 'local' else this.A1012M_euro
     for i, row in enumerate(row_group):
-        if i == 10:
-            break
         ticker = utils.getCode(row['Code'])
         Market_DSLOC = None
         Market_MLOC = None
@@ -551,6 +549,12 @@ def create_market_indices():
 
 def create_ticker_returns(type):
     all_dates = set()
+    rel2 = {}
+    rel4 = {}
+    for row in db.REL_STOCK_LEV2IN:
+        rel2[row['name']] = row['code']
+    for row in db.REL_STOCK_LEV4SE:
+        rel4[row['name']] = row['code']
     A1012M_rows = db.core_A1012M_local if type == 'local' else db.core_A1012M_euro
     for market_name, row_group in A1012M_rows.items():
         for key, val in row_group[0].items():
@@ -569,6 +573,19 @@ def create_ticker_returns(type):
         adjusted_price_row = adjusted_price_rows[row_i]
         turnover_volume_row = turnover_volume_rows[row_i]
         unadjusted_price_row = unadjusted_price_rows[row_i * 2]
+
+        ticker = utils.getCode(adjusted_price_row['Code'])
+        Market_DSLOC = None
+        Market_MLOC = None
+        Market_LEV2IN = None
+        Market_LEV4SE = None
+        for static_row in db.stock_meta_rows:
+            if ticker == utils.formatTicker(static_row['Type']):
+                Market_DSLOC = static_row['DATASTREAM INDEX']
+                Market_MLOC = static_row['LOCAL INDEX']
+                Market_LEV2IN = rel2[static_row['LEVEL2 SECTOR NAME']]
+                Market_LEV4SE = rel4[static_row['LEVEL4 SECTOR NAME'].replace(",", "")]
+                break
         for date_i in range(len(all_dates) - 1):
 
             # Dates for tomorow and today
@@ -620,7 +637,12 @@ def create_ticker_returns(type):
                     ln_unadjusted_price = log(unadjusted_price_next, e) - log(unadjusted_price, e)
 
             new_row = {
-                'Market_index': utils.getCode(adjusted_price_row['Code']),
+                'Ticker': utils.getCode(adjusted_price_row['Code']),
+                'Market_DSLOC': Market_DSLOC,
+                'Market_MLOC': Market_MLOC,
+                'Market_LEV2IN': Market_LEV2IN,
+                'Market_LEV4SE': Market_LEV4SE,
+                'Market_TOTMKWD': 'TOTMKWD',
                 'Date': date,
                 'Currency': type,
                 'AP': adjusted_price,
@@ -653,22 +675,24 @@ if __name__ == '__main__':
     # RESTRUCTURE ANNUAL=========
 
     # CREATE INDEX FILE==========
-    # db.init_nodes_stock_meta()
-    # db.init_rel_stock()
-    # type = init_A1012M()
-    # change_A1012M_structure(type)
-    # save_A1012M(type)
+    db.init_nodes_stock_meta()
+    db.init_rel_stock()
+    type = init_A1012M()
+    change_A1012M_structure(type)
+    save_A1012M(type)
     # CREATE INDEX FILE==========
 
     # CREATE MARKET INDICES======
-    type = db.init_nodes_A1012M()
+    # db.init_nodes_stock_meta()
+    # db.init_rel_stock()
+    # type = db.init_nodes_A1012M()
     # db.init_nodes_market_indices(type)
     # create_market_indices()
     # save_market_indices(type)
     # CREATE MARKET INDICES======
 
-    # CREATE DAILY VALUES=======
-    create_ticker_returns(type)
-    save_ticker_returns(type)
+    # CREATE TICKER RETURNS =======
+    # create_ticker_returns(type)
+    # save_ticker_returns(type)
 
     # CREATE DAILY VALUES=======
