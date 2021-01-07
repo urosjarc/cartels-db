@@ -660,18 +660,19 @@ def create_ticker_returns(type):
 
 if __name__ == '__main__':
     # RESTRUCTURE CORE==========
-    # init_core(with_new_vars=False)
-    # init_core_reformat()
-    # change_long_vars()
-    # init_core(with_new_vars=True)
-    # save_long_vars()
-    # save_core()
+    init_core(with_new_vars=False)
+    init_core_reformat()
+    change_long_vars()
+    init_core(with_new_vars=True)
+    save_long_vars()
+    save_core()
     # RESTRUCTURE CORE
 
     # RESTRUCTURE ANNUAL=========
-    # init_annual_figures()
-    # change_annual_structure()
-    # save_annual_figures()
+    init_annual_figures()
+    change_annual_structure()
+    save_annual_figures()
+    exit()
     # RESTRUCTURE ANNUAL=========
 
     # CREATE INDEX FILE==========
