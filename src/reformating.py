@@ -20,7 +20,9 @@ this.A1012M_euro = []
 this.A1012M_local = []
 this.A1012M_euro_new = []
 this.A1012M_local_new = []
+
 this.market_indices = []
+this.ticker_returns = []
 
 
 def init_core(with_new_vars=False):
@@ -109,11 +111,18 @@ def save_long_vars():
         writer.writerows(this.core_vars_changes)
 
 
-def save_market_indices():
-    with open(f'{db.csvPath}/OUT_market_indices.csv', 'w') as csvfile:
+def save_market_indices(type):
+    with open(f'{db.csvPath}/OUT_market_returns_{type}.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=this.market_indices[0].keys())
         writer.writeheader()
         writer.writerows(this.market_indices)
+
+
+def save_ticker_returns(type):
+    with open(f'{db.csvPath}/OUT_ticker_returns_{type}.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=this.ticker_returns[0].keys())
+        writer.writeheader()
+        writer.writerows(this.ticker_returns)
 
 
 def save_core():
@@ -514,21 +523,21 @@ def create_market_indices():
 
                 # Return index for today and tomorow
                 return_index = float(return_index_row[date]) if return_index_row[date] not in ['NA', ''] else None
-                return_index_next = float(return_index_row[date_next]) if return_index_row[date_next] not in ['NA',''] else None
+                return_index_next = float(return_index_row[date_next]) if return_index_row[date_next] not in ['NA',
+                                                                                                              ''] else None
 
                 # Return index raw_return, ln_return
                 RR_return_index = None
                 ln_return_return_index = None
                 if return_index is not None and return_index_next is not None:
-                    RR_return_index = ( return_index_next - return_index) / return_index if return_index > 0 else None
+                    RR_return_index = (return_index_next - return_index) / return_index if return_index > 0 else None
                     ln_return_return_index = log(return_index_next, e) - log(return_index, e)
 
                 new_row = {
                     'Name': VAR,
                     'Market_index': utils.getCode(price_index_row['Code']),
                     'Date': date,
-                    'Currency_PI': price_index_row['currency'],
-                    'Currency_RI': return_index_row['currency'],
+                    'Currency': 'euro' if price_index_row['currency'] == 'euro' else 'local',
                     'PI': price_index,
                     'RI': return_index,
                     'RR_PI': RR_price_index,
@@ -537,6 +546,91 @@ def create_market_indices():
                     'LNR_RI': ln_return_return_index,
                 }
                 this.market_indices.append(new_row)
+
+
+def create_ticker_returns(type):
+    all_dates = set()
+    A1012M_rows = db.core_A1012M_local if type == 'local' else db.core_A1012M_euro
+    for market_name, row_group in A1012M_rows.items():
+        for key, val in row_group[0].items():
+            if key.count('/') == 2:
+                all_dates.add(utils.parseDate(key))
+        break
+
+    all_dates = [f'{d.month}/{d.day}/{d.year}' for d in sorted(all_dates)]
+
+    adjusted_price_rows = A1012M_rows['adjusted_price']
+    turnover_volume_rows = A1012M_rows['turnover_volume']
+    unadjusted_price_rows = A1012M_rows['unadjusted_price']
+
+    for row_i in range(len(adjusted_price_rows)):
+        adjusted_price_row = adjusted_price_rows[row_i]
+        turnover_volume_row = turnover_volume_rows[row_i]
+        unadjusted_price_row = unadjusted_price_rows[row_i * 2]
+        for date_i in range(len(all_dates) - 1):
+            # Dates for tomorow and today
+            date = all_dates[date_i]
+            date_next = all_dates[date_i + 1]
+
+            # Today
+            adjusted_price = float(adjusted_price_row[date]) if adjusted_price_row[date] not in ['', 'NA'] and \
+                                                                adjusted_price_row['Name'] != '#ERROR' else None
+            turnover_volume = float(turnover_volume_row[date]) if turnover_volume_row[date] not in ['', 'NA'] and \
+                                                                  turnover_volume_row['Name'] != '#ERROR' else None
+            unadjusted_price = float(unadjusted_price_row[date]) if unadjusted_price_row[date] not in ['', 'NA'] and \
+                                                                    unadjusted_price_row['Name'] != '#ERROR' else None
+
+            # Tomorow
+            adjusted_price_next = float(adjusted_price_row[date_next]) if adjusted_price_row[date_next] not in ['',
+                                                                                                                'NA'] and \
+                                                                          adjusted_price_row[
+                                                                              'Name'] != '#ERROR' else None
+            turnover_volume_next = float(turnover_volume_row[date_next]) if turnover_volume_row[date_next] not in ['',
+                                                                                                                   'NA'] and \
+                                                                            turnover_volume_row[
+                                                                                'Name'] != '#ERROR' else None
+            unadjusted_price_next = float(unadjusted_price_row[date_next]) if unadjusted_price_row[date_next] not in [
+                '', 'NA'] and unadjusted_price_row['Name'] != '#ERROR' else None
+
+            RR_adjusted_price = None
+            ln_adjusted_price = None
+            if adjusted_price is not None and adjusted_price_next is not None:
+                RR_adjusted_price = (
+                                                adjusted_price_next - adjusted_price) / adjusted_price if adjusted_price > 0 else None
+                if adjusted_price > 0 and adjusted_price_next > 0:
+                    ln_adjusted_price = log(adjusted_price_next, e) - log(adjusted_price, e)
+
+            RR_turnover_volume = None
+            ln_turnover_volume = None
+            if turnover_volume is not None and turnover_volume_next is not None:
+                RR_turnover_volume = (
+                                                 turnover_volume_next - turnover_volume) / turnover_volume if turnover_volume > 0 else None
+                if turnover_volume > 0 and turnover_volume_next > 0:
+                    ln_turnover_volume = log(turnover_volume_next, e) - log(turnover_volume, e)
+
+            RR_unadjusted_price = None
+            ln_unadjusted_price = None
+            if unadjusted_price is not None and unadjusted_price_next is not None:
+                RR_unadjusted_price = (
+                                                  unadjusted_price_next - unadjusted_price) / unadjusted_price if unadjusted_price > 0 else None
+                if unadjusted_price > 0 and unadjusted_price_next > 0:
+                    ln_unadjusted_price = log(unadjusted_price_next, e) - log(unadjusted_price, e)
+
+            new_row = {
+                'Market_index': utils.getCode(adjusted_price_row['Code']),
+                'Date': date,
+                'Currency': type,
+                'AP': adjusted_price,
+                'TV': turnover_volume,
+                'UP': unadjusted_price,
+                'RR_AP': RR_adjusted_price,
+                'RR_TV': RR_turnover_volume,
+                'RR_UP': RR_unadjusted_price,
+                'LN_AP': ln_adjusted_price,
+                'LN_TV': ln_turnover_volume,
+                'LN_UP': ln_unadjusted_price,
+            }
+            this.ticker_returns.append(new_row)
 
 
 if __name__ == '__main__':
@@ -564,7 +658,15 @@ if __name__ == '__main__':
     # CREATE INDEX FILE==========
 
     # CREATE MARKET INDICES======
-    db.init_nodes_market_indices()
+    type = db.init_nodes_A1012M()
+    db.init_nodes_market_indices(type)
     create_market_indices()
-    save_market_indices()
+    save_market_indices(type)
+    exit(0)
     # CREATE MARKET INDICES======
+
+    # CREATE DAILY VALUES=======
+    create_ticker_returns(type)
+    save_ticker_returns(type)
+
+    # CREATE DAILY VALUES=======

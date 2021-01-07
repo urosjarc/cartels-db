@@ -161,7 +161,7 @@ def init_nodes_A1012M():
     return type
 
 
-def init_nodes_market_indices():
+def init_nodes_market_indices(type):
     paths = [
         this.csvPath + f'/LEV/2IN',
         this.csvPath + f'/LEV/4SE',
@@ -175,6 +175,9 @@ def init_nodes_market_indices():
         for file_path in files_paths:
             name = file_path.split(", ")[1].replace(' ', '_')
             currency = file_path.split("__")[-1].replace(".csv", "")
+            if type != currency:
+                continue
+
             with open(f'{path}/{file_path}', 'r', errors='ignore') as csvfile:
                 # print(csvfile.name)
                 reader = csv.DictReader(csvfile)
