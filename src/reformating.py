@@ -446,8 +446,13 @@ def change_A1012M_structure(type):
     for row in db.REL_STOCK_LEV4SE:
         rel4[row['name']] = row['code']
     row_group = this.A1012M_local if type == 'local' else this.A1012M_euro
+    unique = set()
     for i, row in enumerate(row_group):
         ticker = utils.getCode(row['Code'])
+        hash = f'{row["Date"]}_{row["Date_type"]}_{ticker}'
+        if hash not in unique:
+            unique.add(hash)
+            continue
         Market_DSLOC = None
         Market_MLOC = None
         Market_LEV2IN = None
@@ -459,7 +464,6 @@ def change_A1012M_structure(type):
                 Market_LEV2IN = rel2[static_row['LEVEL2 SECTOR NAME']]
                 Market_LEV4SE = rel4[static_row['LEVEL4 SECTOR NAME'].replace(",", "")]
                 break
-
         new_row = {
             'Date': row['Date'],
             'Competition_event': row['Date_type'],
@@ -660,19 +664,19 @@ def create_ticker_returns(type):
 
 if __name__ == '__main__':
     # RESTRUCTURE CORE==========
-    init_core(with_new_vars=False)
-    init_core_reformat()
-    change_long_vars()
-    init_core(with_new_vars=True)
-    save_long_vars()
-    save_core()
+    # init_core(with_new_vars=False)
+    # init_core_reformat()
+    # change_long_vars()
+    # init_core(with_new_vars=True)
+    # save_long_vars()
+    # save_core()
     # RESTRUCTURE CORE
 
     # RESTRUCTURE ANNUAL=========
-    init_annual_figures()
-    change_annual_structure()
-    save_annual_figures()
-    exit()
+    # init_annual_figures()
+    # change_annual_structure()
+    # save_annual_figures()
+    # exit()
     # RESTRUCTURE ANNUAL=========
 
     # CREATE INDEX FILE==========
