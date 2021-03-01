@@ -275,6 +275,7 @@ def ustvari_csv_with_texts(core_out_tickers, pdfDicts):
 
             crow = None
             for core_row in core_out_tickers:
+                #TODO: decisions/Event, LCD.txt se ne metcha z core EC_Event_dec_file odstrani stevilke iz cora!
                 if core_row['EC_Event_dec_file'].replace('pdf', 'txt') == fileName:
                     crow = core_row
                     break
