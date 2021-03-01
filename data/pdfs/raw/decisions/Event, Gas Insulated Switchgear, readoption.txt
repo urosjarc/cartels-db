@@ -1,0 +1,726 @@
+
+
+
+
+
+Antitrust Alert: Documents Provided In Antitrust Leniency Applications Not Exempt From Disclosure Demands In
+EU - Part 2................................................................................................................................................................ 2
+EU General Court Overturns Commission Decision To Deny Access To File To Private Plaintiff In Switchgear
+Cartel Case .............................................................................................................................................................. 5
+Toshiba , Mitsubishi Electric cartel fines lowered by EU, Reuters reports ............................................................... 7
+EU cuts Mitsubishi Electric , Toshiba cartel fines by over a third ............................................................................. 8
+European Commission cuts cartel fines for M'bishi Electric, Toshiba ...................................................................... 9
+Kyodo news summary -7-....................................................................................................................................... 10
+CARTELS : NEW FINES FOR MITSUBISHI AND TOSHIBA ................................................................................ 12
+Access To Leniency Documents In The Context Of Civil Damage Actions - An Overview Of Pfleiderer And Its
+Aftermath ................................................................................................................................................................ 13
+Damages Claims: No Unlimited Obligation To Produce Documents ..................................................................... 15
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      Antitrust Alert: Documents Provided  In Antitrust Leniency  Applications Not Exempt From
+Disclosure Demands In EU - Part 2
+BY       Frances Murphy
+WC     861 words
+PD      8 June 2012
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA       English
+CY      (c) 2012 Mondaq Ltd
+
+LP
+A recent ruling from the EU General Court ("General Court") in EnBW Energie Baden-Württemberg AG v Commission confirms that leniency documents produced under the  European Commission's ("Commission") leniency program are not exempt from disclosure in civil actions in the EU. Earlier this year, the European Court of Justice ("ECJ") had ruled in Pfleiderer that leniency documents produced to National Competition Authorities could be disclosed to  cartel victims in civil actions for restitution.
+
+These developments may be welcome news for the increasing number of claimants across the EU seeking access to documents filed by leniency applicants, but less welcome to defendants and prospective leniency applicants, who may feel more reluctant to blow the whistle if that puts them at risk of their incriminating evidence becoming available to prospective claimants.
+
+TD
+Background
+
+In 2007, the Commission imposed fines totaling EUR 750 million on several companies that had taken part in a cartel relative to gas-insulated switchgear ("GIS"). The GIS  cartel came to light after one of the GIS cartel members blew the whistle.
+
+Energie Baden-Wuerttemberg AG ("EnBW"), an alleged victim of the GIS  cartel, brought a civil action for damages allegedly suffered as a result of the  cartel. EnBW sought access from the Commission to leniency applications produced to the Commission including by the whistleblower. The Commission refused access on the basis that disclosure would undermine the protection of the leniency applicant's commercial interests, the purpose of its own investigation, the efficacy of its leniency program and the absence of any overriding public interest. EnBW appealed the Commission's decision to the General Court.
+General Court judgment
+
+On 22 May 2012, the General Court annulled the Commission's refusal to disclose the leniency documents in its possession. In adopting its ruling, the General Court observed:
+EU transparency law confers on the public a wide right of access to documents of the European
+Institutions, including the Commission.
+This right of access is subject to certain exceptions.
+
+However, these exceptions must be interpreted and applied strictly. To justify refusal of access to a document, the Commission must explain how access to that document could specifically and actually undermine the interest protected by each exception.
+
+Applying these principles, the General Court considered that the Commission had not established to the appropriate legal standard the existence of exceptional circumstances in order to dispense with a request for disclosure.
+Practical implications
+
+In the earlier Pfleiderer case, while the ECJ ruled that leniency documents produced to National
+Competition Authorities could be disclosed to  cartel victims in civil actions for restitution, disclosure
+Page 2 of 16 © 2019 Factiva, Inc. All rights  reserved.
+would be subject to provisions of national law. The national courts must assess, on a case-by-case basis, the relative merits of disclosing or protecting leniency information against the right of  cartel victims to claim compensation (see our previous Alert, " Leniency Documents Not Exempt from Disclosure
+Demands in EU").
+
+In EnBW, the General Court held that the disclosure of leniency documents produced to the Commission pursuant to its leniency program ought to be decided in the same way.
+
+The implications of the Pfleiderer judgment now has been tested by the High Court in England in National Grid v ABB. National Grid Electricity Transmission had brought a follow-on action for damages for losses allegedly suffered as a result of the GIS  cartel and applied for disclosure of documents that included leniency material produced to the Commission. In a filing the Commission did not oppose disclosure but underscored the harm that could be done to its leniency program if the national courts started ordering disclosure. After a careful balancing of the Pfleiderer factors, the High Court ordered partial disclosure of the documents that had been produced to the Commission under its leniency program.
+
+These recent developments demonstrate that, while there is no blanket bar on disclosure, there is also no presumption in favor of disclosure. Each case will be considered on its merits. Even where disclosure is ordered, it may be partial disclosure only.
+Conclusion
+
+It is clear that there is no automatic protection from disclosure for leniency documents. As a result, in civil actions for damages we are very likely to see an increase in requests for disclosure of leniency documents produced to the competition authorities. This would not least be on the basis that there is everything to be gained and nothing to be lost by such applications. For putative leniency applicants, the associated risks of disclosure may make them less inclined to apply for leniency. Any company seeking leniency ought to consider what information to include in its application and how it might be used by any future damages claimant.
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Ms Frances Murphy
+Jones Day
+21 Tudor Street
+London
+EC4Y 0DJ
+UNITED KINGDOM Tel: 2165863939
+Fax: 2165790212
+E-mail: mmtomaro@JonesDay.com
+URL: www.jonesday.com
+Click Here for related articles
+(c) Mondaq Ltd, 2012 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com CO      bdnwk : Energie Baden Wuerttemberg AG | eurcj : European Court of Justice IN        i1 : Energy | i16 : Electricity/Gas Utilities
+NS      c12 : Corporate Crime/Legal/Judicial | ccat : Corporate/Industrial News | c34 : Competition Issues | eucj : European Court of Justice | eec : European Union | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter | ocat : International Pol-Econ Organizations
+RE      eecz : European Union Countries | uk : United Kingdom | eurz : Europe | weurz : Western Europe
+IPD     Anti-trust/Competition
+
+
+Page 3 of 16 © 2019 Factiva, Inc. All rights  reserved.
+PUB    Mondaq Limited
+AN      Document BBPUB00020120608e868000e0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 4 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      EU General Court Overturns Commission Decision  To Deny Access To File To Private Plaintiff In
+Switchgear Cartel Case
+BY      Van Bael Bellis
+WC     844 words
+PD      20 June 2012
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA      English
+CY      (c) 2012 Mondaq Ltd
+
+LP
+On 22 May 2012, the General Court of the European Union annulled a decision of the  European             Commission ("Commission") that had denied Energie Baden-Württemberg ("EnBW") access to the Commission's insulated switchgear cartel file. The General Court held that the Commission had failed
+to justify its claim that there were too many documents to consider allowing partial access to the investigation file in question.
+
+TD
+In January 2007, a number of companies, including Mitsubishi, Toshiba, Alstom, Areva and Siemens, were fined by the Commission a total of over € 750 million for having participated in a  cartel on the market for gas  insulated switchgear (equipment which regulates the flow of power in electricity grids).
+The companies were found to have engaged in price-fixing,  bid-rigging and sharing of markets in Europe, the Middle East and the Far East. Two of the undertakings – ABB and Siemens – had co-operated with
+the Commission under its leniency program and obtained immunity and a  fine reduction, respectively. Following the decision, EnBW, a German electricity provider, announced that it intended to launch an action for damages against members of the  cartel, including ABB and Siemens. Relying upon EU transparency rules (Regulation 1049/2001), EnBW applied to the Commission seeking access to certain documents contained in the investigation file relating to the  cartel case, in order to bolster its damages claim.
+In a decision adopted in June 2008, the Commission refused such access on the basis that many of the
+1,900 documents on file contained commercially sensitive information, thereby falling within the
+exceptions provided for in Articles 4(2) and 4(3) of Regulation 1049/2001. The Commission also claimed
+that, given the scale of the request, it was unable to conduct a more detailed review of each individual
+document. EnBW appealed this decision before the General Court.
+
+In its appeal, EnBW argued that there was "no absolute protection" for documents supplied to the Commission under the leniency procedure. In response, the Commission, supported by  cartel participants ABB and Siemens, claimed that to oblige the disclosure of such information would be
+"disproportionate". Moreover, it would dissuade companies from co-operating with the Commission during antitrust investigations, ultimately hampering the efficiency of  cartel detection and, in particular, the Commission's leniency program.
+
+In its judgment, the General Court upheld EnBW's appeal, finding that the Commission had not assessed "in a concrete, specific and detailed manner, the other options that might be envisaged in order to limit its workload, or the reasons which could allow it to dispense with any concrete, individual examination, instead of adopting, where appropriate, a measure less restrictive of the applicant's right of access". The Court noted in particular that, at one stage during its review of EnBW's request for access, the Commission had asked for more time, due to the number of documents contained in the file. At that point, the Commission, far from indicating to EnBW that a concrete, individual examination was not possible, merely stated that it needed more time.
+
+The General Court therefore reached the conclusion, a contrario, that the Commission could not be considered to have regarded the amount of work as unreasonable, and annulled the decision in its entirety. The Commission will now either adopt a new decision on this matter or appeal the judgment to the Court of Justice ("ECJ").
+
+
+Page 5 of 16 © 2019 Factiva, Inc. All rights  reserved.
+Similar to the recent CDC Hydrogen Peroxide judgment (see VBB on Competition Law, Volume 2011, No.
+12, available at  www.vbb.com), the General Court has once again set a significant threshold for the
+Commission to meet in order to justify refusing access to certain documents of its antitrust investigation
+files. However, there have been previous rulings where the Court upheld the Commission's right to
+refuse, or at least greatly limit, disclosure. In last year's Pfleiderer ruling, the ECJ offered limited guidance
+on the right of damage claimants to obtain documents submitted by cartelists under a national leniency
+program, stating that such documents can be accessed if national laws permit it (see VBB on Competition
+Law, Volume 2011, No. 6, available at  www.vbb.com).
+
+In response to the above case law, the Commission and the heads of all 27 competition authorities of the EU Member States adopted a resolution on 23 May 2012, stressing that while claimants should have the right to seek redress from  cartel members, this must not jeopardise the effectiveness of leniency regimes which play a crucial role in facilitating the detection of anti-competitive agreements and practices.
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Van Bael Bellis
+Van Bael & Bellis
+165 Avenue Louise
+Brussels
+1050
+BELGIUM
+Tel: 26477350
+Fax: 26406499
+E-mail: acoppieters@vbb.com
+URL: www.vbb.com
+Click Here for related articles
+(c) Mondaq Ltd, 2012 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO     bdnwk : Energie Baden Wuerttemberg AG | vanbel : VAN BAEL AND BELLIS
+IN       i1 : Energy | i16 : Electricity/Gas Utilities | i835 : Legal Services | ibcs : Business/Consumer Services
+
+NS      c12 : Corporate Crime/Legal/Judicial | ccat : Corporate/Industrial News | c34 : Competition Issues | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter
+RE      eecz : European Union Countries | eurz : Europe
+IPD     Anti-trust/Competition Law
+PUB   Mondaq Limited
+AN      Document BBPUB00020120620e86k00003
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 6 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD        Toshiba, Mitsubishi Electriccartel fines lowered by EU, Reuters reports
+WC        59 words
+PD         27 June 2012
+SN         Theflyonthewall.com
+SC         FLYWAL
+LA         English
+CY         (c) 2012. Theflyonthewall.com. All Rights Reserved.
+
+LP
+Fines for Toshiba (TOSBF) and Mitsubishi Electric (MIELY) for price fixing  in gas insulated switchgear have been lowered by the EU, Reuters reports. The European Commission cut Toshiba's penalty to EUR56.79M from EUR90.9M and Mitsubishi Electric's fine to EUR74.82M from
+EUR118.58M.
+
+Reference Link
+CO        mitsel : Mitsubishi Electric Corp | tshba : Toshiba Corp
+
+IN          i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | i3454 : Electronic Consumer Goods | icnp : Consumer Products | idurhg : Durable Household Products | ielec : Electronics | ihome : Home Electronics/Appliances | iindele : Industrial Electronics
+NS         ccat : Corporate/Industrial News
+RE         usa : United States | namz : North America
+IPD        Periodicals
+PUB      Theflyonthewall.com
+AN         Document FLYWAL0020120627e86r002uu
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 7 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD          EU cuts Mitsubishi Electric,  Toshibacartel fines by over a third
+WC          279 words
+PD           27 June 2012
+ET           03:16 PM
+SN           Reuters News
+SC           LBA
+LA           English
+CY           (c) 2012 Reuters Limited
+
+LP
+BRUSSELS, June 27 (Reuters) - EU regulators set substantially lower fines for Mitsubishi Electric Corp. and Toshiba Corp. on Wednesday for  fixing  prices in gas insulated switchgear, after Europe's second-highest court scrapped their penalties last year.
+
+The European Commission said it was fining Mitsubishi Electric 74.82 million euros, down 37 percent from the 118.58 million it had set in 2007 for the company's role in the  cartel. The Commission also reduced Toshiba's penalty to 56.79 million euros - 37.5 percent lower than the original 90.90 million euros.
+
+TD
+In addition to the separate  fines, the Commission said in a statement it had also imposed a joint penalty of 4.65 million euros on Mitsubishi and Toshiba.
+Wednesday's decision took account of last year's ruling by the second highest EU court on setting the
+fines, the Commission said.
+
+"Today's decision ensures that Mitsubishi and Toshiba receive an appropriate  fine for their participation in the  cartel," it said.
+"The (court) entirely upheld the Commission's findings that the two companies had infringed EU
+antitrust rules that prohibit cartels and restrictive business practices and their liability for it."
+
+The EU watchdog had imposed a total  fine of 750.71 million euros against the two companies and 18 others in 2007 for rigging bids and sharing markets in the heavy electrical equipment market catering to power stations.
+Swiss company ABB blew the whistle on the  cartel.
+(Reporting by Foo Yun Chee and Rex Merrifield; Brussels newsroom)
+
+RF           EU-CARTEL/SWITCHGEAR (URGENT) | ABX | CZS | ABN | E | RBN | BNX | J | RNP | DNP | PCO
+CO          mitsel : Mitsubishi Electric Corp | tshba : Toshiba Corp
+IN            i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | i3454 : Electronic Consumer Goods
+| icnp : Consumer Products | idurhg : Durable Household Products | ielec : Electronics | ihome : Home
+Electronics/Appliances | iindele : Industrial Electronics
+NS           ccat : Corporate/Industrial News | ginda : Independent Agencies/Regulatory Bodies | gcrim : Crime/Courts | gcat : Political/General News | gpir : Politics/International Relations | gpol : Domestic Politics
+RE           czrep : Czech Republic | eecz : European Union Countries | devgcoz : Emerging Market Countries |
+eeurz : Central/Eastern Europe | eurz : Europe
+IPC          MUL
+PUB        Reuters Limited
+AN           Document LBA0000020120627e86r000r1
+
+Page 8 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD            European Commission cuts cartel fines for M'bishi  Electric,  Toshiba
+CR           Kyodo
+WC          153 words
+PD           28 June 2012
+ET            12:19 PM
+SN           Kyodo News
+SC           KYODO
+LA            English
+CY           (c) 2012 Kyodo News
+
+LP
+TOKYO, June 28 -- Mitsubishi Electric Corp. and Toshiba Corp. said Thursday the  European              Commission has decided to reduce the amount of  fines for the Japanese firms over an alleged
+cartel in gas-insulated switchgear after an earlier decision on their penalties was scrapped last year.
+The two companies had disputed the initial EC decision and an EU court rescinded the  fines in July
+2011, saying regulators used erroneous figures in calculating the  fines.
+
+TD
+Mitsubishi is now fined 74.82 million euros and Toshiba 56.79 million euros for  fixing  prices of the equipment at electric power substations. In addition, the EC is imposing a joint penalty of 4.65 million euros on the two firms.
+
+In its previous decision in January 2007, the EC imposed  fines of 118.58 million euros on Mitsubishi and 90.90 million euros on Toshiba.
+==Kyodo
+
+CO           mitsel : Mitsubishi Electric Corp | tshba : Toshiba Corp | eucmm : European Commission
+IN             i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | i3454 : Electronic Consumer Goods
+| icnp : Consumer Products | idurhg : Durable Household Products | ielec : Electronics | ihome : Home
+Electronics/Appliances | iindele : Industrial Electronics
+NS           ccat : Corporate/Industrial News | eucom : European Commission | eec : European Union | ocat : International Pol-Econ Organizations
+RE           jap : Japan | apacz : Asia Pacific | asiaz : Asia | easiaz : Eastern Asia
+IPD          Cartel
+IPC          04016004
+PUB         Kyodo News
+AN           Document KYODO00020120628e86s0035x
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 9 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         Kyodo news summary  -7- CR         Kyodo
+WC        354 words
+PD         28 June 2012
+ET         12:49 PM
+SN         Kyodo News
+SC         KYODO
+LA          English
+CY         (c) 2012 Kyodo News
+
+LP
+TOKYO, June 28 -- ----------
+Record 34% of new recruits hope to stay at firms until retirement
+
+TD
+TOKYO - A record-high 34.3 percent of new employees who started this spring hope to continue working at the same firm until their mandatory retirement age, reflecting tough job market conditions, a survey showed Thursday.
+
+The figure for new recruits hoping for lifetime employment at their companies is the highest since comparable data became available in 1971, beating the previous record of 33.5 percent set last year, as more young people have "lingering worries over employment and are increasingly interested in stability," said an official of the Japan Productivity Center, a nonprofit organization that conducted the annual survey covering 2,036 new employees.
+----------
+
+European Commission cuts cartel fines for M'bishi Electric, Toshiba
+
+TOKYO - Mitsubishi Electric Corp. and Toshiba Corp. said Thursday the European Commission has decided to reduce the amount of  fines for the Japanese firms over an alleged cartel in gas-insulated switchgear after an earlier decision on their penalties was scrapped last year.
+The two companies had disputed the initial EC decision and an EU court rescinded the  fines in July
+2011, saying regulators used erroneous figures in calculating the  fines.
+----------
+Isuzu to develop large trucks in China with local partner
+
+TOKYO - Isuzu Motors Ltd. said Thursday it will set up companies with Chinese automaker Qingling Motors (Group) Co. in Chongqing in August to develop and produce heavy-duty trucks for the Chinese market at lower cost.
+
+The Japanese truck maker is now producing about 75,000 vehicles including small and medium-sized trucks a year at a plant in China set up jointly with Qingling Motors while exporting heavy-duty trucks from Japan.
+----------
+China considering setting up military facilities in disputed South China Sea
+
+BEIJING - China is considering setting up military facilities in the disputed South China Sea, a Defense Ministry spokesman said Thursday, a week after Beijing upgraded administrative control over the islands in dispute.
+
+
+
+Page 10 of 16 © 2019 Factiva, Inc. All rights  reserved.
+"China sets up military facilities in line with the administrative divisions," Defense Ministry spokesman
+Geng Yansheng told a news conference.
+==Kyodo
+CO         mitsel : Mitsubishi Electric Corp | tshba : Toshiba Corp
+
+IN          i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | i3454 : Electronic Consumer Goods | icnp : Consumer Products | idurhg : Durable Household Products | ielec : Electronics | ihome : Home Electronics/Appliances | iindele : Industrial Electronics
+NS         gcat : Political/General News | ncdig : Corporate Digest | nsum : News Digest | ncat : Content Types |
+nfact : Factiva Filters | nfce : FC&E Exclusion Filter | niwe : IWE Filter
+RE         china : China | jap : Japan | tokyo : Tokyo | apacz : Asia Pacific | asiaz : Asia | bric : BRIC Countries | chinaz : Greater China | devgcoz : Emerging Market Countries | dvpcoz : Developing Economies | easiaz : Eastern Asia
+IPD        News Summary
+IPC        0153
+PUB       Kyodo News
+AN         Document KYODO00020120628e86s003e9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 11 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      CARTELS : NEW FINES FOR MITSUBISHI AND TOSHIBA WC     273 words
+PD      29 June 2012
+SN      Europolitics SC      EURREP VOL   4454
+LA      English
+CY      Copyright 2012 Europe Information Service All Rights Reserved
+
+LP
+Following the July 2011 ruling of the EU tribunal, which annulled the way it had calculated the  fines, the European Commission has adopted a new decision inflicting reduced financial sanctions on Mitsubishi Electric Corp and Toshiba Corp for taking part in a  cartel on electrical equipment, which converts electric current from high voltage to low voltage and vice versa, known as gas  insulated switchgear (GIS). On
+24 January 2007, the Commission imposed  fines of €750.71 million on 20 European and Japanese companies for their participation - between 15 April 1988 and 11 May 2004 - in a  cartel by coordinating their activities and by agreeing their market shares according to their geographical zones.
+
+TD
+Mitsubishi and Toshiba contested this decision in front of the EU cour, which in turn upheld the Commission's finding that Mitsubishi and Toshiba were in infringement, but not the method used to calculate these  fines, stating that the Japanese producers had not been treated in the same way as the European producers since the Commission had used a different reference year for Mitsubishi Electric and Toshiba (2001), and for European enterprises (2003 - see Europolitics 4241).
+
+The new fines were calculated on the basis of the parameters as in the 2007 decision, with the exception of the reference year. This has lead to a reduction of the amounts of around 37% for Mitsubishi Electric which is now fined €74,817,000 (€118,580,000 in 2007), while Toshiba is  fined €56,793,000 (€90.90 million in 2007). Moreover, Mitsubishi Electric Corporation and Toshiba Corporation are jointly and severally fined €4,650,000.
+
+RF      31732420120629
+CO     mitsel : Mitsubishi Electric Corp | tshba : Toshiba Corp
+
+IN       i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | i3454 : Electronic Consumer Goods | icnp : Consumer Products | idurhg : Durable Household Products | ielec : Electronics | ihome : Home Electronics/Appliances | iindele : Industrial Electronics
+RE      eurz : Europe
+PUB   Europe Information Service SA
+AN      Document EURREP0020120628e86t0000q
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 12 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     Access To Leniency  Documents In The Context Of Civil Damage Actions - An Overview Of
+Pfleiderer  And Its Aftermath
+BY      Christian Wik
+WC    925 words
+PD     18 July 2012
+SN     Mondaq Business Briefing
+SC     BBPUB
+LA      English
+CY     (c) 2012 Mondaq Ltd
+
+LP
+On 14 June 2011 the European Court of Justice ("ECJ") gave its ruling in the Pfleiderer case (C-360/09). Pfleiderer concerned a so-called preliminary question referred to the ECJ by the Amstgericht Bonn in which the latter was seeking clarification on whether EU law prohibits the disclosure of leniency applications to third parties which have suffered damages resulting from a breach of competition law. The
+Amstgericht Bonn was adjudicating a matter in which Pfleiderer AG, a customer of manufacturers of décor paper which the German Competition Authority (Bundeskartellamt, "BKA") had in 2008  fined EUR 62 million for participation in a  cartel, was seeking access to the BKA's file for the purposes of submitting a civil action for damages. The BKA granted access to certain documents but refused to grant access to documents relating to leniency applications made in the case. Pfleiderer AG appealed to the Amstgericht Bonn.
+
+TD
+In response to the Amstgericht's preliminary question, the ECJ stated that while the disclosure of leniency applications was not prohibited under EU law, any national court being asked to rule on the question would have to weigh and balance the interest of the aggrieved parties (e.g. customers seeking to file claims for damages) against the necessity of effective  cartel prosecution of which leniency programmes form a significant tool. It is to be left up to the national courts, said the ECJ, to decide, on the basis of national law, the conditions under which access to leniency documents can be permitted or refused.
+
+Based on this guidance from the ECJ, the Amstgericht Bonn on 30 January 2012 ruled that in the case before it the threat to the detection and prosecution of competition law infringements justified the refusal to access to the leniency applications. Accordingly, Pfleiderer AG was not granted access to the leniency
+documents. The significance and effects of this decision extend way beyond the case in question and will reportedly result in a codification of the principle of non-disclosure of leniency documents to third parties
+in the German Competition Act.
+
+The same issue – access to leniency documents - was dealt with entirely differently by another national court, the High Court of England and Wales (EWHC) on 4 April 2012. The EWHC was adjudicating a matter in which NGET, a customer of producers of gas insulated switchgear deemed by the European Commission in 2007 to have participated in a  cartel and having been fined EUR 750 million, was seeking access to certain leniency documents. The EWHC considered that a cartelist had no legitimate expectation that any leniency submissions it made to a competition authority in the course of any investigation would be protected from disclosure but that such disclosure would increase a leniency applicant's exposure to liability compared to a company which has chosen not to submit a leniency application. Moreover, the EWHC stated that although the risk of disclosure may deter companies from applying for leniency this would be a high-risk strategy for a company considering the significant amounts of reduction (let alone full immunity) of a  fine available for a company which cooperates with a
+competition authority. Finally, the EWHC also took into account elements of proportionality i.e. how difficult would it be for the claimant to obtain the requested information from other sources. On balancing these considerations and having reviewed all documents concerned in detail, the EWHC decided to allow disclosure of certain leniency documents to NGET.
+
+On 22 May 2012, the EU General Court ("GC") in EnWB (T-344/08) annulled a European Commission decision refusing access to leniency documents related to the gas insulated switchgear case (as referred to above). The GC found that the Commission had misapplied the exceptions laid down in Articles 4(2) and 4(3) of Regulation 1049/2001 (the so-called transparency regulation based on which
+
+Page 13 of 16 © 2019 Factiva, Inc. All rights  reserved.
+individuals have a very broad right to be granted access to documents of EU institutions unless certain narrowly interpreted exceptions apply). Because the Commission had not undertaken a concrete and individual examination of each document requested in order to determine whether any of the exceptions would apply, the GC annulled the Commission's decision to refuse access to the leniency documents concerned.
+
+Undoubtedly based on the considerable confusion existing at present as to status of leniency documents when it comes to disclosure requests made in the context of civil actions for damages, the latest contribution to the discussion comes from the European Competition Network ("ECN") which on 23 May
+2012 published a resolution of the meeting of the heads of the European Competition Authorities in which it felt the need to "reiterate the importance of appropriate protection of leniency material in the context of civil damages actions following the Pfleiderer judgment". Even though the ECN states that it welcomes
+the developing of private enforcement of competition rules, particularly by way of damage actions as a complementary too to public enforcement, it stresses that as far as possible under applicable national rules leniency materials should be protected against disclosure to the extent necessary to ensure the effectiveness of leniency programs.
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Mr Christian Wik Roschier Keskuskatu 7 A Helsinki
+00100
+FINLAND
+Click Here for related articles
+(c) Mondaq Ltd, 2012 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO     ktzwrk : Pfleiderer AG | eurcj : European Court of Justice
+IN       i46 : Wood Products | icnp : Consumer Products
+
+NS     ccat : Corporate/Industrial News | c34 : Competition Issues | c12 : Corporate Crime/Legal/Judicial | eucj : European Court of Justice | eec : European Union | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter | ocat : International Pol-Econ Organizations
+RE     gfr : Germany | dach : DACH Countries | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+IPD    Anti-trust/Competition Law
+PUB   Mondaq Limited
+AN     Document BBPUB00020120718e87i000jj
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 14 of 16 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      Damages Claims: No Unlimited Obligation To Produce Documents
+BY       Jaap de Keijzer
+WC     430 words
+PD      25 July 2012
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA       English
+CY      (c) 2012 Mondaq Ltd
+
+LP
+The Arnhem District Court recently had to rule on a request to orderTenneT, the operator of the Dutch electricity grid, to make available certain documents relating to the damage suffered by it as a result of the Gas Insulated Switchgear cartel. In 2007, the European Commissionfined 11 groups of companies over EUR 750 millionfor participating in a cartel for gas insulated switchgear projects.1TenneTlaunched legal action against cartel participants ABB and Alstom to recover the damages it suffered as a result of this  cartel. In response, the  cartel participants ordered access to certain ofTenneT's documents but were, however, out of luck: the court rejected their petition.2
+
+TD
+The Court first reiterated that Article 843a of the Dutch Code of Civil Procedure (DCCP) does not provide unrestricted access to all documents. In response to the document request made, TenneT introduced a multitude of documents to the proceedings, none of which overlapped with the documents requested,
+and stated that the other documents had been lost over time. This was supported by a statement made by TenneT's archives manager.
+
+The Court held that TenneT had sufficiently demonstrated that it had no further documents in its possession. According to the Court, the fact that no more documents were available should not have come as a total surprise, since there is a statutory duty to keep documents for seven years only and almost all documents dated from before 2005.
+Footnotes
+
+1. See Case COMP/F/38.899 - " GAS  INSULATED SWITCHGEAR of 24 January 2007. The  European  Commission re-adopted a decision fining Mitsubishi Electric Corporation and Toshiba Corporation for their participation in a  cartel on the markets for gas insulated switchgears, after part of the original decision (see IP/07/80) was annulled by the European General Court for a breach of equal treatment in the setting of the two companies'  fines (cases T-113/07 and T-133/07). See the  European                     Commission's press release of 27 June 2012, IP/12/705.
+2. District Court of Arnhem, 16 May 2012, LJN: BW7445 and LJN: BW7444
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Mr Jaap de Keijzer
+De Brauw Blackstone Westbroek N.V. Claude Debussylaan 80
+Amsterdam
+1070 AB NETHERLANDS Fax: 205771775
+
+E-mail: mailamst@dbbw.nl
+Page 15 of 16 © 2019 Factiva, Inc. All rights  reserved.
+URL: www.dbbw.nl
+Click Here for related articles
+(c) Mondaq Ltd, 2012 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO      eucmm : European Commission
+
+IN        i342 : Electrical Components/Equipment | iindstrls : Industrials | i32 : Machinery/Industrial Goods | i3302 : Computers/Electronics | ielec : Electronics | iindele : Industrial Electronics | itech : Technology
+NS      ccat : Corporate/Industrial News | c34 : Competition Issues | c12 : Corporate Crime/Legal/Judicial | eucom : European Commission | eec : European Union | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter | ocat : International Pol-Econ Organizations
+RE      neth : Netherlands | benluxz : Benelux Countries | eecz : European Union Countries | eurz : Europe |
+weurz : Western Europe
+IPD     Anti-trust/Competition Law
+PUB    Mondaq Limited
+AN      Document BBPUB00020120726e87p0000n
+
+Search Summary
+
+Text                                 ("european commission" or "Eu commission") and fine* and (cartel or fixing) and ( "Insulated Switchgear") not celex* not interfax
+Date                                27/05/2012 to 27/07/2012
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                9
+Timestamp                      12 April 2019 8:49 PM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 16 of 16 © 2019 Factiva, Inc. All rights  reserved.

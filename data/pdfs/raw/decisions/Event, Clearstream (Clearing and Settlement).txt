@@ -1,0 +1,919 @@
+
+
+
+
+
+EC: Level the Playing Field ..................................................................................................................................... 2
+EU finds against Clearstream , but avoids fine. ....................................................................................................... 4
+Highlights of Wednesday's Commission briefing. .................................................................................................... 6
+UPDATE 1-EU finds against Clearstream , but avoids fine...................................................................................... 8
+Reuters EU highlights for 24 hours to 0700 GMT Thursday. ................................................................................ 10
+EU finds Deutsche Boerse unit infringed on competition rules .............................................................................. 14
+EU Finds Deutsche Boerse Unit Infringed Competition Rules ............................................................................... 15
+EU Says Clearstream Broke Antitrust Rules .......................................................................................................... 17
+Commission Rips Clearstream Frankfurt ............................................................................................................... 18
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         EC: Level the Playing Field
+BY         Chris Kentouris
+WC        620 words
+PD         3 May 2004
+SN         Securities Industry News
+SC         SINW
+LA         English
+CY         Copyright (c) 2004 Thomson Media Inc. All Rights Reserved
+
+LP
+In its long-awaited strategy document on European clearance and settlement, the  European                 Commission last week appeared to side with a group of European central banks and securities regulators in recommending broad regulations based on a "functional approach" to post-trade processing.
+
+While much of the white paper centers on the removal of legal and regulatory restrictions that have raised cross-border settlement costs in Europe to multiples of domestic , it also suggests that providers of clearance and settlement services be treated equally regardless of the type of institution-a stance promoted by international depository Euroclear and the joint group of the European System of Central Banks and the Committee of European Securities Regulators, among others.
+
+TD
+The ESCB-CESR committee is set to come out with its own recommendations for what it calls "systemically important providers" of clearance and settlement services-local custodian banks, national and international depositories-which the EC could adopt in the final version of its consultative document. Industry comments are due by July 31.
+
+Unlike the ESCB-CESR group, the EC fell short of defining "systemically important" enitities or specifying any guidelines they should follow but, akin to ESCB-CESR, appears to have rejected proposals made by a group of local agent banks led by BNP Paribas Securities Services and Citigroup known as Fair and Clear. Concerned about growing competition in cross-border equities settlement from international depositories-particularly Euroclear-the group had lobbied the ESCB-CESR and other regulators for only national and international depositories to fall under any new oversight. It even went as far as to urge European regulators to require Euroclear Bank in Brussels to separate its clearance and settlement services from its banking services, but the EC's consultative document doesn't back up that stance.
+
+Since the EC doesn't have rulemaking authority, its recommendations could take years to come to fruition. Not only must the EC review industry opinion, but the European Parliament in conjunction with the Council of Ministers-one from each EU country-must then draft and vote on any legislation. Elections for new EP officials set for the fall could easily throw a monkey wrench into the rulemaking agenda.
+
+Yet, at the very least, market players say, Europe is now seeing a hint of progress toward creating a single framework to replace a badly fragmented market.
+
+In its 33-page document, the EC said it wouldn't take sides in the longstanding heated debate over whether clearance and settlement systems should be user-owned-as in the case of Euroclear-or exchange owned, as in the case of Germany's  Clearstream  Banking Frankfurt. However, it reiterated calls made by the ESCB-CESR and others that, regardless of ownership structure, market players should have "freedom of choice" in selecting where they clear and settle their trades, and that clearance and settlement providers should allow open access to their systems. In so doing, it appeared to be
+taking a stab at exchanges such as the  Deutsche Boerse and Borsa Italiana, which have required that post-trade processing of exchange-traded securities be handled only at their subsidiary depositories.
+
+The German exchange recently agreed to ease its policy to allow entities other than  Clearstream  to settle Deutsche Boerse-traded transactions, but they would still have to meet stringent requirements which critics say would be cost-prohibitive. The EC previously accused  Clearstream  Banking Frankfurt
+Page 2 of 19 © 2019 Factiva, Inc. All rights  reserved.
+of abusing  its "dominant" position in Germany to prevent Euroclear Bank from gaining access to its Cascade settlement system for some registered German shares, and then charging "discriminatory prices" once it allowed entry.
+Copyright 2004 Thomson Media Inc. All Rights Reserved.
+
+http://www.thomsonmedia.comhttp://www.securitiesindustry.com
+CO         banqnp : BNP Paribas SA
+
+IN          i816 : Clearing House/Reserve Activities | i83106 : Securities/Commodity Exchange Activities | i814 : Banking | i81402 : Commercial Banking | i81501 : Credit Types/Services | i831 : Financial Investments | ibnk : Banking/Credit | iinv : Investing/Securities
+NS         eec : European Union | ocat : International Pol-Econ Organizations
+RE         gfr : Germany | lux : Luxembourg | benluxz : Benelux Countries | eecz : European Union Countries |
+eurz : Europe | weurz : Western Europe
+PUB      Thomson Media
+AN         Document SINW000020040503e05300008
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD          EU finds against Clearstream,  but avoids fine. WC         277 words
+PD          2 June 2004
+ET           12:14 PM
+SN          Reuters News
+SC          LBA
+LA           English
+CY          (c) 2004 Reuters Limited
+
+LP
+BRUSSELS, June 2 (Reuters) - Clearstream  Banking, owned by  Deutsche Boerse, will escape a fine from the European Commission for allegedly discriminating against rivals in its settlement business, the Commission decided on Wednesday.
+
+"The European Commission finds that Clearstream  Banking AG and its parent company Clearstream  International SA infringed competition rules by refusing to supply cross-border securities clearing  and settlement services and by applying discriminatory prices," the European Union executive said in a statement.
+
+TD
+"The Commission's investigation revealed that  Clearstream  refused to supply Euroclear Bank SA with certain clearing  and settlement services and applied discriminatory prices to the detriment of this customer," it said, adding:
+"The Commission decided not to impose a fine."
+
+The Clearstream  antitrust probe was part of a Commission investigation to open up competition in the clearing  and settlement business, lowering the price of trading shares across the EU.
+Reuters already reported in March that  Clearstream  would escape a fine.
+
+The Commission has said that  clearing  and settling securities across borders hampers the EU's capital market because it is more costly and inefficient than when done domestically.
+
+The Commission investigated  Clearstream  for more than a year for  refusing to supply some settlement services, by which securities market transactions are completed, and setting higher prices for rivals.
+
+Under German federal law,  Clearstream  Banking is the only firm recognised for settling German share deals, a position the Commission said opened the possibility of discrimination against rivals such as Belgium-based Euroclear.
+
+Deutsche Boerse announced this year that German shares no longer had to be settled through its in-house Clearstream  unit, thus heading off possible EU action.
+CO          dboers : Deutsche Boerse AG
+
+IN            i831 : Financial Investments | i83106 : Securities/Commodity Exchange Activities | iinv : Investing/Securities
+NS          c181 : Acquisitions/Mergers/Takeovers | eec : European Union | c18 : Ownership Changes | ccat : Corporate/Industrial News | ocat : International Pol-Econ Organizations
+RE          eecz : European Union Countries | eurz : Europe | gfr : Germany | uk : United Kingdom | weurz : Western Europe
+IPC         N2K:BNK
+PUB        Reuters Ltd.
+
+
+Page 4 of 19 © 2019 Factiva, Inc. All rights  reserved.
+AN          Document LBA0000020040602e062001gg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 5 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD            Highlights of Wednesday's Commission briefing. WC           431 words
+PD            2 June 2004
+ET             02:31 PM
+SN            Reuters News
+SC            LBA
+LA             English
+CY            (c) 2004 Reuters Limited
+
+LP
+BRUSSELS, June 2 Reuters) - Following are highlights of the midday briefing by the  European         Commission on Wednesday:
+- - - -
+
+TD
+ANNOUNCEMENTS
+
+Spokesman Reijo Kemppinen said that on Wednesday after the midday briefing, there would be a press conference by Justice and Home Affairs Commissioner Antonio Vitorino on the Tampere programme.
+On Wednesday at 1300/1100 GMT, there will be a press conference by Environment Commissioner
+Margot Wallstrom on fighting climate change beyond 2012.
+
+Kemppinen said that the Commission on Wednesday took a decision on a proposal to open negotiations on tariff-only import of bananas.
+Kemppinen said that the Commission appointed Claude Chene Director General for Personnel and
+Administration. - - - -
+COMPETITION-CLEARSTREAM
+Spokesman Tilman Lueder said that the Commission on Wednesday adopted a decision in the
+Cleastream case.
+
+Clearstream  Banking, owned by  Deutsche Boerse, will escape a fine from the Commission for allegedly discriminating against rivals in its settlement business.
+
+The Commission has said that  clearing  and settling securities across borders hampers the EU's capital market because it is more costly and inefficient than when done domestically.
+
+The Commission investigated  Clearstream  for more than a year for  refusing to supply some settlement services, by which securities market transactions are completed, and setting higher prices for rivals.
+
+Under German federal law,  Clearstream  Banking is the only firm recognised for settling German share deals, a position the Commission said opened the possibility of discrimination against rivals such as Belgium-based Euroclear.
+- - - -
+The Commission released the following documents:
+- IP/04/707 Banana imports: Commission proposes to open tariff-only negotiations
+- IP/04/706 EU and China meet to discuss common energy concerns
+- IP/04/705 Final decision in  Clearstream  case
+
+Page 6 of 19 © 2019 Factiva, Inc. All rights  reserved.
+- IP/04/704 GALILEO: launch of EUR67 million call for research, development and demonstration activities
+
+- IP/04/703 Commission decision on Italian aid for the promotion and advertising of agricultural products in Sicily
+
+- IP/04/702 Commission presents Communication on results of the Tampere programme and future guidelines: "Much has been done, but much also remains to be done"
+- IP/04/701 Mr. Claude Chjne appointed Director General for Personnel and Administration
+- IP/04/700 Further efforts needed to put environment at the heart of EU policy decisions
+- MEX/04/0602 Midday Express of 2004-06-02
+- SPEECH/04/279 Speech by Mr Jan Figel', Member of the  European Commission, Industry Policy
+Day Conference Brussels, 27 May 2004
+- STAT/04/72 April 2004 Euro-zone unemployment stable at 9.0%
+
+- STAT/04/71 April 2004 compared to March 2004 Industrial producer prices up by 0.4% in euro-zone and EU25.
+
+NS            eec : European Union | gpol : Domestic Politics | gcat : Political/General News | gpir : Politics/International Relations | ocat : International Pol-Econ Organizations
+RE            eecz : European Union Countries | eurz : Europe
+IPC           N2K:ECR
+PUB          Reuters Ltd.
+AN            Document LBA0000020040602e062001rc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 7 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD          UPDATE 1-EU finds against Clearstream,  but avoids fine. BY          By Huw Jones and David Lawsky
+WC         602 words
+PD          2 June 2004
+ET           03:01 PM
+SN          Reuters News
+SC          LBA
+LA           English
+CY          (c) 2004 Reuters Limited
+
+LP
+LONDON/BRUSSELS, June 2 (Reuters) - Clearstream  Banking, owned by Deutsche Boerse, will escape a fine from the European Commission despite allegedly discriminating against rivals in its settlement business, the Commission decided on Wednesday.
+
+"The European Commission finds that Clearstream  Banking AG and its parent company Clearstream  International SA infringed competition rules by refusing to supply cross-border securities clearing  and settlement services and by applying discriminatory prices," the European Union executive said in a statement.
+
+TD
+"The Commission's investigation revealed that  Clearstream  refused to supply Euroclear Bank SA with certain clearing  and settlement services and applied discriminatory prices to the detriment of this customer," it said, adding: "The Commission decided not to impose a fine."
+
+ANTITRUST
+
+The Clearstream  antitrust probe was part of a Commission investigation to open up competition in the clearing  and settlement business, lowering the price of trading shares across the EU.
+
+All infringements have ceased, the Commission said, adding that Wednesday's decision will clarify the legal situation at a time when cross border trade in securities is becoming more important in the EU.
+
+"We welcome the decision not to impose a fine on  Clearstream,"  a Deutsche Boerse spokesman said. The spokesman said they wanted to see the ruling in full before commenting. Clearstream  is a key moneyspinner for Deutsche Boerse.
+Euroclear said it was not surprised by the ruling.
+
+"It was not entirely unexpected. We were asked to give evidence and provide information to the Commission and have always long believed there was an irregular application of the rules in regard to the German market." a Euroclear spokesman said.
+HAMPERING EFFICIENCY
+
+The Commission has said that  clearing  and settling securities across borders hampers the EU's capital market because it is more costly and inefficient than when done domestically.
+The Commission probed  Clearstream  and the sector generally for over a year.
+
+Under German federal law,  Clearstream  Banking is the only firm recognised for settling German share deals, a position the Commission said opened the possibility of discrimination against rivals such as Belgium-based Euroclear.
+
+Deutsche Boerse announced this year that German shares no longer had to be settled through its in-house Clearstream  unit, thus heading off possible EU action, though making little difference in practice.
+
+Page 8 of 19 © 2019 Factiva, Inc. All rights  reserved.
+"New entry into this activity is unrealistic for the forseeable future. Therefore,  Clearstream  Banking AG
+is an unavoidable trading partner," the Commission said.
+NO MONTI MODEL
+
+EU Competition Commissioner Mario Monti stressed that Wednesday's ruling was not a comment on how Europe's  clearing  and settlement industry should be organised.
+
+"Today's decision does not favour one particular model, it is not directed against  Deutsche Boerse's business model or any other," Monti said in a statement.
+
+Deutsche Boerse is vertically integrated, creating a one-stop trading to  clearing  and settlement group.
+
+Market participants such as the London Stock Exchange have been vocal critics of this model, arguing for a horizontal set up whereby settlement and  clearing  systems are at arm's length to bourses to ensure equal access for all users.
+
+The Commission said it did not impose a fine on Deutsche Boerse as it took into account there was no Community law or jurisprudence dealing with clearing  and settlement, and in light of the
+wide-ranging debate in the industry.
+
+The European Commission is expected to propose a new directive on  clearing  and settlement that would emphasise the use of competition powers to ensure that  clearing  and settlement houses can be used by all market participants.
+(Additional reporting by Marius Bosch in Frankfurt).
+CO          dboers : Deutsche Boerse AG
+
+IN            i831 : Financial Investments | i83106 : Securities/Commodity Exchange Activities | iinv : Investing/Securities
+NS          c181 : Acquisitions/Mergers/Takeovers | eec : European Union | m11 : Equity Markets | c18 : Ownership Changes | ccat : Corporate/Industrial News | mcat : Commodity/Financial Market News | ocat : International Pol-Econ Organizations
+RE          eecz : European Union Countries | eurz : Europe | gfr : Germany | uk : United Kingdom | weurz : Western Europe
+IPC         N2K:BNK
+PUB        Reuters Ltd.
+AN          Document LBA0000020040602e062001td
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 9 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         Reuters EU highlights for 24 hours to 0700 GMT Thursday. WC         1,206 words
+PD          3 June 2004
+ET          09:16 AM
+SN          Reuters EU Highlights
+SC          REUNH
+LA          English
+CY          (C) Reuters Limited 2004.
+
+LP
+BRUSSELS, June 3 (Reuters) - Following are the main Reuters stories relating to the European Union in the 24 hours to 0700 GMT on Thursday:
+- - - -
+
+TD
+Top EU official warns of serious threat of attack
+
+BRUSSELS - The EU's top counter-terrorism official said on Wednesday all countries in Europe faced a serious threat of attack, regardless of whether they supported the Iraq war or not.
+- - - -
+Irish test new compromise on EU charter - diplomats
+
+BRUSSELS - European Union president Ireland has circulated a new compromise proposal on the bloc's constitution aimed at overcoming Polish and Spanish opposition to the charter, diplomats said on Wednesday.
+- - - -
+Andorran cabinet backs EU savings tax deal
+
+ANDORRA LA VELLA - The cabinet of the tiny principality of Andorra on Wednesday formally approved an agreement with the European Union on taxing the savings income of nonresidents, a government spokesman said.
+- - - -
+Poles seen staying away from Euro elections - poll
+WARSAW - Polish euphoria over joining the European Union will not translate into voter turnout in
+European Parliament elections on June 13, an opinion poll showed on Wednesday.
+- - - -
+France, Ireland say EU constitution deal possible
+PARIS - France and Ireland said on Wednesday they believed it was possible to strike a deal on a new
+European Union constitution before the end of June, although sticking points remained.
+- - - -
+Euro rates should be set on ERM-2 entry-academic group
+
+FRANKFURT - European leaders should set the euro entry rates for new EU countries as soon as they enter the Exchange Rate Mechanism (ERM-2), not two years later, to avoid dangerous speculative attacks on their currencies, a group of European economics professors said on Wednesday.
+
+
+Page 10 of 19 © 2019 Factiva, Inc. All rights  reserved.
+- - - -
+EU Commission sees U.S. return to Kyoto fold
+
+BRUSSELS - The United States will eventually join other industrial nations in signing up to the Kyoto global warming pact despite its current opposition to the agreement, Europe's environment chief said on Wednesday.
+- - - -
+EU states get last say on three sugar reform paths
+
+BRUSSELS - EU governments will get their last chance next week to voice their views on the best approach for overhauling the bloc's sugar regime before three well-known options are whittled down to one, officials said on Wednesday.
+- - - -
+EU's Kallas-accords in June on ERM-2 entries
+
+LUXEMBOURG - A small handful of the EU's 10 new member states will this month agree on early entry into the European Exchange Rate Mechanism (ERM-2), the waiting room before euro adoption, the European Commission said on Wednesday.
+- - - -
+Syria sees no need to reopen EU pact talks
+
+MADRID - Syria said on Wednesday it saw no need to reopen formal negotiations on a trade and aid pact with the European Union despite EU calls for a firmer commitment to renounce weapons of mass destruction.
+- - - -
+EU Commission nears accounting standard decision
+
+LUXEMBOURG - The European Union's top financial regulator said on Wednesday it was close to taking a final decision on whether to adopt a planned global accounting standard which has been criticised by European banks.
+- - - -
+Turkey spooks French, Germans in EU vote campaign
+
+PARIS/BERLIN - The prospect of up to 100 million Turks joining the European Union one day is spooking voters and splitting politicians in France and Germany in the campaign for this month's European Parliament elections.
+- - - -
+Rejected EU budget pact plan may win new fans-EIB
+
+LUXEMBOURG - EU states last year rejected a proposal to link the bloc's budget rules to measures to raise its growth potential but may now be more receptive to the idea, the chief of the European Investment Bank said on Wednesday.
+- - - -
+ECB says inflation could go to 2.5 pct-EU official
+
+FRANKFURT - The European Central Bank cautioned finance ministers that inflation could rise to 2.5 percent this year but remains confident the euro zone economy is recovering, a senior European Union official told Reuters on Wednesday.
+- - - -
+EU ministers shun unilateral tax cuts over oil
+
+
+
+
+Page 11 of 19 © 2019 Factiva, Inc. All rights  reserved.
+LUXEMBOURG - European Union finance ministers said on Wednesday member states would avoid unilateral tax cuts in response to high oil prices and suggested the risks these posed to the global economy should remain manageable.
+- - - -
+Cyprus aims to apply for ERM-2 this year-official
+
+LUXEMBOURG - A Cypriot finance ministry official said on Wednesday his country aims to apply for entry to the European Union's Exchange Rate Mechanism (ERM-2) this year, but not before the summer.
+- - - -
+EIB chief - euro-denominated bonds in demand in Asia
+
+BRUSSELS - Asian investors are snapping up bonds issued by the European Investment Bank and their appetite for its euro-denominated bonds is holding up well this year, EIB President Philippe Maystadt said on Wednesday.
+- - - -
+ECB says inflation could go to 2.5 pct-EU official
+
+FRANKFURT - The European Central Bank cautioned finance ministers that inflation could rise to 2.5 percent this year but remains confident the euro zone economy is recovering, a senior European Union official told Reuters on Wednesday.
+- - - -
+EU set to debate two new GMO approvals in June
+
+BRUSSELS - EU ministers and experts will this month consider two approvals for gene-spliced foods, just a few weeks after the bloc lifted a five-year biotech ban that had angered its top trading partners, officials said on Wednesday.
+- - - -
+Italy to present budget deficit plans in July-EU
+
+LUXEMBOURG - European Economic and Monetary Affairs Commissioner Joaquin Almunia said on Wednesday he expected Italy next month to present to finance ministers the measures it plans to implement to cut its budget deficit.
+- - - -
+EU Commission says no plan to cut growth forecast
+
+LUXEMBOURG - European Economic and Monetary Affairs Commissioner Joaquin Almunia said on Wednesday the EU executive would not change its 2004 growth forecast due to the rise in oil prices to record levels.
+- - - -
+Luxembourg plans to renominate Mersch for ECB
+
+LUXEMBOURG - Luxembourg's central bank governor Yves Mersch will be nominated for a second term, keeping him on the European Central Bank's Governing Council, the country's prime minister said on Wednesday.
+- - - -
+Germany's EnBW to sue German govt over CO2 law
+
+FRANKFURT - German utility EnBW expects to be unfairly hit by an upcoming European carbon dioxide emissions trading scheme and is to take legal action in Germany and possibly at European level to fight the laws, it said on Wednesday.
+- - - -
+
+Page 12 of 19 © 2019 Factiva, Inc. All rights  reserved.
+Poland awaits Eurostat pension ruling in July
+
+KRAKOW, Poland - Poland expects the European Union's statistic agency to rule in July on how its mandatory pension scheme fits into the national budget, Social Affairs Minister Krzysztof Pater said on Wednesday.
+- - - -
+EU finds against  Clearstream,  but avoids fine
+
+LONDON/BRUSSELS - Clearstream  Banking, owned by Deutsche Boerse, will escape a fine from the European Commission despite allegedly discriminating against rivals in its settlement business, the Commission decided on Wednesday.
+- - - -
+Rights not undermined in terror fight, EU says
+
+BRUSSELS - European Union measures to fight terrorism may inconvenience people but have not eroded their civil rights, the bloc's top justice and home affairs official said on Wednesday.
+- - - -
+Belgian, Dane in frame as EU seeks chief executive
+
+BRUSSELS - The prime ministers of Belgium and Denmark were leading contenders in a closed-door tussle for the European Union's top job as Irish Prime Minister Bertie Ahern set off on a final round of consultations on Wednesday.
+- - - -.
+
+NS          eec : European Union | nsum : News Digest | ncat : Content Types | niwe : IWE Filter | ocat : International Pol-Econ Organizations
+RE          gfr : Germany | lux : Luxembourg | eecz : European Union Countries | eurz : Europe | benluxz : Benelux
+Countries | weurz : Western Europe
+IPC         N2K:ECR
+PUB       Reuters Ltd.
+AN          Document REUNH00020040603e06300001
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 13 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD          EU finds  Deutsche Boerse unit infringed on competition rules
+WC          86 words
+PD           3 June 2004
+SN           eFinancialNews
+SC           EFIN
+LA           English
+CY           (c) 2004 eFinancialNews Ltd. Data not available for redissemination.
+
+LP
+European Union regulators found  Deutsche Boerse's Clearstream  trade-processing unit guilty of antitrust abuses in the securities industry but didn't impose a fine.The European Commission said Clearstream  'infringed  competition rules by refusing to supply cross-border securities clearing  and settlement services by applying discriminatory prices.'
+
+While Clearstream  was found to have broken  antitrust rules, the commission did not impose a fine because there was no EU case law or jurisprudence regarding  clearing  and settlement.
+
+IN            i816 : Clearing House/Reserve Activities | i83106 : Securities/Commodity Exchange Activities | i81501
+: Credit Types/Services | i831 : Financial Investments | ibnk : Banking/Credit | iinv : Investing/Securities
+NS           eec : European Union | ocat : International Pol-Econ Organizations
+RE           gfr : Germany | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+IPD          Custody and Settlement
+PUB        Financial News
+AN           Document EFIN000020040605e06300009
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 14 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD            EU Finds Deutsche Boerse Unit Infringed Competition Rules
+BY             By James Kanter and Steve De Bonvoisin Dow Jones Newswires
+WC            414 words
+PD             3 June 2004
+SN             The Wall Street Journal Europe
+SC             WSJE
+PG            M3
+LA             English
+CY             (Copyright (c) 2004, Dow Jones & Company, Inc.)
+
+LP
+BRUSSELS -- European Union regulators found  Deutsche Boerse AG's  Clearstream  unit guilty of
+antitrust abuses in the securities industry but didn't impose a fine.
+
+The European Commission said Clearstream  "infringed  competition rules by refusing to supply cross-border securities clearing  and settlement services by applying discriminatory prices."
+
+TD
+While Clearstream  was found to have broken  antitrust rules, the commission didn't impose a fine because there was no EU case law or jurisprudence regarding  clearing  and settlement.
+
+The commission brought formal charges against  Clearstream  in April 2003. It was the commission's first attempt at stamping out discriminatory behavior in the sector. Regulators accused  Clearstream of denying its rival Euroclear access to its German securities-settlement platform, and for overcharging Euroclear.
+
+"Access was denied for over two years and this is too long," said EU spokesman Tilman Lueder. He added there was no evidence that  Clearstream  faced similar restrictions from other operators, which the company had argued as part of its defense.
+
+Clearstream  already had ceased the practices in question. Even so, the case was important to EU regulators, who want to make settling trades across borders less costly and promote a unified European capital market. The commission's finding could help the EU impose tougher sanctions in future cases where settlement houses break  antitrust rules.
+
+Clearstream  welcomed the decision not to impose a fine, but in a statement it said it "consistently rejected the accusations on which the proceedings were based and emphasized that these related to the past."
+
+Settlement is the process of transferring ownership rights from the seller of a stock or bond to the buyer. As long as both are in the same country, the process remains relatively simple. But with cross-border trade, the process can be unwieldy and expensive because many European stock exchanges, such as Germany's, own their own settlement houses.
+
+Since the euro started circulating at the start of 2002, EU regulators have targeted  clearing  and settlement as part of their efforts to create a seamless internal market across Europe. In May 2002, the commission opened a sectorwide  antitrust inquiry to investigate access and pricing, focusing its efforts on  Clearstream.
+
+Earlier this year, the commission released a long-awaited policy document on the issue, saying every provider of clearing  and settlement services should have access to every other national market -- but left undecided how to implement this.
+CO            dboers : Deutsche Boerse AG
+
+IN              i816 : Clearing House/Reserve Activities | iinv : Investing/Securities | i81501 : Credit Types/Services | i831 : Financial Investments | i83106 : Securities/Commodity Exchange Activities | ibnk : Banking/Credit
+Page 15 of 19 © 2019 Factiva, Inc. All rights  reserved.
+NS             eec : European Union | c13 : Regulation/Government Policy | c34 : Competition Issues | ccat : Corporate/Industrial News | ocat : International Pol-Econ Organizations
+RE             lux : Luxembourg | belg : Belgium | gfr : Germany | benluxz : Benelux Countries | eecz : European
+Union Countries | eurz : Europe | weurz : Western Europe
+IPC            IGV
+PUB          Dow Jones & Company Inc.
+AN             Document WSJE000020040603e0630000l
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 16 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD            EU Says Clearstream  Broke Antitrust Rules
+BY            Dow Jones Newswires
+WC           227 words
+PD            3 June 2004
+SN            The Wall Street Journal
+SC            J
+PG            B7
+LA             English
+CY            (Copyright (c) 2004, Dow Jones & Company, Inc.)
+
+LP
+BRUSSELS -- European Union regulators found  Deutsche Boerse AG's  Clearstream
+trade-processing unit guilty of  antitrust abuses in the securities industry but didn't impose a fine.
+
+The European Commission said Clearstream  "infringed  competition rules by refusing to supply cross-border securities clearing  and settlement services by applying discriminatory prices." While Clearstream  was found to have broken  antitrust rules, the commission didn't impose a fine because there was no EU case law or jurisprudence regarding  clearing  and settlement.
+
+TD
+The commission brought formal charges against  Clearstream  in April 2003. Regulators accused Clearstream  of denying its rival, Euroclear, access to its German securities-settlement platform, and of overcharging Euroclear.
+
+EU spokesman Tilman Lueder said there was no evidence that  Clearstream  faced similar restrictions from other operators, which the company had argued as part of its defense.
+
+Clearstream  already had ceased the practices in question. Even so, the case was important to EU regulators, who want to make settling trades across borders less costly and promote a unified European capital market. The commission's finding could help the EU impose tougher sanctions in future cases where settlement houses break  antitrust rules.
+
+Clearstream  said it "consistently rejected the accusations on which the proceedings were based and emphasized that these related to the past."
+
+License this article from Dow Jones Reprint Service
+IN              i816 : Clearing House/Reserve Activities | iinv : Investing/Securities | i81501 : Credit Types/Services |
+ibnk : Banking/Credit
+NS            eec : European Union | c13 : Regulation/Government Policy | c34 : Competition Issues | ccat : Corporate/Industrial News | ocat : International Pol-Econ Organizations
+RE            lux : Luxembourg | belg : Belgium | gfr : Germany | benluxz : Benelux Countries | eecz : European
+Union Countries | eurz : Europe | weurz : Western Europe
+IPC           FIN
+PUB          Dow Jones & Company, Inc.
+AN            Document J000000020040603e06300039
+
+
+
+
+
+
+
+
+
+Page 17 of 19 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         Commission Rips Clearstream  Frankfurt
+BY         Chris Kentouris Senior International Editor
+WC        697 words
+PD         7 June 2004
+SN         Securities Industry News
+SC         SINW
+LA          English
+CY         Copyright (c) 2004 Thomson Media Inc. All Rights Reserved
+
+LP
+The European Commission (EC)'s widely expected decision to publicly condemn but not fine Clearstream  Banking Frankfurt (CBF) for  anticompetitive tactics against Euroclear Bank in the German market may have both sides claiming victory, but more importantly proves the EC's conviction to ban anticompetitive practices within Europe's post-trade processing industry.
+
+In the first-of-its-kind move, the EC last week found CBF guilty of  abusing  its position as a "dominant provider" of settlement services in Germany by  refusing Euroclear Bank access, for more than two years, to its Cascade RS settlement platform for some registered German shares. Even after Euroclear Bank was granted a link to Cascade RS in November 2001, it was charged with "discriminatory pricing" by CBF-fees far higher than those of other depository systems, the EC contended.
+
+TD
+Clearstream's  action to block Euroclear meant that participants of Euroclear Bank could not settle their trades in registered German equities directly on the books of Euroclear Bank and had to go to CBF or rely on intermediary agent banks, which meant higher settlement costs.
+
+Euroclear last week confirmed that CBF reduced its fees in January 2002, but it would not say by how much or whether it was the percentage requested. Euroclear officials said they were not surprised with the EC's ruling, but remained adamant that  Clearstream's  fees to link to the Cascade platform "remained too high."
+
+Last week,  Clearstream  continued to deny any wrongdoing-a stance officials claim is bolstered by the fact that the EC's decision, albeit embarrassing to CBF, is essentially a slap on the wrist. A fine could have easily amounted to tens of millions of euros. "Clearstream  welcomes the decision of the European Commission's antitrust authorities not to impose a fine on the company.  Clearstream  has consistently rejected the accusations on which the proceedings were based and emphasized that these related to the past," said a statement issued by the  Deutsche Boerse, CBF's parent. But in a separate statement announcing its decision, the EC explained that it could not fine CBF because there was no precedent within European Community case law.
+
+Operations officials at several European financial institutions told Securities Industry News that Clearstream  has claimed Euroclear was never denied access to the Cascade platform for registered shares, but requested a more advanced technological means of linking than other depositories that required infrastructure work by CBF and Euroclear. Hence, the link was merely "delayed" until November 2001.
+
+The change in CBF's position on Euroclear Bank's request came eight months after the EC began its review of Europe's  clearing  and settlement business. Euroclear and Deutsche Borse officials declined to provide details on the Euroclear link with Cascade RS.
+
+How far the EC's decision will go in changing  Clearstream's  market practice remains to be seen. The Clearstream  problem, as defined by the EC, has put EU depositories on notice that its  antitrust laws cannot be violated; settlement houses cannot abuse their dominant market positions to refuse access to other depositories and cannot charge "discriminatory prices."
+
+In its ruling, the EC noted that since its discovery of the problem between CBF and Euroclear two years ago, a number of industry initiatives-including the Giovannini Report and standards set by the European System of Central Banks and the Committee of European Securities Regulators-have gone even further
+
+Page 18 of 19 © 2019 Factiva, Inc. All rights  reserved.
+in mandating open access between EU market infrastructure providers to create a level playing field in
+Europe.
+
+It's uncertain what the EC will finally decide in its own clearance and settlement directive-which could eventually translate into EU law; recent communiques indicate it is following ESCB-CESR's path.
+
+In a conciliatory move to the EC, the Deutsche Borse has expanded the roster of entities that can settle German exchange-traded securities beyond CBF to any entity fulfilling the standards set for a Wertpapiersammelsbanken, although some say the criteria, set under German law, are too stringent and cost-prohibitive for anyone other than CBF to comply with.
+Copyright 2004 Thomson Media Inc. All Rights Reserved.
+
+http://www.thomsonmedia.comhttp://www.securitiesindustry.com
+IN           i816 : Clearing House/Reserve Activities | i81501 : Credit Types/Services | ibnk : Banking/Credit
+NS         eec : European Union | ocat : International Pol-Econ Organizations
+RE         gfr : Germany | lux : Luxembourg | benluxz : Benelux Countries | eecz : European Union Countries |
+eurz : Europe | weurz : Western Europe
+PUB       Thomson Media
+AN         Document SINW000020040607e06700009
+
+Search Summary
+
+Text                                 ("european commission" or "ec commission") and (antitrust or "competition rules" or abusing or anticompetitive or refusing or discriminating) and (Clearstream or Clearing) and ""Deutsche Boerse"" not celex* not interfax not "moral victory"
+Date                                02/05/2004 to 02/07/2004
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                9
+Timestamp                      13 April 2019 10:04 AM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 19 of 19 © 2019 Factiva, Inc. All rights  reserved.

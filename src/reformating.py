@@ -452,6 +452,7 @@ def change_A1012M_structure(type):
         hash = f'{row["Date"]}_{row["Date_type"]}_{ticker}'
         if hash not in unique:
             unique.add(hash)
+        else:
             continue
         Market_DSLOC = None
         Market_MLOC = None

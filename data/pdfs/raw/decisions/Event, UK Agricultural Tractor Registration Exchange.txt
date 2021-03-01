@@ -1,0 +1,436 @@
+
+
+
+
+
+EC bans trade in business secrets among British tractor firms ................................................................................ 2
+EC SLAMS TRACTOR FIRMS FOR SWAPPING BUSINESS SECRETS. ............................................................. 3
+Tractor makers told to halt information exchange .................................................................................................... 5
+
+COMPETITION  -  COMMISSION  BANS  INFORMATION  EXCHANGE  SYSTEM  BETWEEN  MAKERS  OF AGRICULTURAL TRACTORS IN THE U.K . ........................................................................................................... 7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 8 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     EC bans trade in business secrets among British tractor  firms
+WC    205 words
+PD     4 March 1992
+SN     Agence France-Presse
+SC     AFPR
+LA      English
+CY     (Copyright 1992)
+
+LP
+BRUSSELS, March 4 (AFP) - The European Community ordered a stop here Wednesday to exchange of data and business secrets between distributors of farm  tractors in Britain, on the grounds that it hurt competition.
+
+The EC's executive  European Commission said it had condemned a system for sharing data on sales and market shares because this destroyed the secrecy necessary for fair competition, and froze newcomers out of the market.
+
+TD
+Informed sources said the exchange system had operated since 1975 between eight manufacturers which together account for 88 percent of the market.
+
+They said the four biggest firms involved were Ford, John Deere, Massey Ferguson and Case International, which share 70 percent of the market. The four others are Fiat, Renault, Lamborghini and Watveare.
+
+A commission spokesman said the decision would have no impact on other sectors such as automobiles, because the market for cars was much more open and subject to competition from abroad, particularly Japan.
+
+He said the commission had no objections to exchange of information by country or period, but objected to data swaps which identified the performance of specific manufacturers in the highly-concentrated tractor  market.
+gb/hl AFP AFP SEQN-0213
+
+IPD    Financial
+AN     Document afpr000020011106do3400w6f
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 2 of 8 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         EC SLAMS TRACTOR FIRMS FOR SWAPPING BUSINESS SECRETS. BY          By Brian Love
+WC        461 words
+PD         4 March 1992
+SN         Reuters News
+SC         LBA
+LA          English
+CY         (c) 1992 Reuters Limited
+
+LP
+BRUSSELS, Reuter - The  European Commission ordered leading tractor  makers on Wednesday to stop sharing top secret information on sales in Britain, saying the collusion had helped them to corner the market for nearly two decades.
+
+It said four big  tractor  firms and a few smaller ones had been swapping business secrets through a computer network since 1975 and this had allowed them to fix prices and control any potential competition in the  British market.
+
+TD
+"You can't swap company-specific figures...they should be secrets which help firms to compete, even to lead each other up the garden path," said a spokesman for the Commission, which has powers to
+break up industrial cartels in the European Community.
+
+EC officials said Ford, John Deere, Massey Ferguson and Case International were the main culprits but the order also applied to Fiat, Renault, Lamborghini and another very small German firm.
+
+The four biggest firms have 70 per cent of the  British market and the whole group accounts for 88 per cent of all  tractors sold in Britain, the spokesman said.
+
+He said it would have been acceptable for firms to swap figures on sales trends in various EC countries and other general information.
+
+"But it's a question of degree, they went too far in swapping their specific figures," the spokesman told reporters.
+No fine was imposed, he said, because the collaboration was not a fully fledged cartel.
+
+The Commission's verdict, issued after years of inquiry, means the firms must either abandon their arrangement or tone it down radically so that it does not shackle free competition, he explained.
+
+He said the decision only referred to the  British market but he did not rule out that similar arrangements might exist elsewhere in the Community.
+
+The spokesman also confirmed that the Commission had taken "all the necessary steps" to avoid any challenge to the legality of its decision against the firms.
+
+Two major competition policy decisions by the Commission have been quashed by EC courts in the past month on the grounds that the Commission had ignored correct procedure -- in one case partly because Commission President Jacques Delors had not personally signed the final decisions.
+
+The spokesman added that there was no relation between the Commission's conclusions regarding the British tractor  market and the outcome of an extensive inquiry into sales of passenger cars across the Community.
+
+"There's a big difference between the market for  tractors and the market for cars and there's no connection to be made," he said.
+
+Most notably, Japanese carmakers provided major competition for EC carmakers in Britain whereas there was no such influence from outside the EC as far as  tractors were concerned, he noted.
+Page 3 of 8 © 2019 Factiva, Inc. All rights  reserved.
+CO         cryco : Chrysler Group LLC | crycox : | deere : Deere & Company | deerex : | fiat : Fiat SpA | fiatx : |
+frdmo : Ford Motor Company | frdmox : | mafer : Varity Corp | maferx : | rnltl : Renault SA | rnltlx :
+IN           i32 : Machinery/Industrial Goods | i321 : Agricultural Machinery | i351 : Motor Vehicles | i35101 : Passenger Cars | iaut : Automobiles
+NS         c13 : Regulation/Government Policy | c34 : Competition Issues | ccat : Corporate/Industrial News | eec : European Union | gcat : Political/General News | ocat : International Pol-Econ Organizations
+RE         eurz : Europe | uk : United Kingdom | weurz : Western Europe
+AN         Document lba0000020011122do3402tyg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 4 of 8 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         Tractor makers told to halt information exchange
+BY         By DAVID BUCHAN and MICHAEL CASSELL
+WC        365 words
+PD         5 March 1992
+SN         Financial Times
+SC         FTFT
+PG        London Page 9
+LA         English
+CY         (c) 1992 The Financial Times Limited. All rights reserved
+
+LP
+THE EUROPEAN Commission yes-terday ordered several leading  tractor  makers to stop sharing sensitive information on sales in the UK, alleging this collusion had helped the companies solidify a share of about 88 per cent of the British market.
+Four big tractor  companies - Ford New Holland, John Deere, Massey Ferguson and Case International
+- and four with smaller operations in the  UK - Fiat Agri, Renault, Lamborghini and Deutz of Germany -
+have been sharing business information since 1975 through a computer network.
+
+TD
+Some manufacturers last night acknowledged that information on the registration of vehicles was being exchanged through a third party, but denied that the information swap involved pricing details.
+
+Renault, the French state-owned vehicle producer, said it regretted the Brussels move. It added that information had only been exchanged to help identify the scale and nature of a difficult market.
+
+The commission has ordered manufacturers to scrap the system or scale it down so it does not interfere with free competition. It decided not to impose a fine as it judged that the information-sharing did not amount to a fully-fledged cartel.
+Brussels said the  tractor  makers were effectively eliminating competition.
+
+'You can't exchange company-specific figures,' said the commission, adding that these 'should be secrets which help companies compete, even to lead each other up the garden path'.
+
+Members of the information exchange would also be in a position to act to exclude outsiders, the commission feared.
+
+The commission's move followed a long inquiry, and took account of the fact that the  UK tractor  market is declining, relatively small, and highly concentrated.
+Since the inquiry started, Ford New Holland has merged with Fiat Agri.
+
+In certain types of  tractors sold in the UK there were only three or four suppliers, and no significant imports from outside the EC.
+
+The commission said the oligopolistic structure of this market contrasted with that of the  UK car market, where prices were generally above those on the Continent, but which was subject to considerable pressure from Japanese imports. Yesterday's decision carried no implications for the  UK car market,
+the commission said.
+
+CO        rnltl : Renault SA
+IN          i351 : Motor Vehicles | i35101 : Passenger Cars | iaut : Automobiles
+RE         uk : United Kingdom | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+PUB      The Financial Times Limited (AAIW/EIW)
+
+Page 5 of 8 © 2019 Factiva, Inc. All rights  reserved.
+AN         Document FTFT000020070429do3502lfn
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 6 of 8 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD   COMPETITION - COMMISSION BANS INFORMATION EXCHANGE SYSTEM BETWEEN MAKERS OF AGRICULTURAL TRACTORS IN THE U.K.
+WC  470 words
+PD   5 March 1992
+SN   Agence Europe
+SC   AGEU
+LA    English
+CY   (c) 1992 Agence EUROPE, Brussels Not Available for Re-dissemination. .
+
+LP
+BRUSSELS, 04/03/1992 (AGENCE EUROPE) - At the end of investigations lasting several years, the European Commission has decided on banning a system of information exchange involving the retail sale of and market share of agricultural  tractors sold in the United Kingdom. The biggest manufacturers of tractors in the Community take part in the system, in operation since 1975. The Commission considered that the exchange of information identifying the sales of each competitor in a very concentrated market, without any significant competition coming from outside the Community, restrains competition. In its
+opinion, most of the very detailed data accessible to the members of the system through computer reports and analyses constitutes business secrets.
+
+The system of information exchange thus condemned entailed, the Commission considered, two great risks to effective competition, these are:
+
+TD
+- the elimination of all secret competition through the creation of an artificial level of transparency, undesirable in a very concentrated market. In such a market, uncertainty and secrecy between suppliers is an essential element in competition which can only be possible if each participant can keep their action secret, or even lead their competitors on a false trail;
+- a reinforcement of obstacles to market access for non-members.
+
+The decision is based on the "guidelines in matters of information exchange" published in the seventh Commission report in matters of competition policy, published in 1970 and constitutes an illustration of the application of these guidelines. At the same time, it takes into account the specific elements of the market in agricultural tractors in the United Kingdom, characterised by the following factors:
+- narrow market in decline;
+
+- highly concentrated market in which the 4 main suppliers have over 70% of the market, and the 8 member of the Exchange have around 88% of the market;
+- the very limited number of suppliers (sometimes 3 or 4) in certain categories of engine power;
+
+- obstacles to market penetration stemming from make loyalty as well as the high cost of the after-sales network and spare parts;
+
+- absence of any significant imports from third countries. The Commission's decision is not transferrable to the car industry
+There are three points to stress concerning this decision:
+- in banning the information exchange system, the Commission has not inflicted a fine on those taking part;
+
+- the firms involved in the system are; the four large manufacturers Ford, John Deere, Massey Ferguson and Case International; three secondary suppliers (Fiat, Renault and Lambourghini) and a marginal supplier (German);
+
+- the Commission's decision is not transferable to the car sector (where information exchange systems between European manufacturers exist), as the markets are fundamentally different: in the car market there is greater product heterogeneity and imports from third countries create strong competition.
+
+Page 7 of 8 © 2019 Factiva, Inc. All rights  reserved.
+(c) Agence EUROPE, Brussels 1992.
+CO   crycox : | deerex : | fiatx : | frdmox : | maferx : | rnltlx :
+IN     i351 : Motor Vehicles | i35102 : Commercial Vehicles | iaut : Automobiles
+NS   c34 : Competition Issues | ccat : Corporate/Industrial News | eec : European Union | gcat : Political/General
+News | ocat : International Pol-Econ Organizations
+RE   eurz : Europe | uk : United Kingdom | weurz : Western Europe
+AN   Document ageu000020011122do350081c
+
+Search Summary
+Text                                ("european commission" or "EC commission") and tractor* and (british or britan or UK
+or "U.K.") not celex* not gatt not "The other main themes of this session, barring any"
+Date                                17/01/1992 to 17/03/1992
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                4
+Timestamp                      12 April 2019 2:23 PM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 8 of 8 © 2019 Factiva, Inc. All rights  reserved.

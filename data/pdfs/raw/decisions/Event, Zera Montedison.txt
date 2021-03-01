@@ -1,0 +1,263 @@
+
+
+
+
+
+E.C. warns against anti-trust abuses of product norms ........................................................................................... 2
+COMMISSION MAKES LANDMARK RULING ON PARALLEL IMPORTS.............................................................. 3
+THE EUROPEAN COMMISSION TAKES A DECISION IN THE MONTEDISON /STAEHLER CASE. ................... 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 5 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     E.C. warns against anti-trust abuses of product norms
+WC    187 words
+PD     24 June 1993
+SN     Agence France-Presse
+SC     AFPR
+LA      English
+CY     (Copyright 1993)
+
+LP
+BRUSSELS, June 24 (AFP) - The  European Community warned here Thursday that it would not tolerate the exploitation of product technical standards to shut competition out of national markets.
+The E.C.'s executive  European Commission issued a formal condemnation of the Italian chemicals firm
+ZERA Montedison and its German distributor, Hinkens Stahler, for breaching E.C. competition rules.
+
+TD
+It said the two firms had exploited a minor product differentiation to sell a version of the weedkiller Digermin at a much higher price in Germany than charged for a nearly identical product under the same name in other countries.
+
+The expensive version was registered in Germany, and the cheaper version available elsewhere could not be imported into Germany by rival distributors because it did not exactly match the specifications of the registered product.
+
+The commission said it would be keeping a close eye out for similar anti-competitive practices, stemming from the fact that the E.C. does not yet have a system of E.C.-wide recognition of national product specifications.
+gb/hl AFP AFP SEQN-0255
+
+IPD    Financial
+AN     Document afpr000020011031dp6o01dkm
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 2 of 5 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         COMMISSION MAKES LANDMARK RULING ON PARALLEL IMPORTS. WC        296 words
+PD         24 June 1993
+SN         Reuters News
+SC         LBA
+LA         English
+CY         (c) 1993 Reuters Limited
+
+LP
+BRUSSELS, June 24, Reuter - The European Commission said on Thursday it had ruled that the German branch of Italy's Montedison was guilty of concerted practices with its official distributor intended to stop parallel imports of weedkiller.
+
+The decision will have only limited effects on the firms involved as the practice ended in 1988 but it sets an important precedent for similar cases in other sectors, a  Commission official said.
+
+TD
+"It is important that all those companies that are affected (by practices limiting parallel imports) know they can complain to the  Commission and get defended," he said.
+
+Parallel imports involve shipments between EC states outside manufacturer-controlled distribution networks, from wholesalers in low-price countries to customers in high-price countries.
+
+In the present case, the German wholesale company  Zera Agrarchemikalien GmbH complained about the exclusive rights given by  Montedison Deutschland to its distributor Hinkens Stahler for the sale of Digermin by having the product approved in different member states.
+
+"The Commission decided there is an infraction to competition rules when a manufacturer gives its distributor total territorial protection by requesting, in conformity with an agreement between the two, approval in different member states for products that often only present slight differences," the Commission said in a statement IP/93/507.
+
+The fact that very similar products need be approved under member states different standards was an obstacle to parallel imports, it said.
+
+The Commission's decision was based on article 85 of the EC treaty prohibiting agreements and concerted practices which restrict competition on the Community level.
+
+Following a similar  Commission initiative in the drugs sector, Germany agreed in January to stop requiring special certificates for medicines imported from wholesalers in other  European Community countries.
+(c) Reuters Limited
+
+CO        agfinz : MONTEDISON
+IN          i8396 : Diversified Holding Companies | ibcs : Business/Consumer Services
+
+NS         c34 : Competition Issues | ccat : Corporate/Industrial News | eec : European Union | gcat : Political/General News | ocat : International Pol-Econ Organizations
+RE         eurz : Europe | gfr : Germany | italy : Italy | medz : Mediterranean | weurz : Western Europe
+AN        Document lba0000020011120dp6o071bn
+
+
+
+
+
+
+Page 3 of 5 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD   THE EUROPEAN COMMISSION TAKES A DECISION IN THE MONTEDISON/STAEHLER CASE. WC  367 words
+PD   25 June 1993
+SN   Agence Europe
+SC   AGEU
+LA    English
+CY   (c) 1993 Agence EUROPE, Brussels Not Available for Re-dissemination. .
+
+LP
+It intends to use to the case to prevent the partitioning of national markets.
+
+TD
+BRUSSELS, 24/06/1993 (AGENCE  EUROPE) - The European Commission has ruled against Zera         Montedison and Hinkens Staehler for infringement of the prohibition on concerted agreements set out in Article 85 of the EEC Treaty. This decision will enable the  Commission to step up its monitoring of economic sectors in which an often minimal differentiation of products is used by manufacturers to practice different prices in the different Member States and, lacking mutual recognition of national approval procedures or a harmonized system of approval, to protect themselves from parallel imports. In the case in point, the infringement was committed between 1983 and 1988 and is of marginal economic importance. The decision nevertheless is exemplary in nature in that such "partitioning agreements" between manufacturers and distributors can be practised in other sectors subject to official product approval requirements to hinder or even prevent trade between the Member States in a certain product by introducing a minimum change in its composition or trademark; thus, the consumer cannot benefit from the price differences between Member States.
+
+With its present decision, the  Commission has established that there is infringement to the law on competition when a manufacturer (here, Farmoplant and  Montedison Deutschland) grants his distributor (Staehler) absolute territorial protection (in Germany) by calling for, in conformity with the agreement which binds them, approval in the different Member States for products (Digermine herbicide) which only have slight differences. This differentiation, applied to products which require approval, enabled the incriminated firms to prevent the parallel import onto the German market of the product in question which was sold at a much lower price in other Member States (notably Italy) but with a composition not approved by the German authorities. German legislation in the matter in fact only permits the import of this kind of product if the importer proves to the relevant authorities that it is identical to the product approved in Germany;
+changes to the composition, even slight ones, have the effect therefore of preventing parallel imports and to compartmentalize the Community market.
+(c) Agence EUROPE, Brussels 1993.
+
+CO   agfinz : MONTEDISON
+IN     i8396 : Diversified Holding Companies | ibcs : Business/Consumer Services
+NS   c34 : Competition Issues | ccat : Corporate/Industrial News | eec : European Union | gcat : Political/General
+News | ocat : International Pol-Econ Organizations
+RE   eurz : Europe | weurz : Western Europe
+AN   Document ageu000020011120dp6p00hzl
+
+Search Summary
+Text                                commission and euro* and montedison not celex* and zera
+Date                                22/05/1993 to 22/07/1993
+Source                            All Sources Author                             All Authors Company                        All Companies
+Page 4 of 5 © 2019 Factiva, Inc. All rights  reserved.
+Subject                           All Subjects
+Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                3
+Timestamp                      11 April 2019 3:35 PM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 5 of 5 © 2019 Factiva, Inc. All rights  reserved.

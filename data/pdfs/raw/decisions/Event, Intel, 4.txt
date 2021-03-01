@@ -1,0 +1,267 @@
+
+
+
+
+
+Microsoft bids to pre-empt EU browser action ......................................................................................................... 2
+UPDATE 1-Opera says Microsoft EU browser offer 'not enough' ............................................................................ 4
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 5 © 2019 Factiva, Inc. All rights  reserved.
+
+
+
+SE       FRONT PAGE - COMPANIES & MARKETS
+HD       Microsoft bids to pre-empt EU browser  action
+BY       By Richard Waters in San Francisco and Nikki Tait in Brussels
+WC      371 words
+PD       12 June 2009
+SN       Financial Times
+SC       FTFT
+ED       USA Ed2
+PG       13
+LA        English
+CY       (c) 2009 The Financial Times Limited. All rights reserved
+
+LP
+The fight between Microsoft and the European Union over how to bring greater  competition to the internet browser market erupted afresh late yesterday as the software company sought to pre-empt stringent anti-trust action being planned by Brussels.
+Microsoft issued a unilateral statement saying that its Windows 7 operating system, due to be launched
+in October, would be made available in Europe without the Internet Explorer browser included. The move
+was designed to reduce the legal uncertainties around the launch of Windows 7 in Europe and "the risk
+of large fines", Microsoft said.
+
+TD
+The move drew a cool response from the European Commission, which has been preparing more stringent action against the software company to bring greater competition to the browser market. While the commission said it noted Microsoft's move "with interest", one official said that for consumers, "rather than more choice, Microsoft seems to have chosen to provide less".
+
+Thomas Vinje, a lawyer representing ECIS, a grouping of technology companies opposed to Microsoft, said: "This is a step in the right direction, but it is far from enough."
+
+Microsoft's move comes as the European regulators have been preparing action against Microsoft that would include a requirement for it to give personal computer users a choice of which browser they use
+on their PCs. The unusual remedy would mark the most direct intervention yet by European regulators to promote consumer choice in technology markets.
+
+The EU has been expected to push ahead with its action later this summer, along with a penalty that some legal observers say could approach the record €1.06bn ($1.49bn)  fine recently levied on Intel.
+
+Rather than wait for the expected sanctions, however, Microsoft said yesterday that Windows 7 would be released in Europe without a browser, and that PC makers and consumers would be free to install one themselves.
+
+The move echoes an earlier European action against Microsoft, when regulators forced the company to sell a version of Windows without a media player "bundled" into the software.
+Free ride for rivals, Page 14
+
+RF       ftnewspaper_20090612.xml|20090612U213.228
+CO       mcrost : Microsoft Corporation
+
+IN         i3302 : Computers/Electronics | i330202 : Software | i3302020 : Systems Software | i3302021 : Applications Software | ibrows : Internet Browsers | icomp : Computing | iint : Internet/Online Services
+NS       c34 : Competition Issues | eucom : European Commission | npag : Page-One Story | ccat : Corporate/Industrial News | eec : European Union | ncat : Content Types | nfact : Factiva Filters | nfcpin : FC&E Industry News Filter | ocat : International Pol-Econ Organizations
+Page 2 of 5 © 2019 Factiva, Inc. All rights  reserved.
+RE       eurz : Europe | usa : United States | namz : North America
+IPD      Company News
+IPC      CN
+PUB     The Financial Times Limited (AAIW/EIW)
+AN       Document FTFT000020090612e56c0005g
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3 of 5 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD        UPDATE 1-Opera says Microsoft EU browser  offer 'not enough' WC       506 words
+PD        12 June 2009
+ET         10:48 AM
+SN        Reuters News
+SC        LBA
+LA         English
+CY        (c) 2009 Reuters Limited
+
+LP
+* Opera says browser move would not restore  competition
+* Says Microsoft's dominant position would prevail
+
+TD
+* EU says never asked MSFT to ship OS without browsers
+* EU will examine conditions of Windows 7 rollout
+(Adds background, Commission official, Opera shares) By Tarmo Virki, European technology correspondent
+HELSINKI, June 12 (Reuters) - Norwegian browser maker Opera ASA said on Friday that Microsoft's plan to ship its Windows operating system in Europe without its Internet Explorer web browser was not enough to restore  competition.
+
+On Thursday the world's top software maker Microsoft, countering pressure from European regulators, said it plans to ship the newest version of Windows in Europe without its Internet Explorer web browser. [ID:nN11506625]
+"I don't think what Microsoft announced is going to restore  competition," Opera's Chief Technology
+Officer Hakon Wium Lie told Reuters.
+"I don't think its going to be enough, I don't think it will get them off the hook," he said.
+
+Shares in Opera leapt more than 6 percent to a three-year high on the news of Microsoft's plans and expectations for an upcoming announcement from the company, an analyst said.
+
+Microsoft's abrupt reversal comes shortly before the  European Commission is due to rule on antitrust charges brought against the company in January, claiming that it abuses its dominant position by bundling its Explorer browser, shielding it from head-to-head  competition with rival products.
+EU WATCHDOG
+
+Until now, Microsoft has claimed that the browser was an integral part of the operating system and should not be pulled out, but it now plans to do that for a European version of Windows 7, due to be rolled out later this year.
+
+A European Commission official said the EU watchdog will examine the conditions under which Microsoft will ship Windows 7 without browsers to manufacturers and suppliers, warning that the Commission will find out if there are any conditions attached.
+
+"We never suggested that they have to sell Windows without Internet Explorer. We suggested that they might have to give the possibility to customers to chose between different browsers," the official said.
+
+The official added that it was in Microsoft's interest to inform the Commission of any conditions attached to the rollout.
+
+Page 4 of 5 © 2019 Factiva, Inc. All rights  reserved.
+The Commission, which enforces  competition rules in the 27-nation European Union, said it planned to decide shortly on its latest case against the U.S. tech giant.
+It has to date  fined Microsoft nearly $2 billion for various offenses. The Commission can impose a  fine
+of up to 10 percent of a company's turnover and other remedies if found to have breached EU rules.
+
+Last month, it slapped a record $1.49 billion  fine on the world's biggest chipmaker  Intel for anti-competitive practices.
+(Additional reporting by Bate Felix and Ilona Wissenbach in Brussels; editing by Mike Nesbit and Rupert
+Winchester)
+RF         OPERA-MICROSOFT/ (UPDATE 1)|LANGEN|ABN|E|RBN|U|DA|FN|NW|SW|RNP|DNP|PCO
+CO        mcrost : Microsoft Corporation | opersa : Opera SA
+
+IN          i8395466 : Data Processing Services | ibcs : Business/Consumer Services | i3302 : Computers/Electronics | i330202 : Software | i3302020 : Systems Software | icomp : Computing | i81502
+: Trusts/Funds/Financial Vehicles | i8150203 : Private Equity | ialtinv : Alternative Investments | iinv : Investing/Securities
+NS        c34 : Competition Issues | c22 : New Products/Services | ccat : Corporate/Industrial News | ncat : Content Types | nfact : Factiva Filters | nfcpin : FC&E Industry News Filter
+RE        eecz : European Union Countries | eurz : Europe
+IPC       EU
+PUB      Reuters Limited
+AN        Document LBA0000020090612e56c000ky
+
+Search Summary
+
+Text                                 ("european commission" or "ec commission") and fine* and intel and (abuse or antitrust or competition or monopoly)not celex* not interfax
+Date                                13/04/2009 to 13/06/2009
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                315
+Timestamp                      13 April 2019 10:27 AM
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 5 of 5 © 2019 Factiva, Inc. All rights  reserved.

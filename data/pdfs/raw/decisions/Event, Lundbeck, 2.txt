@@ -1,0 +1,1198 @@
+
+
+
+
+
+DID NOT DELAY LAUNCH OF GENERIC ANTI-DEPRESSANT: RANBAXY CHIEF (the company intends to appeal against the order of the European Commission ) ......................................................................................... 2
+ANTI-TRUST POLICY : LUNDBECK FINED FOR BLOCKING GENERIC RIVALS ................................................ 3
+Pharmaceuticals Newsletter – June 21 to June 27, 2013 ........................................................................................ 5
+Guest Post: The legality of 'reverse payments' in the E.U. ...................................................................................... 7
+SpicyIP Weekly Review (June 2013, Week 5) ....................................................................................................... 10
+The EU Perspective: Lundbeck .............................................................................................................................. 13
+Supreme Court Holds Reverse Payment Settlements Are Subject To Rule-Of-Reason Scrutiny In Landmark
+Ruling ..................................................................................................................................................................... 15
+Focus Antitrust - Competition Weekly Email Alert - 26 June 2013 ......................................................................... 18
+EC Slaps Huge Fines on Lundbeck , Generics for Pay-for-Delay Deals................................................................ 20
+EU fines Ranbaxy, 8 others for blocking cheaper drugs ........................................................................................ 22
+European Competition Law Newsletter – July 2013 ............................................................................................... 23
+Georgia scrambles for fresh supply of drugs to execute death row inmate ........................................................... 26
+EU Commission Fines Lundbeck And Others Over "Pay-For-Delay" Agreements ................................................ 28
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      DID NOT DELAY LAUNCH OF GENERIC ANTI-DEPRESSANT: RANBAXY CHIEF (the company intends  to appeal against the order of the European Commission)
+CR      Business Line. Jun 25, 2013; pg 3
+WC     99 words
+PD      25 June 2013
+SN      Indian Business Insight
+SC      WIBI
+VOL    0971-7528
+LA       English
+CY      Copyright (c) 2013 Informatics (India) Ltd.
+
+LP
+The Chief Executive of Ranbaxy Pharmaceuticals Ltd is of the view that the company did not delay the launch of generic version of the anti-depressant drug, citalogram, of  Lundbeck. The European Commission (EC) has imposed a fine of Rs80 crore on Ranbaxy. The EC has imposed a total fine of
+146 million Euro on nine companies on similar charges. Ranbaxy intends to appeal against the order of the EC.
+
+CO      eucmm : European Commission | lundh : H. Lundbeck A/S | ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo Company Limited
+IN       i25 : Chemicals | i257 : Pharmaceuticals | igeneri : Generic Drugs | i2577 : Anti-depressants | i951 : Health Care/Life Sciences | ibasicm : Basic Materials/Resources | idrugty : Drugs/Medication
+NS      c12 : Corporate Crime/Legal Action | c22 : New Products/Services | nabst : Abstracts | ccat : Corporate/Industrial News | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter
+RE      india : India | asiaz : Asia | bric : BRIC Countries | devgcoz : Emerging Market Countries | dvpcoz : Developing Economies | indsubz : Indian Subcontinent | sasiaz : Southern Asia
+IPD     Drugs-and-Pharmaceuticals-283000.000
+PUB    Informatics (India) Ltd.
+AN      Document WIBI000020130626e96p0000a
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 2 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     ANTI-TRUST POLICY : LUNDBECK FINED FOR BLOCKING GENERIC RIVALS WC    858 words
+PD     28 June 2013
+SN     Europolitics Environment
+SC     ENVE
+VOL   0859
+LA      English
+CY     Copyright 2013 Europe Information Service All Rights Reserved
+
+LP
+€93,8 million. That is the fine the European Commission levied, on 19 June, against Danish pharmaceutical company Lundbeck for having entered into an agreement, in 2002, with various laboratories to delay the placing on the market of the generic version of citalopram, a "blockbuster"
+anti-depressant it produced. These generics contain the same molecule as the original (princeps) but are sold on average 40% cheaper than princeps as soon as the patent has expired or is about to. It is the first time the Commission has penalised a so-called "pay-for-delay" agreement - by which a laboratory enters into an agreement with one or several laboratories producing generics to delay the entry onto the market of said generics (see Insight on Big Pharma in Europolitics 4553). These generic companies were
+Alpharma (now part of Zoetis), Merck KGaA/Generics UK (Generics UK is now part of Mylan), Arrow (now part of Actavis), and Ranbaxy. These laboratories were  fined in total €52.2 million.
+
+TD
+The Commissioner for Competition, Joaquín Almunia, said that "It is unacceptable that a company pays off its competitors to stay out of its market and delay the entry of cheaper medicines. Agreements of this type directly harm patients and national health systems, which are already under tight budgetary constraints. The Commission will not tolerate such anti-competitive practices".
+
+Citalopram is a blockbuster antidepressant medicine and was  Lundbeck's best-selling product at the time. After Lund-beck's basic patent for the citalopram molecule had expired, it only held a number of related process patents, which provided a more limited protection. Producers of cheaper, generic versions of citalopram therefore had the possibility to enter the market. Indeed, one of them had actually started selling its own generic version of citalopram and several other producers had made serious preparations
+to do so. This new competition should have led to a drop in the price of the medicine. But instead of competing, the generic producers agreed with Lundbeck, in 2002, not to enter the market in return for substantial payments and other inducements from Lundbeck amounting to tens of millions euro. Internal documents refer to a "club" being formed and "a pile of $$$" to be shared among the participants. Lundbeck paid significant lump sums, purchased generics' stock for the sole purpose of destroying it, and offered guaranteed profits in a distribution agreement, the Commission notes. "The agreements gave Lundbeck the certainty that the generics producers would stay out of the market for the duration of the agreements without giving the generic producers any guarantee of market entry thereafter." These agreements are very different from other settlements of patent disputes where generic companies are not simply paid off to stay out of the market. For example, prices of generic citalopram dropped on average by
+90% in the UK, compared to  Lundbeck's previous price level once wide-spread generic market entry took place following the discontinuation of the agreements.
+MONITORING
+
+The EU executive sent the parties a statement of objections in July 2012, but it has been closely following this type of agreement since its big investigation into competition in the pharmaceuticals sector in 2008. Moreover, the Commission launched an in-depth investigation into this type of agreement between
+several manufacturers of generics and the Servier laboratory (3892) concerning a cardio-vascular medicine (perindopril). The Commission also suspects Johnson & Johnson and subsidiaries of Novartis generics of similar practices to push back the introduction in the Netherlands of generic versions in patch form of the painkiller fentanyl. The Commission sent both Servier and Johnson & Johnson a statement of objections, on 31 January.
+
+
+Page 3 of 29 © 2019 Factiva, Inc. All rights  reserved.
+In addition, the Commission has been monitoring patent settlements in order to identify those settlements that could be potentially problematic from an anti-trust perspective - namely those that limit generics' entry against a value transfer from an originator to a generic company. The latest report, published in July 2012, indicates that the proportion of such potentially problematic settlements has stabilised at the low level of
+11%. The report therefore shows that the vast majority of patent settlements are unproblematic from the point of view of anti-trust rules. The number of patent settlements has significantly increased since the sector inquiry, suggesting that the Commission's action has not hindered pharmaceutical companies from concluding legitimate settlements. At the same time, the persistence of potentially problematic settlements shows that the Commission has reason to remain vigilant.
+
+Fines (in euro)
+All infringements -  Lundbeck: 93,766,000
+- Infringements -  Fines to generics companies (total: 52,239,000)
+- Merck KGaA/Generics (UK) - Merck KGaA agreements: 21,411,000, including, jointly and severally with
+Generics (UK) Limited: 7,766 843
+- Arrow - Groupe Arrow ApS: 9,975,000, including, jointly and severally with Arrow Generics Limited:
+9,360,000 of the latter amount, jointly and severally with Resolution Chemicals Limited: 823,735
+- Alpharma - Zoetis Products LLC and Xellia Pharmaceuticals ApS agreement, jointly and severally:
+10,530,000, including jointly and severally with A.L. Industrier AS: 43,216
+- Ranbaxy - Laboratories Limited and Ranbaxy (UK) Limited agreement, jointly and severally: 10,323,000
+RF     33841720130628
+
+CO     merck : Merck KGaA | myln : Mylan Inc. | pharic : Actavis Group hf | lundh : H. Lundbeck A/S | ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo Company Limited | wtsnph : Actavis PLC
+IN      igeneri : Generic Drugs | i257 : Pharmaceuticals | i951 : Health Care/Life Sciences | i2577 : Anti-depressants | idrugty : Drugs/Medication
+NS     c133 : Patents | c34 : Anti-Competition Issues | c13 : Regulation/Government Policy | ccat : Corporate/Industrial News | cgymtr : Intellectual Property | cinprp : Industrial Property Rights (Patents/Trademarks) | ncat : Content Types | nfact : Factiva Filters | nfcpin : FC&E Industry News Filter
+RE     uk : United Kingdom | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+PUB   Europe Information Service SA
+AN     Document ENVE000020130702e96s0001b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 4 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     Pharmaceuticals Newsletter  – June 21 to June 27, 2013
+CR     India Infoline News Service
+WC    870 words
+PD     28 June 2013
+SN     Indiainfoline News Service
+SC     INFOIN
+LA      English
+CY     Copyright © 2013. Indiainfoline Ltd.
+
+LP
+Top Stories
+EU fines nine drug cos including Ranbaxy 146mn euro
+
+TD
+After US FDA rounding up of Indian generic drug makers and putting alerts on and Dabur plants in India, European Union (EU) has rounded up 9 global drugmakers. India's Ranbaxy along with Denmark's Lundbeck were fined a total of Eu. 146mn by EU anti-trust regulators on Wednesday for restricting the supply of a cheaper anti-depressant drug to the market. Lundenback was accused of paying rival generic companies to delay the delivery of anti-depressant drug citalopram to the market…
+Ranbaxy substandard drug plea: SC dismisses PIL for no proof
+
+According to reports, Supreme Court has dismissed a PIL seeking a probe against for allegedly manufacturing and selling substandard medicines. A bench of justices A K Patnaik and Ranjan Gogoi, allowed the petitioner advocate M L Sharma to file a fresh petition if he finds some evidence against the company, report was quoted as saying…
+Disappointed by EC move on  Lundbeck: Ranbaxy
+
+Ranbaxy is disappointed with the decision by the  European Commission to rule its patent settlement agreement with  Lundbeck, covering the molecule Citalopram, anti-competitive, and intends to appeal the Decision to the General Court of the European Union…
+Maha upholds FDA move to cancel J&J's Mulund licence
+
+According to reports, Maharashtra government has upheld the Food & Drug Administration (FDA) commissioner's move to cancel Johnson & Johnson India's licence to manufacture cosmetics from its facility in Mulund, north east Mumbai. FDA’s action taken this year was based on a limited number of batches of baby powder produced in 2007…
+No definite plans to sell formulations biz: Elder Pharma
+
+With reference to the news item appearing in a leading financial daily titled "MNCs Eye's Formulations Biz", has clarified that the company does not have any definite proposals for sale of its domestic formulations business. The Company has been looking for opportunities of organic and inorganic growth / strategic restructuring / fund raising activities, etc. so as to add value to the shareholders. We, as a company constantly work towards adding value to our shareholders and for growth of the Company…
+In focus Story
+Buy Sun Pharma, target Rs. 1,114/share: IIFL Inst Eq
+
+IIFL Institutional Equities, a part of the IIFL Group, has maintained its buy rating on Sun Pharmaceutical. It finds valuation attractive post the recent correction and earnings upside from the weakened rupee. "In the median case, we expect 21% core earnings growth in FY14 and 14% in FY15. The increase in core earnings estimates by around 8% is factoring in a weaker rupee." The brokerage has a 12-month price target of Rs. 1,114, which is an 18% upside from its current market price of Rs. 947 per share.
+
+Page 5 of 29 © 2019 Factiva, Inc. All rights  reserved.
+Domestic News
+AbbVie drags Dr Reddy's to court over Zemplar infringment
+
+US-based drug maker AbbVie Inc has dragged Dr Reddy's Lab to court for allegedly infringing former's patented drug Zemplar on six counts concerning three patents, according to reports. Reports stated that Dr Reddy's Lab committed an act of infringement by filing an ANDA with a Paragraph IV Certification that seeks FDA-marketing approval for DRL generic versions of AbbVie's paricalcitol injection products…
+Arvind Remedies sets up Rs 2.50bn plant
+
+Reports said that Arvind Remedies has set up a Rs 2.50bn manufacturing facility at Irungattukottai, near Chennai. The company will seek USFDA approval in six months, report was quoted as saying. The pharma industry in the US is currently estimated at $326 bn., B. Arvind Shah, MD and CEO, Arvind Remedies, reportedly said addressing a press conference…
+Orchid Chemicals initiates debt restructuring process
+
+& Pharmaceuticals Ltd has announced that due to continuing liquidity constraints and pressure on operations, Orchid has initiated the process of restructuring its debt and accordingly the Company has made reference to the Corporate Debt Restructuring Cell (CDR Cell) through .
+Glenmark Generics gets ANDA approval for Riluzole tablets
+
+Glenmark Generics Inc., USA the subsidiary of Glenmark Generics Limited has been granted final abbreviated new drug approval (ANDA) from the United States Food and Drug Administration (U.S. FDA) for Riluzole Tablets, 50mg. The Company will commence shipping immediately…
+Roselabs Bioscience invests Rs400 cr
+
+Roselabs Bioscience Limited and Roselabs Polymers Ltd, part of the Roselabs Group, have set up the first of its kind complete end-to-end pre-filled syringes (PFS) making facility in the world. The company has already invested more than Rs 400 crore in this unique new state-of-the-art facility near Ahmedabad. It is one of the few companies in the world which offers the complete PFS solution under one roof: from
+manufacturing of glass and polymer PFS, all required components, to making formulations that need to be put into the injectables.
+International News
+Tenet to acquire Vanguard Health Systems
+
+Tenet Healthcare Corporation (NYSE:THC) and Vanguard Health Systems, Inc. (NYSE:VHS) have signed a definitive agreement whereby Tenet will acquire Vanguard for $21 per share in an all cash transaction. The acquisition is valued at $4.3 billion including the assumption of $2.5bn in Vanguard debt…
+CO     usfda : U.S. Food and Drug Administration | ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo
+Company Limited
+IN       i257 : Pharmaceuticals | i951 : Health Care/Life Sciences
+
+RE     india : India | asiaz : Asia | bric : BRIC Countries | devgcoz : Emerging Market Countries | dvpcoz : Developing Economies | indsubz : Indian Subcontinent | sasiaz : Southern Asia
+IPD    Pharmaceuticals Newsletter
+PUB   India Infoline Ltd.
+AN     Document INFOIN0020130628e96s0007a
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 6 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     Guest Post: The legality  of 'reverse payments' in the E.U. BY     Prashant Reddy
+CR     Distributed by Contify.com
+WC    1,508 words
+PD     30 June 2013
+SN     Spicy IP SC     ATSPIC LA      English
+CY     Copyright © 2013. SpicyIP
+
+LP
+The issue of reverse payments, appears to be a rather hot topic this year, with both the U.S. and the E.U. cracking down on this practice, where an innovator pharmaceutical company, which owns a patent, pays off a generic competitor to not enter the market. Last week we had a guest post by George Yu, on the U.S. Supreme Court's decision in the Acatavis case. Today we have for our readers a guest post by Gary Moss, a U.K. solicitor, specialising in patent litigation and the Head of EIP Legal, London.
+The legality of 'reverse payments' in the E.U. by
+
+TD
+Gary Moss
+
+Competition authorities around the world are taking considerable interest in how pharma companies are using their patents to maintain their positions in the market, and in particular, whether they are using them in a way which breaches anti-trust laws. One item which appears to have particularly exercised them is
+the so called "reverse payment" where the pharma company / patent holder pays a sum of money to a "generic" in return, ostensibly, for the generic agreeing to drop its challenge to the pharma company's patent and to stay off the market for a given time.
+Spicy IP recently published here the report on recent case on this topic which came up before the United
+States Supreme Court and which had been instigated by the Federal Trade Commission.
+
+The latest salvo was fired last week by the  European Commission when it fined Lundbeck of Denmark and four other generic companies (Merck KGaA / Generics UK,, Arrow (now part of Activis), Alphapharma (now part of Zoetis) and Ranbaxy) a total of 146 Million. The largest  fine (93.8 Million was levied on Lundbeck. Rambaxy was fined 10.3 Million.
+
+According to the press release which was issued by the Commission (the full text of which can be found here) In 2002, Lundbeck agreed with each of these companies to delay the market entry of cheaper generic versions of Lundbeck's branded citalopram, a blockbuster antidepressant. These agreements violated EU antitrust rules that prohibit anticompetitive agreements (Article 101 of the Treaty on the Functioning of the European Union - TFEU)..Citalopram is a blockbuster antidepressant medicine and was Lundbeck's best-selling product at the time. After  Lundbeck's basic patent for the citalopram molecule had expired, it only held a number of related process patents which provided a more limited protection. Producers of cheaper, generic versions of citalopram therefore had the possibility to enter the market. Indeed, one of them had actually started selling its own generic version of citalopram and several other producers had made serious preparations to do so. Experience shows that effective generic competition drives prices down significantly, reducing dramatically the profits of the producer of the branded product and bringing large benefits to patients. For example, prices of generic citalopram dropped on average by
+90% in the UK compared to  Lundbeck's previous price level once wide-spread generic market entry took place following the discontinuation of the agreements.But instead of competing, the generic producers agreed with Lundbeck in 2002 not to enter the market in return for substantial payments and other inducements from Lundbeck amounting to tens of millions of euros. Internal documents refer to a "club" being formed and "a pile of $$$" to be shared among the participants.  Lundbeck paid significant lump sums, purchased generics' stock for the sole purpose of destroying it, and offered guaranteed profits in a distribution agreement. The agreements gave  Lundbeck the certainty that the generics producers would stay out of the market for the duration of the agreements without giving the generic producers any
+Page 7 of 29 © 2019 Factiva, Inc. All rights  reserved.
+guarantee of market entry thereafter. These agreements are very different from other settlements of patent disputes where generic companies are not simply paid off to stay out of the market. Unfortunately the Commission decision is not currently publicly available, nor is the Statement of Objections which was served on the various entities and which specifies the exact nature of the objectionable behaviour. What is clear is that underlying this was some form of settlement agreement relating to patent litigation over citalopram. To quote from  Lundbeck's press release (the full text of which can be found here)
+
+Lundbeck strongly disagrees with the Commission's decision. It asserts that any settlement agreements involving a transfer of value from an originator to a generic company is a restriction of competition and the value transfer reflects an understanding that the patent is invalid or weak. This approach is erroneous. There is no question about the validity of  Lundbeck's process patents at issue. Patent settlement agreements are efficiency enhancing and legitimate when there are bona fide grounds for dispute.The agreements did not restrict competition in the market beyond the protection already offered by society via the patent rights  Lundbeck already held and as has been confirmed by the European Patent Office (EPO). Over 600 meticulous analyses of the generic citalopram demonstrated that they were all produced with infringing processes. Furthermore, in many concurrent documents the generic companies
+acknowledged that their products violated  Lundbeck's patents.Lundbeck welcomes competition between companies. Lundbeck also strongly believes in and advocates for a level-playing field, which includes that intellectual property rights should not be ignored and infringed by third parties, since this seriously
+damages innovators' investments and reduce their incentives to innovate. The company acted transparently and in good faith in trying to protect our patents.Ranbaxy has been similarly vitriolic in its condemnation of the decision. It issued the following statement:"Ranbaxy is disappointed with the decision by the European Commission to rule its patent settlement agreement with  Lundbeck, covering the molecule Citalopram, anti-competitive, and intends to appeal the decision in the General Court of the European Union.These events took place over 10 years ago, and the company considers that the Commission has misunderstood the facts and misapplied the law. It believes it has strong grounds of appeal."An appeal against the Commission's decision will lie to the General Court of the EU, with the possibility of a further appeal to the Court of Justice of the EU. At that stage hopefully there will be
+provided greater transparency as to what exactly the Commission found so heinous.
+
+This decision needs to be viewed in context. In 2008 the Commission conducted an investigation into the pharmaceutical industry with particular reference as to how the industry (allegedly) used its patent in order to restrict competition. Although the Commission made something of a song and dance about the
+outcome, identifying that generic entry into the market was delayed by a period on average of 7 months following patent expiration (EU Commissioner Neelie Kroes was quoted as saying "Overall it is indeed a conclusion that there is something rotten in the state"), to many commentators eyes the outcome was something of a damp squib. The press release issued by the Commission at the end of this Inquiry can be found here. (For those people who are interested the writer recommends reviewing Robin Jacob's
+(formerly Lord Justice Jacob) masterly presentation to the inquiry the text of which can be found here In its press release following the inquiry the Commission stated:
+
+To reduce the risk that settlements between originator and generic companies are concluded at the expense of consumers, the Commission undertakes to carry out further focused monitoring of settlements that limit or delay the market entry of generic drugs.
+This latest action by the Commission needs to be seen in that light.
+
+What is of interest to commentators is how the Commission intends to prove that the agreements under scrutiny did not constitute genuine attempts by the parties to settle their ongoing patent dispute? Are they going to effectively attempt to retry the patent dispute which was settled to show that one or other of the parties was bound to win and thus had no legitimate interest in settling? And are the parties going to be forced to prove exactly the opposite of what they would have been intending to prove had those cases not been settled - i.e. will  Lundbeck be required to establish that the generic companies could have succeeded and shown that the patents relied upon were invalid? Conversely will the generic companies need to show that their cases were not so strong that they could be certain of winning? If so it will indeed make for an interesting spectacle.
+For the time being, however, in the absence of further detail that is all speculation.
+
+In the meantime the Commission has two other investigations on the go. One relates to perindopril in which Servier, Teva, Mylan and several others are in the Commission's sights, and the other relates to fentanyl, where Johnson & Johnson and Novartis / Sandoz are involved. The former investigation relates to settlement of patent disputes, the latter involves a co-promotion agreement. Interesting times - watch this space!
+IN      i257 : Pharmaceuticals | i951 : Health Care/Life Sciences
+
+
+Page 8 of 29 © 2019 Factiva, Inc. All rights  reserved.
+NS     c133 : Patents | cgymtr : Intellectual Property | gvsup : Judicial Branch | c12 : Corporate Crime/Legal Action | c13 : Regulation/Government Policy | ccat : Corporate/Industrial News | cinprp : Industrial Property Rights (Patents/Trademarks) | gcat : Political/General News | gpir : Politics/International Relations | gpol : Domestic Politics | gvbod : Government Bodies | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter
+RE     uk : United Kingdom | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+PUB  Shamnad Basheer
+AN     Document ATSPIC0020130630e96u00001
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 9 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     SpicyIP Weekly Review (June 2013, Week 5) BY      Sai Vinod
+CR     Distributed by Contify.com
+WC    1,532 words
+PD     1 July 2013
+SN     Spicy IP SC     ATSPIC LA      English
+CY     Copyright © 2013. SpicyIP
+
+LP
+In a historic development, the negotiators at the WIPO Diplomatic Conference at Marrakesh last week concluded the 'Treaty to Facilitate Access to Published Works by Visually Impaired Persons and Persons with Print Disabilities'. The draft text of the treaty is available here. Several civil society organizations who have relentlessly fought for the treaty since 2008 were in boundless joy with the news. The negotiations were intense and faced huge roadblocks from publishing lobby in US and EU. Readers can soon expect a detailed analysis on the treaty.
+Pfizer's testimony leads the way as US pressure on India increases (Part I & Part II)
+
+TD
+Image from here In an excellent two part post (here and here), Swaraj exposes the lies, misrepresentations and disingenuous claims against Indian's IP policy from governmental and industry groups in the US. Leading the pack is Pfizer's Chief IP Counsel, Roy Waldron, who recently in his testimony before US House of Representative accused India of violating TRIPS obligations and harming innovation by granting compulsory licenses. Waldron noted that the provision 'effectively nullified the contributions of the whole discipline of pharmaceutical sciences'. In Part I, Swaraj dwells into fallacious allegations of TRIPS violations by India and demonstrates how this is nothing but a case of double standards by US. Subsequently, more than 150 members of the US Congress wrote to President Obama criticizing India's patent regime and suggested action before WTO dispute settlement body. In Part II, Swaraj looks into several other reports emanating from US on India's IP regime.
+IPO publishes all 'Statements of Working' for 2012
+
+Section 146 of the Patents Act, 1970 requires patentees to submit information relating to working of the patent to the Controller General every year. Finally, the Patent Office for the first time has uploaded the
+'Statements of Working' filed by patentees for last year (i.e. 2012) on its website (here). One had to file an RTI application in order to obtain the information previously. As Prashant rightly states, this information is critical for evaluating the performance of patent system in India.
+Delhi High Court grants ex-parte injunction against Aprica Pharma
+
+The Delhi High Court granted yet another ex parte injunction in patent infringement suit against Aprica Pharmaceuticals on June 17, 2013. The injunction prevents Aprica from launching generic versions Merck's Sitagliptin sold under brand names, Januvia and Janumet. Madhulika notes that the 'vaguely' worded order neither discusses the patent claims nor finds infringement in any specific product. Incidentally, the High Court denied interim relief to Merck against Glenmark for the same drug, a fact which doesn't find any mention in the latest order against Aprica.
+Online censorship continues
+
+Anubha brought to our attention the recent order of the Department of Telecom (DoT) which directed ISPs to block 39 websites for hosting pornographic material. Yet again, the DoT passed the order callously without specifying any reasons for blocking the site. Incidentally, the Supreme Court has asked the IT Ministry and the Home Ministry to respond to a recent PIL seeking a ban on pornographic content on the internet and also criminalizing viewing as a non-bailable offense. Image from here
+
+
+Page 10 of 29 © 2019 Factiva, Inc. All rights  reserved.
+In a similar but unrelated incident, Moutshut.com filed a PIL earlier this year before the Supreme Court seeking orders to quash the abusive IT Rules (Intermediary Guidelines), 2011 and declaring them as violative of Articles 14, 19 and 21 of the Constitution. Mouthshut.com is a popular platform to review consumer products and services. Unfortunately, it had to face the brunt of the Bombay High Court recently after a complaint filed by Sharda University for alleged objectionable comments against them on the site.
+Legality of 'reverse payments' in EU
+
+UK based Solicitor and Head of EIP Legal, Gary Moss, analyses the recent decision of the  European       Commission (EC) to impose a whopping 160 million euro  fine on Lundbeck and four generic manufacturers for entering into 'reverse payment' agreements. Ranbaxy is one of the four generic manufacturers slapped with 10.3 million euros for agreeing to delay generic version of  Lundbeck's blockbuster antidepressant, Citalopram in 2002.  Lundbeck strongly disagreed with the Commissions' decision and stated that: 'Patent settlement agreements are efficiency enhancing and legitimate when there are bona fide grounds for dispute'. Ranbaxy too, expressed its disappointment and announced its intention to appeal before General Court of the European Union. The exact nature of violation of anti-trust law is unclear at this point. Moss concludes with raising pertinent questions on parameters the Commission would have employed to scrutinize settlement agreements against infringement suits.
+MPP succeeds in licensing key HIV medicines
+
+Gopika reported a recent success recorded by the Medicines Patent Pool (MPP) in assisting patent licensing negotiations between Gilead Sciences and Karnataka-based Shilpa Medicare. The UN backed MPP has been created to improve access to HIV/AIDS medicines in developing and under-developed countries by assisting in licensing negotiations between patent holders and generic drug manufacturers. This latest license agreement between Gilead and Shipla extends to manufacture and sale of five key HIV/AIDS patented medicines in over 100 countries. The royalty rate hovers between 3-5 percent on the market price.
+'Om Shanti Om' copyright infringement dispute (Update)
+
+Aparajita blogged on the copyright infringement dispute pending before the Bombay High Court pertaining to Sharukh Khan's home production, Om Shanti Om. Prior to the movie release in 2007, a certain scriptwriter by the name Ajay Monga, alleged that the movie infringes his script titled 'The Silent Movie'. Before moving to the Bombay High Court in 2008, Monga agitated the matter before the Film Writers Association which went in vain. The High Court, however, refused to grant an interim relief in 2008 as there was a considerable delay in filing the suit from the date when legal notice was served. In March this year, the Court framed the issues and asked Monga to submit evidence in support of his claim by 2nd of April. Subsequently, the High Court on April 18, 2013 dismissed the suit. However, the High Court
+restored the suit on June 18, 2013 after allowing a notice of motion from the Plaintiff's lawyer with directions to pay a total of Rs. 20,000/- as cost to Defendants.
+Image from hereKerala's Endosulfan Ban -The science that never got discussed
+
+This guest post from award-winning journalist, Priyanka Pulla, explores the ban on use of endosulfan by the Kerala government. Many have attributed the tragedy in Kasargod, Kerala to the aerial spraying of pesticide, endosulfan (organochlorine class) which has been declared as persistent organic pollutant (POP). In a piece published in Open magazine, Ms. Pulla argued that there is no epidemiological evidence to establish any causal relationship between use of enodsulfan and diseases in Kasargod. In this guest post, Ms. Pulla explores if the Kerala government was correct in banning endosulfan by invoking the precautionary principle.
+
+As per the Stockholm Convention, only a chemical which has a half-life of more than 6 months in soil (persistence) can be classified as POP in addition to three other factors. In a research paper authored by Ivan Kennedy of University of Sydney demonstrated that endosulfan has a half-life greater than 6 months when tested in a laboratory or in arctic regions. On the other hand, the half-life period is much lower than
+6 months in tropical climates. Ms. Pulla queried three of scientists, whose works are believed to have been instrumental in listing endosulfan as POP, about Kennedy's findings. Interestingly, two of studies were conducted in a laboratory and the other did not measure half-life at all. Furthermore, Crispin Halsall of Lancaster Environment Centre who supports the classification agreed with Kennedy's arguments on half-life.
+
+What about alternatives to endosulfan? Ms. Pulla states that there is no data on safety of other alternatives to endosulfan proposed by the Stockholm Convention. Furthermore, cashew growers in Kasargod who switched to organic farming were apparently hit by tea-mosquito bugs.
+A quick look at Venus & PPL's challenge to copyright amendments
+Page 11 of 29 © 2019 Factiva, Inc. All rights  reserved.
+As reported earlier, Venus Worldwide Entertainment Pvt. Ltd. and Phonographics Performance Limited
+(PPL) have jointly filed a writ petition challenging the constitutionality of Sections 31(1)(b), 31D and
+33A(2) and their corresponding rules under the Copyright Rules, 2013. The petition is more or less similar
+to Super Cassettes Industries Ltd. (T-Series) challenge to compulsory licensing and statutory licensing
+scheme affecting music companies. This petition additionally challenges the right to appeal against tariff
+scheme prescribed by copyright societies under Section 33A(2). The role of Copyright Board in
+determining royalty rates and removing 'unreasonable' elements in prescribed tariff scheme is seen as
+unwarranted and unreasonable interference to freedom of contract. Furthermore, it argues that there is no
+public utility in the favourable treatment meted out to radio broadcasters who operate on purely
+commercial basis. Consequently, the provisions are challenged as violation of Articles 14, 19(1)(c),
+19(1)(g), 21 and 300A. The contentions against Sections 31(1)(b) and 31D are similar to the ones raised
+by T-Series.
+
+NS     c133 : Patents | cgymtr : Intellectual Property | c13 : Regulation/Government Policy | ccat : Corporate/Industrial News | cinprp : Industrial Property Rights (Patents/Trademarks) | ncat : Content Types | nfact : Factiva Filters | nfcpin : FC&E Industry News Filter
+RE     india : India | kerala : Kerala | asiaz : Asia | bric : BRIC Countries | devgcoz : Emerging Market Countries |
+dvpcoz : Developing Economies | indsubz : Indian Subcontinent | sasiaz : Southern Asia
+PUB   Shamnad Basheer
+AN     Document ATSPIC0020130701e97100001
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 12 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD     The EU Perspective: Lundbeck
+
+BY      John Allen WC    801 words PD     3 July 2013
+SN     Mondaq Business Briefing
+SC     BBPUB
+LA      English
+CY     (c) 2013 Mondaq Ltd
+
+LP
+Lundbeck held various patents relating to citalopram, both in respect of the substance itself and in respect of various production processes. When the substance patent expired,  Lundbeck and the generic manufacturers entered into talks on whether or not certain alternative manufacturing methods infringed the process patents.  Lundbeck then entered into settlement agreements with Alpharma (now part of Zoetis), Merck KGaA/Generics UK (now part of Mylan), Arrow (now part of Actavis), and Ranbaxy providing that, against a payment, these would not bring generic versions of citalopram on the market for the duration of the agreements. Because of the payment, such agreements are aslso referred to as "reverse payment" agreements.
+
+The European Commission has found that these agreements violate the prohibition of agreements that restrict competition.
+
+TD
+This case is part of a broader  European Commission crackdown on the pharmaceutical industry and the
+European Commission is currently investigating similar cases. The question remains what this
+European Commission decision concretely means.
+
+In its press release, the  European Commission emphasizes that the agreements concerned were "very different from other settlements of patent disputes where generic companies are not simply paid off to
+stay out of the market" and indicated that it is monitoring settlement agreements in order to identify "those settlements which could be potentially problematic from an antitrust perspective - namely those that limit generic entry against a value transfer from an originator to a generic company."
+The US Perspective: Actavis
+
+A similar development is taking place in the US, where on 17 June 2013, the Supreme Court issued a 5-3 decision in FTC v. Actavis. The court reversed an 11th Circuit decision dismissing antitrust proceedings brought by the Federal Trade Commission against innovator Solvay and various generic manufacturers
+for settling patent litigation through reverse payments agreements. The court ruled that while such are not per se unlawful, they may still violate antitrust laws and must therefore be assessed under a "rule of reason" analysis.
+
+The dissenting minority (Chief Justice Roberts, joined by Justices Scalia and Thomas)declared that settling a patent claim cannot possibly result in unlawful anticompetitive harm if the patent holder is acting within the scope of a valid patent and therefore permitted to prohibit generic entry. In this view, a settlement can never violate antitrust law when it stays within the boundaries of the patent grant.
+Commentary
+
+The Commission's distinction between "normal" and "problematic" settlement agreements is difficult to apply in practice. Indeed, agreements whereby a generic company agrees not to bring a generic version
+of a certain medicinal product on the market can constitute the legitimate outcome of a settlement. Such a settlement usually aims at avoiding costly and time-consuming litigation relating to, inter alia, (i) the
+validity of the patents invoked by the innovator and (ii) whether these patents are actually infringed by the substances manufactured by the generic companies or by the processes that these companies apply. While leaving the option open for such settlements, the decision significantly increases legal uncertainty in this area, as companies no longer can exclude that, with hindsight, the  European Commission will take the view that a certain settlement in fact restricted competition and therefore justifies the imposition of a
+Page 13 of 29 © 2019 Factiva, Inc. All rights  reserved.
+fine. An element that complicates the individual competition assessment is that, by their very nature, settlement agreements restrict competition in that, in order to ward off litigation, generic companies accept to respect the application of certain patents or IP rights that they would otherwise have contested and therefore voluntarily agree to restrict their competitive behaviour. Such a settlement may also contain, on legitimate grounds, a value transfer. The concrete assessment is therefore likely to focus on the question whether the patent infringement case which an innovator would have brought in the absence of an agreement is in fact serious enough to justify a settlement.
+
+The downside of this development is that both innovators and generic companies will probably become more risk adverse in contemplating patent litigation settlements. Patent disputes will therefore increasingly be fought out in the courtrooms, resulting in a significant increase in transaction costs for both sides of the industry.
+
+The Supreme Court decision gives more guidance, but still seems to fail to give sufficient importance to the strength of the patent claims involved in assessing whether a settlement is compatible with competition law.
+
+The Commission's press release can be found here. The US Supreme Court's judgment in FTC v. Actavis can be found here.
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Mr John Allen NautaDutilh Strawinskylaan 1999
+Amsterdam
+1077 XV NETHERLANDS
+Click Here for related articles
+(c) Mondaq Ltd, 2013 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO     merck : Merck KGaA | myln : Mylan Inc. | nautad : NautaDutilh N.V. | eucmm : European Commission |
+lundh : H. Lundbeck A/S | ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo Company Limited
+IN       igeneri : Generic Drugs | i257 : Pharmaceuticals | i951 : Health Care/Life Sciences | i2577 :
+Anti-depressants | i835 : Legal Services | ibcs : Business/Consumer Services | idrugty : Drugs/Medication
+NS     c133 : Patents | ccat : Corporate/Industrial News | c34 : Anti-Competition Issues | cgymtr : Intellectual Property | c13 : Regulation/Government Policy | cinprp : Industrial Property Rights (Patents/Trademarks) | ncat : Content Types | nfact : Factiva Filters | nfcpin : FC&E Industry News Filter
+RE     neth : Netherlands | benluxz : Benelux Countries | eecz : European Union Countries | eurz : Europe |
+weurz : Western Europe
+IPD    Intellectual Property
+PUB   Mondaq Limited
+AN     Document BBPUB00020130703e973000gq
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 14 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      Supreme Court Holds Reverse Payment Settlements Are Subject To Rule-Of-Reason  Scrutiny In
+Landmark  Ruling
+BY      Proskauer's Antitrust Practice Group
+WC     1,348 words
+PD      3 July 2013
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA      English
+CY      (c) 2013 Mondaq Ltd
+
+LP
+In Federal Trade Commission v. Actavis, Inc., the Supreme Court, in a 5-3 decision written by Justice Breyer, reversed the Eleventh Circuit's dismissal of an FTC complaint under Section 5 of the Federal Trade Commission Act1 challenging a pharmaceutical reverse payment settlement even though the exclusionary effect of the settlement was within the scope of the patent grant.
+
+TD
+Although the Court rejected the "rule of presumptive illegality" advocated by the FTC and held that the FTC "must prove its case as in other rule-of-reason cases,"2 the decision upends the prevailing Circuit Court view that the anticompetitive effects of settlement pursuant to Hatch-Waxman litigation are assessed by reference to the scope of the challenged patent.3 While the ruling resolves the Circuit split created by last year's Third Circuit decision in In re K-Dur Antitrust Litigation,4 it dramatically alters the certainty implicit in, and the incentives for settlement of, patent infringement litigation between
+brand-name and generic pharmaceutical manufacturers.
+
+The FTC's challenge in Actavis focused on Solvay Pharmaceuticals' settlement agreement with several generic pharmaceutical patent challengers following Hatch-Waxman Act (the "Act") litigation involving Solvay's AndroGel®. In 2003, Solvay obtained a patent for AndroGel, a prescription testosterone treatment. Later that year, Actavis (formerly Watson Pharmaceuticals) filed an Abbreviated New Drug Application ("ANDA") under the Act for a generic version of AndroGel, which certified that Actavis' patent was invalid.5 Shortly thereafter, Paddock Laboratories also filed an ANDA with a similar
+certification.6 Solvay, in turn, commenced litigation against Actavis and Paddock alleging patent infringement, resulting in a mandatory 30-month stay of the ANDA approval process pursuant to the
+Act.7 In 2006, the parties reached a settlement with Actavis agreeing not to bring their generic product to market until 2015, 65 months before the AndroGel patent expired, and Solvay agreeing to pay $12 million to Paddock and $19-30 million annually to Actavis for nine years.8
+
+In early 2009, the FTC filed suit against Solvay as well as its generic challengers alleging that the settlement agreement violated Section 5 of the Federal Trade Commission Act. The FTC alleged that the parties unlawfully agreed to share the monopoly profits to be derived from Solvay's patent in exchange for delaying the introduction of generic competitors that would benefit consumers through lower prices.9 Like the District Court, the Eleventh Circuit rejected the FTC's challenge, holding that, absent sham litigation or fraud in obtaining the patent, reverse payments are immune from antitrust attack so long as their anticompetitive effects fall within the exclusionary potential (i.e., temporal duration) of the patent.10
+
+Rejecting the Eleventh Circuit's view that patent law controls the inquiry, the Supreme Court's decision in Actavis holds that reverse payments are subject to rule-of-reason analysis that "consider[s] traditional antitrust factors such as likely anticompetitive effects, redeeming virtues [i.e., procompetitive effects], market power, and potentially offsetting legal considerations present in the circumstances, such as here those related to patents."11 The Court explained that rule-of-reason analysis is appropriate because reverse payments have "the potential for genuine adverse effects on competition," particularly when they involve ANDA first filers and "remove[] from consideration the most motivated [generic]
+challenger."12 Contrary to the Eleventh Circuit's understanding, antitrust review of reverse payments does not require an unwieldy assessment of patent validity because large reverse payments may serve as a surrogate for a patent's weakness, whereas settlement remains an option in absence of such payments.13
+
+
+Page 15 of 29 © 2019 Factiva, Inc. All rights  reserved.
+In a vigorous dissent, Chief Justice Roberts assailed the majority for, in his view, a misreading of Supreme Court precedent. The Chief Justice pointed out that a patent grant "provides an exception to antitrust law, and the scope of the patent - i.e., the rights conferred by the patent - forms the zone within which the patent holder may operate without facing antitrust liability."14 Responding to the majority's contention that a reverse payment settlement draws into question a patent's validity and, thus, antitrust immunity, the dissent countered that questions of patent validity must be resolved through resort to patent principles and not antitrust law.15
+
+Although the Supreme Court's decision resolves the Circuit split created by the Third Circuit's decision in In re K-Dur Antitrust Litigation, the contours of reverse payment rule-of-reason analysis remain undefined. Indeed, the Court's decision acknowledges that the lower courts must fill in the structure of the investigation. Furthermore, it remains to be seen whether the application of rule-of-reason analysis will discourage settlements under the Act or discourage generics from challenging pharmaceutical patents in the first instance. It is now clear, however, that Hatch-Waxman litigation settlements are subject to thorough review and, consequently, that the incentives for both brand-name and generic pharmaceutical manufacturers to settle have been altered.
+Related Precedent-setting Decision by  European Commission in Lundbeck
+
+Two days following the Supreme Court's decision in Actavis, the  European Commission released its opinion in Lundbeck, a precedent-settingdecision imposing monetary sanctions in one of the Commission's first cases dealing with reverse payments. The Commission  fined Lundbeck, the Danish developer of the antidepressant Citalopram, € 93 million, and its generic rivals, Alpharma, Ranbaxy and others, a total of € 52 million. Although the patent protecting Citalopram's active ingredient expired in
+2002, Lundbeck possessed patents which protected the drug's manufacturing processes. In order to forego a challenge to these patents,  Lundbeck entered agreements which compensated its generic rivals to remain off the market prior to the patents' expiration. The Commission's decision found the arrangements to be anticompetitive agreements in violation of Article 101 on the Treaty on the
+Functioning of the European Union.
+Footnotes
+1 15 U.S.C. § 45.
+2 FTC v. Actavis, Inc., 2013 WL 2922122 at *13 (June 17, 2013).
+
+3 See In re Ciprofloxacin Hydrochloride Antitrust Litig., 544 F.3d 1323 (Fed. Cir. 2008) (applying scope of the patent test); In re Tamoxifen Citrate Antitrust Litig., 429 F.3d 370 (2d Cir. 2005) (same);
+Schering-Plough Corp. v. FTC, 402 F.3d 1056 (11th Cir. 2005) (same); contra In re K-Dur Antitrust Litig.,
+686 F.3d 197, 209 (3d Cir. 2012) (applying "quick look" rule of reason analysis).
+4 In re K-Dur Antitrust Litig., 686 F.3d 197 (3d Cir. 2012).
+
+5 Under the Hatch-Waxman Act, the first ANDA filer is entitled to 180 days of generic marketing exclusivity which is the period of greatest generic profits.
+
+6 Although it did not file an ANDA, generic manufacturer Par Pharmaceutical entered into an agreement with Paddock in which it agreed to share patent litigation expenses in exchange for a share of Par's profits if Par obtained FDA approval of its ANDA.
+
+7 21 U.S.C. § 355(j)(5)(B)(iii); 35 U.S.C. § 271(e)(2)(A) (paragraph IV certification constitutes a constructive act of patent infringement); 21 U.S.C. § 355(j)(5)(B)(iii).
+8 Solvay additionally agreed to pay $60 million to Par.
+
+9 FTC v. Watson Pharms., Inc., 677 F.3d 1298, 1305-06 (11th Cir.), cert. granted, 133 S. Ct. 787 (2012), rev'd sub nom. FTC v. Actavis, Inc., 2013 WL 2922122 (June 17, 2013).
+10 Id. at 1312.
+11 Actavis, 2013 WL 2922122, at *7.
+12 Id. at *10-*11 (citations omitted).
+13 Id. at *12.
+14 Id. at *14.
+15 Id. at *19.
+Page 16 of 29 © 2019 Factiva, Inc. All rights  reserved.
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Proskauer's Antitrust Practice Group
+Proskauer Rose LLP Eleven Times Square New York
+NY 10036-8299
+UNITED STATES Tel: 2129693000
+Fax: 2129692900
+E-mail: webmaster@proskauer.com
+URL: www.proskauer.com
+Click Here for related articles
+(c) Mondaq Ltd, 2013 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO     ftrade : Federal Trade Commission | wtsnph : Actavis PLC | prgm : Proskauer Rose LLP | pharic : Actavis
+Group hf
+IN       i257 : Pharmaceuticals | i951 : Health Care/Life Sciences | i835 : Legal Services | ibcs : Business/Consumer Services | igeneri : Generic Drugs
+NS      c133 : Patents | gvjus : Justice Department | c34 : Anti-Competition Issues | c12 : Corporate Crime/Legal Action | ccat : Corporate/Industrial News | cgymtr : Intellectual Property | gvsup : Judicial Branch | c13 : Regulation/Government Policy | cinprp : Industrial Property Rights (Patents/Trademarks) | gcat : Political/General News | ginda : Independent Agencies/Regulatory Bodies | gpir : Politics/International Relations | gpol : Domestic Politics | gvbod : Government Bodies | gvexe : Executive Branch | ncat : Content Types | nfact : Factiva Filters | nfcpex : FC&E Executive News Filter | nfcpin : FC&E Industry News Filter
+RE      namz : North America | usa : United States
+IPD     Anti-trust/Competition Law
+PUB   Mondaq Limited
+AN      Document BBPUB00020130703e973000e7
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 17 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      Focus Antitrust - Competition Weekly Email Alert - 26 June 2013
+
+BY       Paul Stone WC     658 words PD      9 July 2013
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA       English
+CY      (c) 2013 Mondaq Ltd
+
+LP
+IN THE NEWS
+
+European Commission consults on possible changes to EU merger control
+
+TD
+Click hereThe Commission has published a consultation paper inviting comments on whether the EU Merger Regulation should be amended to allow the Commission to look at non-controlling minority shareholdings and to streamline the process for case referrals between the Commission and national competition authorities. .
+
+European Commissionfines Lundbeck and other pharma companies for delaying market entry of generic medicines
+
+Click hereThe Commission has imposed a  fine of €93.8 million on Danish pharmaceutical company Lundbeck and fines totalling € 52.2 million on several producers of generic medicines for infringing Article 101. The Commission found that in 2002 Lundbeck agreed with each of the generic producers to delay the market entry of cheaper generic versions of Lundbeck's branded citalopram, a blockbuster antidepressant. In return, the generic producers received substantial payments and other inducements from Lundbeck. This is the first decision from the Commission that confirms that so-called
+"pay-for-delay" deals are regarded as serious infringements of EU competition law. .
+Government issues consultation on streamlining regulatory and competition appeals
+
+Click hereThe Government is consulting on possible changes to the appeals frameworks for regulatory and competition decisions. The proposed changes cover all steps in the appeals process, including initial incentives on firms to launch an appeal, grounds on which an appeal is heard, the body which hears the appeal and making the processes for conducting appeals more straightforward. .
+EU
+Articles 101 and 102
+
+Click hereThe European Commission has confirmed that on 18 June 2013 it carried out dawn raids at the premises of several companies active in the sector of cargo train transport services to South Eastern Europe. The Commission believes that the companies concerned may have infringed Article 101. .
+UK
+Competition Appeal Tribunal
+
+Click hereThe Tribunal has dismissed Akzo Nobel's appeal against the Competition Commission decision which prohibited its anticipated acquisition of Metlac Holding. The Tribunal was satisfied that Akzo Nobel was "a person carrying on business in the United Kingdom" such that the Commission had jurisdiction to prohibit the transaction. The Tribunal also concluded that the Commission had not erred in finding that Metlac competes more aggressively on price than its competitors and that the Commission had a
+sufficient evidential basis for its finding that the transaction might lead to a loss of competition in innovation. .
+
+
+Page 18 of 29 © 2019 Factiva, Inc. All rights  reserved.
+Office of Fair Trading
+
+Click hereThe OFT has announced a market study on competition in banking for small and medium-sized businesses and is seeking views on its scope. The study is part of the OFT's continuing planned programme of work in retail banking, of which the first stage was a review of personal current accounts, concluded in January. .
+Ofcom
+
+Click hereOfcom has issued its final decision on the complaint from Thus Plc and Gamma Telecom Limited against BT about an alleged margin squeeze in wholesale call pricing contrary to the Chapter II prohibition and Article 102. Ofcom has concluded that BT's conduct did not constitute an abuse of its dominant position and that there are therefore no grounds for action. .
+
+Click hereOfcom has opened an investigation into a complaint from BT which alleges that the terms on which Sky offered wholesale supply of Sky Sports 1 and 2 to BT's YouView platform amount to an abuse of dominance. The complaint alleges that Sky is making wholesale supply of these channels to BT's YouView platform conditional on BT wholesaling BT Sport channels to Sky for retail on Sky's satellite platform. .
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Mr Paul Stone
+Charles Russell LLP
+5 Fleet Place London EC4M 7RD
+UNITED KINGDOM
+Click Here for related articles
+(c) Mondaq Ltd, 2013 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO      rssll : Charles Russell LLP | eucmm : European Commission
+IN        i835 : Legal Services | ibcs : Business/Consumer Services
+NS      c34 : Anti-Competition Issues | ccat : Corporate/Industrial News | ncat : Content Types | nfact : Factiva
+Filters | nfcpin : FC&E Industry News Filter
+RE      uk : United Kingdom | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+IPD     nti-trust/Competition Law
+PUB    Mondaq Limited
+AN      Document BBPUB00020130709e979000e3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 19 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+
+HD     EC Slaps Huge Fines on Lundbeck, Generics for Pay-for-Delay  Deals
+WC    525 words
+PD     10 July 2013
+SN     International Pharmaceutical Regulatory Monitor
+SC     IPRM
+VOL   Vol. 41, No. 7
+LA      English
+CY     Copyright (c) 2013 Washington Business Information, Inc.
+
+LP
+The European Commission June 19 slapped Lundbeck with a nearly $126 million  fine, and levied fines totaling $70 million on four of its generic rivals for their respective roles in 2002 pay-for-delay settlement deals tied to the Danish drugmaker's antidepressant citalopram.
+The four generic drugmakers  fined were India's Ranbaxy; Alpharma, now part of Zoetis; Merck
+KGaA/Generics UK, the latter now part of Mylan; and Arrow, now part of Actavis.
+
+TD
+Critics of the practice, also known as reverse payment, were likely to be buoyed by the timing of the commission's enforcement action, as it came on the heels of the U.S. Supreme Court's June 17 decision in FTC v. Actavis. The justices ruled pay-for-delay deals can sometimes violate antitrust law, making it easier for legal challenges to be brought against industry.
+
+The European Commission found the agreements violated EU antitrust rules, housed in Article 101 of the Treaty on the Functioning of the European Union, that prohibit agreements between two or more independent market operators that restrict competition (IPRM, August 2012).
+
+Citalopram was Lundbeck's best-selling product at the time, but the expiry of the drug's basic patent left the drugmaker with only a number of limited-protection patents to maintain its exclusivity. Generic drugmakers were readily prepping their market entry when  Lundbeck offered big payments and inducements to hold off production of generic versions of the drug.
+
+Commission Vice President Joaquin Almunia said the practice delays the availability of cheaper drugs to the detriment of patients and national health systems "already under tight budgetary constraints."
+He added: "The Commission will not tolerate such anticompetitive practices."
+
+Lundbeck said it strongly disagrees with the Commission's decision and will appeal.
+Legal Framework Proposed
+
+The fines flow from a massive, years-long effort by the Commission to crack down on alleged anticompetitive practices. In 2008, the Commission launched an inquiry into why fewer new drugs made it to market and why generic entry seemed to be delayed in some cases.
+
+The results of that investigation prompted the Commission to stage a series of surprise inspections at the offices of European pharmaceutical companies in an attempt to dig up evidence of anticompetitive business practices and further investigate companies suspected of committing them (IPRM, January
+2010).
+
+The Commission opened a formal investigation against  Lundbeck in January 2010. Subsequent investigations targeted Novartis and Johnson & Johnson, among others (IPRM, November 2011).
+
+Last month, the Commission doubled down on those efforts, establishing a legal framework to address pay-for-delay cases. On June 11, the Commission adopted a proposal for a directive that aims to make it easier for victims of anticompetitive practices to collect damages, particularly patients and the public, who rarely seek out compensation. The directive would standardize the process across the EU's member
+states and grant national courts the power to remove certain obstacles, such as access to evidence or the burden of proving infringement.
+View the June 11 proposal at  www.fdanews.com/ext/files/06-20-13-ec-directive.pdf. -- Melissa Winn
+
+Page 20 of 29 © 2019 Factiva, Inc. All rights  reserved.
+CO     merck : Merck KGaA | myln : Mylan Inc. | eucmm : European Commission | lundh : H. Lundbeck A/S |
+ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo Company Limited
+IN      i257 : Pharmaceuticals | igeneri : Generic Drugs | i2577 : Anti-depressants | i951 : Health Care/Life
+Sciences | idrugty : Drugs/Medication
+NS     c34 : Anti-Competition Issues | ccat : Corporate/Industrial News | ncat : Content Types | nfact : Factiva
+Filters | nfcpin : FC&E Industry News Filter
+RE     eurz : Europe
+PUB  Federal Information & News Dispatch, Inc.
+AN     Document IPRM000020130711e97a0000d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 21 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         EU fines Ranbaxy, 8 others for blocking cheaper drugs
+CR         Distributed by Contify.com
+WC        280 words
+PD         12 July 2013
+SN         eHealth SC         ATEHEA LA          English
+CY         Copyright © 2013. Centre for Science, Development and Media Studies.
+
+LP
+Some more bad news for Ranbaxy. The  European Commission has fined the India-based drug-maker, along with eight other firms, on the charge of delaying launch (http://ehealth.eletsonline.com/tag/launch/) of cheaper generic drugs in the market (http://ehealth.eletsonline.com/tag/market/).
+
+Ranbaxy has been fined 1,03,23,000 (over Rs 80 crore) for delaying the marketing of its generic version of depression drug citalopram made by Danish company  Lundbeck.
+
+TD
+Ranbaxy said it would appeal the decision at a general court in the European Union as it believed it was on a strong ground.
+
+The EC note said: "In 2002,  Lundbeck agreed with each of these companies to delay the market entry of cheaper generic versions of its branded citalopram, a blockbuster anti-depressant. These agreements violated EU anti-trust rules that prohibit anti-competitive agreements."
+
+The generic companies  fined included Alpharma (now part of Zoetis), Merck KGaA/Generics UK (Generics UK is now part of Mylan), Arrow (now part of Actavis), and Ranbaxy. The  fine imposed by the European Commission on the nine companies totals 146 million.
+
+A Ranbaxy spokesperson said the company was "disappointed with the European Union's decision to rule its patent settlement agreement with  Lundbeck, covering the anti-depression drug, as
+anti-competitive."
+
+"These events took place over 10 years ago. And the company considers that the Commission has misunderstood the facts and misapplied the law (http://ehealth.eletsonline.com/tag/law/)."
+
+Recently, Ranbaxy agreed to pay $500 million to settle criminal and fraud charges in the US. The company was charged with data falsification, among others.
+
+CO         merck : Merck KGaA | myln : Mylan Inc. | eucmm : European Commission | lundh : H. Lundbeck A/S |
+ranlab : Ranbaxy Laboratories Ltd | daisky : Daiichi Sankyo Company Limited
+IN          igeneri : Generic Drugs | i257 : Pharmaceuticals | i951 : Health Care/Life Sciences | i2577 : Anti-depressants | idrugty : Drugs/Medication
+NS         c22 : New Products/Services | ccat : Corporate/Industrial News | ncat : Content Types | nfact : Factiva
+Filters | nfcpin : FC&E Industry News Filter
+PUB       Centre for Science, Development and Media Studies
+AN         Document ATEHEA0020130713e97c0005n
+
+
+
+
+
+
+
+
+
+Page 22 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD      European Competition Law Newsletter  – July 2013
+
+BY       Matthew Hall WC     1,224 words PD      12 July 2013
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA       English
+CY      (c) 2013 Mondaq Ltd
+
+LP
+First EU  Fines for "Pay-For-Delay" Patent Settlement
+
+On 19 June 2013, the European Commission (EC) imposed a fine of €93.8 million on Danish pharmaceutical company Lundbeck and fines totalling €52.2 million on several producers of generic medicines for infringing EU competition law.
+
+TD
+According to the EC, after  Lundbeck's basic patent for its branded citalopram molecule (a blockbuster antidepressant) had expired, it only held some related process patents which provided a more limited protection. However, instead of taking advantage of this situation by starting to compete, the generic producers agreed with Lundbeck not to enter the market in return for substantial payments and other inducements from Lundbeck. This gave them, in the EC's view, the "equivalent of what they would have earned if they had entered the market" and the parties therefore "shared the monopoly rents among themselves". The EC saw this arrangement as a type of cartel and  fined it accordingly.
+
+The EC was careful to point out in its announcement that the overwhelming majority of patent settlement agreements are entirely legitimate because they do not involve any payments by originators to exclude generic companies. Nevertheless, originator and generic companies must continue to be very careful in this area. In addition, in principle, there is no reason why settlement agreements of this nature in other industries would not also raise similar issues.
+EU Private and Collective Actions: Another Big Step on the Road
+
+After a very long period of gestation, on 11 June 2013, the EC published two documents that together make up its private antitrust enforcement package and two further documents that deal with collective redress mechanisms in the EU Member States.
+
+The private antitrust enforcement documents are a proposal for legislation on certain rules governing antitrust damages actions (such as claims following a decision by the EC to  fine a cartel) and a communication on how to quantify harm caused by infringements of the EU antitrust rules. The legislative proposal contains specific measures that would apply in each Member State of the EU to improve the national legal frameworks governing actions for damages. The communication specifically addresses the problem of determining the specific amount of harm suffered as a result of a competition law
+infringement, which is currently one of the main obstacles to obtaining effective compensation.
+
+The collective redress documents are a non-binding recommendation on common principles for collective mechanisms to be put in place in each EU Member State for violation of EU law (not just antitrust law)
+and a communication called "Towards a European horizontal framework for collective redress". The recommendation and communication on collective redress set out a series of common, non-binding principles to apply in the Member States, intended to assist citizens and companies in the enforcement of the rights granted to them under EU law (of all types). The EC is keen to point out that this needs to be clearly distinguished from U.S.-style "class actions".
+
+The area of antitrust damages actions continues to develop rapidly in the EU and the EC's proposals will serve to facilitate this. The EC also wants collective redress to develop in the EU, but it remains to be
+seen to what extent the non-binding principles will gain traction amongst the widely differing legal regimes and litigation cultures in the EU.
+
+Page 23 of 29 © 2019 Factiva, Inc. All rights  reserved.
+Proposal To Extend EU Merger Rules to Cover Non-controlling Minority Shareholdings
+
+On 20 June 2013, the EC announced a consultation on whether to extend the EU Merger Regulation (EUMR) rules to cover the acquisition of non-controlling minority shareholdings by one competitor in another or between companies in a vertical relationship.
+
+The EUMR requires pre-merger filing and clearance of large mergers in the EU. One option that is proposed is simply to extend this system to non-controlling minority shareholdings. This would mean that all such shareholdings would have to be notified to the EC in advance and could not be implemented before the EC had cleared them.
+
+The proposal potentially has wide implications. In addition to applying to transactions between trading companies, the EUMR applies to transactions by investment funds, and all investee companies managed by a management company are treated as forming part of that company's group. Therefore, the proposal could catch an investment company building up minority stakes in a number of competing businesses, even if through different funds that it manages.
+The consultation closes on 20 September 2013.
+New EU Regional Aid Guidelines: Cutting Red Tape to Foster Investment in the EU
+
+After extensive consultations with stakeholders, the EC has adopted new Regional Aid Guidelines (RAG). The new RAG, which will enter into force on 1 July 2014, cover the period 2014-2020. They allow EU Member States to grant regional aid in an increased number of geographic areas in the EU. The new
+RAG will apply to all sectors, save for fisheries/aquaculture, agriculture, transport (including aid to airports) and energy, which are or will be dealt with in sector-specific notices.
+
+Under the new RAG, more aid categories will be exempted from the obligation of prior notification to and approval by the EC, thereby cutting the red tape requirements before Member States are able to grant small aid amounts for regional development. However, large aid measures will continue to be subject to in-depth assessment by the EC.
+
+A stricter approach will also be taken for aid to large companies in the more developed assisted areas. However, if it is shown that the aid allows investments for new economic activity or initial investments intended to diversify the activities of a business into new products or process innovation, the aid will be authorized.
+In order to gain a full picture of the geographic areas in which companies might be able to obtain
+additional aid, it is necessary to wait until the new regional aid maps for each Member State are approved
+by the EC. However, it is already clear that the reduced formalities under the new RAG will make it easier
+to obtain aid under certain circumstances. Once the new regional aid maps do become available,
+investors from both EU and non-EU countries can look in detail at funding possibilities in relevant EU
+regions for projects implemented in 2014-2020.
+International Trade and Competition Team Joins McGuireWoods in Brussels
+
+McGuireWoods LLP announced on 13 June 2013 that it is expanding its Competition, EU Regulatory and International Trade practice with the addition of a four-member team in the firm's Brussels office. The team will significantly enhance the firm's abilities to represent clients in these areas of law.
+Additional European competition law news coverage can be found in our news section. U.S. Antitrust
+We publish a newsletter and bulletins on U.S. antitrust developments, as well as regular publications on numerous other topics.
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Mr Matthew Hall McGuireWoods LLP Imperial House
+15-19 Kingsway
+London
+
+Page 24 of 29 © 2019 Factiva, Inc. All rights  reserved.
+WC2B 6UN
+UNITED KINGDOM Tel: 804775 1000
+Fax: 804775 1061
+E-mail: mkulstad@mcguirewoods.com
+URL: www.mcguirewoods.com
+Click Here for related articles
+(c) Mondaq Ltd, 2013 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO      mcwbb : McGuireWoods LLP | lundh : H. Lundbeck A/S
+IN        i257 : Pharmaceuticals | i2577 : Anti-depressants | i835 : Legal Services | i951 : Health Care/Life
+Sciences | ibcs : Business/Consumer Services | idrugty : Drugs/Medication
+NS      ccat : Corporate/Industrial News | c34 : Anti-Competition Issues | ncat : Content Types | nfact : Factiva
+Filters | nfcpin : FC&E Industry News Filter
+RE      eecz : European Union Countries | eurz : Europe
+IPD     nti-trust/Competition Law
+PUB    Mondaq Limited
+AN      Document BBPUB00020130712e97c000p3
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 25 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD         Georgia scrambles for fresh supply  of drugs to execute death row inmate
+
+BY          Ed Pilkington CR         guardian.co.uk WC         828 words
+PD          12 July 2013
+SN          Guardian.co.uk
+SC          GRULTD
+LA          English
+CY          (c) 2013 Guardian News & Media Limited. All rights reserved
+
+LP
+Warren Hill's attorney 'searching for words to express my disgust' as Georgia tries to skirt international controls for lethal injection
+
+The state of Georgia is scrambling to obtain a new supply of the sedative pentobarbital for use in lethal injections ahead of the scheduled execution of Warren Hill on Monday night.
+
+TD
+The Georgia corrections department confirmed that, with just days to go before Hill's death sentence is due to be carried out, it has not yet secured a batch of the medical drug in sufficient quantity to kill him. The department's existing stock of pentobarbital expired in March, and the Guardian understands that the state has turned to an unidentified compounding pharmacy in another state to try and skirt around international controls.
+
+The ungainly spectacle of a US state desperately seeking a supply of pharmaceutical in order to kill a man provides a snapshot of the dire condition of the death penalty in many of the 32 states that still practice it. An international boycott of trade in medicines to corrections departments for use in executions, led by the  European Commission, has reduced stocks to such a low level that many states are struggling to carry out any executions at all.
+
+In an attempt to circumvent international and national scrutiny, the Georgia state assembly passed a law in March that in effect permitted the corrections department to act in secret in seeking to acquire execution drugs. The provision classifies the identity of any person or company providing drugs for use in lethal injections as a "state secret", thereby negating any public right to the information.
+
+It also allows the corrections department to keep secret the identity of doctors who collaborate with executions by administering lethal injections in contravention of their ethical code.
+
+Brian Kammer, the defence attorney for Hill, pictured, said he was "searching for words to express my disgust at this process. The secrecy in this context to me invokes images of lynchings by hooded men – it's very emblematic of an earlier time in the south."
+Kammer added that in his view this was a "shameful, reprehensible, cowardly way of killing people." Georgia corrections department said that it was confident that it would obtain sufficient drugs in time for
+Monday's 7pm execution of Hill. It said that the current protocol would be followed of injecting the
+prisoner with 5g of the single drug pentobarbital.
+
+Like other death penalty states, Georgia was forced to drop its three-drug lethal injection protocol when the US manufacturer Hospira ceased making the anaesthetic sodium thiopental after the company
+came under pressure from authorities in Italy. The state moved to the single drug pentobarbital, but that also was hit by the boycott when a major manufacturer of the drug, the Danish firm  Lundbeck, strictly restricted sales to prohibit its product ending up in the death chamber.
+
+In extremis, Georgia even turned to an unlicensed company called Dream Pharma that operated out of a driving school in Acton, west London.
+
+
+Page 26 of 29 © 2019 Factiva, Inc. All rights  reserved.
+As a result of Georgia's new secrecy law, that hides the identity of the sources of the drugs, it is not known where the corrections department is attempting to get hold of pentobarbital before Monday. But the fine print of the law contains clues: it classes as a state secret the identity of "any person or entity that manufactures, supplies, compounds or prescribes the drugs".
+
+The use of compounding pharmacies to create small batches of drug to order has been highly controversial in the US. The Food and Drug Administration has struggled to bring the outlets under rigorous supervision.
+
+Other states including Arkansas, South Dakota and Tennessee have also introduced secrecy provisions designed to foil the boycott by keeping the identities of suppliers hidden. But lawyers and human rights groups have protested against the creeping secrecy in something as fundamental as the judicial taking of life.
+
+Maya Foa, a death penalty drugs expert with Reprieve, said that lack of scrutiny meant it would be more difficult to ensure that the execution did not stray into torture or cruel and unusual punishment. "I would question what Georgia has to hide," she said.
+
+Sara Totonchi of the Atlanta-based Southern Center for Human Rights said that by shrouding the supply route in secrecy "they are cutting off from the public an act that is desperately needed – oversight."
+
+In October 2012 an outbreak of fungal meningitis in the US was traced back to a compounding center in Massachusetts.
+
+Hill would be the first death row inmate in Georgia to be executed after the introduction of the new secrecy law. His case is singularly controversial as he has been found by multiple medical experts to be intellectually disabled – a developmental condition still known in US jurisprudence as "mental retardation" that renders him constitutionally barred from execution.
+guardian.co.uk © Guardian News and Media 2013
+
+NS          gdeath : Death Penalty/Capital Punishment | ghum : Human Rights/Civil Liberties | gcat : Political/General News | gcom : Society/Community/Work | gcrim : Crime/Courts | ncat : Content Types
+| nfact : Factiva Filters | nfcpex : FC&E Executive News Filter
+RE          uk : United Kingdom | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+IPD         Georgia US state
+PUB       Guardian Newspapers Limited
+AN          Document GRULTD0020130712e97c004ed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 27 of 29 © 2019 Factiva, Inc. All rights  reserved.
+
+
+HD       EU Commission Fines Lundbeck And Others Over "Pay-For-Delay" Agreements
+BY      Van Bael Bellis
+WC     642 words
+PD      17 July 2013
+SN      Mondaq Business Briefing
+SC      BBPUB
+LA       English
+CY      (c) 2013 Mondaq Ltd
+
+LP
+On 19 June 2013, the European Commission announced that it had imposed a  fine of € 93.8 million on Danish pharmaceutical group Lundbeck and a total of € 52.2 million on several generic medicines producers over their conclusion of so-called "pay-for-delay" agreements in the antidepressant medicine market. The decision follows the Commission's opening of an investigation in 2010 and its issuance of a formal Statement of Objections ("SO") against the parties back in July 2012 (see VBB on Competition Law, Volume 2010, No. 1 & Volume 2012, No. 7, available at  www.vbb.com).
+
+TD
+According to the Commission,  Lundbeck concluded in 2002 agreements with generic producers of its citalopram to delay entry of cheaper versions on the market, contrary to Article 101 of the Treaty on the Functioning of the European Union ("TFEU"). In theory, entry on the market of generic versions of citalopram should have been possible when Lundbeck's patent in the active substance had expired. However, due to agreements between Lundbeck and the four generic producers, the latter subsequently abstained from entering the market. Of particular concern to the Commission is the fact that  Lundbeck offered the generic producers substantial lump sum payments and guaranteed their profits in a
+distribution agreement.  Lundbeck also purchased their stock of generic citalopram for the sole purpose of destroying it.
+The detailed breakdown of the  fines is the following:
+
+Lundbeck: € 93,766,000;
+Merck KGaA: € 21,411,000 of which € 7,766,843 jointly and severally with Generics UK Ltd;
+
+Arrow Group ApS: € 9,975,000 of which € 9,360,000 jointly and severally with Arrow Generics Ltd, of the latter amount of which € 823,735 jointly and severally with Resolution Chemicals Limited;
+
+Alpharma: € 10,530,000 for Zoetis Products LLC and Xellia Pharmaceuticals ApS jointly and severally of which € 43,216 jointly and severally with A.L. Industrier AS;
+
+Ranbaxy: € 10,323,000 for Ranbaxy Laboratories Limited and Ranbaxy (UK) Limited, jointly and severally.
+
+Lundbeck has already stated that it would appeal the decision before the EU General Court. For its part, the European Federation of Pharmaceutical Industries and Associations ("EFPIA"), which represents the interests of the pharmaceutical industry, has indicated that the Commission's decision would increase legal uncertainty and ultimately harm R&D and the growth of the sector generally. Rather, it identifies the EU's fragmented patent system as a cause for companies' willingness to avoid expensive litigation costs through such patent settlement agreements.
+
+The Lundbeck case echoes the findings of the Commission's 2009 pharmaceutical sector inquiry in which a number of alleged competition problems had been identified, including delays to generic market medicine entry (see VBB on Competition Law, Volume 2009, No. 7, available at  www.vbb.com). In its final version of the sector inquiry, the Commission signalled that it would follow closely developments in the pharmaceutical sector, particularly as regards patent settlement agreements that involve what it refers to as a "value transfer" from the innovative to the generic sector. Other Commission investigations are ongoing against a number of pharmaceutical companies including Cephalon and Teva (see VBB on
+
+Page 28 of 29 © 2019 Factiva, Inc. All rights  reserved.
+Competition Law, Volume 2011, No. 4, available at  www.vbb.com) and Johnson & Johnson and Novartis
+(see VBB on Competition Law, Volume 2011, No. 11 & Volume 2012 No. 2, available at  www.vbb.com).
+
+The content of this article is intended to provide a general guide to the subject matter. Specialist advice should be sought about your specific circumstances.
+Van Bael Bellis
+Van Bael & Bellis
+165 Avenue Louise
+Brussels
+1050
+BELGIUM
+Tel: 26477350
+Fax: 26406499
+E-mail: Gdepril@vbb.com
+URL: www.vbb.com
+Click Here for related articles
+(c) Mondaq Ltd, 2013 - Tel. +44 (0)20 8544 8300 -  http://www.mondaq.com
+CO      eucmm : European Commission | lundh : H. Lundbeck A/S
+
+IN       i257 : Pharmaceuticals | i2577 : Anti-depressants | i951 : Health Care/Life Sciences | idrugty : Drugs/Medication
+NS      ccat : Corporate/Industrial News | c34 : Anti-Competition Issues | ncat : Content Types | nfact : Factiva
+Filters | nfcpin : FC&E Industry News Filter
+RE      eecz : European Union Countries | eurz : Europe
+IPD     nti-trust/Competition Law
+PUB   Mondaq Limited
+AN      Document BBPUB00020130717e97h000jz
+
+Search Summary
+
+Text                                 ("european commission" or "Eu commission") and fine* and (lundbeck) not celex* not interfax
+Date                                19/05/2013 to 19/07/2013
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                113
+Timestamp                      12 April 2019 8:29 PM
+
+
+
+
+
+
+
+Page 29 of 29 © 2019 Factiva, Inc. All rights  reserved.

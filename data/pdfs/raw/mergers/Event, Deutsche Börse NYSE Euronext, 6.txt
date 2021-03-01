@@ -1,0 +1,132 @@
+
+
+
+
+
+Securities exchanges: Monopoly fears nobble Deutsche/Euronext tie-up ......................................................................2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 3 © 2019 Factiva, Inc. All rights  reserved.
+
+
+Equities
+Securities exchanges: Monopoly fears nobble Deutsche/Euronext tie-up
+Laurence Neville Laurence Neville
+956 words
+1 March 2012
+Euromoney
+EURMY
+English
+© Copyright 2012 Euromoney Institutional Investor plc.
+The writing was on the wall for the  merger of Deutsche Börse and NYSE Euronext long before the European Commission rejected the deal on February 1. The merged entity’s potential 90% market share of European derivatives was always a deal breaker, so why then did Deutsche Börse and NYSE Euronext believe a merger was achievable? The answer lies in the unpredictability of competition authorities and politicians.
+
+“Competition from new entrants such as Chi-X and Bats has had a profound effect on volumes on mainstream exchanges: once the LSE had 90% of all London-listed stocks, now it frequently drops below 60%”
+Lynton Jones, Bourse Consult
+
+Lynton Jones, chairman of exchange advisory firm Bourse Consult, explains that recent merger attempts have failed for different reasons. "Singapore/ASX [which failed in April 2011] was essentially [about] political unwillingness to allow foreign ownership; TMX/LSE [June 2011] was because Canadian banks feared new listing business would migrate to London; Deutsche Börse/NYSE Euronext was because the combination of Liffe and Eurex would have created an effective derivatives monopoly," he says. Nasdaq and ICE’s bid for NYSE Euronext also floundered in May 2011 on grounds of creating a near monopoly.
+
+There have always been political objections to international mergers. "There is unwillingness in many quarters to accept that this is now a global business, and national interests are not best served with protectionist stances," says Gary Wright, chief executive of analysis firm Biss Research. "The idea that German equity volumes could leave Frankfurt is unpalatable, for example." This sort of parochialism reached its nadir in the Singapore/ASX merger, with some Australian politicians resorting to thinly veiled racism to voice their opposition to the plan.
+User benefits in doubt
+
+However, the interest among regulators in ensuring competition – ostensibly the reason the Deutsche Börse/NYSE Euronext merger was rejected – is relatively new and comes in response to users’ concerns, according to Jones.
+
+Historically, anything that concentrates volumes was assumed to reduce costs and risk for investors and was therefore seen as beneficial. Now there is a recognition that consolidation does not always benefit users. "Certainly, it boosts the profitability of exchanges – most of which are now listed, profit-making vehicles – but the benefits appear not to be passed on," says Jones.
+
+In the past decade the demutualization of stock exchanges has intensified the pressure to consolidate. That pressure remains despite the Deutsche Börse/NYSE Euronext decision. As Biss’s Wright notes: "The main driver is profit – but it is more complex than that."
+
+The introduction of the EU’s Markets in Financial Instruments Directive in 2007 changed everything by permitting multilateral trading facilities (MTFs). These – combined with internalization by banks and cross-selling networks – began to nibble away at exchanges’ volumes. "Competition from new entrants such as Chi-X and Bats has had a profound effect on volumes on mainstream exchanges: once the LSE had 90% of all London-listed stocks, now it frequently drops below 60%," says Bourse Consult’s Jones.
+
+Moreover, new exchanges are able to choose to trade only the most liquid and profitable stocks while traditional exchanges have to trade all stocks – many of which are illiquid and unprofitable. Newer exchanges also use more advanced trading systems with lower latency (the lag between placing an order and execution). This makes them
+
+Page 2 of 3 © 2019 Factiva, Inc. All rights  reserved.
+attractive for the high-frequency traders that increasingly drive volumes. In response, exchanges have sought to consolidate to boost volumes and lower costs.
+
+Meanwhile, in parallel with the drive to consolidate, there has been a shift in the business model of many exchanges. At the turn of the century there were two models: a horizontal model, as at the LSE, split clearing and settlement from the exchange while a vertical model, as at Deutsche Börse, retained clearing and settlement. As competition with MTFs has intensified, those exchanges that backed a horizontal model have reversed their position. "The LSE is seeking to buy LCH.Clearnet in order to expand its post-trade services," says Wright. "The aim is now to grab as much of the client’s business as possible by creating a strong vertical silo. There is a recognition that the future is about value-added services."
+
+Following the recent wave of failed deals, mega-mergers, such as Deutsche Börse/NYSE Euronext, might be on hold. However, the drive to broaden exchanges’ product offerings and lower costs endures: by late February the London Metal Exchange had received around 15 bids – reportedly including NYSE Euronext, which is eager to dovetail its soft and agricultural commodity derivatives business with hard commodities.
+Small attractions
+
+Wright at Biss says that in the wake of Deutsche Börse/NYSE Euronext, activity might be focused on small and medium-sized exchanges – in Central and Eastern Europe, for example. "They may consolidate among themselves or alternatively may merge with larger western European exchanges with greater technology capabilities," he says. Jones at Bourse Connect is less sure that such consolidation makes sense. "There could be smaller exchange mergers but there is little value in them," he says. "Generally they serve a domestic market only because once a company reaches a certain size it wants to be listed in London or New York."
+
+What is certain is that there remains no clear route to a successful exchange merger, although it seems likely that exchanges will be wary of creating what might be perceived as monopolies. Wright says that while explanations for the rejection of mergers vary, politics and protectionism will continue to take precedence over what is best for investors in many cases. So, he says: "Anticipating possible objections regarding political acceptability will therefore remain crucial."
+Document EURMY00020120327e8310000t
+
+Search Summary
+Text                                merger and (ec or eu or europ*) and nyse and ("Deutsche Börse" or "Deutsche
+Boerse")
+Date                                01/01/2012 to 01/03/2012
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       English
+Results Found                546
+Timestamp                      18 May 2019 16:56
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 3 of 3 © 2019 Factiva, Inc. All rights  reserved.

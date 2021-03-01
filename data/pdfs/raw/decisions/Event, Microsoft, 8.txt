@@ -1,0 +1,149 @@
+
+
+
+
+
+Microsoft attacks EU ruling as appeal is readied ..................................................................................................... 2
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Page 1 of 3 © 2019 Factiva, Inc. All rights  reserved.
+
+
+
+SE        FINANCE/BUSINESS
+HD         Microsoft attacks EU ruling  as appeal is readied
+BY        Paul Meller
+CR        The New York Times
+WC       707 words
+PD        24 April 2004
+SN        International Herald Tribune
+SC        INHT
+LA        English
+CY        © 2004 International Herald Tribune. Provided by ProQuest Information and Learning. All rights reserved.
+
+LP
+BRUSSELS:
+
+The European Commission has released its antitrust ruling against Microsoft to the public, prompting a strenuous rebuttal from the company in a widely disseminated internal memorandum.
+
+TD
+Arguments made behind closed doors before the ruling last month were vented publicly on Thursday as both sides sought support before the ruling is appealed, which will most likely happen in late May or June at the European Court of Justice.
+
+Microsoft is fine-tuning its arguments on why the court should suspend the remedies demanded by the commission pending an outcome of the appeal, which could take as long as five years.
+
+The ruling lacks any convincing evidence and will have an adverse effect on consumers, the computer industry and many other sectors by stifling  competition, Horacio Guttierez,  Microsoft's chief legal counsel for Europe, the Middle East and Africa, said by telephone.
+
+In the memorandum,  Microsoft said, Novel legal standards announced in the decision will affect all industries, altering market dynamics and reducing incentives for research and development that are essential to global economic growth.
+
+Meanwhile, the 302-page ruling is intended to make it as difficult as possible for the court to grant Microsoft's request,  antitrust lawyers in Brussels said. The wording of the decision has been formulated specifically to avoid a suspension of the remedies, said Thomas Vinje, a partner in the Brussels office of law firm Clifford Chance who has been representing  Microsoft rivals during the commission's investigation.
+
+The ruling, issued last month, required  Microsoft to sell within 90 days a version of its dominant Windows operating system in Europe without the Media Player audio and video playing software, which normally comes as part of Windows.
+
+The commission concluded that by bundling Media Player into Windows,  Microsoft was abusing its dominant position by putting rival players at a competitive disadvantage.
+
+The ruling permits  Microsoft to continue selling a version of Windows with Media Player, alongside the unbundled version, as long as the company does not give it an unfair commercial advantage over the unbundled one.
+
+Within 120 days of the date of the ruling,  Microsoft must disclose enough Windows code to rivals to allow them to build server software that works as well with Windows as  Microsoft's own server software does.
+
+Withholding details about the Windows code from rivals has prevented them from competing on a level playing field with  Microsoft in the server software market, the commission ruled.
+
+Page 2 of 3 © 2019 Factiva, Inc. All rights  reserved.
+If the remedies are suspended pending the appeal, the harm will be irreparable, said Ed Black, president of the Computer and Communications Industry Association, a vocal critic of  Microsoft in antitrust actions on both sides of the Atlantic.
+The longer it takes to impose these remedies, the less likely they will work.
+
+The remedy designed to restore  competition in the market for media players is particularly urgent because Microsoft is gaining market share each year, the commission showed in detailed market analysis conducted by independent researchers, including IDC, based in Boston.
+
+The commission's ruling details all of  Microsoft's arguments, then rebuts each one. For example, Microsoft asserted that removing all media code from Windows would disrupt the operating system's narrator function, an aid to the visually impaired.
+
+In response, the commission said that it was not ordering all media code removed from Windows, only the Media Player code, which does not include the narrator function.
+
+Similarly, when detailing the remedies for the server software market, the commission repeated Microsoft's argument that requiring it to disclose all Windows source code to its rivals would result in the cloning of  Microsoft products and would harm  Microsoft's incentive to innovate.
+
+The commission said that it had not ordered  Microsoft to disclose, or license to rivals, Windows source code, only the code necessary to comply with the requirement on the server market. The commission does not envisage ordering compulsory licensing of  Microsoft's source code, the ruling said.
+
+In the interview, Guttierez said: The commission is belittling our argument. Our case was not limited to source code. We said that compulsory licensing of our intellectual property would result in the cloning or replication of our products.
+CO       mcrost : Microsoft Corporation
+IN         i3302 : Computers/Electronics | i3302020 : Systems Software | i3302021 : Applications Software |
+i330202 : Software | icomp : Computing
+NS        c34 : Competition Issues | c13 : Regulation/Government Policy | eucom : European Commission | ccat : Corporate/Industrial News | eec : European Union | ocat : International Pol-Econ Organizations
+RE        belg : Belgium | benluxz : Benelux Countries | eecz : European Union Countries | eurz : Europe | weurz : Western Europe
+IPD       European Commission
+PUB     International Herald Tribune
+AN        Document INHT000020040425e04o0001x
+
+Search Summary
+Text                                "european commission" and microsoft and fine* and (abuse or antitrust or competition)
+not celex* not interfax
+Date                                24/02/2004 to 24/04/2004
+Source                            All Sources Author                             All Authors Company                        All Companies Subject                           All Subjects Industry                           All Industries Region                            All Regions Language                       All Languages Results Found                707
+Timestamp                      5 April 2019 4:24 PM
+
+
+
+
+
+
+Page 3 of 3 © 2019 Factiva, Inc. All rights  reserved.
