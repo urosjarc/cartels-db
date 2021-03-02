@@ -13,11 +13,13 @@ def read_csv_core_out_tickers():
             csvEle.append(row)
     return csvEle
 
-def write_csv_core_out_tickers(csv):
-    with open('../data/pdfs/csv/EC_decision_news', 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=list(csv[0].keys()))
+
+def write_csv_core_out_tickers(csvRows):
+    with open('../data/pdfs/csv/EC_decision_news.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, quotechar='"', fieldnames=list(csvRows[0].keys()))
         writer.writeheader()
-        writer.writerows(csv)
+        writer.writerows(csvRows)
+
 
 def read_pdfs():
     pdfTypes = {}
@@ -26,7 +28,7 @@ def read_pdfs():
         for file in os.listdir(f'../data/pdfs/raw/{dir}'):
             fileList = file.replace('.txt', '').split(', ')
             num = fileList[-1]
-            fileNum = int(num) if num.isnumeric() else 0
+            fileNum = int(num) if num.isnumeric() else 1
 
             f = open(f'../data/pdfs/raw/{dir}/{file}', 'r', encoding="utf8", errors='ignore')
 
@@ -40,6 +42,70 @@ def read_pdfs():
             f.close()
         pdfTypes[dir] = fileDict
     return pdfTypes
+
+
+def get_headlines(pdfDicts):
+    print("GET HEADLIENS")
+    dict = {}  # filename: title
+    for dir, dirDict in pdfDicts.items():
+        for file, fileDict in dirDict.items():
+            hds = []
+            for num, content in fileDict.items():
+                for line in content.split("\n"):
+                    if 'HD ' in line:
+                        hd = re.sub(r'(WC|BY).*', '', line)
+                        hds.append(hd.replace('HD', '').strip())
+            dict[file] = ', '.join(hds)
+
+    return dict
+
+
+def get_word_count(pdfDicts):
+    print("GET NEWS DATES")
+    dict = {}  # filename: title
+    for dir, dirDict in pdfDicts.items():
+        for file, fileDict in dirDict.items():
+            info = []
+            for num, content in fileDict.items():
+                for line in content.split("\n"):
+                    lineEle = [ele.strip() for ele in line.split(" ")]
+                    if len(lineEle) >= 2:
+                        if lineEle[-1] == 'words' and lineEle[-2].isnumeric():
+                            info.append(int(lineEle[-2]))
+            dict[file] = sum(info)
+
+    return dict
+
+
+def get_publisher(pdfDicts):
+    print("GET PUBLISHER")
+    dict = {}  # filename: title
+    for dir, dirDict in pdfDicts.items():
+        for file, fileDict in dirDict.items():
+            hds = []
+            for num, content in fileDict.items():
+                for line in content.split("\n"):
+                    if 'SN ' in line:
+                        hds.append(line.replace('SN', '').strip())
+            dict[file] = ', '.join(hds)
+
+    return dict
+
+
+def get_dates(pdfDicts):
+    print("GET DATES")
+    dict = {}  # filename: title
+    for dir, dirDict in pdfDicts.items():
+        for file, fileDict in dirDict.items():
+            hds = []
+            for num, content in fileDict.items():
+                for line in content.split("\n"):
+                    if 'PD ' in line:
+                        lineEle = line.strip().split()
+                        hds.append(' '.join(lineEle[-3:]))
+            dict[file] = ', '.join(hds)
+
+    return dict
 
 
 def odstrani_prazne_prostore(pdfDicts):
@@ -265,38 +331,53 @@ def write_pdfs(pdfDicts):
     return pdfDicts
 
 
-def ustvari_csv_with_texts(core_out_tickers, pdfDicts):
+def ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dates, publisher):
     newCsv = []
+    errors = []
     mapping = {
         'decisions': 'EC_Event_dec_file'
     }
     for dir, column in mapping.items():
-        for fileName, fileDict in pdfDicts[dir].items():
+        for fileName, content in pdfDicts[dir].items():
+
+            if 'BREZ' in fileName:
+                continue
 
             crow = None
             for core_row in core_out_tickers:
-                #TODO: decisions/Event, LCD.txt se ne metcha z core EC_Event_dec_file odstrani stevilke iz cora!
-                if core_row['EC_Event_dec_file'].replace('pdf', 'txt') == fileName:
+                # TODO: decisions/Event, LCD.txt se ne metcha z core EC_Event_dec_file odstrani stevilke iz cora!
+                coreFile = core_row['EC_Event_dec_file'].split('/')[-1].replace('pdf', 'txt').replace(', 1', '')
+                if coreFile == fileName:
                     crow = core_row
                     break
 
             if crow is not None:
                 newCsv.append({
-                    'dir': dir,
-                    'file': fileName,
-                    'EC_decision_news_texts': fileDict,
-                    'EC_decision_news_headlines': "TODO",
-                    'EC_decision_news_dates': "TODO",
-                    'EC_decision_news_publishers': "TODO"
+                    'group_name': dir,
+                    'file_name': fileName,
+                    'headlines': headlines[fileName],
+                    'word_count': wordCount[fileName],
+                    'dates': dates[fileName],
+                    'publishers': publisher[fileName],
+                    'text': content,
                 })
             else:
-                raise Exception(f"Could not found matching file in core: {dir}/{fileName}")
+                errors.append(f'{dir}/{fileName}')
 
+    print('Errors:')
+    for e in errors:
+        print('\t',e)
     return newCsv
 
 
 # PDF handling...
 pdfDicts = read_pdfs()
+
+headlines = get_headlines(pdfDicts)
+dates= get_dates(pdfDicts)
+publisher = get_publisher(pdfDicts)
+wordCount = get_word_count(pdfDicts)
+
 pdfDicts = odstrani_prazne_prostore(pdfDicts)
 pdfDicts = odstrani_besede(pdfDicts)
 pdfDicts = odstrani_vrstice(pdfDicts)
@@ -311,5 +392,5 @@ pdfDicts = write_pdfs(pdfDicts)
 
 # NEW CSV handling...
 core_out_tickers = read_csv_core_out_tickers()
-new_core_out_tickers = ustvari_csv_with_texts(core_out_tickers, pdfDicts)
+new_core_out_tickers = ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dates, publisher )
 write_csv_core_out_tickers(new_core_out_tickers)
