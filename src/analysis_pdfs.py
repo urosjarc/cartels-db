@@ -51,10 +51,33 @@ def get_headlines(pdfDicts):
         for file, fileDict in dirDict.items():
             hds = []
             for num, content in fileDict.items():
+                #File with HD code in it
                 for line in content.split("\n"):
                     if 'HD ' in line:
                         hd = re.sub(r'(WC|BY).*', '', line)
                         hds.append(hd.replace('HD', '').strip())
+                #File without HD code in it
+                if len(hds) == 0:
+                    vrstice = content.split("\n")
+                    for i, line in enumerate(vrstice):
+                        lineEle = line.split()
+                        headlineCandidates = []
+                        if len(lineEle) == 2: # Vrstica kjer je word count
+                            if lineEle[1] == 'words':
+                                emptyLines = 0
+                                for j in range(i, i-10, -1):
+                                    prevLine = vrstice[j]
+                                    if prevLine == '':
+                                        emptyLines += 1
+                                        if emptyLines == 2:
+                                            break
+                                    elif 'press' not in prevLine.lower() or 'by' not in prevLine.lower().split(' ')[0]:
+                                        headlineCandidates.append(prevLine)
+
+                        if len(headlineCandidates) > 0:
+                            headline = sorted(headlineCandidates, key=lambda hc: len(hc), reverse=True)[0]
+                            hds.append(headline)
+
             dict[file] = ', '.join(hds)
 
     return dict
@@ -70,9 +93,9 @@ def get_word_count(pdfDicts):
                 for line in content.split("\n"):
                     lineEle = [ele.strip() for ele in line.split(" ")]
                     if len(lineEle) >= 2:
-                        if lineEle[-1] == 'words' and lineEle[-2].isnumeric():
-                            info.append(int(lineEle[-2]))
-            dict[file] = sum(info)
+                        if lineEle[-1] == 'words':
+                            info.append(lineEle[-2].replace(",", ''))
+            dict[file] = ",".join(info)
 
     return dict
 
@@ -87,6 +110,17 @@ def get_publisher(pdfDicts):
                 for line in content.split("\n"):
                     if 'SN ' in line:
                         hds.append(line.replace('SN', '').strip())
+                if len(hds) == 0:
+                    lines = content.split("\n")
+                    for i, line in enumerate(lines):
+                        lineEle = line.split()
+                        if len(lineEle) == 2:
+                            if lineEle[1] == 'words':
+                                if ':' in lines[i+2] or 'pm' in lines[i+2].lower() or 'am' in lines[i+2].lower():
+                                    hds.append(lines[i+3])
+                                else:
+                                    hds.append(lines[i+2])
+
             dict[file] = ', '.join(hds)
 
     return dict
@@ -99,10 +133,25 @@ def get_dates(pdfDicts):
         for file, fileDict in dirDict.items():
             hds = []
             for num, content in fileDict.items():
+
+                #File with PD code in it
                 for line in content.split("\n"):
                     if 'PD ' in line:
                         lineEle = line.strip().split()
                         hds.append(' '.join(lineEle[-3:]))
+                #File without PD code in it
+                if len(hds) == 0:
+                    lines = content.split("\n")
+                    for i, line in enumerate(lines):
+                        lineEle = line.split()
+                        if len(lineEle) == 2:
+                            if lineEle[1] == 'words':
+                                nextlineEle = lines[i+1].split()
+                                if len(nextlineEle) == 3:
+                                    if nextlineEle[0].isnumeric() and nextlineEle[-1].isnumeric():
+                                        hds.append(lines[i+1])
+
+
             dict[file] = ', '.join(hds)
 
     return dict
@@ -238,7 +287,7 @@ def odstrani_documents(pdfDicts):
                 for line in content.split('\n'):
                     lineEle = line.split()
                     if len(lineEle) > 1:
-                        if lineEle[0] == 'Documents' and len(lineEle) == 2:
+                        if lineEle[0] in ['Documents', 'Document'] and len(lineEle) == 2:
                             newContent += '\n'
                             continue
                     newContent += line + '\n'
@@ -334,20 +383,23 @@ def write_pdfs(pdfDicts):
 def ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dates, publisher):
     newCsv = []
     errors = []
+    success = 0
     mapping = {
-        'decisions': 'EC_Event_dec_file'
+        'decisions': 'EC_Event_dec_file',
+        'dawn_raid': 'DR_Event_File'
     }
     for dir, column in mapping.items():
-        for fileName, content in pdfDicts[dir].items():
+        core_colume_name = mapping[dir]
+        for fileName, content in pdfDicts.get(dir, {}).items():
 
-            if 'BREZ' in fileName:
+            if 'BREZ' in fileName or 'brez' in fileName:
                 continue
 
             crow = None
             for core_row in core_out_tickers:
-                # TODO: decisions/Event, LCD.txt se ne metcha z core EC_Event_dec_file odstrani stevilke iz cora!
-                coreFile = core_row['EC_Event_dec_file'].split('/')[-1].replace('pdf', 'txt').replace(', 1', '')
+                coreFile = core_row[core_colume_name].split('/')[-1].replace(".pdf", ".txt").replace(', 1.txt', '.txt')
                 if coreFile == fileName:
+                    success+=1
                     crow = core_row
                     break
 
@@ -366,7 +418,8 @@ def ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dat
 
     print('Errors:')
     for e in errors:
-        print('\t',e)
+        print('\t', e)
+    print(f"Success rate: {len(errors)}/{success}")
     return newCsv
 
 
@@ -374,7 +427,7 @@ def ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dat
 pdfDicts = read_pdfs()
 
 headlines = get_headlines(pdfDicts)
-dates= get_dates(pdfDicts)
+dates = get_dates(pdfDicts)
 publisher = get_publisher(pdfDicts)
 wordCount = get_word_count(pdfDicts)
 
@@ -392,5 +445,5 @@ pdfDicts = write_pdfs(pdfDicts)
 
 # NEW CSV handling...
 core_out_tickers = read_csv_core_out_tickers()
-new_core_out_tickers = ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dates, publisher )
+new_core_out_tickers = ustvari_csv_with_texts(core_out_tickers, pdfDicts, headlines, wordCount, dates, publisher)
 write_csv_core_out_tickers(new_core_out_tickers)
