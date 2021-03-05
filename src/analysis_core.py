@@ -778,7 +778,7 @@ def Case_A101_only():
         A101_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if str(row2['A_101']) != '1':
+                if str(row2['A101']) != '1':
                     A101_only = False
                     break
 
@@ -792,7 +792,7 @@ def Case_A102_only():
         A102_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case']:
-                if str(row2['A_102']) != '1':
+                if str(row2['A102']) != '1':
                     A102_only = False
                     break
 
@@ -884,7 +884,7 @@ def Case_A101_only_undertaking():
         A101_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                if str(row2['A_101']) != '1':
+                if str(row2['A101']) != '1':
                     A101_only = False
                     break
 
@@ -898,7 +898,7 @@ def Case_A102_only_undertaking():
         A102_only = True
         for row2 in db.core:
             if row['Case'] == row2['Case'] and row['Undertaking'] == row2['Undertaking']:
-                if str(row2['A_102']) != '1':
+                if str(row2['A102']) != '1':
                     A102_only = False
                     break
 

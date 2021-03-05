@@ -69,7 +69,7 @@ analysis_core.Case_a101()
 analysis_core.Case_a102()
 analysis_core.Case_cartel_VerR()
 analysis_core.Case_Ringleader()
-
+#
 analysis_core.Case_A101_only_undertaking()
 analysis_core.Case_A102_only_undertaking()
 analysis_core.Case_A101_102_only_undertaking()
@@ -369,23 +369,23 @@ analysis_core_anual.Ime__Currency__Inv_begin_to_EC_Dec_trend()
 analysis_core_anual.Ime__Currency__EC_Dec_to_GC_Dec_trend()
 analysis_core_anual.Ime__Currency__GC_Dec_to_ECJ_Dec_trend()
 
-if analysis_A1012M != None:
-    """
-    Analysis A1012M
-    """
-    for name in db.names_A1012M:
-        print(f"Analysis A1012M: {name}")
-        analysis_A1012M.NAMES_A1012(name, A1012M_type)
-
-    '''
-    New wars in A1012M
-    '''
-    analysis_A1012M.momentum_year(A1012M_type)
-    analysis_A1012M.raw_returns(A1012M_type)
-    analysis_A1012M.ln_returns(A1012M_type)
-
-    print("Saving A1012M...")
-    db.save_A1012M(A1012M_type)
+# if analysis_A1012M != None:
+#     """
+#     Analysis A1012M
+#     """
+#     for name in db.names_A1012M:
+#         print(f"Analysis A1012M: {name}")
+#         analysis_A1012M.NAMES_A1012(name, A1012M_type)
+#
+#     '''
+#     New wars in A1012M
+#     '''
+#     analysis_A1012M.momentum_year(A1012M_type)
+#     analysis_A1012M.raw_returns(A1012M_type)
+#     analysis_A1012M.ln_returns(A1012M_type)
+#
+#     print("Saving A1012M...")
+#     db.save_A1012M(A1012M_type)
 
 
 db.save_core()

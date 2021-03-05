@@ -54,6 +54,14 @@ def parseDate(date: str):
     date_format = '%m/%d/%Y'
     return datetime.strptime(date, date_format)
 
+def convert2pdfDate(date):
+    date_format = '%-d %B %Y'
+    return date.strftime(date_format)
+
+def parsePdfDate(date: str):
+    date_format = '%d %B %Y'
+    return datetime.strptime(date, date_format)
+
 
 def exists(property: str) -> bool:
     if property is None:
