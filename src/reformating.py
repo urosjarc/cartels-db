@@ -663,7 +663,105 @@ def create_ticker_returns(type):
             this.ticker_returns.append(new_row)
 
 
+def poprava_annual_figures_za_EU():
+    local = []
+    eu = []
+
+    copy_map = [
+        'OPERATING PROFIT MARGIN',
+        'GROSS PROFIT MARGIN',
+        'EMPLOYEES',
+        'INVENTORY TURNOVER',
+        'TOTAL ASSET TURNOVER',
+        'EX DIVID DATE',
+        'DIV PAY DATE',
+        'DIVIDEND PAYOUT PER SHARE',
+        'DIVIDEND YIELD',
+        'RETURN ON ASSETS',
+        'RETURN ON EQUITY PERCENT',
+        'INVOLUNTARY TURNOVER OF EMPLOY',
+        'VOLUNTARY TURNOVER OF EMPLOY'
+    ]
+
+    with open(db.csvPath + '/OUT_annual_figures_eu.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            eu.append(row)
+
+    with open(db.csvPath + '/OUT_annual_figures_local.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            local.append(row)
+
+    for i, eu_row in enumerate(eu):
+        if i%100 == 0:
+            print('PROGRESS:', round(i/len(eu)*100,2))
+        for local_row in local:
+            if eu_row['ticker'] == local_row['ticker'] and eu_row['year'] == local_row['year']:
+                for column in copy_map:
+                    if eu_row[column] is '':
+                        eu[i][column] = local_row[column]
+
+    with open(db.csvPath + '/POPRAVA_annual_figures_eu.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=eu[0].keys())
+        writer.writeheader()
+        writer.writerows(eu)
+
+
+def split_core_out_tickers():
+    core_rows = []
+    rows_1 = []
+    rows_2 = []
+    with open(db.csvPath + '/core_out_tickers.csv') as csvfile:
+        reader = csv.DictReader(csvfile)
+        for row in reader:
+            core_rows.append(row)
+
+    indexColumn = [
+        'Case',
+        'Firm',
+        'Undertaking',
+        'Holding',
+        'Ticker_firm',
+        'Holding_Ticker_parent'
+    ]
+    crk = list(core_rows[0].keys())
+    for i, core_row in enumerate(core_rows):
+        if i%100 == 0:
+            print("PROGRESS:", round(i/len(core_rows)*100, 2), '%')
+        rows = [{}, {}]
+
+        # Adding index colums to all
+        for column in indexColumn:
+            for row in rows:
+                row[column] = core_row[column]
+
+        # Adding first half to first
+        for col0 in crk[:len(crk)//2]:
+            rows[0][col0] = core_row[col0]
+
+        # Adding second half to second
+        for col1 in crk[len(crk)//2:]:
+            rows[1][col1] = core_row[col1]
+
+        rows_1.append(rows[0])
+        rows_2.append(rows[1])
+
+    with open(db.csvPath + '/SPLIT_1_core_out_tickers.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=rows_1[0].keys())
+        writer.writeheader()
+        writer.writerows(rows_1)
+
+    with open(db.csvPath + '/SPLIT_2_core_out_tickers.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=rows_2[0].keys())
+        writer.writeheader()
+        writer.writerows(rows_2)
+
+
 if __name__ == '__main__':
+    # poprava_annual_figures_za_EU()
+    split_core_out_tickers()
+
     # RESTRUCTURE CORE==========
     # init_core(with_new_vars=False)
     # init_core_reformat()
@@ -681,11 +779,11 @@ if __name__ == '__main__':
     # RESTRUCTURE ANNUAL=========
 
     # CREATE INDEX FILE==========
-    db.init_nodes_stock_meta()
-    db.init_rel_stock()
-    type = init_A1012M()
-    change_A1012M_structure(type)
-    save_A1012M(type)
+    # db.init_nodes_stock_meta()
+    # db.init_rel_stock()
+    # type = init_A1012M()
+    # change_A1012M_structure(type)
+    # save_A1012M(type)
     # CREATE INDEX FILE==========
 
     # CREATE MARKET INDICES======
@@ -700,5 +798,4 @@ if __name__ == '__main__':
     # CREATE TICKER RETURNS =======
     # create_ticker_returns(type)
     # save_ticker_returns(type)
-
-    # CREATE DAILY VALUES=======
+    # CREATE TICKER RETURNS =======

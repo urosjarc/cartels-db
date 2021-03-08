@@ -305,7 +305,7 @@ analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=3)
 analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearFirm', year_minus=5)
 analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=1)
 analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=3)
-analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=4)
+analysis_core_anual.Ime_Currency_VAR_Info_YearTrend('InfringeBeginYearFirm', trend_year=5)
 
 analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking')
 analysis_core_anual.Ime_Currency_VAR_Info('InfringeBeginYearUndertaking', ticker='Ticker_undertaking', year_minus=1)
