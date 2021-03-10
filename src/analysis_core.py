@@ -2603,6 +2603,46 @@ def GC_decision_year():
     for row in db.core:
         row['GC_decision_year'] = row['GC_Decision_date'].split('/')[-1]
 
+def GC_decision_year_minANDmax_case():
+    db.core_fields.append('GC_decision_year_min_case')
+    db.core_fields.append('GC_decision_year_max_case')
+    for row in db.core:
+        years = []
+        # Get all years with the same case
+        for row1 in db.core:
+            if row['Case'] == row1['Case']:
+                year = row1['GC_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['GC_decision_year_min_case'] = min(years) if len(years) > 0 else None
+        row['GC_decision_year_max_case'] = max(years) if len(years) > 0 else None
+
+def GC_decision_year_undertaking():
+    db.core_fields.append('GC_decision_year_undertaking')
+    for row in db.core:
+        years = []
+        for row1 in db.core:
+            if row['Case'] == row1['Case'] and row['Undertaking'] == row1['Undertaking']:
+                year = row1['GC_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['GC_decision_year_undertaking'] = max(years) if len(years) > 0 else None
+
+def GC_decision_year_holding():
+    db.core_fields.append('GC_decision_year_holding')
+    for row in db.core:
+        years = []
+        for row1 in db.core:
+            if row['Case'] == row1['Case'] and row['Undertaking'] == row1['Undertaking'] and row['Holding'] == row1['Holding']:
+                year = row1['GC_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['GC_decision_year_holding'] = max(years) if len(years) > 0 else None
+
+
 
 def GC_columns():
     cs = [
@@ -2702,6 +2742,45 @@ def ECJ_decision_year():
     db.core_fields.append('ECJ_decision_year')
     for row in db.core:
         row['ECJ_decision_year'] = row['ECJ_Decision_date'].split('/')[-1]
+
+def ECJ_decision_year_minANDmax_case():
+    db.core_fields.append('ECJ_decision_year_min_case')
+    db.core_fields.append('ECJ_decision_year_max_case')
+    for row in db.core:
+        years = []
+        # Get all years with the same case
+        for row1 in db.core:
+            if row['Case'] == row1['Case']:
+                year = row1['ECJ_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['ECJ_decision_year_min_case'] = min(years) if len(years) > 0 else None
+        row['ECJ_decision_year_max_case'] = max(years) if len(years) > 0 else None
+
+def ECJ_decision_year_undertaking():
+    db.core_fields.append('ECJ_decision_year_undertaking')
+    for row in db.core:
+        years = []
+        for row1 in db.core:
+            if row['Case'] == row1['Case'] and row['Undertaking'] == row1['Undertaking']:
+                year = row1['ECJ_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['ECJ_decision_year_undertaking'] = max(years) if len(years) > 0 else None
+
+def ECJ_decision_year_holding():
+    db.core_fields.append('ECJ_decision_year_holding')
+    for row in db.core:
+        years = []
+        for row1 in db.core:
+            if row['Case'] == row1['Case'] and row['Undertaking'] == row1['Undertaking'] and row['Holding'] == row1['Holding']:
+                year = row1['ECJ_decision_year']
+                if year is not None and year.isnumeric():
+                    years.append(int(year))
+
+        row['ECJ_decision_year_holding'] = max(years) if len(years) > 0 else None
 
 def ECJ_columns():
     cs = [

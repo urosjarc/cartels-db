@@ -12,7 +12,7 @@ matcher = {
     'Holding_Ticker_parent': 'holding'
 }
 
-def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
+def Ime_Currency_VAR_Info(VAR, ticker, year_minus=0, info=''):
     print("ANALYSIS CORE ANNUAL: ", VAR, year_minus)
     colums = set()
     for i, rows_group in enumerate([db.A1012M_EU_rows, db.A1012M_LOCAL_rows]):
@@ -41,7 +41,7 @@ def Ime_Currency_VAR_Info(VAR, ticker='Ticker_firm', year_minus=0, info=''):
 
     this.COLUMS_Ime_Currency_VAR_Info += colums
 
-def Ime_Currency_VAR_Info_YearTrend(VAR, trend_year, ticker='Ticker_firm', info=''):
+def Ime_Currency_VAR_Info_YearTrend(VAR, trend_year, ticker, info=''):
     print("ANALYSIS CORE ANNUAL TREND: ", VAR, trend_year)
     colums = set()
     for i, rows_group in enumerate([db.A1012M_EU_rows, db.A1012M_LOCAL_rows]):
