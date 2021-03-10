@@ -699,7 +699,7 @@ def poprava_annual_figures_za_EU():
         for local_row in local:
             if eu_row['ticker'] == local_row['ticker'] and eu_row['year'] == local_row['year']:
                 for column in copy_map:
-                    if eu_row[column] is '':
+                    if eu_row[column] == '':
                         eu[i][column] = local_row[column]
 
     with open(db.csvPath + '/POPRAVA_annual_figures_eu.csv', 'w') as csvfile:
@@ -737,12 +737,11 @@ def split_core_out_tickers():
                 row[column] = core_row[column]
 
         # Adding first half to first
-        for col0 in crk[:len(crk)//2]:
-            rows[0][col0] = core_row[col0]
-
-        # Adding second half to second
-        for col1 in crk[len(crk)//2:]:
-            rows[1][col1] = core_row[col1]
+        for col in crk:
+            if col.count('__') == 4:
+                rows[1][col] = core_row[col]
+            else:
+                rows[0][col] = core_row[col]
 
         rows_1.append(rows[0])
         rows_2.append(rows[1])
@@ -759,8 +758,6 @@ def split_core_out_tickers():
 
 
 if __name__ == '__main__':
-    # poprava_annual_figures_za_EU()
-    split_core_out_tickers()
 
     # RESTRUCTURE CORE==========
     # init_core(with_new_vars=False)
@@ -769,12 +766,14 @@ if __name__ == '__main__':
     # init_core(with_new_vars=True)
     # save_long_vars()
     # save_core()
+    split_core_out_tickers()
     # RESTRUCTURE CORE
 
     # RESTRUCTURE ANNUAL=========
     # init_annual_figures()
     # change_annual_structure()
     # save_annual_figures()
+    poprava_annual_figures_za_EU()
     # exit()
     # RESTRUCTURE ANNUAL=========
 
